@@ -4,7 +4,7 @@ function App() {
 	return (
 		<div className="App">
 			<header className="App-header">
-				<h1>ZachSchneider[dot]com</h1>
+				<h1>Zach Schneider [dot]com</h1>
 				<img src="https://zkm.s3.amazonaws.com/profile-coffee.jpg" alt="Zach Schneider" />
 				<h2>Stay in Touch</h2>
 				<ul>
@@ -21,7 +21,7 @@ function App() {
 					</li>
 					<li>
 						<a className="App-link" href="/blog/" title="blog">
-							Random Thoughts
+							Blog
 						</a>
 					</li>
 				</ul>
