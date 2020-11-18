@@ -25,7 +25,7 @@ function App() {
 						</a>
 					</li>
 				</ul>
-				&copy; 2006 — {new Date().getFullYear()}, ZachSchneider[dot]com
+				&copy; 2006 — {new Date().getFullYear()}, Zach Schneider [dot]com
 			</header>
 		</div>
 	);
