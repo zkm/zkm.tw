@@ -3,27 +3,27 @@
 	"name": "No Excuses",
 	"icons": [
 		{
-			"src": "favicon.ico",
+			"src": "./favicon.ico",
 			"sizes": "64x64",
 			"type": "image/x-icon"
 		},
 		{
-			"src": "img/coffee-192.png",
+			"src": "./img/coffee-192.png",
 			"type": "image/png",
 			"sizes": "192x192"
 		},
 		{
-			"src": "img/profile-coffee.jpg",
+			"src": "./img/profile-coffee.jpg",
 			"type": "image/jpeg",
 			"sizes": "1024x1024"
 		},
 		{
-			"src": "img/profile-coffee.webp",
+			"src": "./img/profile-coffee.webp",
 			"type": "image/webp",
 			"sizes": "1280x1280"
 		}
 	],
-	"start_url": ".",
+	"start_url": "./",
 	"display": "standalone",
 	"theme_color": "#000000",
 	"background_color": "#ffffff"

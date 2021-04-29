@@ -6,9 +6,21 @@ function App() {
 			<header className="App-header">
 				<h1>Zach Schneider [dot]com</h1>
 				<picture>
-					<source srcSet={process.env.PUBLIC_URL + '/img/profile-coffee.webp'} type="image/webp" />
-					<source srcSet={process.env.PUBLIC_URL + '/img/profile-coffee.jpg'} type="image/jpeg" />
-					<source srcSet={process.env.PUBLIC_URL + '/img/profile-coffee.png'} type="image/png" />
+					<source
+						srcSet={process.env.PUBLIC_URL + '/img/profile-coffee.webp'}
+						type="image/webp"
+						alt="Zach Schneider"
+					/>
+					<source
+						srcSet={process.env.PUBLIC_URL + '/img/profile-coffee.jpg'}
+						type="image/jpeg"
+						alt="Zach Schneider"
+					/>
+					<source
+						srcSet={process.env.PUBLIC_URL + '/img/profile-coffee.png'}
+						type="image/png"
+						alt="Zach Schneider"
+					/>
 					<img src={process.env.PUBLIC_URL + '/img/profile-coffee.png'} alt="Zach Schneider" />
 				</picture>
 				<h2>Stay in Touch</h2>
