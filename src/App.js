@@ -14,23 +14,27 @@ function App() {
 				<h2>Stay in Touch</h2>
 				<ul>
 					<li>
-						<a className="App-link" role="button" href="https://twitter.com/zkm" title="Twitter">
-							Twitter
-						</a>
-					</li>
-
-					<li>
-						<a className="App-link" role="button" href="https://github.com/zkm" title="Github">
-							Github
-						</a>
-					</li>
-					<li>
 						<a className="App-link" role="button" href="/blog/" title="blog">
 							Blog
 						</a>
 					</li>
+					<li>
+						<a className="App-link" role="button" href="//github.com/zkm" title="Github">
+							Github
+						</a>
+					</li>
+					<li>
+						<a className="App-link" role="button" href="//linkedin.com/in/zschneider" title="LinkedIn">
+							LinkedIn
+						</a>
+					</li>
+					<li>
+						<a className="App-link" role="button" href="//twitter.com/zkm" title="Twitter">
+							Twitter
+						</a>
+					</li>
 				</ul>
-				&copy; 2006 — {new Date().getFullYear()}, Zach Schneider [dot]com
+				&copy; 2006 &ndash; {new Date().getFullYear()}
 			</header>
 		</div>
 	);
