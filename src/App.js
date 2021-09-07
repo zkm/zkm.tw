@@ -1,3 +1,5 @@
+import React from 'react';
+import logo from './profile-coffee.webp';
 import './App.scss';
 
 function App() {
@@ -5,7 +7,8 @@ function App() {
 		<div className="App">
 			<header className="App-header">
 				<h1>Zach Schneider [dot]com</h1>
-				<picture>
+				<img src={logo} className="App-logo" alt="logo" />
+				{/* <picture>
 					<source
 						srcSet={process.env.PUBLIC_URL + '/img/profile-coffee.webp'}
 						type="image/webp"
@@ -21,8 +24,13 @@ function App() {
 						type="image/png"
 						alt="Zach Schneider"
 					/>
-					<img src={process.env.PUBLIC_URL + '/img/profile-coffee.png'} alt="Zach Schneider" />
-				</picture>
+					<img
+						src={process.env.PUBLIC_URL + '/img/profile-coffee.png'}
+						alt="Zach Schneider"
+						width="500px"
+						height="500px"
+					/>
+				</picture> */}
 				<h2>Stay in Touch</h2>
 				<ul>
 					<li>
@@ -46,7 +54,7 @@ function App() {
 						</a>
 					</li>
 				</ul>
-				&copy; 2006 &ndash; {new Date().getFullYear()}
+				<sup>&copy;</sup> 2005 &ndash; {new Date().getFullYear()}
 			</header>
 		</div>
 	);

@@ -28,8 +28,8 @@ body {
 		list-style: none;
 		margin: 0 0 1em;
 		padding: 0;
-		&> li {
-			display: inline-block;			
+		& > li {
+			display: inline-block;
 			margin-left: .5em;
 			&:before {
 				content: '|';
@@ -40,12 +40,15 @@ body {
 				&:before {
 					content: '';
 				}
-
 			}
-
 		}
 	}
 }
+
+h1 {
+	font-size: 1.7em;
+}
+
 .App-link {
 	color: $link-color;
 }
