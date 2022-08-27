@@ -28,11 +28,6 @@ export default function App() {
         <h2>Stay in Touch</h2>
         <ul>
           <li>
-            <a className="App-link" role="button" href="/blog/" title="blog">
-              Blog
-            </a>
-          </li>
-          <li>
             <a
               className="App-link"
               role="button"
