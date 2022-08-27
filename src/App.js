@@ -6,7 +6,7 @@ export default function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Zach Schneider [dot]com</h1>
+        <h1>Zach Schneider &#91;dot&#93; com</h1>
         <picture className="App-logo">
           <source
             srcSet={`${process.env.PUBLIC_URL} ${logo}`}
@@ -21,8 +21,8 @@ export default function App() {
           <img
             src={`${process.env.PUBLIC_URL} ${webSafelogo}`}
             alt="Zach Schneider"
-            width="500px"
-            height="500px"
+            width={500} 
+            height={500}           
           />
         </picture>
         <h2>Stay in Touch</h2>

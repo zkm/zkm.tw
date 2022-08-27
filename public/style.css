@@ -23,7 +23,7 @@ body {
 .App-header img {
   border-radius: 50%;
   max-width: 100%;
-  width: 500px;
+  height: auto;
 }
 .App-header ul {
   list-style: none;
