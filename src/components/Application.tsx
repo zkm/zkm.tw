@@ -2,6 +2,7 @@ import React from "react";
 import { hot } from "react-hot-loader";
 import webSafelogo from "@assets/images/profile-coffee.jpg";
 import logo from "@assets/images/profile-coffee.webp";
+import { ConnectListItem } from "./ConnectListItem";
 
 import "./Application.scss";
 
@@ -9,6 +10,8 @@ type Props = {
   title: string;
   version: string;
 };
+
+console.log("Tesst: " + ConnectListItem + " End test;")
 
 const Application: React.FC<Props> = props => {
   return (
@@ -28,14 +31,14 @@ const Application: React.FC<Props> = props => {
             height={500}
           />
         </p>
-
+                
         <h2>Stay in Touch</h2>
         <div className="main-connect">
-
-          <ul>            
+          <ul>
             <li>
               <a href="https://github.com/zkm">
                 <span className="screen-reader-text">GitHub</span>
+
                 <svg
                   className="svg-icon"
                   aria-hidden="true"
