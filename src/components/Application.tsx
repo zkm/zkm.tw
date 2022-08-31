@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { hot } from "react-hot-loader";
-import logo from "@assets/images/logo.png";
-// import logo from '@assets/images/profile-coffee.webp';
-import webSafelogo from "@assets/images/profile-coffee.png";
-// import logo from '@assets/images/profile-coffee.webp';
+import webSafelogo from "@assets/images/profile-coffee.jpg";
+import logo from '@assets/images/profile-coffee.webp';
 
 import "./Application.scss";
 
