@@ -1,0 +1,90 @@
+//-----------------------------------------
+// Variables
+//-----------------------------------------
+
+$base-bg-color: #282c34;
+$base-text-color: #ffffff;
+$base-link-color: #61dafb;
+$base-font-size: 16px;
+$base-line-height: 1.15;
+$base-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+  'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+$cont-bg-color: rgba(63, 74, 101, 0.2);
+
+//-----------------------------------------
+// Style Rules
+//-----------------------------------------
+
+html,
+body,
+#app {
+  height: 100%;
+}
+
+body {
+  font-size: $base-font-size;
+  font-family: $base-font-family;
+  color: $base-text-color;
+  background-color: $base-bg-color;
+  line-height: $base-line-height;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0 auto;
+}
+
+a {
+  color: $base-link-color;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+h1 {
+  margin: 0;
+  font-size: 2.7rem;
+}
+
+#app {
+  display: flex;
+  user-select: none;
+  align-items: center;
+  justify-content: center;
+}
+
+main {
+  max-width: 800px;
+  text-align: center;
+}
+
+.main-logo {
+  img {
+    border-radius: 50%;
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+.main-connect {
+  ul {
+    list-style: none;
+    margin: 0 0 1em;
+    padding: 0;
+    & > li {
+      display: inline-block;
+      margin-left: .5em;
+      &:before {
+        content: '|';
+        padding: 0 10px 0 0;
+      }
+      &:first-child {
+        margin-left: 0;
+        &:before {
+          content: '';
+        }
+      }
+    }
+  }
+}
