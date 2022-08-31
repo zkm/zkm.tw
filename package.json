@@ -1,7 +1,7 @@
 {
   "name": "zkm.tw",
   "version": "1.0.0",
-  "repository": "git@github.com:zkm/zachschneider.com.git",
+  "repository": "git@github.com:zkm/zkm.tw.git",
   "author": "Zach Schneider <me@zachschneider.com>",
   "license": "MIT",
   "scripts": {
