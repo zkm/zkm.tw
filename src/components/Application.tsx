@@ -2,7 +2,6 @@ import React from "react";
 import { hot } from "react-hot-loader";
 import webSafelogo from "@assets/images/profile-coffee.jpg";
 import logo from "@assets/images/profile-coffee.webp";
-import { ConnectListItem } from "./ConnectListItem";
 
 import "./Application.scss";
 
@@ -10,8 +9,6 @@ type Props = {
   title: string;
   version: string;
 };
-
-console.log("Tesst: " + ConnectListItem + " End test;")
 
 const Application: React.FC<Props> = props => {
   return (
