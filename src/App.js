@@ -1,5 +1,5 @@
-import logo from "./logo.webp";
-import "./App.css";
+import logo from './logo.webp';
+import './App.css';
 
 function App() {
   return (
@@ -8,22 +8,15 @@ function App() {
         <h1>Zach Schneider</h1>
       </div>
       <p className="main-logo">
-        <img
-          src={logo}
-          alt="Zach Schneider"
-          srcSet={logo}
-          width={500}
-          height={500}
-        />
+        <img src={logo} alt="Zach Schneider" srcSet={logo} width={500} height={500} />
       </p>
 
       <h2>Stay in Touch</h2>
       <div className="main-connect">
         <ul>
           <li>
-            <a href="https://github.com/zkm">
+            <a href="https://github.com/zkm" target="_blank" rel="noreferrer noopener">
               <span className="screen-reader-text">GitHub</span>
-
               <svg
                 className="svg-icon"
                 aria-hidden="true"
@@ -38,7 +31,10 @@ function App() {
             </a>
           </li>
           <li>
-            <a href="https://www.linkedin.com/in/zschneider/">
+            <a
+              href="https://www.linkedin.com/in/zschneider/"
+              target="_blank"
+              rel="noreferrer noopener">
               <span className="screen-reader-text">LinkedIn</span>
               <svg
                 className="svg-icon"
@@ -54,7 +50,10 @@ function App() {
             </a>
           </li>
           <li>
-            <a href="https://www.instagram.com/zachschneider/">
+            <a
+              href="https://www.instagram.com/zachschneider/"
+              target="_blank"
+              rel="noreferrer noopener">
               <span className="screen-reader-text">Instagram</span>
               <svg
                 className="svg-icon"
@@ -70,7 +69,7 @@ function App() {
             </a>
           </li>
           <li>
-            <a href="https://twitter.com/zkm">
+            <a href="https://twitter.com/zkm" target="_blank" rel="noreferrer noopener">
               <span className="screen-reader-text">Twitter</span>
               <svg
                 className="svg-icon"
@@ -86,7 +85,10 @@ function App() {
             </a>
           </li>
           <li>
-            <a href="https://stackoverflow.com/users/461733/zach-schneider">
+            <a
+              href="https://stackoverflow.com/users/461733/zach-schneider"
+              target="_blank"
+              rel="noreferrer noopener">
               <span className="screen-reader-text">StackOverflow</span>
               <svg
                 className="svg-icon"
