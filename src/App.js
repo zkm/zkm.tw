@@ -5,9 +5,8 @@ import TagManager from 'react-gtm-module';
 
 class App extends React.Component {
   componentDidMount() {
-    const TRACKING_ID = 'G-2J7SWPGLE4';
     const tagManagerArgs = {
-      gtmId: TRACKING_ID,
+      gtmId: 'GTM-KTW7DXZ',
     };
     TagManager.initialize(tagManagerArgs);
   }
