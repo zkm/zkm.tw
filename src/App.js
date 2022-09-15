@@ -1,13 +1,15 @@
 import logo from './logo.webp';
 import './App.css';
-import ReactGA from 'react-ga';
 import React from 'react';
+import TagManager from 'react-gtm-module';
 
 class App extends React.Component {
   componentDidMount() {
     const TRACKING_ID = 'G-2J7SWPGLE4';
-    ReactGA.initialize(TRACKING_ID);
-    ReactGA.pageview(window.location.pathname);
+    const tagManagerArgs = {
+      gtmId: TRACKING_ID,
+    };
+    TagManager.initialize(tagManagerArgs);
   }
   render() {
     return (
