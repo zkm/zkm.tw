@@ -19,8 +19,7 @@ class ConnectLinks extends React.Component {
             <a
               href="https://www.linkedin.com/in/zschneider/"
               target="_blank"
-              rel="noreferrer noopener"
-            >
+              rel="noreferrer noopener">
               <IconLinkedIn size="24" />
             </a>
           </li>
@@ -33,8 +32,7 @@ class ConnectLinks extends React.Component {
             <a
               href="https://www.instagram.com/zachschneider/"
               target="_blank"
-              rel="noreferrer noopener"
-            >
+              rel="noreferrer noopener">
               <IconInstagram size="24" />
             </a>
           </li>
@@ -42,8 +40,7 @@ class ConnectLinks extends React.Component {
             <a
               href="https://stackoverflow.com/users/461733/zach-schneider"
               target="_blank"
-              rel="noreferrer noopener"
-            >
+              rel="noreferrer noopener">
               <IconLink size="24" />
             </a>
           </li>
