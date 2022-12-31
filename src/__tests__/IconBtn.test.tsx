@@ -1,24 +1,32 @@
+import React from 'react';
 import { render, screen } from '@testing-library/react';
 import IconBtn from '../components/IconBtn';
+import IconGithub from '../assets/icon_gh.svg';
 
-test('renders an icon button', () => {
-  const content = <path d="M12,2C6,2z" />;
-  const iconName = 'Github';
-  const viewBox = '0 0 24 24';
-  const size = 24;
-  const color = 'red';
+describe('IconBtn', () => {
+  it('renders an icon button with the correct size, color, and viewBox values', () => {
+    const content = <IconGithub />;
+    const iconName = 'Github';
+    const viewBox = '0 0 24 24';
+    const size = 24;
+    const color = 'red';
 
-  render(
-    <IconBtn
-      content={content}
-      iconName={iconName}
-      viewBox={viewBox}
-      size={size}
-      color={color}
-      data-testid="icon-btn"
-    />
-  );
+    render(
+      <IconBtn
+        content={content}
+        iconName={iconName}
+        viewBox={viewBox}
+        size={size}
+        color={color}
+        data-testid="icon-btn"
+      />
+    );
 
-  const iconBtnElement = screen.getByTestId('icon-btn');
-  expect(iconBtnElement).toBeInTheDocument();
+    const iconBtnElement = screen.getByTestId('icon-btn');
+    expect(iconBtnElement).toBeInTheDocument();
+    expect(iconBtnElement).toHaveAttribute('width', '24');
+    expect(iconBtnElement).toHaveAttribute('height', '24');
+    expect(iconBtnElement).toHaveAttribute('viewBox', '0 0 24 24');
+    expect(iconBtnElement).toHaveStyle('color: red');
+  });
 });

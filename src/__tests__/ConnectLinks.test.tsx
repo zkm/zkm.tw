@@ -1,15 +1,12 @@
-import React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import ConnectLinks from '../components/ConnectLinks';
 import links from '../data/links';
 
 describe('ConnectLinks', () => {
   it('renders a list of links', () => {
-    const { getByText } = render(<ConnectLinks />);
+    render(<ConnectLinks />);
 
-    // Assert that each link is rendered
-    links.forEach((link) => {
-      expect(getByText(link.text)).toBeInTheDocument();
-    });
+    // Check that the correct number of links are rendered
+    expect(screen.getAllByRole('link')).toHaveLength(links.length);
   });
 });

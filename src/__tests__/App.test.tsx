@@ -1,9 +1,16 @@
-import * as React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import App from '../App';
 
-test('renders my name', () => {
-  render(<App gtmId="GTM-KTW7DXZ" />);
-  const titleElement: HTMLElement = screen.getByText(/Zach Schneider/);
-  expect(titleElement).toBeInTheDocument();
+describe('App component', () => {
+  test('it renders the correct content', () => {
+    const { getByText } = render(<App />);
+
+    // Check that the Header component is rendered correctly
+    const headerElement = getByText('Zach Schneider');
+    expect(headerElement).toBeInTheDocument();
+
+    // Check that the Body component is rendered correctly
+    const bodyElement = getByText('Stay in Touch');
+    expect(bodyElement).toBeInTheDocument();
+  });
 });
