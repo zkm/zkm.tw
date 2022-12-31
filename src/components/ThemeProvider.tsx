@@ -1,10 +1,44 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { string } from 'prop-types';
 import { ThemeProvider as StyledComponentsProvider } from 'styled-components';
 
 import GlobalStyles from './GlobalStyles';
 
-const palette = {
+
+interface Palette {
+  primary_100: string;
+  primary_200: string;
+  primary_300: string;
+  primary_400: string;
+  primary_500: string;
+  primary_600: string;
+  primary_700: string;
+  primary_800: string;
+  info_100: string;
+  info_800: string;
+  negative_100: string;
+  negative_200: string;
+  negative_500: string;
+  negative_600: string;
+  negative_700: string;
+  negative_800: string;
+  warning_100: string;
+  warning_500: string;
+  warning_600: string;
+  warning_700: string;
+  reward_200: string;
+  reward_400: string;
+  reward_500: string;
+  neutral_100: string;
+  neutral_200: string;
+  neutral_300: string;
+  neutral_400: string;
+  neutral_500: string;
+  neutral_700: string;
+  neutral_800: string;
+}
+
+const palette: Palette = {
   primary_100: '#F6FD39',
   primary_200: '#E4FABF',
   primary_300: '#D2F895',
@@ -37,7 +71,14 @@ const palette = {
   neutral_800: '#343434',
 };
 
-const breakpoints = {
+interface Breakpoints {
+  xl: string;
+  lg: string;
+  md: string;
+  sm: string;
+}
+
+const breakpoints: Breakpoints = {
   /** Above 1200 */
   xl: '1200px',
   /** Between 1024 and  1199 */
@@ -51,7 +92,14 @@ const breakpoints = {
 /**
  * Breakpoints as integers for styled-bootstrap-grid
  */
-export const rawBreakpoints = {
+interface RawBreakpoints {
+  xl: number;
+  lg: number;
+  md: number;
+  sm: number;
+}
+
+export const rawBreakpoints: RawBreakpoints = {
   /** Above 1200 */
   xl: parseInt(breakpoints.xl, 10),
   /** Between 1024 and  1199 */
@@ -62,6 +110,7 @@ export const rawBreakpoints = {
   sm: parseInt(breakpoints.sm, 10),
 };
 
+
 /**
  * We use this array to set the breakpoints scale for styled-system.
  * we skip breakpoints.sm because styled-system already takes care of the initial breakpoint.
@@ -69,69 +118,14 @@ export const rawBreakpoints = {
  */
 const BREAKPOINTS_SCALE = [breakpoints.md, breakpoints.lg, breakpoints.xl];
 
-const mediaQueries = {
-  sm: `@media screen and (min-width: ${breakpoints[0]})`,
-  md: `@media screen and (min-width: ${breakpoints[1]})`,
-  lg: `@media screen and (min-width: ${breakpoints[2]})`,
-  xl: `@media screen and (min-width: ${breakpoints[3]})`,
-};
-
-const fonts = [
-  'Montserrat, Verdana, Geneva, sans-serif',
-  "'Source Sans Pro', 'Trebuchet MS', Helvetica, sans-serif",
-];
-fonts.primary = fonts[0];
-fonts.secondary = fonts[1];
-
-const fontSizes = [14, 16, 20, 24, 32];
-fontSizes.sm = fontSizes[0];
-fontSizes.md = fontSizes[1];
-fontSizes.lg = fontSizes[2];
-fontSizes.xl = fontSizes[3];
-fontSizes.xxl = fontSizes[4];
-
-const lineHeights = ['24px', '27px', '34px', '41px', '54px'];
-lineHeights.sm = lineHeights[0];
-lineHeights.md = lineHeights[1];
-lineHeights.lg = lineHeights[2];
-lineHeights.xl = lineHeights[3];
-lineHeights.xxl = lineHeights[4];
-
-const fontWeights = [400, 600];
-fontWeights.regular = fontWeights[0];
-fontWeights.bold = fontWeights[1];
-
-const space = [0, 4, 8, 16, 24, 32, 40, 56];
-space.xxs = space[1];
-space.xs = space[2];
-space.sm = space[3];
-space.md = space[4];
-space.lg = space[5];
-space.xl = space[6];
-space.xxl = space[7];
-
-const radii = [2, 4, 8];
-radii.sm = radii[0];
-radii.md = radii[1];
-radii.lg = radii[2];
-
-const shadows = [
-  '0 1px 3px 0 rgba(0, 0, 0, 0.1)',
-  '0 2px 4px 0 rgba(0, 0, 0, 0.15)',
-  '0 3px 8px 0 rgba(0, 0, 0, 0.15)',
-  '0 6px 12px 0 rgba(0, 0, 0, 0.10)',
-];
-shadows.sm = shadows[0];
-shadows.md = shadows[1];
-shadows.lg = shadows[2];
-shadows.xl = shadows[3];
-
-const borderWidths = ['1px', '2px'];
-borderWidths.sm = borderWidths[0];
-borderWidths.md = borderWidths[1];
+export interface MediaQueries {
+  sm: string;
+  md: string;
+  lg: string;
+  xl: string;
+}
 
 export const theme = {
-  borderWidths,
   colors: {
     ...palette,
     border: palette.neutral_400,
@@ -140,14 +134,6 @@ export const theme = {
     black: palette.neutral_800,
     white: palette.neutral_100,
   },
-  fonts,
-  fontSizes,
-  fontWeights,
-  lineHeights,
-  shadows,
-  space,
-  radii,
-  mediaQueries,
   breakpoints: BREAKPOINTS_SCALE,
   // https://github.com/dragma/styled-bootstrap-grid#styled-bootstrap-grid
   grid: {
@@ -173,7 +159,11 @@ export const theme = {
   },
 };
 
-const ThemeProvider = ({ children }) => (
+interface ThemeProviderProps {
+  children: React.ReactNode;
+}
+
+const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => (
   <StyledComponentsProvider theme={theme}>
     <GlobalStyles />
     {children}
