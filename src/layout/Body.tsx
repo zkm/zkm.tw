@@ -1,18 +1,26 @@
 import React from 'react';
-import ConnectLinks, { ConnectLinksProps } from '../components/ConnectLinks';
-import links from '../data/links';
+import ConnectLinks from '../components/ConnectLinks';
+import styled from 'styled-components';
+
+const TitleText = styled.h2`
+  color: white;
+  font-size: 1.5rem;
+  margin-bottom: 0.25em;
+  font-weight: normal;
+  height: 100%;
+  text-align: center;
+`;
 
 export type BodyProps = {
   title: string;
-  links: any;
 };
 
-const Body: React.FC<BodyProps> = ({ title, links, ...rest }) => {
+const Body: React.FC<BodyProps> = ({ title }) => {
   return (
-    <div className="main-connect">
-      <h2>{title}</h2>
+    <>
+      <TitleText>{title}</TitleText>
       <ConnectLinks />
-    </div>
+    </>
   );
 };
 

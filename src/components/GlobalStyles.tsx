@@ -1,123 +1,48 @@
-import { createGlobalStyle, DefaultTheme, css } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
-export interface IGlobalStylesProps {
-  theme?: DefaultTheme;
-}
-
-const GlobalStyles = createGlobalStyle<IGlobalStylesProps>`
-  html, body, #root {
-    ${css({
-  height: '100%',
-})}
-}  
-body {
-    ${css({
-  fontSize: '1rem',
-  fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
-  color: '#fff',
-  backgroundColor: '#282c34',
-  lineHeight: 1.15,
-  fontSmoothing: 'antialiased',
-  marginLeft: 'auto',
-  marginRight: 'auto',
-  marginTop: 0,
-  marginBottom: 0,
-})}
+const GlobalStyles = createGlobalStyle`
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
   }
+
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    font-size: 1rem;
+    font-family: 'system-ui', sans-serif;
+    color: #fff;
+    background-color: #282c34;
+    line-height: 1.15;
+    font-smoothing: antialiased;
+    margin: 0;
+  }
+
   a {
-    ${css({
-  color: '#5990f7',
-  textDecoration: 'none',
-})}
+    color: #5990f7;
+    text-decoration: none;
   }
+
   a:hover {
-    ${css({
-  textDecoration: 'underline',
-})}
+    text-decoration: underline;
   }
+
   h1 {
-    ${css({
-  margin: 0,
-  fontSize: '2.7rem',
-})}
+    margin: 0;
+    font-size: 2.7rem;
   }
+
   #root {
-    ${css({
-  display: 'flex',
-  userSelect: 'none',
-  alignItems: 'center',
-  justifyContent: 'center',
-  height: '100%',
-})}
+    display: flex;
+    user-select: none;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
   }
-
-main {
-  ${css({
-  maxWidth: '800px',
-  textAlign: 'center',
-})}
-}
-
-.main-logo img {
-  ${css({
-  borderRadius: '50%',
-  maxWidth: '100%',
-  height: 'auto',
-})}
-}
-.main-connect ul {
-  ${css({
-  listStyle: 'none',
-  marginLeft: 0,
-  marginRight: 0,
-  marginTop: 0,
-  marginBottom: '1em',
-  padding: 0,
-})}
-}
-.main-connect ul > li {
-  ${css({
-  display: 'inline-block',
-  marginLeft: '0.5em',
-})}
-}
-.main-connect ul > li:before {
-  ${css({
-  paddingLeft: 0,
-  paddRight: '10px',
-  paddingTop: 0,
-  paddingBottom: 0,
-})}
-}
-.main-connect ul a {
-  ${css({
-  alignItems: 'center',
-  background: '#5990f7',
-  borderRadius: '50%',
-  color: '#000',
-  display: 'flex',
-  justifyContent: 'center',
-  padding: 0,
-  textDecoration: 'none',
-  transition: 'transform 0.15s ease-in-out',
-  height: '3rem',
-  width: '3rem',
-})}
-}
-.main-connect .screen-reader-text {
-  ${css({
-  border: 0,
-  clip: 'rect(1px, 1px, 1px, 1px)',
-  clipPath: 'inset(50%)',
-  height: '1px',
-  margin: '-1px',
-  overflow: 'hidden',
-  padding: 0,
-  position: 'absolute',
-  width: '1px',
-  wordWrap: 'normal',
-  wordBreak: 'normal',
-})}
-}`;
+`;
 
 export default GlobalStyles;

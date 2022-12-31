@@ -16,11 +16,25 @@ const IconContainer = styled.svg<Omit<IconProps, 'size' | 'content' | 'iconName'
   fill: currentcolor;
 `;
 
+const ScreenReaderText = styled.span`
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  word-wrap: normal;
+  word-break: normal;
+`;
+
 IconContainer.displayName = 'IconContainer';
 
 const Icon: React.FC<IconProps> = ({ content, iconName, viewBox, size, ...props }) => (
   <IconContainer width={size} height={size} viewBox={viewBox} {...props}>
-    <span className="screen-reader-text">{iconName}</span>
+    <ScreenReaderText>{iconName}</ScreenReaderText>
     {content}
   </IconContainer>
 );
