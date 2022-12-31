@@ -1,7 +1,11 @@
 import React from 'react';
 import Icon, { IconProps } from './Icon';
 
-const IconBtn: React.FC<IconProps> = (props) => (
+interface IconBtnProps extends Omit<IconProps, 'iconName'> {
+  iconName: string;
+}
+
+const IconBtn: React.FC<IconBtnProps> = (props) => (
   <Icon {...props} />
 );
 

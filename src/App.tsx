@@ -1,51 +1,29 @@
 import React from 'react';
-import ThemeProvider from './components/ThemeProvider';
-import Header, { HeaderProps } from './layout/Header';
-import Body, { BodyProps } from './layout/Body';
-import Footer, { FooterProps } from './layout/Footer';
-import links from './data/links';
-
+import GlobalStyles from './components/GlobalStyles';
+import Tracking from './components/Tracking';
+import Header from './layout/Header';
+import Body from './layout/Body';
+import Footer from './layout/Footer';
 import logo from './assets/logo.webp';
-import TagManager from 'react-gtm-module';
+import styled from 'styled-components';
 
-interface AppProps {
-  gtmId: string;
-}
+const MainSection = styled.main`
+  max-width: 800px;
+  text-align: center;
+`;
 
-const initializeTagManager = (gtmId: string) => {
-  React.useEffect(() => {
-    TagManager.initialize({ gtmId });
-  }, []);
-};
-
-const App: React.FC<AppProps> = ({ gtmId }) => {
-  initializeTagManager(gtmId);
-
-  const headerProps: HeaderProps = {
-    name: 'Zach Schneider',
-    logo,
-  };
-
-  const bodyProps: BodyProps = {
-    title: 'Stay in Touch',
-    links,
-  };
-
-  const footerProps: FooterProps = {};
-
+const App: React.FC = () => {
   return (
-    <ThemeProvider>
-      <main>
-        <Header {...headerProps} />
-        <Body {...bodyProps} />
-        <Footer {...footerProps} />
-      </main>
-    </ThemeProvider>
+    <>
+      <GlobalStyles />
+      <Tracking />
+      <MainSection>
+        <Header name="Zach Schneider" logo={logo} />
+        <Body title="Stay in Touch" />
+        <Footer startYear={2005} />
+      </MainSection>
+    </>
   );
-};
-
-App.defaultProps = {
-  gtmId: 'GTM-KTW7DXZ',
 };
 
 export default App;
