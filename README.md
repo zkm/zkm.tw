@@ -1,6 +1,6 @@
 # My Personal Website
 
-Welcome to my personal website, powered by [React](https://reactjs.org/) and [TypeScript](https://www.typescriptlang.org/). This website serves as a digital business card, providing a simple URL for others to easily access and connect with me. Whether you want to learn more about me and my professional background, view my portfolio, or reach out to me, you'll find all the necessary information here on this one-stop-shop website.
+Welcome to my personal website, powered by [React](https://reactjs.org/) and [TypeScript](https://www.typescriptlang.org/). This website serves as a digital business card, providing a simple URL ([zkm.tw](https://zkm.tw)) for others to easily access and connect with me. Whether you want to learn more about me and my professional background, view my portfolio, or reach out to me, you'll find all the necessary information here on this one-stop-shop website.
 
 ## Getting Started
 
