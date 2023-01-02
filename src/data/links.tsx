@@ -1,8 +1,8 @@
 import { ReactComponent as GitHub } from '../assets/icon_gh.svg';
 import { ReactComponent as Instagram } from '../assets/icon_ig.svg';
 import { ReactComponent as LinkedIn } from '../assets/icon_li.svg';
-import { ReactComponent as DefaultIcon } from '../assets/icon_link.svg';
 import { ReactComponent as Twitter } from '../assets/icon_tw.svg';
+import { ReactComponent as StackOverflow } from '../assets/icon_stackoverflow.svg'
 interface LinkCommonProps {
   target: string;
   rel: string;
@@ -58,9 +58,9 @@ const links: Link[] = [
     target: '_blank',
     rel: 'noreferrer noopener',
     size: '24',
-    content: <DefaultIcon />,
+    content: <StackOverflow />,
     text: 'StackOverflow',
-    viewBox: '-2 -2 24 24',
+    viewBox: '0 0 24 24',
   },
 ];
 
