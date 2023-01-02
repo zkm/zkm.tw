@@ -1,48 +1,37 @@
-![Zach's github stats](https://github-readme-stats.vercel.app/api?username=zkm&show_icons=true&theme=tokyonight)
+# My Personal Website
 
-<details>
-  <summary>My guiding principles</summary>
-  
-  - Open is good.
-  - Dependencies are bad.
-  - Help others help themselves!
-</details>
+Welcome to my personal website, powered by [React](https://reactjs.org/) and [TypeScript](https://www.typescriptlang.org/). This website serves as a digital business card, providing a simple URL ([zkm.tw](https://zkm.tw)) for others to easily access and connect with me. Whether you want to learn more about me and my professional background, view my portfolio, or reach out to me, you'll find all the necessary information here on this one-stop-shop website.
 
-## Please help support my work!
+## Getting Started
 
-If you've enjoyed or gotten use out of my work, please consider supporting me so I can continue to make great open source software! Any contributions are greatly appreciated. **Thank you in advance!**
+To get started with this project, follow these instructions:
 
-<details>
+1. Clone or download the repository
+2. Navigate to the project directory
+3. Run `yarn` to install the dependencies
+4. Run `yarn start` to start the development server
 
-  <summary>Support via PayPal</summary>
+## Building and Running in Production
 
-[![Support via PayPal @zachschneider](https://raw.githubusercontent.com/zkm/zkm/master/assets/support-via-paypal.png)](https://www.paypal.com/paypalme/zachschneider)
+To build the app for production, run `yarn build`. The production-ready code will be built in the `build` folder.
 
-</details>
+To run the app in a Docker instance, run `yarn dev`.
 
-**Languages and Tools:**
+## Technologies Used
 
-<code><img height="20" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/html/html.png"></code>
-<code><img height="20" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/css/css.png"></code>
-<code><img height="20" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/javascript/javascript.png"></code>
-<code><img height="20" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/react/react.png"></code>
-<code><img height="20" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/php/php.png"></code>
-<code><img height="20" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/wordpress/wordpress.png"></code>
+- React
+- TypeScript
+- yarn
+- Docker
+- Jest
 
-<!--
+## Unit Tests 
+To run unit tests, run yarn test.
 
-Made with: https://github.com/anuraghazra/github-readme-stats
+## Credits
 
-**jeremyckahn/jeremyckahn** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+- [Zach Schneider](https://twitter.com/zkm) - Project creator and developer
 
-Here are some ideas to get you started:
+## License
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+This project is licensed under the [MIT License](LICENSE).
