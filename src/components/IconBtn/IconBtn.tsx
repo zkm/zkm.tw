@@ -1,9 +1,6 @@
 import React from 'react';
-import Icon, { IconProps } from './Icon';
-
-interface IconBtnProps extends Omit<IconProps, 'iconName'> {
-  iconName: string;
-}
+import Icon from '../Icon/Icon';
+import { IconBtnProps } from '../../types/IconBtn';
 
 const IconBtn: React.FC<IconBtnProps> = (props) => (
   <Icon {...props} />

@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import ConnectLinks from '../components/ConnectLinks';
+import ConnectLinks from '../components/ConnectLinks/ConnectLinks';
 import links from '../data/links';
 
 describe('ConnectLinks', () => {

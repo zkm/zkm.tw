@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import TagManager from 'react-gtm-module';
-import Tracking from '../components/Tracking';
+import Tracking from '../components/tracking/Tracking';
 
 jest.mock('react-gtm-module', () => ({
   initialize: jest.fn(),

@@ -1,6 +1,6 @@
 import React from 'react';
-import links from '../data/links';
-import IconBtn from './IconBtn';
+import links from '../../data/links';
+import IconBtn from '../IconBtn/IconBtn';
 import styled from 'styled-components';
 
 const ConnectList = styled.ul`

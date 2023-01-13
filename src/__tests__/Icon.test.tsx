@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import Icon from '../components/Icon';
+import Icon from '../components/Icon/Icon';
 import IconGithub from '../assets/icon_gh.svg';
 
 test('renders an icon with the correct size, color, and viewBox values', () => {

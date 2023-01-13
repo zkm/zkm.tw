@@ -1,8 +1,8 @@
-import { ReactComponent as GitHub } from '../assets/icon_gh.svg';
-import { ReactComponent as Instagram } from '../assets/icon_ig.svg';
-import { ReactComponent as LinkedIn } from '../assets/icon_li.svg';
-import { ReactComponent as Twitter } from '../assets/icon_tw.svg';
-import { ReactComponent as StackOverflow } from '../assets/icon_stackoverflow.svg'
+import { ReactComponent as GitHub } from '../assets/icons/icon_gh.svg';
+import { ReactComponent as Instagram } from '../assets/icons/icon_ig.svg';
+import { ReactComponent as LinkedIn } from '../assets/icons/icon_li.svg';
+import { ReactComponent as Twitter } from '../assets/icons/icon_tw.svg';
+import { ReactComponent as StackOverflow } from '../assets/icons/icon_stackoverflow.svg'
 interface LinkCommonProps {
   target: string;
   rel: string;

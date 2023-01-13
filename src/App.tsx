@@ -1,10 +1,10 @@
 import React from 'react';
-import GlobalStyles from './components/GlobalStyles';
-import Tracking from './components/Tracking';
+import GlobalStyles from './assets/styles/GlobalStyles';
+import Tracking from './components/tracking/Tracking';
 import Header from './layout/Header';
 import Body from './layout/Body';
 import Footer from './layout/Footer';
-import logo from './assets/logo.webp';
+import logo from './assets/icons/logo.webp';
 import styled from 'styled-components';
 
 const MainSection = styled.main`
