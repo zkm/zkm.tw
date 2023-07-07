@@ -43,7 +43,7 @@ const ConnectLinks: React.FC<ConnectLinksProps> = ({ 'data-testid': dataTestId }
     <ConnectList data-testid={dataTestId}>
       {links.map((link) => (
         <ConnectListItem key={link.text}>
-          <ConnectAnchor href={link.href} aria-label={link.text}>
+          <ConnectAnchor href={link.href} aria-label={link.text} rel={link.rel}>
             <IconBtn
               size={link.size}
               content={link.content}
