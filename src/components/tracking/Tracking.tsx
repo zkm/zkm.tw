@@ -8,8 +8,6 @@ const Tracking = () => {
     const gtmId = process.env.REACT_APP_GTM_ID;
     if (gtmId) {
       TagManager.initialize({ gtmId });
-    } else {
-      console.error('GTM container ID is missing. Please check your .env file.');
     }
   }, []);
 
