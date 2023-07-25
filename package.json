@@ -34,7 +34,8 @@
     "build": "react-scripts build",
     "dev": "docker-compose -f docker-compose.yml up",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "yarn build && git checkout production && rsync -avh --progress build/ . && git add . && git commit -m 'Update production build for deployment' && git push origin production && git checkout master"
   },
   "browserslist": {
     "production": [
