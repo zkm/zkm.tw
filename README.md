@@ -30,7 +30,7 @@ To run unit tests, run yarn test.
 
 ## Credits
 
-- [Zach Schneider](https://twitter.com/zkm) - Project creator and developer
+- [Zach Schneider](https://x.com/zkm) - Project creator and developer
 
 ## License
 
