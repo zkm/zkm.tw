@@ -2,7 +2,7 @@ import { ReactComponent as GitHub } from '../assets/icons/icon_gh.svg';
 import { ReactComponent as Instagram } from '../assets/icons/icon_ig.svg';
 import { ReactComponent as LinkedIn } from '../assets/icons/icon_li.svg';
 import { ReactComponent as Mastodon } from '../assets/icons/icon_mst.svg'
-import { ReactComponent as Twitter } from '../assets/icons/icon_tw.svg';
+import { ReactComponent as X } from '../assets/icons/icon_x.svg';
 import { ReactComponent as StackOverflow } from '../assets/icons/icon_stackoverflow.svg'
 interface LinkCommonProps {
   target: string;
@@ -46,12 +46,12 @@ const links: Link[] = [
     viewBox: '0 0 24 24',
   },
   {
-    href: 'https://twitter.com/zkm',
+    href: 'https://x.com/zkm',
     target: '_blank',
     rel: 'noreferrer noopener',
     size: '24',
-    content: <Twitter />,
-    text: 'Twitter',
+    content: <X />,
+    text: 'X',
     viewBox: '0 0 24 24',
   },
   {
