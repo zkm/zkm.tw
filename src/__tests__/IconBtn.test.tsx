@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import IconBtn from '../components/IconBtn/IconBtn';
-import IconGithub from '../assets/icon_gh.svg';
+import IconGithub from '../assets/icons/icon_gh.svg';
 
 describe('IconBtn', () => {
   it('renders an icon button with the correct size, color, and viewBox values', () => {
