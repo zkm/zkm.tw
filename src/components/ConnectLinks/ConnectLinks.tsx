@@ -22,18 +22,30 @@ const ConnectListItem = styled.li`
 `;
 
 const ConnectAnchor = styled.a`
-  align-items: center;
-  background: #5990f7;
-  border-radius: 50%;
-  color: #000;
   display: flex;
+  align-items: center;
   justify-content: center;
-  padding: 0;
-  text-decoration: none;
-  transition: transform 0.15s ease-in-out;
-  height: 3rem;
   width: 3rem;
+  height: 3rem;
+  padding: 0;
+  border-radius: 50%;
+  background-color: #5990f7;
+  color: #fff;
+  text-decoration: none;
+  transition: transform 0.2s ease, filter 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    transform: scale(1.15);
+    filter: brightness(1.15);
+    outline: none;
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.6);
+  }
 `;
+
 export interface ConnectLinksProps {
   'data-testid'?: string;
 }

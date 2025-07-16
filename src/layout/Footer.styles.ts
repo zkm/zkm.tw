@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const FooterContainer = styled.footer`
-  color: #f9fafb;
+  color: ${({ theme }) => theme.text};
   padding: 1rem;
   text-align: center;
   font-size: 0.875rem;
