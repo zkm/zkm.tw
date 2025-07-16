@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { color } from 'styled-system';
 
 export interface IconProps {
-  size: number | string;
+  size?: number | string;
   color?: string;
   content: React.ReactNode;
   iconName: React.ReactNode;
@@ -32,15 +32,11 @@ const ScreenReaderText = styled.span`
 
 IconContainer.displayName = 'IconContainer';
 
-const Icon: React.FC<IconProps> = ({ content, iconName, viewBox, size, ...props }) => (
+const Icon: React.FC<IconProps> = ({ content, iconName, viewBox, size = 24, ...props }) => (
   <IconContainer width={size} height={size} viewBox={viewBox} {...props}>
     <ScreenReaderText>{iconName}</ScreenReaderText>
     {content}
   </IconContainer>
 );
-
-Icon.defaultProps = {
-  size: 24,
-};
 
 export default Icon;

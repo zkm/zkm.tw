@@ -12,20 +12,16 @@ const TitleText = styled.h2`
 `;
 
 export type BodyProps = {
-  title: string;
+  title?: string;
 };
 
-const Body: React.FC<BodyProps> = ({ title }) => {
+const Body: React.FC<BodyProps> = ({ title = '' }) => {
   return (
     <>
       <TitleText>{title}</TitleText>
       <ConnectLinks />
     </>
   );
-};
-
-Body.defaultProps = {
-  title: '',
 };
 
 export default Body;

@@ -1,6 +1,6 @@
 {
   "name": "zkm.tw",
-  "version": "2.0.2",
+  "version": "4.0.4",
   "repository": "git@github.com:zkm/zkm.tw.git",
   "author": "Zach Schneider <me@zachschneider.com>",
   "license": "MIT",
@@ -8,7 +8,7 @@
   "dependencies": {
     "@humanwhocodes/gitignore-to-minimatch": "^1.0.2",
     "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^13.0.0",
+    "@testing-library/react": "^16.3.0",
     "@testing-library/react-hooks": "^8.0.1",
     "@testing-library/user-event": "^13.2.1",
     "@types/jest": "^29.2.4",
@@ -51,11 +51,16 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@testing-library/dom": "^10.4.0",
     "@types/react-gtm-module": "^2.0.1",
     "@types/react-router": "^5.1.20",
     "@types/styled-components": "^5.1.26",
     "@types/styled-system": "^5.1.15",
     "@types/styled-system__css": "^5.0.17",
-    "prettier": "^2.7.1"
+    "@typescript-eslint/eslint-plugin": "^8.37.0",
+    "@typescript-eslint/parser": "^8.37.0",
+    "eslint": "^9.31.0",
+    "eslint-plugin-react": "^7.37.5",
+    "prettier": "^3.6.2"
   }
 }

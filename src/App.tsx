@@ -20,7 +20,7 @@ const App: React.FC = () => {
       <MainSection>
         <Header name="Zach Schneider" logo={logo} />
         <Body title="Stay in Touch" />
-        <Footer startYear={2005} />
+        <Footer />
       </MainSection>
     </>
   );
