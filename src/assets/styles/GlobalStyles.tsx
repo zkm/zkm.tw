@@ -118,6 +118,16 @@ const GlobalStyles = createGlobalStyle`
     cursor: not-allowed;
     opacity: 0.6;
   }
+  
+  /* === SVG Icons === */
+  .svg-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: currentColor;
+    flex-shrink: 0;
+    vertical-align: middle;
+  }
+
 
 `;
 

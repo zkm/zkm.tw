@@ -29,8 +29,8 @@ const ConnectAnchor = styled.a`
   height: 3rem;
   padding: 0;
   border-radius: 50%;
-  background-color: #5990f7;
-  color: #fff;
+  background-color: ${({ theme }) => theme.accent};
+  color: ${({ theme }) => theme.iconColor}; // ← dynamic text/icon color
   text-decoration: none;
   transition: transform 0.2s ease, filter 0.2s ease;
 
@@ -42,9 +42,10 @@ const ConnectAnchor = styled.a`
   }
 
   &:focus-visible {
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 0 3px ${({ theme }) => theme.iconFocusOutline};
   }
 `;
+
 
 export interface ConnectLinksProps {
   'data-testid'?: string;
@@ -56,12 +57,17 @@ const ConnectLinks: React.FC<ConnectLinksProps> = ({ 'data-testid': dataTestId }
       {links.map((link) => (
         <ConnectListItem key={link.text}>
           <ConnectAnchor href={link.href} aria-label={link.text} rel={link.rel}>
-            <IconBtn
+            {React.cloneElement(link.content, {
+              className: 'svg-icon',
+              role: 'img',
+              'aria-label': link.text,
+            })}
+            {/* <IconBtn
               size={link.size}
               content={link.content}
               iconName={link.text}
               viewBox={link.viewBox}
-            />
+            /> */}
           </ConnectAnchor>
         </ConnectListItem>
       ))}
