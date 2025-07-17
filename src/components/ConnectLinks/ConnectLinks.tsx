@@ -29,10 +29,13 @@ const ConnectAnchor = styled.a`
   height: 3rem;
   padding: 0;
   border-radius: 50%;
-  background-color: #5990f7;
-  color: #fff;
+  background-color: ${({ theme }) => theme.colors.accent};
+  color: ${({ theme }) => theme.colors.icon};
   text-decoration: none;
-  transition: transform 0.2s ease, filter 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease,
+    color 0.2s ease;
 
   &:hover,
   &:focus-visible {
@@ -54,14 +57,14 @@ const ConnectLinks: React.FC<ConnectLinksProps> = ({ 'data-testid': dataTestId }
   return (
     <ConnectList data-testid={dataTestId}>
       {links.map((link) => (
-        <ConnectListItem key={link.text}>
-          <ConnectAnchor href={link.href} aria-label={link.text} rel={link.rel}>
-            <IconBtn
-              size={link.size}
-              content={link.content}
-              iconName={link.text}
-              viewBox={link.viewBox}
-            />
+        <ConnectListItem key={link.href}>
+          <ConnectAnchor
+            href={link.href}
+            aria-label={link.label}
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            {link.icon}
           </ConnectAnchor>
         </ConnectListItem>
       ))}

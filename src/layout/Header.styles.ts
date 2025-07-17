@@ -25,8 +25,8 @@ const fadeIn = keyframes`
 export const MainTitle = styled.h1`
   font-size: 2.5rem;
   margin-bottom: 0.25rem;
-  color: ${({ theme }) => theme.text};
-  text-shadow: 1px 1px 2px ${({ theme }) => theme.accent}66;
+  color: ${({ theme }) => theme.colors.text};
+  text-shadow: 1px 1px 2px ${({ theme }) => theme.colors.accent}66;
   animation: ${fadeInUp} 0.5s ease-out both;
 `;
 
@@ -34,7 +34,7 @@ export const Tagline = styled.p`
   font-size: 1.125rem;
   font-weight: 400;
   margin-bottom: 1rem;
-  color: ${({ theme }) => theme.text}cc;
+  color: ${({ theme }) => theme.colors.text}cc;
   animation: ${fadeInUp} 0.6s ease-out 0.1s both;
 `;
 
@@ -43,14 +43,14 @@ export const MainLogo = styled.img`
   height: clamp(160px, 25vw, 300px);
   object-fit: cover;
   border-radius: 50%;
-  box-shadow: 0 0 20px ${({ theme }) => theme.accent}40,
+  box-shadow: 0 0 20px ${({ theme }) => theme.colors.accent}40,
               0 4px 12px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   animation: ${fadeIn} 0.7s ease-out 0.2s both;
 
   &:hover {
     transform: scale(1.03);
-    box-shadow: 0 0 25px ${({ theme }) => theme.accent}88,
+    box-shadow: 0 0 25px ${({ theme }) => theme.colors.accent}88,
                 0 6px 16px rgba(0, 0, 0, 0.25);
   }
 `;

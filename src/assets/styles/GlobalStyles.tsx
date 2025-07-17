@@ -23,8 +23,8 @@ const GlobalStyles = createGlobalStyle`
       Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 1rem;
     line-height: 1.5;
-    background-color: ${({ theme }) => theme.background};
-    color: ${({ theme }) => theme.text};
+    background-color: ${({ theme }) => theme.colors.background};
+    color: ${({ theme }) => theme.colors.text};
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     transition: background-color 0.3s ease, color 0.3s ease;
@@ -35,7 +35,7 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     font-weight: 600;
     line-height: 1.25;
-    color: ${({ theme }) => theme.text};
+    color: ${({ theme }) => theme.colors.text};
   }
 
   h1 {
@@ -48,7 +48,7 @@ const GlobalStyles = createGlobalStyle`
 
   /* === Links === */
   a {
-    color: ${({ theme }) => theme.accent};
+    color: ${({ theme }) => theme.colors.accent};
     text-decoration: none;
     transition: color 0.2s ease;
   }
@@ -60,7 +60,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   a:focus-visible {
-    outline: 2px solid ${({ theme }) => theme.accent};
+    outline: 2px solid ${({ theme }) => theme.colors.accent};
     outline-offset: 2px;
   }
 
@@ -79,15 +79,15 @@ const GlobalStyles = createGlobalStyle`
   }
 
   ::selection {
-    background: ${({ theme }) => theme.accent}33;
-    color: ${({ theme }) => theme.text};
+    background: ${({ theme }) => theme.colors.accent}33;
+    color: ${({ theme }) => theme.colors.text};
   }
   
   /* === Buttons === */
   button {
     font: inherit;
-    background-color: ${({ theme }) => theme.accent};
-    color: ${({ theme }) => theme.background};
+    background-color: ${({ theme }) => theme.colors.accent};
+    color: ${({ theme }) => theme.colors.background};
     border: none;
     padding: 0.5em 1em;
     border-radius: 0.375rem;
@@ -96,7 +96,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   button:hover {
-    background-color: ${({ theme }) => theme.accent}cc;
+    background-color: ${({ theme }) => theme.colors.accent}cc;
   }
 
   button:active {
@@ -108,7 +108,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   button:focus-visible {
-    outline: 2px solid ${({ theme }) => theme.accent};
+    outline: 2px solid ${({ theme }) => theme.colors.accent};
     outline-offset: 2px;
   }
 

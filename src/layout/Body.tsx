@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import FadeInSection from '../components/ui/FadeInSection';
 
 const TitleText = styled.h2`
-  color: ${({ theme }) => theme.text};
+  color: ${({ theme }) => theme.colors.text};
   font-size: 1.5rem;
   margin-bottom: 0.25em;
   font-weight: normal;
@@ -17,7 +17,7 @@ const RoleText = styled.p`
   font-weight: 300;
   margin-top: 0.25em;
   margin-bottom: 1em;
-  color: ${({ theme }) => theme.text};
+  color: ${({ theme }) => theme.colors.text};
   text-align: center;
 `;
 
