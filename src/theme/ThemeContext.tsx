@@ -1,7 +1,12 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { ThemeProvider } from 'styled-components';
+import { DefaultTheme } from 'styled-components'; // ✅ add this back
 import { lightTheme, darkTheme, ThemeType } from './theme';
+import { ThemeProvider as SCThemeProvider } from 'styled-components';
 
+const ThemeProvider = SCThemeProvider as unknown as React.FC<{
+  theme: DefaultTheme;
+  children: React.ReactNode;
+}>;
 type ThemeMode = 'light' | 'dark';
 
 interface ThemeContextType {
