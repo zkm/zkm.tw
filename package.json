@@ -16,6 +16,7 @@
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.10",
     "axios": "^1.6.0",
+    "caniuse-lite": "^1.0.30001727",
     "framer-motion": "^12.23.6",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
