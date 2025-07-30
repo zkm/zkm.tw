@@ -22,10 +22,10 @@ const RoleText = styled.p`
 `;
 
 export type BodyProps = {
-  title?: string;
+  title: string;
 };
 
-const Body: React.FC<BodyProps> = ({ title = '' }) => {
+const Body: React.FC<BodyProps> = ({ title }) => {
   return (
     <>
       <FadeInSection delay={0}>

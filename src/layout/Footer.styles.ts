@@ -1,15 +1,14 @@
 import styled from 'styled-components';
 
 export const FooterContainer = styled.footer`
-  color: ${({ theme }) => theme.text};
-  padding: 1rem;
-  text-align: center;
-  font-size: 0.875rem;
-  font-weight: 400;
   width: 100%;
+  padding: 1.5rem 0;
+  text-align: center;
 `;
 
-export const FooterText = styled.sub`
-  display: block;
-  margin: 0 auto;
+export const FooterText = styled.p`
+  color: ${({ theme }) => theme.textSecondary};
+  font-size: 1rem;
+  margin: 0;
+  opacity: 0.8;
 `;
