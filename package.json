@@ -7,7 +7,7 @@
   "private": true,
   "dependencies": {
     "@humanwhocodes/gitignore-to-minimatch": "^1.0.2",
-    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/jest-dom": "^6.6.4",
     "@testing-library/react": "^16.3.0",
     "@testing-library/react-hooks": "^8.0.1",
     "@testing-library/user-event": "^13.2.1",
@@ -21,22 +21,20 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-gtm-module": "^2.0.11",
-    "react-scripts": "^5.0.1",
     "react-test-renderer": "^18.2.0",
     "styled-components": "^5.3.6",
     "styled-system": "^5.1.5",
-    "typescript": "^4.9.4",
+    "typescript": "^5.9.2",
     "utility-types": "^3.10.0",
-    "web-vitals": "^2.1.0",
-    "workbox-webpack-plugin": "^7.0.0"
+    "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "dev": "docker-compose -f docker-compose.yml up",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "deploy": "yarn build && git checkout production && rsync -avh --progress build/ . && git add . && git commit -m 'Update production build for deployment' && git push origin production && git checkout master"
+    "dev": "vite",
+    "dev:docker": "docker-compose -f docker-compose.yml up",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest",
+    "deploy": "yarn build && git checkout production && rsync -avh --progress dist/ . && git add . && git commit -m 'Update production build for deployment' && git push origin production && git checkout master"
   },
   "browserslist": {
     "production": [
@@ -61,8 +59,12 @@
     "@types/styled-system__css": "^5.0.17",
     "@typescript-eslint/eslint-plugin": "^8.37.0",
     "@typescript-eslint/parser": "^8.37.0",
+    "@vitejs/plugin-react": "^4.7.0",
     "eslint": "^9.31.0",
     "eslint-plugin-react": "^7.37.5",
-    "prettier": "^3.6.2"
+    "jsdom": "^26.1.0",
+    "prettier": "^3.6.2",
+    "vite": "^7.0.6",
+    "vitest": "^3.2.4"
   }
 }
