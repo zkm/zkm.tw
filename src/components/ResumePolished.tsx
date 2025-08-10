@@ -62,73 +62,51 @@ const ResumePolished: React.FC = () => {
 
   return (
     <main className="min-h-screen w-full flex items-center justify-center bg-gray-900" aria-label="Resume">
-      <a href="#main-content" className="sr-only focus:not-sr-only focus:ring-2 focus:ring-blue-600">Skip to main content</a>
-      <div className="max-w-4xl w-full mx-auto p-6 relative bg-gray-900" id="main-content" tabIndex={-1}>
-        {/* Floating Action Button for PDF Download */}
-        <button
-          className="fixed bottom-8 right-8 z-50 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-full shadow-lg p-4 hover:scale-105 focus:ring-4 focus:ring-pink-400 transition-all"
-          aria-label="Download Resume as PDF"
-        >
-          <Download size={28} />
-        </button>
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="bg-white/80 rounded-2xl shadow-xl overflow-hidden mb-8 border border-gray-200"
-          role="region" aria-labelledby="resume-header"
-        >
-          <div className="bg-white/80 text-gray-900 p-8">
-            <h1 id="resume-header" className="text-4xl font-extrabold mb-1 flex items-center gap-3 drop-shadow-lg text-gray-900">
-              <User aria-hidden="true" className="text-pink-600" /> {resumeData.personalInfo.name}
-            </h1>
-            <p className="text-lg font-semibold flex items-center gap-2 text-gray-800">
-              <Star className="inline text-yellow-600" aria-hidden="true" /> {resumeData.personalInfo.title}
-            </p>
-            <div className="flex flex-col sm:flex-row sm:items-center gap-4 text-gray-800 text-base mt-2">
-              <span className="flex items-center gap-2"><Mail className="inline text-blue-600" aria-hidden="true" />{resumeData.personalInfo.email}</span>
-              <span className="flex items-center gap-2"><Phone className="inline text-green-600" aria-hidden="true" />{resumeData.personalInfo.phone}</span>
-              {resumeData.personalInfo.website && <span className="flex items-center gap-2"><Globe className="inline text-pink-600" aria-hidden="true" />{resumeData.personalInfo.website}</span>}
-            </div>
+      <div className="flex flex-col md:flex-row w-full max-w-6xl mx-auto p-6 gap-8">
+        {/* Sidebar/Profile */}
+        <aside className="w-full md:w-1/3 bg-slate-900 rounded-2xl shadow-xl p-8 flex flex-col items-start text-white text-left">
+          <div className="mb-8 w-full">
+            <h1 className="text-3xl font-extrabold mb-2 text-yellow-400 tracking-tight">Zach Schneider</h1>
+            <p className="text-lg font-semibold mb-4 text-gray-200">Senior Web Developer & Technical Advisor</p>
           </div>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="w-full mt-6">
+            <h2 className="text-xl font-bold text-yellow-400 mb-2 uppercase tracking-wide">About Me</h2>
+            <p className="text-gray-200 text-base mb-6 leading-relaxed">Experienced Senior Web Developer with 15+ years of expertise in modern frontend technologies, team leadership, and technical architecture.</p>
+            <h2 className="text-xl font-bold text-yellow-400 mb-2 uppercase tracking-wide">Languages</h2>
+            <ul className="text-gray-200 text-base mb-6 space-y-1">
+              <li>English</li>
+              {/* TODO: Fetch languages from resume.json for data-driven rendering */}
+            </ul>
+            <h2 className="text-xl font-bold text-yellow-400 mb-2 uppercase tracking-wide">Contact</h2>
+            <ul className="text-gray-200 text-base space-y-2">
+              <li className="flex items-center gap-2"><Mail className="inline text-yellow-400" /> me@zachschneider.com</li>
+              <li className="flex items-center gap-2"><Phone className="inline text-yellow-400" /> (260) 435-9767</li>
+              <li className="flex items-center gap-2"><Globe className="inline text-yellow-400" /> <a href="https://www.zachschneider.com" className="underline hover:text-yellow-300">zachschneider.com</a></li>
+            </ul>
+          </div>
+        </aside>
+        {/* Main Content */}
+        <section className="w-full md:w-2/3 bg-white rounded-2xl shadow-xl p-8">
           {/* Professional Summary */}
-          <motion.section
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="bg-white/80 rounded-xl shadow-lg p-6 border border-gray-200"
-            role="region" aria-labelledby="summary-header"
-          >
-            <h2 id="summary-header" className="text-xl font-bold text-pink-700 mb-2 flex items-center gap-2">
-              <Book aria-hidden="true" className="text-indigo-700" /> Professional Summary
-            </h2>
-            <p className="text-gray-900 leading-relaxed text-base font-medium">{resumeData.summary}</p>
-          </motion.section>
-
+          <div className="mb-10 pb-8 border-b border-gray-200">
+            <h2 className="text-2xl font-bold text-black mb-3 flex items-center gap-2 tracking-tight"><Book className="text-indigo-400" /> Professional Summary</h2>
+            <p className="text-gray-900 leading-relaxed text-lg font-normal">Experienced Senior Web Developer with 15+ years of expertise in modern frontend technologies, team leadership, and technical architecture. Proven track record of successfully migrating legacy systems to modern frameworks, leading cross-functional teams, and delivering high-impact web solutions. Passionate about mentoring developers and implementing best practices that drive business results.</p>
+          </div>
           {/* Technical Skills + Chart */}
-          <motion.section
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-            className="bg-white/80 rounded-xl shadow-lg p-6 border border-gray-200"
-            role="region" aria-labelledby="skills-header"
-          >
-            <h2 id="skills-header" className="text-xl font-bold text-blue-700 mb-2 flex items-center gap-2">
-              <Code2 aria-hidden="true" className="text-blue-700" /> Technical Skills
-            </h2>
-            <ul className="list-disc list-inside text-gray-900 text-sm mt-4">
-              {Object.entries(resumeData.technicalSkills.languages).map(([lang, skills]) => (
-                <li key={lang}><strong className="text-blue-700">{lang}:</strong> {skills.join(', ')}</li>
-              ))}
-              <li><strong className="text-indigo-700">Frameworks:</strong> {resumeData.technicalSkills.frameworks.join(', ')}</li>
-              <li><strong className="text-pink-700">CMS:</strong> {resumeData.technicalSkills.cms.join(', ')}</li>
-              <li><strong className="text-yellow-700">Cloud:</strong> {resumeData.technicalSkills.cloud.join(', ')}</li>
-              <li><strong className="text-green-700">Tools:</strong> {resumeData.technicalSkills.tools.join(', ')}</li>
-              <li><strong className="text-red-700">Testing:</strong> {resumeData.technicalSkills.testing.join(', ')}</li>
-              <li><strong className="text-blue-700">Methodologies:</strong> {resumeData.technicalSkills.methodologies.join(', ')}</li>
+          <div className="mb-10 pb-8 border-b border-gray-200">
+            <h2 className="text-2xl font-bold text-black mb-3 flex items-center gap-2 tracking-tight"><Code2 className="text-blue-400" /> Technical Skills</h2>
+            <ul className="list-disc list-inside text-gray-900 text-base mb-6 space-y-1">
+              <li><strong className="text-blue-600">HTML:</strong> HTML5, XHTML, HAML, Web Components</li>
+              <li><strong className="text-green-600">CSS:</strong> SASS, SCSS, LESS, CSS3, Tailwind CSS, PostCSS</li>
+              <li><strong className="text-yellow-500">JavaScript:</strong> ES2024, TypeScript, React, Node.js, Next.js, Vite, jQuery, Webpack</li>
+              <li><strong className="text-purple-600">PHP:</strong> Zend, Symfony, CodeIgniter</li>
+              <li><strong className="text-gray-700">Other:</strong> Python, Java, Ruby</li>
+              <li><strong className="text-indigo-600">Frameworks:</strong> React 18+, Next.js, Angular, Vue.js, Express.js, Backbone.js</li>
+              <li><strong className="text-pink-600">CMS:</strong> WordPress, Drupal, Magento, Contentful, Strapi</li>
+              <li><strong className="text-orange-500">Cloud:</strong> AWS, Azure, Vercel, Netlify</li>
+              <li><strong className="text-teal-600">Tools:</strong> Git, Docker, JIRA, Figma, Adobe Creative Suite</li>
+              <li><strong className="text-red-500">Testing:</strong> Jest, Cypress, Playwright, React Testing Library</li>
+              <li><strong className="text-blue-500">Methodologies:</strong> Agile, SCRUM, CI/CD, DevOps</li>
             </ul>
             <div className="mt-6">
               <Bar data={chartData} options={{
@@ -143,113 +121,93 @@ const ResumePolished: React.FC = () => {
                 }
               }} />
             </div>
-          </motion.section>
-        </div>
-
-        {/* Work Experience */}
-        <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="bg-white/80 rounded-xl shadow-lg p-8 mt-10 border border-gray-200"
-          role="region" aria-labelledby="work-header"
-        >
-          <h2 id="work-header" className="text-2xl font-bold text-indigo-700 mb-6 flex items-center gap-2">
-            <Briefcase aria-hidden="true" className="text-blue-400" /> Work Experience
-          </h2>
-          {resumeData.workExperience.map((exp, idx) => (
-            <div key={idx} className="mb-8">
-              <h3 className="text-lg font-semibold text-blue-700 flex items-center gap-2">
-                <Users aria-hidden="true" className="text-pink-600" /> {exp.position} <span className="text-gray-800">@ {exp.company}</span>
-              </h3>
-              <p className="text-gray-500 mb-2">{exp.period}</p>
-              <ul className="list-disc list-inside text-gray-900 mb-2">
-                {exp.responsibilities.map((r, i) => (
-                  <li key={i}>{r}</li>
-                ))}
-              </ul>
-              {exp.notableProjects && exp.notableProjects.length > 0 && (
-                <div className="ml-4 mt-2">
-                  <div className="p-3 my-2">
-                    <h4 className="font-medium text-gray-900 flex items-center gap-2"><Star aria-hidden="true" /> Notable Projects:</h4>
-                    <ul className="list-disc list-inside text-gray-800">
-                      {exp.notableProjects.map((proj, pi) => (
-                        <li key={pi}><strong>{proj.name}</strong>: {proj.description} <span className="text-gray-500">[{proj.technologies.join(', ')}]</span></li>
-                      ))}
-                    </ul>
-                  </div>
+          </div>
+          {/* Work Experience */}
+          <div className="mb-10 pb-8 border-b border-gray-200">
+            <h2 className="text-2xl font-bold text-black mb-6 flex items-center gap-2 tracking-tight"><Briefcase className="text-blue-400" /> Work Experience</h2>
+            <div className="space-y-8">
+              {resumeData.workExperience.map((exp, idx) => (
+                <div key={idx}>
+                  <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                    <Users className="text-blue-400" /> {exp.position}
+                    <span className="text-gray-900 font-normal">@ {exp.company}</span>
+                  </h3>
+                  <p className="text-gray-900 mb-1">{exp.period}</p>
+                  <ul className="list-disc list-inside text-gray-900 mb-2">
+                    {exp.responsibilities.map((r, i) => (
+                      <li key={i}>{r}</li>
+                    ))}
+                  </ul>
+                  {exp.notableProjects && exp.notableProjects.length > 0 && (
+                    <div className="ml-4 mt-2">
+                      <div className="p-3 my-2 rounded bg-blue-50 border-l-4 border-blue-400">
+                        <h4 className="font-medium text-blue-900 flex items-center gap-2"><Star aria-hidden="true" /> Notable Projects:</h4>
+                        <ul className="list-disc list-inside text-gray-900">
+                          {exp.notableProjects.map((proj, pi) => (
+                            <li key={pi}><strong>{proj.name}</strong>: {proj.description} <span className="text-gray-700">[{proj.technologies.join(', ')}]</span></li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  )}
+                  {exp.honorsAndAwards && exp.honorsAndAwards.length > 0 && (
+                    <div className="ml-4 mt-2">
+                      <div className="p-3 my-2 rounded bg-yellow-50 border-l-4 border-yellow-400">
+                        <h4 className="font-medium text-yellow-900 flex items-center gap-2"><Award aria-hidden="true" /> Honors & Awards:</h4>
+                        <ul className="list-disc list-inside text-gray-900">
+                          {exp.honorsAndAwards.map((award, ai) => (
+                            <li key={ai}><strong>{award.award}</strong> <span className="text-gray-700">({award.date})</span> - <span className="text-gray-800">{award.issuer}</span>: {award.description}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  )}
                 </div>
-              )}
-              {exp.honorsAndAwards && exp.honorsAndAwards.length > 0 && (
-                <div className="ml-4 mt-6">
-                  <div className="p-4 my-4 rounded-lg bg-blue-50 border-l-4 border-blue-400 shadow-sm">
-                    <h4 className="font-medium text-blue-900 flex items-center gap-2"><Award aria-hidden="true" /> Honors & Awards:</h4>
-                    <ul className="list-disc list-inside text-blue-900">
-                      {exp.honorsAndAwards.map((award, ai) => (
-                        <li key={ai} className="mb-2"><strong>{award.award}</strong> <span className="text-gray-700">({award.date})</span> - <span className="text-gray-800">{award.issuer}</span>: {award.description}</li>
-                      ))}
-                    </ul>
-                  </div>
+              ))}
+            </div>
+          </div>
+          {/* Education */}
+          <div className="mb-10 pb-8 border-b border-gray-200">
+            <h2 className="text-2xl font-bold text-black mb-6 flex items-center gap-2 tracking-tight"><GraduationCap className="text-yellow-400" /> Education</h2>
+            <div className="space-y-8">
+              {resumeData.education.map((edu, idx) => (
+                <div key={idx}>
+                  <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                    <Book className="text-yellow-400" /> {edu.degree}, <span className="text-gray-900 font-normal">{edu.institution}</span>
+                  </h3>
+                  <p className="text-gray-900 mb-1">{edu.field} ({edu.period})</p>
                 </div>
-              )}
+              ))}
             </div>
-          ))}
-        </motion.section>
-
-        {/* Education */}
-        <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.25 }}
-          className="bg-white/80 rounded-xl shadow-lg p-8 mt-10 border border-blue-200"
-          role="region" aria-labelledby="education-header"
-        >
-          <h2 id="education-header" className="text-2xl font-bold text-pink-700 mb-6 flex items-center gap-2">
-            <GraduationCap aria-hidden="true" className="text-indigo-700" /> Education
-          </h2>
-          {resumeData.education.map((edu, idx) => (
-            <div key={idx} className="mb-6">
-              <h3 className="text-lg font-semibold text-blue-700 flex items-center gap-2">
-                <Book aria-hidden="true" className="text-pink-600" /> {edu.degree}, {edu.institution}
-              </h3>
-              <p className="text-gray-500">{edu.field} ({edu.period})</p>
-            </div>
-          ))}
-        </motion.section>
-
-        {/* Activities & Volunteer */}
-        <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="bg-white/80 rounded-xl shadow-lg p-8 mt-10 border border-blue-200"
-          role="region" aria-labelledby="activities-header"
-        >
-          <h2 id="activities-header" className="text-2xl font-bold text-indigo-700 mb-6 flex items-center gap-2">
-            <HeartHandshake aria-hidden="true" className="text-pink-600" /> Activities & Volunteer
-          </h2>
-          {resumeData.activitiesAndVolunteer.map((act, idx) => (
-            <div key={idx} className="mb-6">
-              <h3 className="text-lg font-semibold text-blue-700 flex items-center gap-2">
-                <Users aria-hidden="true" className="text-indigo-700" /> {act.role} at {act.organization}
-              </h3>
-              <p className="text-gray-500">{act.period}</p>
-              <p className="text-gray-900 mb-2">{act.description}</p>
-              {act.notableProjects && act.notableProjects.length > 0 && (
-                <div className="ml-4 mt-6">
-                  <div className="p-4 my-4 rounded-lg bg-blue-50 border-l-4 border-blue-400 shadow-sm">
-                    <h4 className="font-medium text-blue-900 flex items-center gap-2"><Star aria-hidden="true" /> Notable Projects:</h4>
-                    <ul className="list-disc list-inside text-blue-900">
-                      {act.notableProjects.map((proj, pi) => (
-                        <li key={pi} className="mb-2"><strong>{proj.name}</strong>: {proj.description} <span className="text-gray-700">[{proj.technologies.join(', ')}]</span></li>
-                      ))}
-                    </ul>
-                  </div>
+          </div>
+          {/* Activities & Volunteer */}
+          <div>
+            <h2 className="text-2xl font-bold text-black mb-6 flex items-center gap-2 tracking-tight"><HeartHandshake className="text-pink-400" /> Activities & Volunteer</h2>
+            <div className="space-y-8">
+              {resumeData.activitiesAndVolunteer.map((act, idx) => (
+                <div key={idx}>
+                  <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                    <Users className="text-pink-400" /> {act.role} <span className="text-gray-900 font-normal">at {act.organization}</span>
+                  </h3>
+                  <p className="text-gray-900 mb-1">{act.period}</p>
+                  <p className="text-gray-900 mb-2">{act.description}</p>
+                  {act.notableProjects && act.notableProjects.length > 0 && (
+                    <div className="ml-4 mt-2">
+                      <div className="p-3 my-2 rounded bg-pink-50 border-l-4 border-pink-400">
+                        <h4 className="font-medium text-pink-900 flex items-center gap-2"><Star aria-hidden="true" /> Notable Projects:</h4>
+                        <ul className="list-disc list-inside text-gray-900">
+                          {act.notableProjects.map((proj, pi) => (
+                            <li key={pi}><strong>{proj.name}</strong>: {proj.description} <span className="text-gray-700">[{proj.technologies.join(', ')}]</span></li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  )}
                 </div>
-              )}
+              ))}
             </div>
-          ))}
-        </motion.section>
+          </div>
+        </section>
       </div>
     </main>
   );
