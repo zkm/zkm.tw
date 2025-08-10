@@ -1,68 +1,38 @@
 {
-  "name": "zkm.tw",
-  "version": "4.0.4",
-  "repository": "git@github.com:zkm/zkm.tw.git",
-  "author": "Zach Schneider <me@zachschneider.com>",
-  "license": "MIT",
+  "name": "zkm_2025",
   "private": true,
-  "dependencies": {
-    "@humanwhocodes/gitignore-to-minimatch": "^1.0.2",
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^16.3.0",
-    "@testing-library/react-hooks": "^8.0.1",
-    "@testing-library/user-event": "^13.2.1",
-    "@types/jest": "^29.2.4",
-    "@types/node": "^18.11.17",
-    "@types/react": "^18.0.26",
-    "@types/react-dom": "^18.0.10",
-    "axios": "^1.6.0",
-    "framer-motion": "^12.23.6",
-    "prop-types": "^15.8.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-gtm-module": "^2.0.11",
-    "react-scripts": "^5.0.1",
-    "react-test-renderer": "^18.2.0",
-    "styled-components": "^5.3.6",
-    "styled-system": "^5.1.5",
-    "typescript": "^4.9.4",
-    "utility-types": "^3.10.0",
-    "web-vitals": "^2.1.0",
-    "workbox-webpack-plugin": "^7.0.0"
-  },
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "dev": "docker-compose -f docker-compose.yml up",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "deploy": "yarn build && git checkout production && rsync -avh --progress build/ . && git add . && git commit -m 'Update production build for deployment' && git push origin production && git checkout master"
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "dependencies": {
+    "framer-motion": "^12.23.12",
+    "jspdf": "^3.0.1",
+    "lucide-react": "^0.539.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "@testing-library/dom": "^10.4.0",
-    "@types/aria-query": "^5.0.4",
-    "@types/react-gtm-module": "^2.0.1",
-    "@types/react-router": "^5.1.20",
-    "@types/styled-components": "^5.1.26",
-    "@types/styled-system": "^5.1.15",
-    "@types/styled-system__css": "^5.0.17",
-    "@typescript-eslint/eslint-plugin": "^8.37.0",
-    "@typescript-eslint/parser": "^8.37.0",
-    "eslint": "^9.31.0",
-    "eslint-plugin-react": "^7.37.5",
-    "prettier": "^3.6.2"
+    "@eslint/js": "^9.32.0",
+    "@tailwindcss/postcss": "^4.1.11",
+    "@tailwindcss/typography": "^0.5.16",
+    "@types/node": "^24.2.1",
+    "@types/react": "^19.1.9",
+    "@types/react-dom": "^19.1.7",
+    "@vitejs/plugin-react": "^5.0.0",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^9.32.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.3.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.11",
+    "typescript": "~5.9.2",
+    "typescript-eslint": "^8.39.0",
+    "vite": "^7.1.0"
   }
 }

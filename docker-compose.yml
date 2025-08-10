@@ -1,9 +1,0 @@
-services:
-  app:
-    container_name: zkm-tw
-    build: .
-    ports:
-      - 8080:80
-    environment:
-      - NODE_ENV=development
-      - PORT=80
