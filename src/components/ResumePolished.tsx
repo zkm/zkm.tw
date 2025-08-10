@@ -11,7 +11,7 @@ const ResumePolished: React.FC = () => {
 
   if (loading) {
     return (
-      <main className="min-h-screen flex items-center justify-center bg-background-dark" aria-busy="true" aria-label="Loading resume">
+      <main className="min-h-screen flex items-center justify-center bg-gray-900" aria-busy="true" aria-label="Loading resume">
         <div className="text-center">
           <div className="animate-spin rounded-full h-24 w-24 border-b-2 border-blue-600 mx-auto" role="status" aria-label="Loading spinner"></div>
           <p className="mt-4 text-gray-300">Loading resume...</p>
@@ -19,20 +19,18 @@ const ResumePolished: React.FC = () => {
       </main>
     );
   }
-
   if (error) {
     return (
-      <main className="min-h-screen flex items-center justify-center bg-background-dark" aria-label="Resume error">
+      <main className="min-h-screen flex items-center justify-center bg-gray-900" aria-label="Resume error">
         <div className="text-center">
           <p className="text-red-400 mb-4">Error loading resume: {error}</p>
         </div>
       </main>
     );
   }
-
   if (!resumeData) {
     return (
-      <main className="min-h-screen flex items-center justify-center bg-background-dark" aria-label="No resume data">
+      <main className="min-h-screen flex items-center justify-center bg-gray-900" aria-label="No resume data">
         <p className="text-gray-300">No resume data found.</p>
       </main>
     );
@@ -40,7 +38,7 @@ const ResumePolished: React.FC = () => {
 
   // Chart data for skills
   const skillLabels = Object.keys(resumeData.technicalSkills.languages);
-  const skillValues = skillLabels.map(lang => resumeData.technicalSkills.languages[lang].length);
+  const skillValues = Object.values(resumeData.technicalSkills.languages).map((skills: string[]) => skills.length);
   const chartData = {
     labels: skillLabels,
     datasets: [
@@ -63,9 +61,9 @@ const ResumePolished: React.FC = () => {
   };
 
   return (
-  <main className="min-h-screen flex items-center justify-center bg-background-dark" aria-label="Resume">
+    <main className="min-h-screen w-full flex items-center justify-center bg-gray-900" aria-label="Resume">
       <a href="#main-content" className="sr-only focus:not-sr-only focus:ring-2 focus:ring-blue-600">Skip to main content</a>
-      <div className="max-w-4xl w-full mx-auto p-6 relative" id="main-content" tabIndex={-1}>
+      <div className="max-w-4xl w-full mx-auto p-6 relative bg-gray-900" id="main-content" tabIndex={-1}>
         {/* Floating Action Button for PDF Download */}
         <button
           className="fixed bottom-8 right-8 z-50 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-full shadow-lg p-4 hover:scale-105 focus:ring-4 focus:ring-pink-400 transition-all"
@@ -77,37 +75,37 @@ const ResumePolished: React.FC = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="bg-background-dark rounded-2xl shadow-xl overflow-hidden mb-8 border border-gray-800"
+          className="bg-white/80 rounded-2xl shadow-xl overflow-hidden mb-8 border border-gray-200"
           role="region" aria-labelledby="resume-header"
         >
-          <div className="bg-background-dark text-white p-8">
-            <h1 id="resume-header" className="text-4xl font-extrabold mb-1 flex items-center gap-3 drop-shadow-lg">
-              <User aria-hidden="true" className="text-pink-300" /> {resumeData.personalInfo.name}
+          <div className="bg-white/80 text-gray-900 p-8">
+            <h1 id="resume-header" className="text-4xl font-extrabold mb-1 flex items-center gap-3 drop-shadow-lg text-gray-900">
+              <User aria-hidden="true" className="text-pink-600" /> {resumeData.personalInfo.name}
             </h1>
-            <p className="text-lg text-pink-200 mb-2 font-semibold flex items-center gap-2">
-              <Star className="inline text-yellow-300" aria-hidden="true" /> {resumeData.personalInfo.title}
+            <p className="text-lg font-semibold flex items-center gap-2 text-gray-800">
+              <Star className="inline text-yellow-600" aria-hidden="true" /> {resumeData.personalInfo.title}
             </p>
-            <div className="flex flex-col sm:flex-row sm:items-center gap-4 text-blue-100 text-base mt-2">
-              <span className="flex items-center gap-2"><Mail className="inline text-blue-300" aria-hidden="true" />{resumeData.personalInfo.email}</span>
-              <span className="flex items-center gap-2"><Phone className="inline text-green-300" aria-hidden="true" />{resumeData.personalInfo.phone}</span>
-              {resumeData.personalInfo.website && <span className="flex items-center gap-2"><Globe className="inline text-pink-300" aria-hidden="true" />{resumeData.personalInfo.website}</span>}
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4 text-gray-800 text-base mt-2">
+              <span className="flex items-center gap-2"><Mail className="inline text-blue-600" aria-hidden="true" />{resumeData.personalInfo.email}</span>
+              <span className="flex items-center gap-2"><Phone className="inline text-green-600" aria-hidden="true" />{resumeData.personalInfo.phone}</span>
+              {resumeData.personalInfo.website && <span className="flex items-center gap-2"><Globe className="inline text-pink-600" aria-hidden="true" />{resumeData.personalInfo.website}</span>}
             </div>
           </div>
         </motion.div>
 
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Professional Summary */}
           <motion.section
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="bg-background-dark rounded-xl shadow-lg p-6 border border-gray-800"
+            className="bg-white/80 rounded-xl shadow-lg p-6 border border-gray-200"
             role="region" aria-labelledby="summary-header"
           >
             <h2 id="summary-header" className="text-xl font-bold text-pink-700 mb-2 flex items-center gap-2">
-              <Book aria-hidden="true" className="text-indigo-400" /> Professional Summary
+              <Book aria-hidden="true" className="text-indigo-700" /> Professional Summary
             </h2>
-            <p className="text-gray-700 leading-relaxed text-base font-medium">{resumeData.summary}</p>
+            <p className="text-gray-900 leading-relaxed text-base font-medium">{resumeData.summary}</p>
           </motion.section>
 
           {/* Technical Skills + Chart */}
@@ -115,14 +113,13 @@ const ResumePolished: React.FC = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="bg-background-dark rounded-xl shadow-lg p-6 border border-gray-800"
+            className="bg-white/80 rounded-xl shadow-lg p-6 border border-gray-200"
             role="region" aria-labelledby="skills-header"
           >
             <h2 id="skills-header" className="text-xl font-bold text-blue-700 mb-2 flex items-center gap-2">
-              <Code2 aria-hidden="true" className="text-blue-400" /> Technical Skills
+              <Code2 aria-hidden="true" className="text-blue-700" /> Technical Skills
             </h2>
-            <Bar data={chartData} options={{ responsive: true, plugins: { legend: { display: false }, tooltip: { backgroundColor: 'rgba(236,72,153,0.9)', titleColor: '#fff', bodyColor: '#fff' } } }} aria-label="Skills chart" />
-            <ul className="list-disc list-inside text-gray-700 text-sm mt-4">
+            <ul className="list-disc list-inside text-gray-900 text-sm mt-4">
               {Object.entries(resumeData.technicalSkills.languages).map(([lang, skills]) => (
                 <li key={lang}><strong className="text-blue-700">{lang}:</strong> {skills.join(', ')}</li>
               ))}
@@ -133,6 +130,19 @@ const ResumePolished: React.FC = () => {
               <li><strong className="text-red-700">Testing:</strong> {resumeData.technicalSkills.testing.join(', ')}</li>
               <li><strong className="text-blue-700">Methodologies:</strong> {resumeData.technicalSkills.methodologies.join(', ')}</li>
             </ul>
+            <div className="mt-6">
+              <Bar data={chartData} options={{
+                responsive: true,
+                plugins: {
+                  legend: { display: false },
+                  title: { display: true, text: 'Skill Distribution' }
+                },
+                scales: {
+                  x: { grid: { display: false } },
+                  y: { beginAtZero: true, grid: { display: false } }
+                }
+              }} />
+            </div>
           </motion.section>
         </div>
 
@@ -141,7 +151,7 @@ const ResumePolished: React.FC = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="bg-background-dark rounded-xl shadow-lg p-8 mt-10 border border-blue-900"
+          className="bg-white/80 rounded-xl shadow-lg p-8 mt-10 border border-gray-200"
           role="region" aria-labelledby="work-header"
         >
           <h2 id="work-header" className="text-2xl font-bold text-indigo-700 mb-6 flex items-center gap-2">
@@ -149,11 +159,11 @@ const ResumePolished: React.FC = () => {
           </h2>
           {resumeData.workExperience.map((exp, idx) => (
             <div key={idx} className="mb-8">
-              <h3 className="text-lg font-semibold text-blue-800 flex items-center gap-2">
-                <Users aria-hidden="true" className="text-pink-400" /> {exp.position} <span className="text-gray-600">@ {exp.company}</span>
+              <h3 className="text-lg font-semibold text-blue-700 flex items-center gap-2">
+                <Users aria-hidden="true" className="text-pink-600" /> {exp.position} <span className="text-gray-800">@ {exp.company}</span>
               </h3>
               <p className="text-gray-500 mb-2">{exp.period}</p>
-              <ul className="list-disc list-inside text-gray-700 mb-2">
+              <ul className="list-disc list-inside text-gray-900 mb-2">
                 {exp.responsibilities.map((r, i) => (
                   <li key={i}>{r}</li>
                 ))}
@@ -161,8 +171,8 @@ const ResumePolished: React.FC = () => {
               {exp.notableProjects && exp.notableProjects.length > 0 && (
                 <div className="ml-4 mt-2">
                   <div className="p-3 my-2">
-                    <h4 className="font-medium text-white flex items-center gap-2"><Star aria-hidden="true" /> Notable Projects:</h4>
-                    <ul className="list-disc list-inside text-gray-300">
+                    <h4 className="font-medium text-gray-900 flex items-center gap-2"><Star aria-hidden="true" /> Notable Projects:</h4>
+                    <ul className="list-disc list-inside text-gray-800">
                       {exp.notableProjects.map((proj, pi) => (
                         <li key={pi}><strong>{proj.name}</strong>: {proj.description} <span className="text-gray-500">[{proj.technologies.join(', ')}]</span></li>
                       ))}
@@ -171,12 +181,12 @@ const ResumePolished: React.FC = () => {
                 </div>
               )}
               {exp.honorsAndAwards && exp.honorsAndAwards.length > 0 && (
-                <div className="ml-4 mt-2">
-                  <div className="p-3 my-2">
-                    <h4 className="font-medium text-white flex items-center gap-2"><Award aria-hidden="true" /> Honors & Awards:</h4>
-                    <ul className="list-disc list-inside text-gray-300">
+                <div className="ml-4 mt-6">
+                  <div className="p-4 my-4 rounded-lg bg-blue-50 border-l-4 border-blue-400 shadow-sm">
+                    <h4 className="font-medium text-blue-900 flex items-center gap-2"><Award aria-hidden="true" /> Honors & Awards:</h4>
+                    <ul className="list-disc list-inside text-blue-900">
                       {exp.honorsAndAwards.map((award, ai) => (
-                        <li key={ai}><strong>{award.award}</strong> ({award.date}) - {award.issuer}: {award.description}</li>
+                        <li key={ai} className="mb-2"><strong>{award.award}</strong> <span className="text-gray-700">({award.date})</span> - <span className="text-gray-800">{award.issuer}</span>: {award.description}</li>
                       ))}
                     </ul>
                   </div>
@@ -191,18 +201,18 @@ const ResumePolished: React.FC = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.25 }}
-          className="bg-background-dark rounded-xl shadow-lg p-8 mt-10 border border-blue-900"
+          className="bg-white/80 rounded-xl shadow-lg p-8 mt-10 border border-blue-200"
           role="region" aria-labelledby="education-header"
         >
           <h2 id="education-header" className="text-2xl font-bold text-pink-700 mb-6 flex items-center gap-2">
-            <GraduationCap aria-hidden="true" className="text-indigo-400" /> Education
+            <GraduationCap aria-hidden="true" className="text-indigo-700" /> Education
           </h2>
           {resumeData.education.map((edu, idx) => (
             <div key={idx} className="mb-6">
-              <h3 className="text-lg font-semibold text-blue-800 flex items-center gap-2">
-                <Book aria-hidden="true" className="text-pink-400" /> {edu.degree}, {edu.institution}
+              <h3 className="text-lg font-semibold text-blue-700 flex items-center gap-2">
+                <Book aria-hidden="true" className="text-pink-600" /> {edu.degree}, {edu.institution}
               </h3>
-              <p className="text-gray-600">{edu.field} ({edu.period})</p>
+              <p className="text-gray-500">{edu.field} ({edu.period})</p>
             </div>
           ))}
         </motion.section>
@@ -212,26 +222,26 @@ const ResumePolished: React.FC = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="bg-background-dark rounded-xl shadow-lg p-8 mt-10 border border-blue-900"
+          className="bg-white/80 rounded-xl shadow-lg p-8 mt-10 border border-blue-200"
           role="region" aria-labelledby="activities-header"
         >
           <h2 id="activities-header" className="text-2xl font-bold text-indigo-700 mb-6 flex items-center gap-2">
-            <HeartHandshake aria-hidden="true" className="text-pink-400" /> Activities & Volunteer
+            <HeartHandshake aria-hidden="true" className="text-pink-600" /> Activities & Volunteer
           </h2>
           {resumeData.activitiesAndVolunteer.map((act, idx) => (
             <div key={idx} className="mb-6">
-              <h3 className="text-lg font-semibold text-blue-800 flex items-center gap-2">
-                <Users aria-hidden="true" className="text-indigo-400" /> {act.role} at {act.organization}
+              <h3 className="text-lg font-semibold text-blue-700 flex items-center gap-2">
+                <Users aria-hidden="true" className="text-indigo-700" /> {act.role} at {act.organization}
               </h3>
-              <p className="text-gray-600">{act.period}</p>
-              <p className="text-gray-700 mb-2">{act.description}</p>
+              <p className="text-gray-500">{act.period}</p>
+              <p className="text-gray-900 mb-2">{act.description}</p>
               {act.notableProjects && act.notableProjects.length > 0 && (
-                <div className="ml-4 mt-2">
-                  <div className="p-3 my-2">
-                    <h4 className="font-medium text-white flex items-center gap-2"><Star aria-hidden="true" /> Notable Projects:</h4>
-                    <ul className="list-disc list-inside text-gray-300">
+                <div className="ml-4 mt-6">
+                  <div className="p-4 my-4 rounded-lg bg-blue-50 border-l-4 border-blue-400 shadow-sm">
+                    <h4 className="font-medium text-blue-900 flex items-center gap-2"><Star aria-hidden="true" /> Notable Projects:</h4>
+                    <ul className="list-disc list-inside text-blue-900">
                       {act.notableProjects.map((proj, pi) => (
-                        <li key={pi}><strong>{proj.name}</strong>: {proj.description} <span className="text-gray-500">[{proj.technologies.join(', ')}]</span></li>
+                        <li key={pi} className="mb-2"><strong>{proj.name}</strong>: {proj.description} <span className="text-gray-700">[{proj.technologies.join(', ')}]</span></li>
                       ))}
                     </ul>
                   </div>
