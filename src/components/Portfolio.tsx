@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Instagram, FileText } from 'lucide-react';
 import { useProfileData } from '../hooks/useProfileData';
-import Resume from './Resume';
+const Resume = React.lazy(() => import('./Resume'));
 
 // Custom SVG components for icons not available in Lucide
 const MastodonIcon = () => (
@@ -63,7 +63,11 @@ const Portfolio: React.FC = () => {
   const { profile, socialLinks, resume } = data;
 
   if (showResume) {
-  return <Resume />;
+  return (
+    <Suspense fallback={<div className="text-white">Loading resume...</div>}>
+      <Resume />
+    </Suspense>
+  );
   }
 
   return (
