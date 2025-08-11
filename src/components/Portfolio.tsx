@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Instagram, FileText } from 'lucide-react';
 import { useProfileData } from '../hooks/useProfileData';
-import Resume from './ResumePolished';
+import Resume from './Resume';
 
 // Custom SVG components for icons not available in Lucide
 const MastodonIcon = () => (

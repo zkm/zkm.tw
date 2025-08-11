@@ -2,7 +2,7 @@
   "personalInfo": {
     "name": "Zach Schneider",
     "title": "Senior Web Developer & Technical Advisor",
-    "phone": "(260) 435-9767",
+    "phone": "(773) 980-9599",
     "email": "me@zachschneider.com",
     "website": "https://www.zachschneider.com",
     "portfolio": "https://zkm.tw"
@@ -10,18 +10,75 @@
   "summary": "Experienced Senior Web Developer with 15+ years of expertise in modern frontend technologies, team leadership, and technical architecture. Proven track record of successfully migrating legacy systems to modern frameworks, leading cross-functional teams, and delivering high-impact web solutions. Passionate about mentoring developers and implementing best practices that drive business results.",
   "technicalSkills": {
     "languages": {
-      "HTML": ["HTML5", "XHTML", "HAML", "Web Components"],
-      "CSS": ["SASS", "SCSS", "LESS", "CSS3", "Tailwind CSS", "PostCSS"],
-      "JavaScript": ["ES2024", "TypeScript", "React", "Node.js", "Next.js", "Vite", "jQuery", "Webpack"],
-      "PHP": ["Zend", "Symfony", "CodeIgniter"],
-      "Other": ["Python", "Java", "Ruby"]
+      "HTML": [
+        "HTML5",
+        "XHTML",
+        "HAML",
+        "Web Components"
+      ],
+      "CSS": [
+        "SASS",
+        "SCSS",
+        "LESS",
+        "CSS3",
+        "Tailwind CSS",
+        "PostCSS"
+      ],
+      "JavaScript": [
+        "ES2024",
+        "TypeScript",
+        "React",
+        "Node.js",
+        "Next.js",
+        "Vite",
+        "jQuery",
+        "Webpack"
+      ],
+      "PHP": [
+        "Zend",
+        "Symfony",
+        "CodeIgniter"
+      ],
+      "Other": [
+        "Python",
+        "Java",
+        "Ruby"
+      ]
     },
-    "frameworks": ["React 18+", "Next.js", "Angular", "Vue.js", "Express.js", "Backbone.js"],
-    "cms": ["WordPress", "Drupal", "Magento", "Contentful", "Strapi"],
-    "cloud": ["AWS", "Azure", "Vercel", "Netlify"],
-    "tools": ["Git", "Docker", "JIRA", "Figma", "Adobe Creative Suite"],
-    "testing": ["Jest", "Cypress", "Playwright", "React Testing Library"],
-    "methodologies": ["Agile", "SCRUM", "CI/CD", "DevOps"]
+    "frameworks": [
+      "React 18+",
+      "Next.js",
+      "Angular",
+      "Vue.js",
+      "Express.js",
+      "Backbone.js"
+    ],
+    "cms": [
+      "WordPress",
+      "Drupal"
+    ],
+    "cloud": [
+      "AWS",
+      "Azure",
+      "DigitalOcean"
+    ],
+    "tools": [
+      "Git",
+      "Docker",
+      "JIRA",
+      "Adobe Creative Suite"
+    ],
+    "testing": [
+      "Jest",
+      "Cypress",
+      "React Testing Library"
+    ],
+    "methodologies": [
+      "Agile",
+      "SCRUM",
+      "CI/CD",
+      "DevOps"
+    ]
   },
   "workExperience": [
     {
@@ -113,7 +170,13 @@
           "name": "Humana EasyPrice",
           "period": "Jun 2014 - Dec 2014",
           "description": "Developed healthcare pricing transparency application for Humana insurance customers. Built interactive web platform allowing users to compare medical procedure costs and make informed healthcare decisions.",
-          "technologies": ["JavaScript", "HTML5", "CSS3", "Backbone.js", ".NET"],
+          "technologies": [
+            "JavaScript",
+            "HTML5",
+            "CSS3",
+            "Backbone.js",
+            ".NET"
+          ],
           "impact": "Enabled healthcare price transparency for Humana customers, improving informed decision-making for medical procedures and healthcare costs."
         }
       ]
@@ -215,7 +278,7 @@
   "activitiesAndVolunteer": [
     {
       "organization": "Out Our Front Door",
-      "role": "Vice President / Outreach Ambassador / Field Guide / Advisor",
+      "role": "Vice President / Field Guide",
       "period": "Jan 2018 - Apr 2019",
       "description": "Served in executive leadership role for environmental education organization, then transitioned to field work providing exploratory adventures by immersing and educating participants in the history, culture, and uniquely beautiful natural habitats of the Lower Lake Michigan Basin Area. Led field experiences connecting urban communities with environmental education and outdoor recreation opportunities."
     },
@@ -245,7 +308,11 @@
         {
           "name": "Community Technology Projects",
           "description": "Contributed to various collaborative technology initiatives within Chicago's hackerspace community, focusing on educational workshops and skill-sharing in web development and maker technologies.",
-          "technologies": ["Web Development", "Community Education", "Maker Technologies"],
+          "technologies": [
+            "Web Development",
+            "Community Education",
+            "Maker Technologies"
+          ],
           "impact": "Fostered technology education and community collaboration within Chicago's maker movement, contributing to the growth of local tech skills and innovation."
         }
       ]
@@ -254,33 +321,6 @@
       "organization": "Chicago Marathon and Shamrock Shuffle",
       "role": "Beer Tent Coordinator",
       "description": "Organized post-race hospitality coordination for major Chicago running events, demonstrating community leadership and event management skills."
-    }
-  ],
-  "references": [
-    {
-      "name": "Halina Miller",
-      "phone": "(515) 422-1976",
-      "email": "halina.miller@gdit.com"
-    },
-    {
-      "name": "Mike Varney",
-      "phone": "(513) 720-4354",
-      "email": "mike19v@gmail.com"
-    },
-    {
-      "name": "Jeff Korba",
-      "phone": "(312) 772-2642",
-      "email": "jeff.korba@korbaconsulting.com"
-    },
-    {
-      "name": "Alex Telischak",
-      "phone": "(773) 710-8372",
-      "email": "alextelischak@gmail.com"
-    },
-    {
-      "name": "Erin DeLashmutt",
-      "phone": "(563) 340-2080",
-      "email": "pettyerin@gmail.com"
     }
   ]
 }
