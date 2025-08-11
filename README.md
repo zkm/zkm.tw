@@ -1,131 +1,127 @@
-# Zach Schneider - Portfolio Website
+# zkm.tw — Portfolio
 
-A modern React portfolio website built with Vite, TypeScript, Tailwind CSS, and Framer Motion.
+Modern React + TypeScript portfolio powered by Vite, Tailwind CSS, and Framer Motion.
 
-## Features
+## Stack
 
-- ⚡ Built with Vite for lightning-fast development
-- 🔧 TypeScript for type safety
-- 🎨 Tailwind CSS for modern styling
-- ✨ Framer Motion for smooth animations
-- 📱 Fully responsive design
-- 🌈 Beautiful gradient backgrounds and glass morphism effects
-- 🚀 Astronaut-themed branding
+- React 19, TypeScript, Vite 7
+- Tailwind CSS 4, PostCSS, Styled Components
+- Framer Motion (animations), Lucide Icons
+- Chart.js + react-chartjs-2 (lazy-loaded Bar)
+- Vitest + Testing Library (unit tests)
 
-## Setup
+## Getting started
 
-1. Install dependencies:
-   ```bash
-   yarn install
-   ```
+Prereqs: Node 20+, Yarn 1.x.
 
-2. Add your images to the `public` folder:
-   - Save your profile photo as `public/zach-photo.webp`
-   - Save the astronaut favicon as `public/astronaut-favicon.png`
+Install deps
 
-3. Start the development server:
-   ```bash
-   yarn dev
-   ```
+```bash
+yarn install
+```
 
-4. Build for production:
-   ```bash
-   yarn build
-   ```
+Dev server
 
-## Image Requirements
+```bash
+yarn dev
+```
 
-### Profile Photo (`public/zach-photo.webp`)
-- Format: WebP (modern, efficient format)
-- Recommended size: 512x512px or larger
-- Square aspect ratio works best for the circular display
+Build
 
-### Favicon (`public/astronaut-favicon.png`)
-- Format: PNG
-- Size: 32x32px or 64x64px
-- Should work well at small sizes
+```bash
+yarn build
+```
 
-## Technologies Used
+Preview
 
-- **React 18+** - Latest React features
-- **Vite** - Next generation frontend tooling
-- **TypeScript** - Type-safe JavaScript
-- **Tailwind CSS** - Utility-first CSS framework
-- **Framer Motion** - Production-ready motion library
-- **Lucide React** - Beautiful & consistent icons
+```bash
+yarn preview
+```
 
-## Project Structure
+## Scripts
+
+- lint: eslint .
+- test: vitest run
+- test:watch: vitest
+- test:coverage: vitest run --coverage
+- docker:dev: docker-compose up Vite dev (5173, HMR 24678)
+- docker:prod: docker-compose up web-prod (nginx at 8080)
+- deploy: builds, switches to production branch, rsyncs dist/, commits if changed, pushes, and switches back
+
+## Docker
+
+- Dockerfile has multi-stage targets: dev (Vite), build, prod (nginx)
+- docker-compose.yml defines:
+  - web: bind-mount dev with hot reload on http://localhost:5173
+  - web-prod: serves built assets via nginx on http://localhost:8080
+- .dockerignore is configured to keep the build context small
+
+Common
+
+```bash
+yarn docker:dev   # dev with HMR
+yarn docker:prod  # serve built site on :8080
+```
+
+## Tests
+
+- Vitest + @testing-library/react
+- Framer Motion is mocked in test setup (src/test-setup.ts) for stable DOM
+- Hooks are mocked per test with vi.mocked(...) patterns
+
+Run
+
+```bash
+yarn test
+yarn test:watch
+yarn test:coverage
+```
+
+## Data & components
+
+- Public JSON data: public/data/profile.json, public/data/resume.json
+- Hooks: src/hooks/useProfileData.ts, src/hooks/useResumeData.ts
+- Key components: src/components/Portfolio.tsx, src/components/Resume.tsx
+- Resume sections are collapsible (accessible), default-expanded
+
+## Analytics
+
+GA4 is integrated via gtag in index.html using measurement ID G-2J7SWPGLE4. If you prefer GTM, replace the GA snippet with your GTM container snippet.
+
+## Deploy
+
+The deploy script publishes the Vite build to the production branch root.
+
+```bash
+yarn deploy
+```
+
+It will:
+
+1) Build to dist/
+2) Switch to production
+3) rsync dist/ -> .
+4) Commit only if changes exist
+5) Push to origin/production
+6) Switch back to your previous branch
+
+## Project structure
 
 ```
 src/
-├── components/
-│   └── Portfolio.tsx    # Main portfolio component
-├── App.tsx             # Root component
-├── main.tsx           # Application entry point
-└── index.css          # Global styles with Tailwind
-
+  components/
+    Portfolio.tsx
+    Resume.tsx
+  hooks/
+    useProfileData.ts
+    useResumeData.ts
+  __tests__/
 public/
-├── zach-photo.webp    # Your profile photo (add this)
-└── astronaut-favicon.png  # Astronaut favicon (add this)
+  data/
+    profile.json
+    resume.json
 ```
-
-## Customization
-
-The portfolio is fully customizable:
-
-- Update personal information in `src/components/Portfolio.tsx`
-- Modify colors and styles in `tailwind.config.js`
-- Add or remove social media links
-- Customize animations and transitions
-
-## Deployment
-
-This project can be deployed to any static hosting service:
-
-- **Vercel**: Connect your GitHub repo for automatic deployments
-- **Netlify**: Drag and drop the `dist` folder after building
-- **GitHub Pages**: Use GitHub Actions for automated deployment
 
 ## License
 
-© 2025 Zach Schneider, All rights reserved
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+MIT
