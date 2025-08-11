@@ -195,7 +195,7 @@ const Portfolio: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2, duration: 0.6 }}
-          className="text-gray-400 text-sm bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2 border border-white/20"
+          className="text-gray-200 text-sm bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2 border border-white/20"
         >
           © 2025 Zach Schneider, All rights reserved
         </motion.div>
