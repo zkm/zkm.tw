@@ -14,7 +14,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "deploy": "yarn test && yarn build && git add . && (git diff --staged --quiet || git commit -m 'Deploy: $(date)') && git push origin master && git push origin master:production --force",
+    "deploy": "yarn test && yarn build && git add . && (git diff --staged --quiet || git commit -m 'Deploy: $(date)') && git push origin master",
+    "deploy:prod": "echo 'To deploy to production, create a PR from master to production branch on GitHub'",
     "docker:dev": "docker-compose -f docker-compose.yml up",
     "docker:prod": "docker-compose -f docker-compose.yml up web-prod"
   },
