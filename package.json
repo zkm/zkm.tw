@@ -14,7 +14,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "deploy": "yarn build && git checkout production && rsync -avh --delete --progress dist/ . && git add -A && git commit -m 'Deploy' && git push origin production && git checkout master",
+    "deploy": "yarn test && yarn build && git add . && git commit -m 'Deploy: $(date)' && git push origin master",
     "docker:dev": "docker-compose -f docker-compose.yml up",
     "docker:prod": "docker-compose -f docker-compose.yml up web-prod"
   },
