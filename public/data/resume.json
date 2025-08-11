@@ -86,25 +86,11 @@
       "position": "Web Developer Advisor",
       "period": "Jan 2023 - Present",
       "responsibilities": [
-        "Provide technical leadership and web development expertise for federal government contracts",
-        "Lead cross-functional development teams on mission-critical government technology solutions",
-        "Coordinate with multiple offshore development teams on defense and civilian agency projects",
-        "Implement security-compliant development practices for federal information systems",
-        "Mentor development teams on government technology standards and best practices"
-      ]
-    },
-    {
-      "company": "Surge (Catalyte company)",
-      "position": "Full Stack Developer",
-      "period": "Dec 2022 - Present",
-      "responsibilities": [
-        "Develop full-stack web applications for Fortune 500 clients using modern JavaScript frameworks and cloud technologies",
-        "Provide on-demand technical resources as part of Surge's 100% onshore engineering talent network",
-        "Collaborate with cross-functional agile teams including UI/UX experts, QA specialists, and project managers",
-        "Implement scalable solutions with no minimum term commitments, allowing clients to scale up/down on demand",
-        "Work across multiple development centers (Baltimore, Boston, Chicago, Denver, Phoenix-Scottsdale, Portland)",
-        "Deliver high-quality software solutions using agile methodologies and DevOps practices",
-        "Contribute to digital transformation initiatives for enterprise clients across various industries"
+        "Develop and maintain JSP pages for a secure, Java-based government web application, ensuring optimized performance, dynamic content delivery, and 508/WCAG accessibility compliance.",
+        "Design and build interactive AI demos using Vite, React, TypeScript, Tailwind CSS, and AWS services (Cognito, Lambda, S3, AWS SDK) to showcase advanced machine learning capabilities.",
+        "Implement secure authentication workflows including MFA, Duo, and OWASP-compliant practices to protect sensitive data and meet federal security requirements.",
+        "Automate workflows and improve productivity by creating and maintaining Ruby, Python, and Bash scripts for development, deployment, and data processing tasks.",
+        "Manage and enhance Drupal-based website, delivering new features, resolving technical issues, and ensuring high performance and accessibility."
       ]
     },
     {
@@ -148,7 +134,7 @@
       "position": "Freelance Web Developer",
       "period": "Mar 2016 - Apr 2016",
       "responsibilities": [
-        "Developed interactive web applications for global advertising campaigns at FCB (Foote, Cone & Belding)",
+        "Developed interactive web applications for global advertising campaigns at FCB",
         "Created single page React.js applications for major brand marketing initiatives",
         "Collaborated with creative directors and account teams on digital advertising solutions",
         "Delivered high-performance web experiences under tight campaign deadlines"
