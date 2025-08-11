@@ -207,7 +207,7 @@ const Resume: React.FC = () => {
 
   // Pull name/title/site from JSON (safe); keep phone/email via reveal components
   const name = resumeData?.personalInfo?.name ?? 'Zach Schneider';
-  const title = resumeData?.personalInfo?.title ?? 'Senior Web Developer & Technical Advisor';
+  const title = resumeData?.personalInfo?.title ?? 'Web Developer Advisor';
   const website = resumeData?.personalInfo?.website ?? 'https://www.zachschneider.com';
   const portfolio = resumeData?.personalInfo?.portfolio;
 
@@ -215,7 +215,7 @@ const Resume: React.FC = () => {
   const chartData = React.useMemo(() => {
     const langs = resumeData?.technicalSkills?.languages ?? {};
     const labels = Object.keys(langs);
-    const values = Object.values(langs).map((skills: any) => (Array.isArray(skills) ? skills.length : 0));
+    const values = Object.values(langs).map((skills: string[]) => (Array.isArray(skills) ? skills.length : 0));
     return {
       labels,
       datasets: [
@@ -309,18 +309,10 @@ const Resume: React.FC = () => {
               <li><RevealPhone /></li>
               <li className="flex items-center gap-2">
                 <Globe className="inline text-yellow-400" aria-hidden="true" />
-                <a href={website} className="underline hover:text-yellow-300" rel="me">
+                <a href={website} className="underline hover:text-yellow-300" rel="me" target='_blank'>
                   {new URL(website).host}
                 </a>
               </li>
-              {portfolio && (
-                <li className="flex items-center gap-2">
-                  <Globe className="inline text-yellow-400" aria-hidden="true" />
-                  <a href={portfolio} className="underline hover:text-yellow-300" rel="me">
-                    {new URL(portfolio).host}
-                  </a>
-                </li>
-              )}
               <li className="text-gray-300 text-sm italic pt-2">References available upon request</li>
             </ul>
           </div>
@@ -359,7 +351,7 @@ const Resume: React.FC = () => {
 
             <div className="mt-6">
               <React.Suspense fallback={<div className="h-40 bg-gray-100 rounded animate-pulse" />}>
-                <BarChart data={chartData as any} options={chartOptions as any} />
+                <BarChart data={chartData} options={chartOptions} />
               </React.Suspense>
             </div>
           </div>
@@ -370,7 +362,7 @@ const Resume: React.FC = () => {
               <Briefcase className="text-blue-400" aria-hidden="true" /> Work Experience
             </h2>
             <div className="space-y-8">
-              {resumeData.workExperience.map((exp: any, idx: number) => (
+              {resumeData.workExperience.map((exp, idx: number) => (
                 <div key={idx}>
                   <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
                     <Users className="text-blue-400" aria-hidden="true" /> {exp.position}
@@ -381,14 +373,14 @@ const Resume: React.FC = () => {
                     {exp.responsibilities.map((r: string, i: number) => <li key={i}>{r}</li>)}
                   </ul>
 
-                  {exp.notableProjects?.length > 0 && (
+                  {(exp.notableProjects?.length ?? 0) > 0 && (
                     <div className="ml-4 mt-2">
                       <div className="p-3 my-2 rounded bg-blue-50 border-l-4 border-blue-400">
                         <h4 className="font-medium text-blue-900 flex items-center gap-2">
                           <Star aria-hidden="true" /> Notable Projects:
                         </h4>
                         <ul className="list-disc list-inside text-gray-900">
-                          {exp.notableProjects.map((proj: any, pi: number) => (
+                          {exp.notableProjects?.map((proj, pi: number) => (
                             <li key={pi}>
                               <strong>{proj.name}</strong>: {proj.description}{' '}
                               <span className="text-gray-700">[{proj.technologies.join(', ')}]</span>
@@ -399,14 +391,14 @@ const Resume: React.FC = () => {
                     </div>
                   )}
 
-                  {exp.honorsAndAwards?.length > 0 && (
+                  {(exp.honorsAndAwards?.length ?? 0) > 0 && (
                     <div className="ml-4 mt-2">
                       <div className="p-3 my-2 rounded bg-yellow-50 border-l-4 border-yellow-400">
                         <h4 className="font-medium text-yellow-900 flex items-center gap-2">
                           <Award aria-hidden="true" /> Honors & Awards:
                         </h4>
                         <ul className="list-disc list-inside text-gray-900">
-                          {exp.honorsAndAwards.map((award: any, ai: number) => (
+                          {exp.honorsAndAwards?.map((award, ai: number) => (
                             <li key={ai}>
                               <strong>{award.award}</strong>{' '}
                               <span className="text-gray-700">({award.date})</span> -{' '}
@@ -428,7 +420,7 @@ const Resume: React.FC = () => {
               <GraduationCap className="text-yellow-400" aria-hidden="true" /> Education
             </h2>
             <div className="space-y-8">
-              {resumeData.education.map((edu: any, idx: number) => (
+              {resumeData.education.map((edu, idx: number) => (
                 <div key={idx}>
                   <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
                     <Book className="text-yellow-400" aria-hidden="true" /> {edu.degree},{' '}
@@ -446,7 +438,7 @@ const Resume: React.FC = () => {
               <HeartHandshake className="text-pink-400" aria-hidden="true" /> Activities & Volunteer
             </h2>
             <div className="space-y-8">
-              {resumeData.activitiesAndVolunteer.map((act: any, idx: number) => (
+              {resumeData.activitiesAndVolunteer.map((act, idx: number) => (
                 <div key={idx}>
                   <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
                     <Users className="text-pink-400" aria-hidden="true" /> {act.role}{' '}
@@ -455,14 +447,14 @@ const Resume: React.FC = () => {
                   <p className="text-gray-900 mb-1">{act.period}</p>
                   <p className="text-gray-900 mb-2">{act.description}</p>
 
-                  {act.notableProjects?.length > 0 && (
+                  {(act.notableProjects?.length ?? 0) > 0 && (
                     <div className="ml-4 mt-2">
                       <div className="p-3 my-2 rounded bg-pink-50 border-l-4 border-pink-400">
                         <h4 className="font-medium text-pink-900 flex items-center gap-2">
                           <Star aria-hidden="true" /> Notable Projects:
                         </h4>
                         <ul className="list-disc list-inside text-gray-900">
-                          {act.notableProjects.map((proj: any, pi: number) => (
+                          {act.notableProjects?.map((proj, pi: number) => (
                             <li key={pi}>
                               <strong>{proj.name}</strong>: {proj.description}{' '}
                               <span className="text-gray-700">[{proj.technologies.join(', ')}]</span>
