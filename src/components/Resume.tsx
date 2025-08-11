@@ -321,158 +321,187 @@ const Resume: React.FC = () => {
 
         {/* Main Content */}
         <section className="w-full md:w-2/3 bg-white rounded-2xl shadow-xl p-8">
-          {/* Professional Summary */}
-          <div className="mb-10 pb-8 border-b border-gray-200">
-            <h2 className="text-2xl font-bold text-black mb-3 flex items-center gap-2 tracking-tight">
-              <Book className="text-indigo-400" aria-hidden="true" /> Professional Summary
-            </h2>
-            <p className="text-gray-900 leading-relaxed text-lg font-normal">{resumeData.summary}</p>
-          </div>
-
-          {/* Technical Skills + Chart */}
-          <div className="mb-10 pb-8 border-b border-gray-200">
-            <h2 className="text-2xl font-bold text-black mb-3 flex items-center gap-2 tracking-tight">
-              <Code2 className="text-blue-400" aria-hidden="true" /> Technical Skills
-            </h2>
-            <ul className="list-disc list-inside text-gray-900 text-base mb-6 space-y-1">
-              <li><strong className="text-blue-600">HTML:</strong> {resumeData.technicalSkills.languages.HTML.join(', ')}</li>
-              <li><strong className="text-green-600">CSS:</strong> {resumeData.technicalSkills.languages.CSS.join(', ')}</li>
-              <li><strong className="text-yellow-500">JavaScript:</strong> {resumeData.technicalSkills.languages.JavaScript.join(', ')}</li>
-              <li><strong className="text-purple-600">PHP:</strong> {resumeData.technicalSkills.languages.PHP.join(', ')}</li>
-              <li><strong className="text-gray-700">Other:</strong> {resumeData.technicalSkills.languages.Other.join(', ')}</li>
-              <li><strong className="text-indigo-600">Frameworks:</strong> {resumeData.technicalSkills.frameworks.join(', ')}</li>
-              <li><strong className="text-pink-600">CMS:</strong> {resumeData.technicalSkills.cms.join(', ')}</li>
-              <li><strong className="text-orange-500">Cloud:</strong> {resumeData.technicalSkills.cloud.join(', ')}</li>
-              <li><strong className="text-teal-600">Tools:</strong> {resumeData.technicalSkills.tools.join(', ')}</li>
-              <li><strong className="text-red-500">Testing:</strong> {resumeData.technicalSkills.testing.join(', ')}</li>
-              <li><strong className="text-blue-500">Methodologies:</strong> {resumeData.technicalSkills.methodologies.join(', ')}</li>
-            </ul>
-
-            <div className="mt-6">
-              <React.Suspense fallback={<div className="h-40 bg-gray-100 rounded animate-pulse" />}>
-                <BarChart data={chartData} options={chartOptions} />
-              </React.Suspense>
-            </div>
-          </div>
-
-          {/* Work Experience */}
-          <div className="mb-10 pb-8 border-b border-gray-200">
-            <h2 className="text-2xl font-bold text-black mb-6 flex items-center gap-2 tracking-tight">
-              <Briefcase className="text-blue-400" aria-hidden="true" /> Work Experience
-            </h2>
-            <div className="space-y-8">
-              {resumeData.workExperience.map((exp, idx: number) => (
-                <div key={idx}>
-                  <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                    <Users className="text-blue-400" aria-hidden="true" /> {exp.position}
-                    <span className="text-gray-900 font-normal">@ {exp.company}</span>
-                  </h3>
-                  <p className="text-gray-900 mb-1">{exp.period}</p>
-                  <ul className="list-disc list-inside text-gray-900 mb-2">
-                    {exp.responsibilities.map((r: string, i: number) => <li key={i}>{r}</li>)}
-                  </ul>
-
-                  {(exp.notableProjects?.length ?? 0) > 0 && (
-                    <div className="ml-4 mt-2">
-                      <div className="p-3 my-2 rounded bg-blue-50 border-l-4 border-blue-400">
-                        <h4 className="font-medium text-blue-900 flex items-center gap-2">
-                          <Star aria-hidden="true" /> Notable Projects:
-                        </h4>
-                        <ul className="list-disc list-inside text-gray-900">
-                          {exp.notableProjects?.map((proj, pi: number) => (
-                            <li key={pi}>
-                              <strong>{proj.name}</strong>: {proj.description}{' '}
-                              <span className="text-gray-700">[{proj.technologies.join(', ')}]</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+          {/* Collapsible helper */}
+            {/** Simple accessible collapsible section */}
+            {(() => {
+              type CollapsibleProps = {
+                id: string;
+                title: React.ReactNode;
+                children: React.ReactNode;
+                className?: string;
+                defaultOpen?: boolean;
+              };
+              const CollapsibleSection: React.FC<CollapsibleProps> = ({ id, title, children, className = '', defaultOpen = true }) => {
+                const [open, setOpen] = React.useState(defaultOpen);
+                const contentId = `${id}-content`;
+                return (
+                  <div className={`mb-10 pb-8 border-b border-gray-200 ${className}`}>
+                    <button
+                      type="button"
+                      aria-expanded={open}
+                      aria-controls={contentId}
+                      onClick={() => setOpen((v) => !v)}
+                      className="w-full flex items-center justify-between gap-4 group"
+                    >
+                      <h2 className="text-2xl font-bold text-black flex items-center gap-2 tracking-tight">{title}</h2>
+                      <span
+                        aria-hidden="true"
+                        className={`transition-transform duration-200 text-gray-500 group-hover:text-gray-700 ${open ? 'rotate-0' : '-rotate-90'}`}
+                      >
+                        ▾
+                      </span>
+                    </button>
+                    <div id={contentId} className={`${open ? 'mt-3' : 'hidden'}`}>
+                      {children}
                     </div>
-                  )}
+                  </div>
+                );
+              };
 
-                  {(exp.honorsAndAwards?.length ?? 0) > 0 && (
-                    <div className="ml-4 mt-2">
-                      <div className="p-3 my-2 rounded bg-yellow-50 border-l-4 border-yellow-400">
-                        <h4 className="font-medium text-yellow-900 flex items-center gap-2">
-                          <Award aria-hidden="true" /> Honors & Awards:
-                        </h4>
-                        <ul className="list-disc list-inside text-gray-900">
-                          {exp.honorsAndAwards?.map((award, ai: number) => (
-                            <li key={ai}>
-                              <strong>{award.award}</strong>{' '}
-                              <span className="text-gray-700">({award.date})</span> -{' '}
-                              <span className="text-gray-800">{award.issuer}</span>: {award.description}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+              return (
+                <>
+                  {/* Professional Summary */}
+                  <CollapsibleSection id="summary" title={<><Book className="text-indigo-400" aria-hidden="true" /> Professional Summary</>}>
+                    <p className="text-gray-900 leading-relaxed text-lg font-normal">{resumeData.summary}</p>
+                  </CollapsibleSection>
+
+                  {/* Technical Skills + Chart */}
+                  <CollapsibleSection id="skills" title={<><Code2 className="text-blue-400" aria-hidden="true" /> Technical Skills</>}>
+                    <ul className="list-disc list-inside text-gray-900 text-base mb-6 space-y-1">
+                      <li><strong className="text-blue-600">HTML:</strong> {resumeData.technicalSkills.languages.HTML.join(', ')}</li>
+                      <li><strong className="text-green-600">CSS:</strong> {resumeData.technicalSkills.languages.CSS.join(', ')}</li>
+                      <li><strong className="text-yellow-500">JavaScript:</strong> {resumeData.technicalSkills.languages.JavaScript.join(', ')}</li>
+                      <li><strong className="text-purple-600">PHP:</strong> {resumeData.technicalSkills.languages.PHP.join(', ')}</li>
+                      <li><strong className="text-gray-700">Other:</strong> {resumeData.technicalSkills.languages.Other.join(', ')}</li>
+                      <li><strong className="text-indigo-600">Frameworks:</strong> {resumeData.technicalSkills.frameworks.join(', ')}</li>
+                      <li><strong className="text-pink-600">CMS:</strong> {resumeData.technicalSkills.cms.join(', ')}</li>
+                      <li><strong className="text-orange-500">Cloud:</strong> {resumeData.technicalSkills.cloud.join(', ')}</li>
+                      <li><strong className="text-teal-600">Tools:</strong> {resumeData.technicalSkills.tools.join(', ')}</li>
+                      <li><strong className="text-red-500">Testing:</strong> {resumeData.technicalSkills.testing.join(', ')}</li>
+                      <li><strong className="text-blue-500">Methodologies:</strong> {resumeData.technicalSkills.methodologies.join(', ')}</li>
+                    </ul>
+
+                    <div className="mt-6">
+                      <React.Suspense fallback={<div className="h-40 bg-gray-100 rounded animate-pulse" />}>
+                        <BarChart data={chartData} options={chartOptions} />
+                      </React.Suspense>
                     </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
+                  </CollapsibleSection>
 
-          {/* Education */}
-          <div className="mb-10 pb-8 border-b border-gray-200">
-            <h2 className="text-2xl font-bold text-black mb-6 flex items-center gap-2 tracking-tight">
-              <GraduationCap className="text-yellow-400" aria-hidden="true" /> Education
-            </h2>
-            <div className="space-y-8">
-              {resumeData.education.map((edu, idx: number) => (
-                <div key={idx}>
-                  <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                    <Book className="text-yellow-400" aria-hidden="true" /> {edu.degree},{' '}
-                    <span className="text-gray-900 font-normal">{edu.institution}</span>
-                  </h3>
-                  <p className="text-gray-900 mb-1">{edu.field} ({edu.period})</p>
-                </div>
-              ))}
-            </div>
-          </div>
+                  {/* Work Experience */}
+                  <CollapsibleSection id="experience" title={<><Briefcase className="text-blue-400" aria-hidden="true" /> Work Experience</>}>
+                    <div className="space-y-8">
+                      {resumeData.workExperience.map((exp, idx: number) => (
+                        <div key={idx}>
+                          <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                            <Users className="text-blue-400" aria-hidden="true" /> {exp.position}
+                            <span className="text-gray-900 font-normal">@ {exp.company}</span>
+                          </h3>
+                          <p className="text-gray-900 mb-1">{exp.period}</p>
+                          <ul className="list-disc list-inside text-gray-900 mb-2">
+                            {exp.responsibilities.map((r: string, i: number) => <li key={i}>{r}</li>)}
+                          </ul>
 
-          {/* Activities & Volunteer */}
-          <div className="mb-10">
-            <h2 className="text-2xl font-bold text-black mb-6 flex items-center gap-2 tracking-tight">
-              <HeartHandshake className="text-pink-400" aria-hidden="true" /> Activities & Volunteer
-            </h2>
-            <div className="space-y-8">
-              {resumeData.activitiesAndVolunteer.map((act, idx: number) => (
-                <div key={idx}>
-                  <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                    <Users className="text-pink-400" aria-hidden="true" /> {act.role}{' '}
-                    <span className="text-gray-900 font-normal">at {act.organization}</span>
-                  </h3>
-                  <p className="text-gray-900 mb-1">{act.period}</p>
-                  <p className="text-gray-900 mb-2">{act.description}</p>
+                          {(exp.notableProjects?.length ?? 0) > 0 && (
+                            <div className="ml-4 mt-2">
+                              <div className="p-3 my-2 rounded bg-blue-50 border-l-4 border-blue-400">
+                                <h4 className="font-medium text-blue-900 flex items-center gap-2">
+                                  <Star aria-hidden="true" /> Notable Projects:
+                                </h4>
+                                <ul className="list-disc list-inside text-gray-900">
+                                  {exp.notableProjects?.map((proj, pi: number) => (
+                                    <li key={pi}>
+                                      <strong>{proj.name}</strong>: {proj.description}{' '}
+                                      <span className="text-gray-700">[{proj.technologies.join(', ')}]</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            </div>
+                          )}
 
-                  {(act.notableProjects?.length ?? 0) > 0 && (
-                    <div className="ml-4 mt-2">
-                      <div className="p-3 my-2 rounded bg-pink-50 border-l-4 border-pink-400">
-                        <h4 className="font-medium text-pink-900 flex items-center gap-2">
-                          <Star aria-hidden="true" /> Notable Projects:
-                        </h4>
-                        <ul className="list-disc list-inside text-gray-900">
-                          {act.notableProjects?.map((proj, pi: number) => (
-                            <li key={pi}>
-                              <strong>{proj.name}</strong>: {proj.description}{' '}
-                              <span className="text-gray-700">[{proj.technologies.join(', ')}]</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                          {(exp.honorsAndAwards?.length ?? 0) > 0 && (
+                            <div className="ml-4 mt-2">
+                              <div className="p-3 my-2 rounded bg-yellow-50 border-l-4 border-yellow-400">
+                                <h4 className="font-medium text-yellow-900 flex items-center gap-2">
+                                  <Award aria-hidden="true" /> Honors & Awards:
+                                </h4>
+                                <ul className="list-disc list-inside text-gray-900">
+                                  {exp.honorsAndAwards?.map((award, ai: number) => (
+                                    <li key={ai}>
+                                      <strong>{award.award}</strong>{' '}
+                                      <span className="text-gray-700">({award.date})</span> -{' '}
+                                      <span className="text-gray-800">{award.issuer}</span>: {award.description}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      ))}
                     </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
+                  </CollapsibleSection>
 
-          {/* References note */}
-          <div className="pt-8 border-t border-gray-200">
-            <h2 className="text-2xl font-bold text-black mb-3 tracking-tight">References</h2>
-            <p className="text-gray-800">Available upon request.</p>
-          </div>
+                  {/* Education */}
+                  <CollapsibleSection id="education" title={<><GraduationCap className="text-yellow-400" aria-hidden="true" /> Education</>}>
+                    <div className="space-y-8">
+                      {resumeData.education.map((edu, idx: number) => (
+                        <div key={idx}>
+                          <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                            <Book className="text-yellow-400" aria-hidden="true" /> {edu.degree},{' '}
+                            <span className="text-gray-900 font-normal">{edu.institution}</span>
+                          </h3>
+                          <p className="text-gray-900 mb-1">{edu.field} ({edu.period})</p>
+                        </div>
+                      ))}
+                    </div>
+                  </CollapsibleSection>
+
+                  {/* Activities & Volunteer */}
+                  <CollapsibleSection id="activities" title={<><HeartHandshake className="text-pink-400" aria-hidden="true" /> Activities & Volunteer</>}>
+                    <div className="space-y-8">
+                      {resumeData.activitiesAndVolunteer.map((act, idx: number) => (
+                        <div key={idx}>
+                          <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                            <Users className="text-pink-400" aria-hidden="true" /> {act.role}{' '}
+                            <span className="text-gray-900 font-normal">at {act.organization}</span>
+                          </h3>
+                          <p className="text-gray-900 mb-1">{act.period}</p>
+                          <p className="text-gray-900 mb-2">{act.description}</p>
+
+                          {(act.notableProjects?.length ?? 0) > 0 && (
+                            <div className="ml-4 mt-2">
+                              <div className="p-3 my-2 rounded bg-pink-50 border-l-4 border-pink-400">
+                                <h4 className="font-medium text-pink-900 flex items-center gap-2">
+                                  <Star aria-hidden="true" /> Notable Projects:
+                                </h4>
+                                <ul className="list-disc list-inside text-gray-900">
+                                  {act.notableProjects?.map((proj, pi: number) => (
+                                    <li key={pi}>
+                                      <strong>{proj.name}</strong>: {proj.description}{' '}
+                                      <span className="text-gray-700">[{proj.technologies.join(', ')}]</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </CollapsibleSection>
+
+                  {/* References note */}
+                  <div className="pt-8 border-t border-gray-200">
+                    <h2 className="text-2xl font-bold text-black mb-3 tracking-tight">References</h2>
+                    <p className="text-gray-800">Available upon request.</p>
+                  </div>
+                </>
+              );
+            })()}
+
+          
         </section>
       </div>
     </main>
