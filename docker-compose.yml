@@ -1,9 +1,30 @@
+version: "3.9"
 services:
-  app:
-    container_name: zkm-tw
-    build: .
+  web:
+    build:
+      context: .
+      target: dev
+    image: zkm-tw-dev
+    container_name: zkm-tw-web
     ports:
-      - 8080:80
+      - "5173:5173"   # Vite dev server
+      - "24678:24678" # Vite HMR websocket
     environment:
       - NODE_ENV=development
-      - PORT=80
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: ["yarn", "dev", "--host", "0.0.0.0"]
+    # optional: ensure consistent user permissions on Linux
+    user: "${UID:-1000}:${GID:-1000}"
+
+  web-prod:
+    build:
+      context: .
+      target: prod
+    image: zkm-tw-prod
+    container_name: zkm-tw-web-prod
+    ports:
+      - "8080:80"
+    environment:
+      - NODE_ENV=production

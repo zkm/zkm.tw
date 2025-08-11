@@ -1,3 +1,17 @@
 **/node_modules
 **/npm-debug.log
 build
+dist
+.next
+.cache
+coverage
+.env
+.env.*
+.DS_Store
+**/*.log
+.vscode
+.idea
+Dockerfile*
+docker-compose.yml
+.git
+.gitignore
