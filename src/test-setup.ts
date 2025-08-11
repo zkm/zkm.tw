@@ -6,27 +6,28 @@ import { vi } from 'vitest'
 // by stripping motion-only props and rendering plain elements.
 vi.mock('framer-motion', () => ({
 	motion: new Proxy({}, {
-		get: (_, prop) => {
-			return ({ children, ...props }: any) => {
-				const Tag = typeof prop === 'string' ? prop : 'div'
-				const {
-					// strip motion props
-					animate,
-					initial,
-					exit,
-					transition,
-					whileHover,
-					whileTap,
-					variants,
-					layout,
-					layoutId,
-					drag,
-					dragConstraints,
-					dragElastic,
-					...rest
-				} = props || {}
-			return React.createElement(Tag as any, rest, children)
-			}
-		}
+		   get: (_, prop) => {
+			   return ({ children, ...props }: Record<string, unknown> & { children?: React.ReactNode }) => {
+				   const Tag = typeof prop === 'string' ? prop : 'div'
+				   // Strip motion props by omitting them from rest
+				   const rest = { ...props }
+				   delete rest.animate
+				   delete rest.initial
+				   delete rest.exit
+				   delete rest.transition
+				   delete rest.whileHover
+				   delete rest.whileTap
+				   delete rest.variants
+				   delete rest.layout
+				   delete rest.layoutId
+				   delete rest.drag
+				   delete rest.dragConstraints
+				   delete rest.dragElastic
+				   if (typeof Tag === 'string') {
+					   return React.createElement(Tag, rest, children)
+				   }
+				   return React.createElement('div', rest, children)
+			   }
+		   }
 	})
 }))
