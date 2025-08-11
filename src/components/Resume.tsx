@@ -209,7 +209,6 @@ const Resume: React.FC = () => {
   const name = resumeData?.personalInfo?.name ?? 'Zach Schneider';
   const title = resumeData?.personalInfo?.title ?? 'Web Developer Advisor';
   const website = resumeData?.personalInfo?.website ?? 'https://www.zachschneider.com';
-  const portfolio = resumeData?.personalInfo?.portfolio;
 
   // ✅ useMemo hooks moved above any conditional return, using safe fallbacks
   const chartData = React.useMemo(() => {
