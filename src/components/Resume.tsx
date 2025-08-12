@@ -82,7 +82,7 @@ const RevealPhone: React.FC = () => {
 
   return (
     <div className="flex items-center gap-2">
-      <Phone className="inline text-yellow-400" aria-hidden="true" />
+      <Phone className="inline text-yellow-400 flex-shrink-0" size={16} aria-hidden="true" />
       {!revealed ? (
         <button
           className="underline text-yellow-300 hover:text-yellow-400"
@@ -161,7 +161,7 @@ const RevealEmail: React.FC = () => {
 
   return (
     <div className="flex items-center gap-2">
-      <Mail className="inline text-yellow-400" aria-hidden="true" />
+      <Mail className="inline text-yellow-400 flex-shrink-0" size={16} aria-hidden="true" />
       {!revealed ? (
         <button
           className="underline text-yellow-300 hover:text-yellow-400"
@@ -287,23 +287,23 @@ const Resume: React.FC = () => {
 
       <div className="flex flex-col md:flex-row w-full max-w-6xl mx-auto p-6 gap-8">
         {/* Sidebar/Profile */}
-        <aside className="w-full md:w-1/3 bg-slate-900 rounded-2xl shadow-xl p-8 flex flex-col items-start text-white text-left" data-nosnippet>
+        <aside className="w-full md:w-1/3 bg-slate-900 rounded-2xl shadow-xl p-8 flex flex-col items-start text-white" data-nosnippet>
           <div className="mb-8 w-full">
-            <h1 className="text-3xl font-extrabold mb-2 text-yellow-400 tracking-tight">{name}</h1>
-            <p className="text-lg font-semibold mb-4 text-gray-200">{title}</p>
+            <h1 className="text-3xl font-extrabold mb-2 text-yellow-400 tracking-tight text-left">{name}</h1>
+            <p className="text-lg font-semibold mb-4 text-gray-200 text-left">{title}</p>
           </div>
 
           <div className="w-full mt-6">
-            <h2 className="text-xl font-bold text-yellow-400 mb-2 uppercase tracking-wide">About Me</h2>
-            <p className="text-gray-200 text-base mb-6 leading-relaxed">{resumeData.summary}</p>
+            <h2 className="text-xl font-bold text-yellow-400 mb-2 uppercase tracking-wide text-left">About Me</h2>
+            <p className="text-gray-200 text-base mb-6 leading-relaxed text-left">{resumeData.summary}</p>
 
-            <h2 className="text-xl font-bold text-yellow-400 mb-2 uppercase tracking-wide">Languages</h2>
-            <ul className="text-gray-200 text-base mb-6 space-y-1">
+            <h2 className="text-xl font-bold text-yellow-400 mb-2 uppercase tracking-wide text-left">Languages</h2>
+            <ul className="text-gray-200 text-base mb-6 space-y-1 text-left">
               <li>English</li>
             </ul>
 
-            <h2 className="text-xl font-bold text-yellow-400 mb-2 uppercase tracking-wide">Contact</h2>
-            <ul className="text-gray-200 text-base space-y-2">
+            <h2 className="text-xl font-bold text-yellow-400 mb-2 uppercase tracking-wide text-left">Contact</h2>
+            <ul className="text-gray-200 text-base space-y-2 text-left">
               <li><RevealEmail /></li>
               <li><RevealPhone /></li>
               <li className="flex items-center gap-2">
@@ -320,7 +320,7 @@ const Resume: React.FC = () => {
         </aside>
 
         {/* Main Content */}
-        <section className="w-full md:w-2/3 bg-white rounded-2xl shadow-xl p-8">
+        <section className="w-full md:w-2/3 bg-white rounded-2xl shadow-xl p-8 text-left">
           {/* Collapsible helper */}
             {/** Simple accessible collapsible section */}
             {(() => {
@@ -361,7 +361,7 @@ const Resume: React.FC = () => {
               return (
                 <>
                   {/* Professional Summary */}
-                  <CollapsibleSection id="summary" title={<><Book className="text-indigo-400" aria-hidden="true" /> Professional Summary</>}>
+                  <CollapsibleSection id="summary" title={<><Book className="text-blue-400" aria-hidden="true" /> Summary</>}>
                     <p className="text-gray-900 leading-relaxed text-lg font-normal">{resumeData.summary}</p>
                   </CollapsibleSection>
 
@@ -389,7 +389,7 @@ const Resume: React.FC = () => {
                   </CollapsibleSection>
 
                   {/* Work Experience */}
-                  <CollapsibleSection id="experience" title={<><Briefcase className="text-blue-400" aria-hidden="true" /> Work Experience</>}>
+                  <CollapsibleSection id="experience" title={<><Briefcase className="text-blue-400" aria-hidden="true" /> Experience</>}>
                     <div className="space-y-8">
                       {resumeData.workExperience.map((exp, idx: number) => (
                         <div key={idx}>
@@ -444,12 +444,12 @@ const Resume: React.FC = () => {
                   </CollapsibleSection>
 
                   {/* Education */}
-                  <CollapsibleSection id="education" title={<><GraduationCap className="text-yellow-400" aria-hidden="true" /> Education</>}>
+                  <CollapsibleSection id="education" title={<><GraduationCap className="text-blue-400" aria-hidden="true" /> Education</>}>
                     <div className="space-y-8">
                       {resumeData.education.map((edu, idx: number) => (
                         <div key={idx}>
                           <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                            <Book className="text-yellow-400" aria-hidden="true" /> {edu.degree},{' '}
+                            <Book className="text-blue-400" aria-hidden="true" /> {edu.degree},{' '}
                             <span className="text-gray-900 font-normal">{edu.institution}</span>
                           </h3>
                           <p className="text-gray-900 mb-1">{edu.field} ({edu.period})</p>
@@ -459,12 +459,12 @@ const Resume: React.FC = () => {
                   </CollapsibleSection>
 
                   {/* Activities & Volunteer */}
-                  <CollapsibleSection id="activities" title={<><HeartHandshake className="text-pink-400" aria-hidden="true" /> Activities & Volunteer</>}>
+                  <CollapsibleSection id="activities" title={<><HeartHandshake className="text-blue-400" aria-hidden="true" /> Activities</>}>
                     <div className="space-y-8">
                       {resumeData.activitiesAndVolunteer.map((act, idx: number) => (
                         <div key={idx}>
                           <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                            <Users className="text-pink-400" aria-hidden="true" /> {act.role}{' '}
+                            <Users className="text-blue-400" aria-hidden="true" /> {act.role}{' '}
                             <span className="text-gray-900 font-normal">at {act.organization}</span>
                           </h3>
                           <p className="text-gray-900 mb-1">{act.period}</p>
@@ -472,8 +472,8 @@ const Resume: React.FC = () => {
 
                           {(act.notableProjects?.length ?? 0) > 0 && (
                             <div className="ml-4 mt-2">
-                              <div className="p-3 my-2 rounded bg-pink-50 border-l-4 border-pink-400">
-                                <h4 className="font-medium text-pink-900 flex items-center gap-2">
+                              <div className="p-3 my-2 rounded bg-blue-50 border-l-4 border-blue-400">
+                                <h4 className="font-medium text-blue-900 flex items-center gap-2">
                                   <Star aria-hidden="true" /> Notable Projects:
                                 </h4>
                                 <ul className="list-disc list-inside text-gray-900">
