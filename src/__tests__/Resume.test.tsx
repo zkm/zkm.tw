@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, waitFor, fireEvent } from '@testing-library/react'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import Resume from '../components/Resume'
 import { useResumeData } from '../hooks/useResumeData'
@@ -163,7 +163,7 @@ describe('Resume', () => {
     render(<Resume />)
 
     await waitFor(() => {
-      expect(screen.getByText('Work Experience')).toBeInTheDocument()
+      expect(screen.getByText('Experience')).toBeInTheDocument()
       expect(screen.getByText('Tech Corp')).toBeInTheDocument()
       expect(screen.getByText('Senior Developer')).toBeInTheDocument()
     })
@@ -182,5 +182,75 @@ describe('Resume', () => {
       expect(screen.getByText('Education')).toBeInTheDocument()
       expect(screen.getByText(/Computer Science \(2016-2020\)/)).toBeInTheDocument()
     })
+  })
+
+  it('toggles accordion sections when clicked', async () => {
+    vi.mocked(useResumeData).mockReturnValue({
+      resumeData: mockResumeData,
+      loading: false,
+      error: null,
+    })
+
+    render(<Resume />)
+
+    // Wait for component to load
+    await waitFor(() => {
+      expect(screen.getByText('Summary')).toBeInTheDocument()
+    })
+
+    // Find the Summary section button
+    const summaryButton = screen.getByRole('button', { name: /summary/i })
+    expect(summaryButton).toBeInTheDocument()
+    
+    // Check initial state - should be expanded (aria-expanded="true")
+    expect(summaryButton).toHaveAttribute('aria-expanded', 'true')
+    
+    // Find the content that should be visible - use getAllByText and select the one in the main content area
+    const summaryContent = screen.getAllByText('Experienced software developer with 5 years of experience.')[1]
+    expect(summaryContent).toBeInTheDocument()
+    
+    // Click to collapse
+    fireEvent.click(summaryButton)
+    
+    // After collapse, button should have aria-expanded="false"
+    await waitFor(() => {
+      expect(summaryButton).toHaveAttribute('aria-expanded', 'false')
+    })
+    
+    // Click to expand again
+    fireEvent.click(summaryButton)
+    
+    // Should be expanded again
+    await waitFor(() => {
+      expect(summaryButton).toHaveAttribute('aria-expanded', 'true')
+    })
+  })
+
+  it('has proper accessibility attributes for accordion sections', async () => {
+    vi.mocked(useResumeData).mockReturnValue({
+      resumeData: mockResumeData,
+      loading: false,
+      error: null,
+    })
+
+    render(<Resume />)
+
+    await waitFor(() => {
+      expect(screen.getByText('Summary')).toBeInTheDocument()
+    })
+
+    const summaryButton = screen.getByRole('button', { name: /summary/i })
+    
+    // Check ARIA attributes
+    expect(summaryButton).toHaveAttribute('aria-controls')
+    expect(summaryButton).toHaveAttribute('aria-expanded')
+    expect(summaryButton).toHaveAttribute('aria-describedby')
+    
+    // Check that controlled content exists with proper ID
+    const contentId = summaryButton.getAttribute('aria-controls')
+    const contentElement = document.getElementById(contentId!)
+    expect(contentElement).toBeInTheDocument()
+    expect(contentElement).toHaveAttribute('role', 'region')
+    expect(contentElement).toHaveAttribute('aria-labelledby')
   })
 })
