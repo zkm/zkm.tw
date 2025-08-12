@@ -330,7 +330,8 @@ const Resume: React.FC = () => {
                 className?: string;
                 defaultOpen?: boolean;
               };
-              // Accessible collapsible section component with improved styling
+              // Accessible collapsible section component with improved styling and animations
+              // Updated: August 12, 2025
               const CollapsibleSection: React.FC<CollapsibleProps> = ({ id, title, children, className = '', defaultOpen = true }) => {
                 const [open, setOpen] = React.useState(defaultOpen);
                 const contentId = `${id}-content`;
