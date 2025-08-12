@@ -14,7 +14,7 @@
     "test": "echo '🧪 Running tests...' && vitest run && echo '✅ Tests passed!'",
     "test:watch": "echo '👁️ Starting test watcher...' && vitest",
     "test:coverage": "echo '📊 Running tests with coverage...' && vitest run --coverage && echo '📈 Coverage report complete!'",
-    "deploy": "echo '🚀 Starting deployment process...' && yarn test && echo '🔨 Building for deployment...' && yarn build && echo '📝 Committing changes...' && git add . && (git diff --staged --quiet || git commit -m 'Deploy: $(date)') && echo '⬆️ Pushing to GitHub...' && git push origin master && echo '🎉 Deployment triggered!'",
+    "deploy": "echo '🚀 Starting deployment process...' && yarn test && echo '🔨 Building for deployment...' && yarn build && echo '📝 Switching to production branch...' && git checkout production && echo '📦 Copying build files...' && rsync -avh --progress dist/ . && git add . && git commit -m 'Update production build for deployment' && echo '⬆️ Pushing to production...' && git push origin production && echo '🔄 Returning to master...' && git checkout master && echo '🎉 Deployment complete!'",
     "deploy:check": "echo '🔍 Pre-deployment check...' && yarn test && echo '🔨 Test build...' && yarn build && echo '✅ Ready for deployment!'",
     "deploy:prod": "echo '🏭 To deploy to production, create a PR from master to production branch on GitHub'",
     "docker:dev": "echo '🐳 Starting Docker development environment...' && docker-compose -f docker-compose.yml up",
