@@ -334,26 +334,58 @@ const Resume: React.FC = () => {
               const CollapsibleSection: React.FC<CollapsibleProps> = ({ id, title, children, className = '', defaultOpen = true }) => {
                 const [open, setOpen] = React.useState(defaultOpen);
                 const contentId = `${id}-content`;
+                const headerId = `${id}-header`;
+                
                 return (
-                  <div className={`mb-10 pb-8 border-b border-gray-200 ${className}`}>
-                    <button
-                      type="button"
-                      aria-expanded={open}
-                      aria-controls={contentId}
-                      onClick={() => setOpen((v) => !v)}
-                      className="w-full flex items-center justify-between gap-4 group"
-                    >
-                      <h2 className="text-2xl font-bold text-black flex items-center gap-2 tracking-tight">{title}</h2>
-                      <span
-                        aria-hidden="true"
-                        className={`transition-transform duration-200 text-gray-500 group-hover:text-gray-700 ${open ? 'rotate-0' : '-rotate-90'}`}
+                  <div className={`mb-8 ${className}`}>
+                    <h2 id={headerId} className="mb-0">
+                      <button
+                        type="button"
+                        aria-expanded={open}
+                        aria-controls={contentId}
+                        aria-describedby={headerId}
+                        onClick={() => setOpen((v) => !v)}
+                        className="w-full flex items-center justify-between gap-4 group bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 focus:from-blue-100 focus:to-indigo-100 rounded-xl p-4 border border-blue-200 hover:border-blue-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 focus:outline-none transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer"
                       >
-                        ▾
-                      </span>
-                    </button>
-                    <div id={contentId} className={`${open ? 'mt-3' : 'hidden'}`}>
-                      {children}
+                        <span className="text-2xl font-bold text-gray-900 flex items-center gap-3 tracking-tight">{title}</span>
+                        <div className={`transition-all duration-300 ${open ? 'rotate-180' : 'rotate-0'} bg-white rounded-full p-2 shadow-sm group-hover:shadow-md flex-shrink-0`}>
+                          <svg 
+                            width="16" 
+                            height="16" 
+                            viewBox="0 0 24 24" 
+                            fill="none" 
+                            stroke="currentColor" 
+                            strokeWidth="2" 
+                            strokeLinecap="round" 
+                            strokeLinejoin="round"
+                            className="text-blue-600"
+                            aria-hidden="true"
+                            role="img"
+                            aria-label={open ? 'Collapse section' : 'Expand section'}
+                          >
+                            <polyline points="6,9 12,15 18,9"></polyline>
+                          </svg>
+                        </div>
+                        <span className="sr-only">
+                          {open ? 'Collapse' : 'Expand'} section
+                        </span>
+                      </button>
+                    </h2>
+                    <div 
+                      id={contentId} 
+                      role="region"
+                      aria-labelledby={headerId}
+                      className={`transition-all duration-300 overflow-hidden ${
+                        open 
+                          ? 'max-h-[5000px] opacity-100 mt-4 mb-8' 
+                          : 'max-h-0 opacity-0'
+                      }`}
+                    >
+                      <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
+                        {children}
+                      </div>
                     </div>
+                    {open && <div className="border-b border-gray-200 mt-4" role="separator" aria-hidden="true"></div>}
                   </div>
                 );
               };
