@@ -32,8 +32,11 @@ jobs:
       - name: Build
         run: yarn build
         
-      - name: Deploy to DigitalOcean App Platform
-        uses: digitalocean/app_action@v1.1.5
+      - name: Install DigitalOcean CLI
+        uses: digitalocean/action-doctl@v2
         with:
-          app_name: jellyfish-app
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+          
+      - name: Trigger DigitalOcean App Deployment  
+        run: |
+          doctl apps create-deployment jellyfish-app --force-rebuild

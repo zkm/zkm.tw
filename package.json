@@ -9,6 +9,8 @@
   "scripts": {
     "dev": "echo '🚀 Starting development server...' && vite",
     "build": "echo '🔨 Building project...' && tsc -b && echo '📦 Running Vite build...' && vite build && echo '✅ Build complete!'",
+    "start": "echo '🌐 Static files are in dist/ - use a static server' && exit 1",
+    "heroku-postbuild": "yarn build",
     "preview": "echo '👀 Starting preview server...' && vite preview",
     "lint": "echo '🔍 Running ESLint...' && eslint . && echo '✨ Linting complete!'",
     "test": "echo '🧪 Running tests...' && vitest run && echo '✅ Tests passed!'",
