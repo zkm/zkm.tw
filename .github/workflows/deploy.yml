@@ -10,8 +10,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Build and deploy job
-  deploy:
+  # Build and test job
+  test-and-build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -32,11 +32,5 @@ jobs:
       - name: Build
         run: yarn build
         
-      - name: Install DigitalOcean CLI
-        uses: digitalocean/action-doctl@v2
-        with:
-          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-          
-      - name: Trigger DigitalOcean App Deployment  
-        run: |
-          doctl apps create-deployment jellyfish-app --force-rebuild
+      - name: Deployment Note
+        run: echo "🎯 Code is ready! DigitalOcean will deploy automatically from master branch."
