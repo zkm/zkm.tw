@@ -7,8 +7,8 @@ const mockGtag = vi.fn()
 
 declare global {
   interface Window {
-    gtag: typeof mockGtag
-    dataLayer: any[]
+    gtag?: typeof mockGtag
+    dataLayer: Array<{ event: string; [key: string]: unknown }>
   }
 }
 
@@ -69,8 +69,10 @@ describe('Google Analytics Integration', () => {
 
   it('should call gtag with correct configuration when initialized', () => {
     // Simulate the gtag initialization calls that happen in index.html
-    window.gtag('js', new Date())
-    window.gtag('config', 'G-2J7SWPGLE4')
+    if (window.gtag) {
+      window.gtag('js', new Date())
+      window.gtag('config', 'G-2J7SWPGLE4')
+    }
 
     expect(mockGtag).toHaveBeenCalledWith('js', expect.any(Date))
     expect(mockGtag).toHaveBeenCalledWith('config', 'G-2J7SWPGLE4')
@@ -79,12 +81,14 @@ describe('Google Analytics Integration', () => {
 
   it('should track page views when gtag is called', () => {
     // Simulate a page view event
-    window.gtag('event', 'page_view', {
-      page_title: 'Portfolio',
-      page_location: window.location.href
-    })
-
-    expect(mockGtag).toHaveBeenCalledWith('event', 'page_view', {
+    if (window.gtag) {
+      window.gtag('event', 'page_view', {
+        page_path: '/',
+        page_title: 'Portfolio',
+        page_location: window.location.href
+      })
+    }    expect(mockGtag).toHaveBeenCalledWith('event', 'page_view', {
+      page_path: '/',
       page_title: 'Portfolio',
       page_location: window.location.href
     })
@@ -92,10 +96,12 @@ describe('Google Analytics Integration', () => {
 
   it('should track custom events', () => {
     // Test custom event tracking (e.g., resume button click)
-    window.gtag('event', 'resume_view', {
-      event_category: 'engagement',
-      event_label: 'Resume Button Click'
-    })
+    if (window.gtag) {
+      window.gtag('event', 'resume_view', {
+        event_category: 'engagement',
+        event_label: 'Resume Button Click'
+      })
+    }
 
     expect(mockGtag).toHaveBeenCalledWith('event', 'resume_view', {
       event_category: 'engagement',
@@ -107,14 +113,16 @@ describe('Google Analytics Integration', () => {
     // Test that we're using the correct GA4 measurement ID
     const expectedMeasurementId = 'G-2J7SWPGLE4'
     
-    window.gtag('config', expectedMeasurementId)
+    if (window.gtag) {
+      window.gtag('config', expectedMeasurementId)
+    }
     
     expect(mockGtag).toHaveBeenCalledWith('config', expectedMeasurementId)
   })
 
   it('should handle analytics gracefully when gtag is not available', () => {
     // Test fallback when gtag is not loaded
-    delete (window as any).gtag
+    delete window.gtag
     
     // This should not throw an error
     expect(() => {

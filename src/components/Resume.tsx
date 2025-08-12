@@ -312,7 +312,6 @@ const Resume: React.FC = () => {
                   {new URL(website).host}
                 </a>
               </li>
-              <li className="text-gray-300 text-sm italic pt-2">References available upon request</li>
             </ul>
           </div>
 
