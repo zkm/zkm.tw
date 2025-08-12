@@ -398,7 +398,7 @@ const Resume: React.FC = () => {
                     <p className="text-gray-900 leading-relaxed text-lg font-normal">{resumeData.summary}</p>
                   </CollapsibleSection>
 
-                  {/* Technical Skills + Chart */}
+                  {/* Skills + Chart */}
                   <CollapsibleSection id="skills" title={<><Code2 className="text-blue-400" aria-hidden="true" /> Skills</>}>
                     <ul className="list-disc list-inside text-gray-900 text-base mb-6 space-y-1">
                       <li><strong className="text-blue-600">HTML:</strong> {resumeData.technicalSkills.languages.HTML.join(', ')}</li>
