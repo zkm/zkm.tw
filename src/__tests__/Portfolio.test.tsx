@@ -14,6 +14,11 @@ vi.mock('lucide-react', () => ({
   Linkedin: () => <div data-testid="linkedin-icon">Linkedin</div>,
   Instagram: () => <div data-testid="instagram-icon">Instagram</div>,
   FileText: () => <div data-testid="file-text-icon">FileText</div>,
+  MessageCircle: () => <div data-testid="message-circle-icon">MessageCircle</div>,
+  X: () => <div data-testid="x-icon">X</div>,
+  Send: () => <div data-testid="send-icon">Send</div>,
+  User: () => <div data-testid="user-icon">User</div>,
+  Bot: () => <div data-testid="bot-icon">Bot</div>,
 }))
 
 // Mock Resume component

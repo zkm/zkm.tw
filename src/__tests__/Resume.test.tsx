@@ -24,6 +24,15 @@ vi.mock('lucide-react', () => ({
   Users: () => <div data-testid="users-icon">Users</div>,
   Copy: () => <div data-testid="copy-icon">Copy</div>,
   Check: () => <div data-testid="check-icon">Check</div>,
+  Shield: () => <div data-testid="shield-icon">Shield</div>,
+  Palette: () => <div data-testid="palette-icon">Palette</div>,
+  Server: () => <div data-testid="server-icon">Server</div>,
+  Settings: () => <div data-testid="settings-icon">Settings</div>,
+  MessageCircle: () => <div data-testid="message-circle-icon">MessageCircle</div>,
+  X: () => <div data-testid="x-icon">X</div>,
+  Send: () => <div data-testid="send-icon">Send</div>,
+  User: () => <div data-testid="user-icon">User</div>,
+  Bot: () => <div data-testid="bot-icon">Bot</div>,
 }))
 
 const mockResumeData = {
