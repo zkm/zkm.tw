@@ -6,6 +6,7 @@ import { Chart, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend }
 Chart.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 import { useResumeData } from '../hooks/useResumeData';
+import Chatbot from './Chatbot';
 import {
   Award,
   GraduationCap,
@@ -606,6 +607,9 @@ const Resume: React.FC = () => {
           </div>
         </section>
       </div>
+
+      {/* Chatbot */}
+      <Chatbot />
     </main>
   );
 };
