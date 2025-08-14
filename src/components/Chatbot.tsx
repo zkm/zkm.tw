@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, X, Send, User, Bot } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
 
 interface Message {
   id: number;
@@ -195,8 +196,27 @@ const Chatbot: React.FC = () => {
                         ? 'bg-gray-100 text-gray-800'
                         : 'bg-gradient-to-r from-blue-600 to-purple-600 text-white'
                     }`}>
-                      <div className="whitespace-pre-line text-sm leading-relaxed">
-                        {message.text}
+                      <div className="text-sm leading-relaxed">
+                        {message.isBot ? (
+                          <div className="prose prose-sm max-w-none prose-headings:text-gray-800 prose-strong:text-gray-900 prose-p:text-gray-800 prose-li:text-gray-800">
+                            <ReactMarkdown 
+                              components={{
+                                // Customize rendering to fit the chat bubble style
+                                p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
+                                strong: ({ children }) => <strong className="font-semibold text-gray-900">{children}</strong>,
+                                ul: ({ children }) => <ul className="list-disc list-inside space-y-1 ml-2">{children}</ul>,
+                                li: ({ children }) => <li className="text-sm">{children}</li>,
+                                h1: ({ children }) => <h1 className="font-bold text-base mb-1">{children}</h1>,
+                                h2: ({ children }) => <h2 className="font-bold text-sm mb-1">{children}</h2>,
+                                h3: ({ children }) => <h3 className="font-semibold text-sm mb-1">{children}</h3>,
+                              }}
+                            >
+                              {message.text}
+                            </ReactMarkdown>
+                          </div>
+                        ) : (
+                          <span>{message.text}</span>
+                        )}
                       </div>
                       <div className={`text-xs mt-1 opacity-70 ${
                         message.isBot ? 'text-gray-500' : 'text-blue-100'
