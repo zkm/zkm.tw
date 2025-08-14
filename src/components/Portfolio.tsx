@@ -2,7 +2,6 @@ import React, { useState, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Instagram, FileText } from 'lucide-react';
 import { useProfileData } from '../hooks/useProfileData';
-import Chatbot from './Chatbot';
 const Resume = React.lazy(() => import('./Resume'));
 
 // Custom SVG components for icons not available in Lucide
@@ -205,9 +204,6 @@ const Portfolio: React.FC = () => {
           © 2025 Zach Schneider, All rights reserved
         </motion.div>
       </motion.div>
-
-      {/* Chatbot */}
-      <Chatbot />
     </div>
   );
 };
