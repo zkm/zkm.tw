@@ -10,75 +10,15 @@
   "summary": "Experienced Senior Web Developer with 15+ years of expertise in modern frontend technologies, team leadership, and technical architecture. Proven track record of successfully migrating legacy systems to modern frameworks, leading cross-functional teams, and delivering high-impact web solutions. Passionate about mentoring developers and implementing best practices that drive business results.",
   "technicalSkills": {
     "languages": {
-      "HTML": [
-        "HTML5",
-        "XHTML",
-        "HAML",
-        "Web Components"
-      ],
-      "CSS": [
-        "SASS",
-        "SCSS",
-        "LESS",
-        "CSS3",
-        "Tailwind CSS",
-        "PostCSS"
-      ],
-      "JavaScript": [
-        "ES2024",
-        "TypeScript",
-        "React",
-        "Node.js",
-        "Next.js",
-        "Vite",
-        "jQuery",
-        "Webpack"
-      ],
-      "PHP": [
-        "Zend",
-        "Symfony",
-        "CodeIgniter"
-      ],
-      "Other": [
-        "Python",
-        "Java",
-        "Ruby"
-      ]
+      "HTML": ["HTML5", "Web Components"],
+      "CSS": ["CSS3", "SASS", "Tailwind CSS", "PostCSS"],
+      "JavaScript": ["ES2024", "TypeScript", "React", "Node.js", "Next.js", "Vite"],
+      "Other": ["Python", "Go", "PHP", "Ruby", "Java"]
     },
-    "frameworks": [
-      "React 18+",
-      "Next.js",
-      "Angular",
-      "Vue.js",
-      "Express.js",
-      "Backbone.js"
-    ],
-    "cms": [
-      "WordPress",
-      "Drupal"
-    ],
-    "cloud": [
-      "AWS",
-      "Azure",
-      "DigitalOcean"
-    ],
-    "tools": [
-      "Git",
-      "Docker",
-      "JIRA",
-      "Adobe Creative Suite"
-    ],
-    "testing": [
-      "Jest",
-      "Cypress",
-      "React Testing Library"
-    ],
-    "methodologies": [
-      "Agile",
-      "SCRUM",
-      "CI/CD",
-      "DevOps"
-    ]
+    "frontend": ["HTML5", "CSS3", "JavaScript", "TypeScript", "React 18+", "Next.js", "jQuery", "Angular", "Backbone.js", "SASS", "Tailwind CSS", "Vite"],
+    "backend": ["Node.js", "Express.js", "Python", "Go", "PHP", "Ruby", "Java", "Ruby on Rails", "WordPress", "Drupal", "AWS", "Azure", "DigitalOcean", "Vercel", "REST APIs", "GraphQL", "AWS SDK", "Lambda", "S3", "Cognito"],
+    "infrastructure": ["MongoDB", "MySQL", "PostgreSQL", "Redis", "Git", "GitLab", "Docker", "GitHub Actions", "ESLint", "Jenkins", "Kubernetes", "Terraform", "Agile", "SCRUM", "CI/CD", "DevOps"],
+    "security": ["OWASP", "HIPAA Compliance", "508/WCAG Accessibility", "MFA", "Duo", "Vitest", "Jest", "Cypress", "React Testing Library"]
   },
   "workExperience": [
     {
@@ -156,13 +96,7 @@
           "name": "Humana EasyPrice",
           "period": "Jun 2014 - Dec 2014",
           "description": "Developed healthcare pricing transparency application for Humana insurance customers. Built interactive web platform allowing users to compare medical procedure costs and make informed healthcare decisions.",
-          "technologies": [
-            "JavaScript",
-            "HTML5",
-            "CSS3",
-            "Backbone.js",
-            ".NET"
-          ],
+          "technologies": ["JavaScript", "HTML5", "CSS3", "Backbone.js", ".NET"],
           "impact": "Enabled healthcare price transparency for Humana customers, improving informed decision-making for medical procedures and healthcare costs."
         }
       ]
@@ -294,11 +228,7 @@
         {
           "name": "Community Technology Projects",
           "description": "Contributed to various collaborative technology initiatives within Chicago's hackerspace community, focusing on educational workshops and skill-sharing in web development and maker technologies.",
-          "technologies": [
-            "Web Development",
-            "Community Education",
-            "Maker Technologies"
-          ],
+          "technologies": ["Web Development", "Community Education", "Maker Technologies"],
           "impact": "Fostered technology education and community collaboration within Chicago's maker movement, contributing to the growth of local tech skills and innovation."
         }
       ]
