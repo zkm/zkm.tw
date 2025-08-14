@@ -20,6 +20,10 @@ import {
   Users,
   Copy as CopyIcon,
   Check as CheckIcon,
+  Shield,
+  Palette,
+  Server,
+  Settings,
 } from 'lucide-react';
 
 /** --- small shared helper --- */
@@ -246,6 +250,15 @@ const Resume: React.FC = () => {
     []
   );
 
+    // ✅ Skills section state hooks at top level
+  type SkillKey = 'frontend' | 'backend' | 'infrastructure' | 'security';
+  const skillGroups: [SkillKey, string][] = [
+    ['frontend', 'Frontend & UI'],
+    ['backend', 'Backend & Cloud'],
+    ['infrastructure', 'Infrastructure & DevOps'],
+    ['security', 'Security & Testing'],
+  ];
+
   // ⬇️ Conditional returns AFTER all hooks
   if (loading) {
     return (
@@ -259,20 +272,61 @@ const Resume: React.FC = () => {
   }
   if (error) {
     return (
-      <main className="min-h-screen flex items-center justify-center bg-gray-900" aria-label="Resume error">
+      <main className="min-h-screen flex items-center justify-center bg-red-900" aria-label="Error loading resume">
         <div className="text-center">
-          <p className="text-red-400 mb-4">Error loading resume: {error}</p>
+          <p className="text-red-300">Error loading resume: {error}</p>
         </div>
       </main>
     );
   }
-  if (!resumeData) {
+
+  // ⬇️ Main render after all hooks and conditionals
+  // CollapsibleSection component
+  const CollapsibleSection: React.FC<{
+    id: string;
+    title: React.ReactNode;
+    children: React.ReactNode;
+  }> = ({ id, title, children }) => {
+    const [open, setOpen] = React.useState(true); // Start expanded for better UX
+    const headerId = `${id}-header`;
+    const contentId = `${id}-content`;
+    const descriptionId = `${id}-description`;
+    
     return (
-      <main className="min-h-screen flex items-center justify-center bg-gray-900" aria-label="No resume data">
-        <p className="text-gray-300">No resume data found.</p>
-      </main>
+      <div className="mb-6">
+        <button
+          id={headerId}
+          onClick={() => setOpen(!open)}
+          className="w-full text-left p-4 bg-gray-50 hover:bg-gray-100 rounded-lg border border-gray-200 transition-colors duration-200 flex items-center justify-between font-semibold text-gray-900"
+          aria-expanded={open}
+          aria-controls={contentId}
+          aria-describedby={descriptionId}
+        >
+          <span className="flex items-center gap-3 text-xl">{title}</span>
+          <span className={`transform transition-transform duration-200 ${open ? 'rotate-180' : ''}`} aria-hidden="true">
+            ▼
+          </span>
+        </button>
+        
+        <div 
+          id={contentId} 
+          role="region"
+          aria-labelledby={headerId}
+          aria-describedby={descriptionId}
+          className={`transition-all duration-300 overflow-hidden ${
+            open 
+              ? 'max-h-[5000px] opacity-100 mt-4 mb-8' 
+              : 'max-h-0 opacity-0'
+          }`}
+        >
+          <div id={descriptionId} className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
+            {children}
+          </div>
+        </div>
+        {open && <div className="border-b border-gray-200 mt-4" role="separator" aria-hidden="true"></div>}
+      </div>
     );
-  }
+  };
 
   return (
     <main className="min-h-screen w-full flex items-center justify-center bg-gray-900" aria-label="Resume">
@@ -295,7 +349,7 @@ const Resume: React.FC = () => {
 
           <div className="w-full mt-6">
             <h2 className="text-xl font-bold text-yellow-400 mb-2 uppercase tracking-wide text-left">About Me</h2>
-            <p className="text-gray-200 text-base mb-6 leading-relaxed text-left">{resumeData.summary}</p>
+            <p className="text-gray-200 text-base mb-6 leading-relaxed text-left">{resumeData?.summary}</p>
 
             <h2 className="text-xl font-bold text-yellow-400 mb-2 uppercase tracking-wide text-left">Languages</h2>
             <ul className="text-gray-200 text-base mb-6 space-y-1 text-left">
@@ -320,221 +374,236 @@ const Resume: React.FC = () => {
 
         {/* Main Content */}
         <section className="w-full md:w-2/3 bg-white rounded-2xl shadow-xl p-8 text-left">
-          {/* Collapsible helper */}
-            {/** Simple accessible collapsible section */}
-            {(() => {
-              type CollapsibleProps = {
-                id: string;
-                title: React.ReactNode;
-                children: React.ReactNode;
-                className?: string;
-                defaultOpen?: boolean;
-              };
-              // Accessible collapsible section component with improved styling and animations
-              // Updated: August 12, 2025
-              const CollapsibleSection: React.FC<CollapsibleProps> = ({ id, title, children, className = '', defaultOpen = true }) => {
-                const [open, setOpen] = React.useState(defaultOpen);
-                const contentId = `${id}-content`;
-                const headerId = `${id}-header`;
-                
-                return (
-                  <div className={`mb-8 ${className}`}>
-                    <h2 id={headerId} className="mb-0">
-                      <button
-                        type="button"
-                        aria-expanded={open}
-                        aria-controls={contentId}
-                        aria-describedby={headerId}
-                        onClick={() => setOpen((v) => !v)}
-                        className="w-full flex items-center justify-between gap-4 group bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 focus:from-blue-100 focus:to-indigo-100 rounded-xl p-4 border border-blue-200 hover:border-blue-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 focus:outline-none transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer"
-                      >
-                        <span className="text-2xl font-bold text-gray-900 flex items-center gap-3 tracking-tight">{title}</span>
-                        <div className={`transition-all duration-300 ${open ? 'rotate-180' : 'rotate-0'} bg-white rounded-full p-2 shadow-sm group-hover:shadow-md flex-shrink-0`}>
-                          <svg 
-                            width="16" 
-                            height="16" 
-                            viewBox="0 0 24 24" 
-                            fill="none" 
-                            stroke="currentColor" 
-                            strokeWidth="2" 
-                            strokeLinecap="round" 
-                            strokeLinejoin="round"
-                            className="text-blue-600"
-                            aria-hidden="true"
-                            role="img"
-                            aria-label={open ? 'Collapse section' : 'Expand section'}
-                          >
-                            <polyline points="6,9 12,15 18,9"></polyline>
-                          </svg>
+          {/* Professional Summary */}
+          <CollapsibleSection id="summary" title={<><Book className="text-blue-400" aria-hidden="true" /> Summary</>}>
+            <p className="text-gray-900 leading-relaxed text-lg font-normal">{resumeData?.summary}</p>
+          </CollapsibleSection>
+
+          {/* Skills + Chart */}
+          <CollapsibleSection id="skills" title={<><Code2 className="text-blue-400" aria-hidden="true" /> Skills</>}>
+            <div className="space-y-6">
+              {/* Programming Languages */}
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-3 border-b border-gray-200 pb-2 flex items-center gap-2">
+                  <Code2 className="text-blue-500" size={20} />
+                  Programming Languages
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {Object.entries(resumeData?.technicalSkills?.languages || {}).map(([lang, skills]) => {
+                    const langConfig = {
+                      HTML: { color: 'text-orange-600', bg: 'bg-orange-50', border: 'border-orange-200' },
+                      CSS: { color: 'text-blue-600', bg: 'bg-blue-50', border: 'border-blue-200' },
+                      JavaScript: { color: 'text-yellow-600', bg: 'bg-yellow-50', border: 'border-yellow-200' },
+                      Other: { color: 'text-purple-600', bg: 'bg-purple-50', border: 'border-purple-200' }
+                    }[lang] || { color: 'text-gray-600', bg: 'bg-gray-50', border: 'border-gray-200' };
+                    
+                    return (
+                      <div key={lang} className={`flex items-start gap-3 p-3 rounded-lg ${langConfig.bg} ${langConfig.border} border`}>
+                        <span className={`font-semibold min-w-[80px] text-sm ${langConfig.color}`}>{lang}:</span>
+                        <span className="text-gray-700 text-sm">{Array.isArray(skills) ? skills.join(', ') : skills}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Tech Stack Grid */}
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-3 border-b border-gray-200 pb-2 flex items-center gap-2">
+                  <Star className="text-purple-500" size={20} />
+                  Technology Stack
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {skillGroups.map(([key, label]) => {
+                    const items = (resumeData?.technicalSkills as any)?.[key];
+                    const isArray = Array.isArray(items);
+                    if (!isArray || items.length === 0) return null;
+                    
+                    const categoryConfig = {
+                      frontend: { 
+                        icon: <Palette size={18} />, 
+                        color: 'text-blue-700', 
+                        bg: 'bg-gradient-to-br from-blue-50 to-indigo-50', 
+                        border: 'border-blue-200',
+                        tagBg: 'bg-blue-100',
+                        tagHover: 'hover:bg-blue-200',
+                        shadow: 'hover:shadow-blue-200/30'
+                      },
+                      backend: { 
+                        icon: <Server size={18} />, 
+                        color: 'text-emerald-700', 
+                        bg: 'bg-gradient-to-br from-emerald-50 to-green-50', 
+                        border: 'border-emerald-200',
+                        tagBg: 'bg-emerald-100',
+                        tagHover: 'hover:bg-emerald-200',
+                        shadow: 'hover:shadow-emerald-200/30'
+                      },
+                      infrastructure: { 
+                        icon: <Settings size={18} />, 
+                        color: 'text-purple-700', 
+                        bg: 'bg-gradient-to-br from-purple-50 to-violet-50', 
+                        border: 'border-purple-200',
+                        tagBg: 'bg-purple-100',
+                        tagHover: 'hover:bg-purple-200',
+                        shadow: 'hover:shadow-purple-200/30'
+                      },
+                      security: { 
+                        icon: <Shield size={18} />, 
+                        color: 'text-orange-700', 
+                        bg: 'bg-gradient-to-br from-orange-50 to-red-50', 
+                        border: 'border-orange-200',
+                        tagBg: 'bg-orange-100',
+                        tagHover: 'hover:bg-orange-200',
+                        shadow: 'hover:shadow-orange-200/30'
+                      }
+                    }[key] || { 
+                      icon: <Code2 size={18} />, 
+                      color: 'text-gray-700', 
+                      bg: 'bg-gradient-to-br from-gray-50 to-slate-50', 
+                      border: 'border-gray-200',
+                      tagBg: 'bg-gray-100',
+                      tagHover: 'hover:bg-gray-200',
+                      shadow: 'hover:shadow-gray-200/30'
+                    };
+                    return (
+                      <div key={key} className={`${categoryConfig.bg} ${categoryConfig.border} border-2 rounded-xl p-6 hover:shadow-lg transition-all duration-300 ${categoryConfig.shadow} transform hover:-translate-y-1`}>
+                        <h4 className={`font-bold mb-4 text-base uppercase tracking-wider flex items-center gap-3 ${categoryConfig.color}`}>
+                          {categoryConfig.icon}
+                          <span className="font-extrabold">{label}</span>
+                        </h4>
+                        <div className="flex flex-wrap gap-2">
+                          {items.map((item: string) => (
+                            <span 
+                              key={item} 
+                              className={`${categoryConfig.tagBg} ${categoryConfig.tagHover} text-gray-800 px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 border border-transparent hover:border-gray-300 hover:scale-105 cursor-default`}
+                            >
+                              {item}
+                            </span>
+                          ))}
                         </div>
-                        <span className="sr-only">
-                          {open ? 'Collapse' : 'Expand'} section
-                        </span>
-                      </button>
-                    </h2>
-                    <div 
-                      id={contentId} 
-                      role="region"
-                      aria-labelledby={headerId}
-                      className={`transition-all duration-300 overflow-hidden ${
-                        open 
-                          ? 'max-h-[5000px] opacity-100 mt-4 mb-8' 
-                          : 'max-h-0 opacity-0'
-                      }`}
-                    >
-                      <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
-                        {children}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6">
+              <React.Suspense fallback={<div className="h-40 bg-gray-100 rounded animate-pulse" />}>
+                <BarChart data={chartData} options={chartOptions} />
+              </React.Suspense>
+            </div>
+          </CollapsibleSection>
+
+          {/* Work Experience */}
+          <CollapsibleSection id="experience" title={<><Briefcase className="text-blue-400" aria-hidden="true" /> Experience</>}>
+            <div className="space-y-8">
+              {resumeData?.workExperience?.map((exp, idx: number) => (
+                <div key={idx}>
+                  <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                    <Users className="text-blue-400" aria-hidden="true" /> {exp.position}
+                    <span className="text-gray-900 font-normal">@ {exp.company}</span>
+                  </h3>
+                  <p className="text-gray-900 mb-1">{exp.period}</p>
+                  <ul className="list-disc list-inside text-gray-900 mb-2">
+                    {exp.responsibilities?.map((r: string, i: number) => <li key={i}>{r}</li>)}
+                  </ul>
+
+                  {(exp.notableProjects?.length ?? 0) > 0 && (
+                    <div className="ml-4 mt-2">
+                      <div className="p-3 my-2 rounded bg-blue-50 border-l-4 border-blue-400">
+                        <h4 className="font-medium text-blue-900 flex items-center gap-2">
+                          <Star aria-hidden="true" /> Notable Projects:
+                        </h4>
+                        <ul className="list-disc list-inside text-gray-900">
+                          {exp.notableProjects?.map((proj, pi: number) => (
+                            <li key={pi}>
+                              <strong>{proj.name}</strong>: {proj.description}{' '}
+                              <span className="text-gray-700">[{proj.technologies?.join(', ')}]</span>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
                     </div>
-                    {open && <div className="border-b border-gray-200 mt-4" role="separator" aria-hidden="true"></div>}
-                  </div>
-                );
-              };
+                  )}
 
-              return (
-                <>
-                  {/* Professional Summary */}
-                  <CollapsibleSection id="summary" title={<><Book className="text-blue-400" aria-hidden="true" /> Summary</>}>
-                    <p className="text-gray-900 leading-relaxed text-lg font-normal">{resumeData.summary}</p>
-                  </CollapsibleSection>
-
-                  {/* Skills + Chart */}
-                  <CollapsibleSection id="skills" title={<><Code2 className="text-blue-400" aria-hidden="true" /> Skills</>}>
-                    <ul className="list-disc list-inside text-gray-900 text-base mb-6 space-y-1">
-                      <li><strong className="text-blue-600">HTML:</strong> {resumeData.technicalSkills.languages.HTML.join(', ')}</li>
-                      <li><strong className="text-green-600">CSS:</strong> {resumeData.technicalSkills.languages.CSS.join(', ')}</li>
-                      <li><strong className="text-yellow-500">JavaScript:</strong> {resumeData.technicalSkills.languages.JavaScript.join(', ')}</li>
-                      <li><strong className="text-purple-600">PHP:</strong> {resumeData.technicalSkills.languages.PHP.join(', ')}</li>
-                      <li><strong className="text-gray-700">Other:</strong> {resumeData.technicalSkills.languages.Other.join(', ')}</li>
-                      <li><strong className="text-indigo-600">Frameworks:</strong> {resumeData.technicalSkills.frameworks.join(', ')}</li>
-                      <li><strong className="text-pink-600">CMS:</strong> {resumeData.technicalSkills.cms.join(', ')}</li>
-                      <li><strong className="text-orange-500">Cloud:</strong> {resumeData.technicalSkills.cloud.join(', ')}</li>
-                      <li><strong className="text-teal-600">Tools:</strong> {resumeData.technicalSkills.tools.join(', ')}</li>
-                      <li><strong className="text-red-500">Testing:</strong> {resumeData.technicalSkills.testing.join(', ')}</li>
-                      <li><strong className="text-blue-500">Methodologies:</strong> {resumeData.technicalSkills.methodologies.join(', ')}</li>
-                    </ul>
-
-                    <div className="mt-6">
-                      <React.Suspense fallback={<div className="h-40 bg-gray-100 rounded animate-pulse" />}>
-                        <BarChart data={chartData} options={chartOptions} />
-                      </React.Suspense>
+                  {(exp.honorsAndAwards?.length ?? 0) > 0 && (
+                    <div className="ml-4 mt-2">
+                      <div className="p-3 my-2 rounded bg-yellow-50 border-l-4 border-yellow-400">
+                        <h4 className="font-medium text-yellow-900 flex items-center gap-2">
+                          <Award aria-hidden="true" /> Honors & Awards:
+                        </h4>
+                        <ul className="list-disc list-inside text-gray-900">
+                          {exp.honorsAndAwards?.map((award, ai: number) => (
+                            <li key={ai}>
+                              <strong>{award.award}</strong>{' '}
+                              <span className="text-gray-700">({award.date})</span> -{' '}
+                              <span className="text-gray-800">{award.issuer}</span>: {award.description}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
-                  </CollapsibleSection>
+                  )}
+                </div>
+              ))}
+            </div>
+          </CollapsibleSection>
 
-                  {/* Work Experience */}
-                  <CollapsibleSection id="experience" title={<><Briefcase className="text-blue-400" aria-hidden="true" /> Experience</>}>
-                    <div className="space-y-8">
-                      {resumeData.workExperience.map((exp, idx: number) => (
-                        <div key={idx}>
-                          <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                            <Users className="text-blue-400" aria-hidden="true" /> {exp.position}
-                            <span className="text-gray-900 font-normal">@ {exp.company}</span>
-                          </h3>
-                          <p className="text-gray-900 mb-1">{exp.period}</p>
-                          <ul className="list-disc list-inside text-gray-900 mb-2">
-                            {exp.responsibilities.map((r: string, i: number) => <li key={i}>{r}</li>)}
-                          </ul>
+          {/* Education */}
+          <CollapsibleSection id="education" title={<><GraduationCap className="text-blue-400" aria-hidden="true" /> Education</>}>
+            <div className="space-y-8">
+              {resumeData?.education?.map((edu, idx: number) => (
+                <div key={idx}>
+                  <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                    <Book className="text-blue-400" aria-hidden="true" /> {edu.degree},{' '}
+                    <span className="text-gray-900 font-normal">{edu.institution}</span>
+                  </h3>
+                  <p className="text-gray-900 mb-1">{edu.field} ({edu.period})</p>
+                </div>
+              ))}
+            </div>
+          </CollapsibleSection>
 
-                          {(exp.notableProjects?.length ?? 0) > 0 && (
-                            <div className="ml-4 mt-2">
-                              <div className="p-3 my-2 rounded bg-blue-50 border-l-4 border-blue-400">
-                                <h4 className="font-medium text-blue-900 flex items-center gap-2">
-                                  <Star aria-hidden="true" /> Notable Projects:
-                                </h4>
-                                <ul className="list-disc list-inside text-gray-900">
-                                  {exp.notableProjects?.map((proj, pi: number) => (
-                                    <li key={pi}>
-                                      <strong>{proj.name}</strong>: {proj.description}{' '}
-                                      <span className="text-gray-700">[{proj.technologies.join(', ')}]</span>
-                                    </li>
-                                  ))}
-                                </ul>
-                              </div>
-                            </div>
-                          )}
+          {/* Activities & Volunteer */}
+          <CollapsibleSection id="activities" title={<><HeartHandshake className="text-blue-400" aria-hidden="true" /> Activities</>}>
+            <div className="space-y-8">
+              {resumeData?.activitiesAndVolunteer?.map((act, idx: number) => (
+                <div key={idx}>
+                  <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                    <Users className="text-blue-400" aria-hidden="true" /> {act.role}{' '}
+                    <span className="text-gray-900 font-normal">at {act.organization}</span>
+                  </h3>
+                  <p className="text-gray-900 mb-1">{act.period}</p>
+                  <p className="text-gray-900 mb-2">{act.description}</p>
 
-                          {(exp.honorsAndAwards?.length ?? 0) > 0 && (
-                            <div className="ml-4 mt-2">
-                              <div className="p-3 my-2 rounded bg-yellow-50 border-l-4 border-yellow-400">
-                                <h4 className="font-medium text-yellow-900 flex items-center gap-2">
-                                  <Award aria-hidden="true" /> Honors & Awards:
-                                </h4>
-                                <ul className="list-disc list-inside text-gray-900">
-                                  {exp.honorsAndAwards?.map((award, ai: number) => (
-                                    <li key={ai}>
-                                      <strong>{award.award}</strong>{' '}
-                                      <span className="text-gray-700">({award.date})</span> -{' '}
-                                      <span className="text-gray-800">{award.issuer}</span>: {award.description}
-                                    </li>
-                                  ))}
-                                </ul>
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      ))}
+                  {(act.notableProjects?.length ?? 0) > 0 && (
+                    <div className="ml-4 mt-2">
+                      <div className="p-3 my-2 rounded bg-blue-50 border-l-4 border-blue-400">
+                        <h4 className="font-medium text-blue-900 flex items-center gap-2">
+                          <Star aria-hidden="true" /> Notable Projects:
+                        </h4>
+                        <ul className="list-disc list-inside text-gray-900">
+                          {act.notableProjects?.map((proj, pi: number) => (
+                            <li key={pi}>
+                              <strong>{proj.name}</strong>: {proj.description}{' '}
+                              <span className="text-gray-700">[{proj.technologies?.join(', ')}]</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
-                  </CollapsibleSection>
+                  )}
+                </div>
+              ))}
+            </div>
+          </CollapsibleSection>
 
-                  {/* Education */}
-                  <CollapsibleSection id="education" title={<><GraduationCap className="text-blue-400" aria-hidden="true" /> Education</>}>
-                    <div className="space-y-8">
-                      {resumeData.education.map((edu, idx: number) => (
-                        <div key={idx}>
-                          <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                            <Book className="text-blue-400" aria-hidden="true" /> {edu.degree},{' '}
-                            <span className="text-gray-900 font-normal">{edu.institution}</span>
-                          </h3>
-                          <p className="text-gray-900 mb-1">{edu.field} ({edu.period})</p>
-                        </div>
-                      ))}
-                    </div>
-                  </CollapsibleSection>
-
-                  {/* Activities & Volunteer */}
-                  <CollapsibleSection id="activities" title={<><HeartHandshake className="text-blue-400" aria-hidden="true" /> Activities</>}>
-                    <div className="space-y-8">
-                      {resumeData.activitiesAndVolunteer.map((act, idx: number) => (
-                        <div key={idx}>
-                          <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                            <Users className="text-blue-400" aria-hidden="true" /> {act.role}{' '}
-                            <span className="text-gray-900 font-normal">at {act.organization}</span>
-                          </h3>
-                          <p className="text-gray-900 mb-1">{act.period}</p>
-                          <p className="text-gray-900 mb-2">{act.description}</p>
-
-                          {(act.notableProjects?.length ?? 0) > 0 && (
-                            <div className="ml-4 mt-2">
-                              <div className="p-3 my-2 rounded bg-blue-50 border-l-4 border-blue-400">
-                                <h4 className="font-medium text-blue-900 flex items-center gap-2">
-                                  <Star aria-hidden="true" /> Notable Projects:
-                                </h4>
-                                <ul className="list-disc list-inside text-gray-900">
-                                  {act.notableProjects?.map((proj, pi: number) => (
-                                    <li key={pi}>
-                                      <strong>{proj.name}</strong>: {proj.description}{' '}
-                                      <span className="text-gray-700">[{proj.technologies.join(', ')}]</span>
-                                    </li>
-                                  ))}
-                                </ul>
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  </CollapsibleSection>
-
-                  {/* References note */}
-                  <div className="pt-8 border-t border-gray-200">
-                    <h2 className="text-2xl font-bold text-black mb-3 tracking-tight">References</h2>
-                    <p className="text-gray-800">Available upon request.</p>
-                  </div>
-                </>
-              );
-            })()}
-
-          
+          {/* References note */}
+          <div className="pt-8 border-t border-gray-200">
+            <h2 className="text-2xl font-bold text-black mb-3 tracking-tight">References</h2>
+            <p className="text-gray-800">Available upon request.</p>
+          </div>
         </section>
       </div>
     </main>
