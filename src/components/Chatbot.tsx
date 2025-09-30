@@ -34,59 +34,64 @@ const Chatbot: React.FC = () => {
 
   const getResponse = (userMessage: string): string => {
     const message = userMessage.toLowerCase();
-    
+
     // Skills related questions
     if (message.includes('skills') || message.includes('technology') || message.includes('tech')) {
       return "I'm a versatile full-stack developer with expertise across many areas:\n\n🖥️ **Frontend**: I work extensively with React, TypeScript, Vue.js, Next.js, and Tailwind CSS\n\n⚙️ **Backend**: I'm proficient in Node.js, Python, PHP, Laravel, and Express\n\n☁️ **Infrastructure**: I have strong experience with AWS, Docker, Kubernetes, and Terraform\n\n🔒 **Security**: I focus heavily on OAuth, JWT, SSL/TLS, and security auditing\n\nI'm passionate about creating secure, scalable applications with great user experiences!";
     }
-    
+
     // Experience questions
     if (message.includes('experience') || message.includes('work') || message.includes('job')) {
       return "I have extensive experience as a Senior Full Stack Developer. My work focuses on:\n\n• **Enterprise Applications**: I build scalable web applications for large organizations\n• **Cloud Architecture**: I design and implement cloud-native solutions\n• **Team Leadership**: I enjoy mentoring developers and leading technical projects\n• **Security**: I implement robust security measures and compliance standards\n\nI'm passionate about writing clean, maintainable code and staying current with emerging technologies.";
     }
-    
+
     // Education questions
     if (message.includes('education') || message.includes('learn') || message.includes('study')) {
       return "I'm a lifelong learner who stays current with technology trends through:\n\n• Continuous learning and professional development\n• Open source contributions\n• Technical conferences and workshops\n• Industry certifications and training\n\nI believe in sharing knowledge and helping others grow in their tech careers!";
     }
-    
+
     // Contact questions
     if (message.includes('contact') || message.includes('reach') || message.includes('hire')) {
       return "You can reach me through several channels:\n\n• **LinkedIn**: For professional networking and career opportunities\n• **GitHub**: Check out my open source projects and contributions\n• **Email**: For direct professional inquiries\n\nI'm always interested in discussing new opportunities, collaborations, or just talking tech!";
     }
-    
+
     // Projects questions
     if (message.includes('project') || message.includes('portfolio') || message.includes('build')) {
       return "I've worked on a variety of exciting projects:\n\n• **Enterprise Web Applications**: Large-scale React and Vue.js applications\n• **API Development**: RESTful and GraphQL APIs with Node.js and Python\n• **Cloud Infrastructure**: AWS and containerized deployments\n• **Security Solutions**: Authentication systems and security auditing tools\n\nThis very portfolio site is built with React, TypeScript, and Tailwind CSS - showcasing modern web development practices I love using!";
     }
-    
+
     // Hobbies/personal questions
-    if (message.includes('hobby') || message.includes('personal') || message.includes('fun') || message.includes('interest')) {
+    if (
+      message.includes('hobby') ||
+      message.includes('personal') ||
+      message.includes('fun') ||
+      message.includes('interest')
+    ) {
       return "When I'm not coding, I enjoy:\n\n• **Technology Exploration**: Experimenting with new frameworks and tools\n• **Community Involvement**: Contributing to open source projects\n• **Problem Solving**: Tackling complex technical challenges\n• **Continuous Learning**: Reading tech blogs and taking online courses\n\nI'm passionate about using technology to solve real-world problems and make a positive impact!";
     }
-    
+
     // Location questions
     if (message.includes('location') || message.includes('where') || message.includes('based')) {
       return "I'm a remote-friendly developer who has experience working with distributed teams across different time zones. I'm adaptable to various working arrangements and enjoy collaborating with teams worldwide!";
     }
-    
+
     // Greeting responses
     if (message.includes('hello') || message.includes('hi') || message.includes('hey')) {
       return "Hello! Great to meet you! I'm here to answer any questions about my professional background, skills, or experience. What would you like to know?";
     }
-    
+
     // Thank you responses
     if (message.includes('thank') || message.includes('thanks')) {
       return "You're very welcome! Feel free to ask me anything else about my background or experience. I'm here to help! 😊";
     }
-    
+
     // Default responses for unmatched queries
     const defaultResponses = [
       "That's an interesting question! While I might not have specific information about that, I can tell you about my skills, experience, projects, or how to contact me. What would you like to know?",
       "I'd love to help! I'm most knowledgeable about my professional background, technical skills, and career experience. Try asking about my skills, projects, or experience!",
-      "Great question! I can share information about my technical expertise, work experience, or professional background. What specific area interests you most?",
+      'Great question! I can share information about my technical expertise, work experience, or professional background. What specific area interests you most?',
     ];
-    
+
     return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
   };
 
@@ -100,23 +105,26 @@ const Chatbot: React.FC = () => {
       timestamp: new Date(),
     };
 
-    setMessages(prev => [...prev, userMessage]);
+    setMessages((prev) => [...prev, userMessage]);
     setInputText('');
     setIsTyping(true);
 
     // Simulate typing delay
-    setTimeout(() => {
-      const response = getResponse(inputText);
-      const botMessage: Message = {
-        id: Date.now() + 1,
-        text: response,
-        isBot: true,
-        timestamp: new Date(),
-      };
+    setTimeout(
+      () => {
+        const response = getResponse(inputText);
+        const botMessage: Message = {
+          id: Date.now() + 1,
+          text: response,
+          isBot: true,
+          timestamp: new Date(),
+        };
 
-      setMessages(prev => [...prev, botMessage]);
-      setIsTyping(false);
-    }, 1000 + Math.random() * 1000); // Random delay between 1-2 seconds
+        setMessages((prev) => [...prev, botMessage]);
+        setIsTyping(false);
+      },
+      1000 + Math.random() * 1000,
+    ); // Random delay between 1-2 seconds
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -184,31 +192,49 @@ const Chatbot: React.FC = () => {
                     animate={{ opacity: 1, y: 0 }}
                     className={`flex gap-3 ${message.isBot ? '' : 'flex-row-reverse'}`}
                   >
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
-                      message.isBot 
-                        ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white' 
-                        : 'bg-gray-200 text-gray-600'
-                    }`}>
+                    <div
+                      className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
+                        message.isBot
+                          ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white'
+                          : 'bg-gray-200 text-gray-600'
+                      }`}
+                    >
                       {message.isBot ? <Bot size={16} /> : <User size={16} />}
                     </div>
-                    <div className={`max-w-[80%] p-3 rounded-2xl ${
-                      message.isBot
-                        ? 'bg-gray-100 text-gray-800'
-                        : 'bg-gradient-to-r from-blue-600 to-purple-600 text-white'
-                    }`}>
+                    <div
+                      className={`max-w-[80%] p-3 rounded-2xl ${
+                        message.isBot
+                          ? 'bg-gray-100 text-gray-800'
+                          : 'bg-gradient-to-r from-blue-600 to-purple-600 text-white'
+                      }`}
+                    >
                       <div className="text-sm leading-relaxed">
                         {message.isBot ? (
                           <div className="prose prose-sm max-w-none prose-headings:text-gray-800 prose-strong:text-gray-900 prose-p:text-gray-800 prose-li:text-gray-800">
-                            <ReactMarkdown 
+                            <ReactMarkdown
                               components={{
                                 // Customize rendering to fit the chat bubble style
                                 p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
-                                strong: ({ children }) => <strong className="font-semibold text-gray-900">{children}</strong>,
-                                ul: ({ children }) => <ul className="list-disc list-inside space-y-1 ml-2">{children}</ul>,
+                                strong: ({ children }) => (
+                                  <strong className="font-semibold text-gray-900">
+                                    {children}
+                                  </strong>
+                                ),
+                                ul: ({ children }) => (
+                                  <ul className="list-disc list-inside space-y-1 ml-2">
+                                    {children}
+                                  </ul>
+                                ),
                                 li: ({ children }) => <li className="text-sm">{children}</li>,
-                                h1: ({ children }) => <h1 className="font-bold text-base mb-1">{children}</h1>,
-                                h2: ({ children }) => <h2 className="font-bold text-sm mb-1">{children}</h2>,
-                                h3: ({ children }) => <h3 className="font-semibold text-sm mb-1">{children}</h3>,
+                                h1: ({ children }) => (
+                                  <h1 className="font-bold text-base mb-1">{children}</h1>
+                                ),
+                                h2: ({ children }) => (
+                                  <h2 className="font-bold text-sm mb-1">{children}</h2>
+                                ),
+                                h3: ({ children }) => (
+                                  <h3 className="font-semibold text-sm mb-1">{children}</h3>
+                                ),
                               }}
                             >
                               {message.text}
@@ -218,15 +244,20 @@ const Chatbot: React.FC = () => {
                           <span>{message.text}</span>
                         )}
                       </div>
-                      <div className={`text-xs mt-1 opacity-70 ${
-                        message.isBot ? 'text-gray-500' : 'text-blue-100'
-                      }`}>
-                        {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                      <div
+                        className={`text-xs mt-1 opacity-70 ${
+                          message.isBot ? 'text-gray-500' : 'text-blue-100'
+                        }`}
+                      >
+                        {message.timestamp.toLocaleTimeString([], {
+                          hour: '2-digit',
+                          minute: '2-digit',
+                        })}
                       </div>
                     </div>
                   </motion.div>
                 ))}
-                
+
                 {/* Typing indicator */}
                 {isTyping && (
                   <motion.div

@@ -16,7 +16,7 @@
       "display": true
     },
     {
-      "platform": "LinkedIn", 
+      "platform": "LinkedIn",
       "url": "https://www.linkedin.com/in/zschneider/",
       "icon": "linkedin",
       "display": true
@@ -30,7 +30,7 @@
     },
     {
       "platform": "X",
-      "url": "https://x.com/zkm", 
+      "url": "https://x.com/zkm",
       "icon": "x",
       "display": true
     },

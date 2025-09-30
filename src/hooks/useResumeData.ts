@@ -76,12 +76,12 @@ export function useResumeData() {
       try {
         setLoading(true);
         setError(null);
-        
+
         const response = await fetch('/data/resume.json');
         if (!response.ok) {
           throw new Error(`Failed to fetch resume data: ${response.status}`);
         }
-        
+
         const data = await response.json();
         setResumeData(data);
       } catch (err) {

@@ -1,13 +1,13 @@
-import { render, screen, waitFor, fireEvent } from '@testing-library/react'
-import { describe, it, expect, vi, beforeEach } from 'vitest'
-import Resume from '../components/Resume'
-import { useResumeData } from '../hooks/useResumeData'
-vi.mock('../hooks/useResumeData')
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+import Resume from '../components/Resume';
+import { useResumeData } from '../hooks/useResumeData';
+vi.mock('../hooks/useResumeData');
 
 // Mock the Chart.js lazy import
 vi.mock('react-chartjs-2', () => ({
   Bar: () => <div data-testid="mock-chart">Chart</div>,
-}))
+}));
 
 // Mock lucide-react icons
 vi.mock('lucide-react', () => ({
@@ -33,7 +33,7 @@ vi.mock('lucide-react', () => ({
   Send: () => <div data-testid="send-icon">Send</div>,
   User: () => <div data-testid="user-icon">User</div>,
   Bot: () => <div data-testid="bot-icon">Bot</div>,
-}))
+}));
 
 const mockResumeData = {
   personalInfo: {
@@ -49,10 +49,10 @@ const mockResumeData = {
     languages: {
       HTML: ['HTML5'],
       CSS: ['CSS3'],
-  JavaScript: ['React', 'Node.js'],
-  Python: ['Django', 'Flask'],
-  PHP: ['Laravel'],
-  Other: ['TypeScript'],
+      JavaScript: ['React', 'Node.js'],
+      Python: ['Django', 'Flask'],
+      PHP: ['Laravel'],
+      Other: ['TypeScript'],
     },
     frameworks: ['React', 'Vue.js'],
     cms: ['WordPress'],
@@ -116,150 +116,156 @@ const mockResumeData = {
       email: 'jane@techcorp.com',
     },
   ],
-}
+};
 
 describe('Resume', () => {
   beforeEach(() => {
-    vi.clearAllMocks()
-  })
+    vi.clearAllMocks();
+  });
 
   it('renders loading state', () => {
     vi.mocked(useResumeData).mockReturnValue({
       resumeData: null,
       loading: true,
       error: null,
-    })
+    });
 
-    render(<Resume />)
-    expect(screen.getByText(/loading/i)).toBeInTheDocument()
-  })
+    render(<Resume />);
+    expect(screen.getByText(/loading/i)).toBeInTheDocument();
+  });
 
   it('renders error state', () => {
     vi.mocked(useResumeData).mockReturnValue({
       resumeData: null,
       loading: false,
       error: 'Failed to load resume data',
-    })
+    });
 
-    render(<Resume />)
-    expect(screen.getByText(/error/i)).toBeInTheDocument()
-  })
+    render(<Resume />);
+    expect(screen.getByText(/error/i)).toBeInTheDocument();
+  });
 
   it('renders resume data when loaded', async () => {
     vi.mocked(useResumeData).mockReturnValue({
       resumeData: mockResumeData,
       loading: false,
       error: null,
-    })
+    });
 
-    render(<Resume />)
+    render(<Resume />);
 
     await waitFor(() => {
-      expect(screen.getByText('John Doe')).toBeInTheDocument()
-      expect(screen.getByText('Software Developer')).toBeInTheDocument()
-      expect(screen.getAllByRole('button', { name: /reveal email address/i })[0]).toBeInTheDocument()
-      expect(screen.getAllByRole('button', { name: /reveal phone number/i })[0]).toBeInTheDocument()
-    })
-  })
+      expect(screen.getByText('John Doe')).toBeInTheDocument();
+      expect(screen.getByText('Software Developer')).toBeInTheDocument();
+      expect(
+        screen.getAllByRole('button', { name: /reveal email address/i })[0],
+      ).toBeInTheDocument();
+      expect(
+        screen.getAllByRole('button', { name: /reveal phone number/i })[0],
+      ).toBeInTheDocument();
+    });
+  });
 
   it('renders work experience section', async () => {
     vi.mocked(useResumeData).mockReturnValue({
       resumeData: mockResumeData,
       loading: false,
       error: null,
-    })
+    });
 
-    render(<Resume />)
+    render(<Resume />);
 
     await waitFor(() => {
-      expect(screen.getByText('Experience')).toBeInTheDocument()
-      expect(screen.getByText('Tech Corp')).toBeInTheDocument()
-      expect(screen.getByText('Senior Developer')).toBeInTheDocument()
-    })
-  })
+      expect(screen.getByText('Experience')).toBeInTheDocument();
+      expect(screen.getByText('Tech Corp')).toBeInTheDocument();
+      expect(screen.getByText('Senior Developer')).toBeInTheDocument();
+    });
+  });
 
   it('renders education section', async () => {
     vi.mocked(useResumeData).mockReturnValue({
       resumeData: mockResumeData,
       loading: false,
       error: null,
-    })
+    });
 
-    render(<Resume />)
+    render(<Resume />);
 
     await waitFor(() => {
-      expect(screen.getByText('Education')).toBeInTheDocument()
-      expect(screen.getByText(/Computer Science \(2016-2020\)/)).toBeInTheDocument()
-    })
-  })
+      expect(screen.getByText('Education')).toBeInTheDocument();
+      expect(screen.getByText(/Computer Science \(2016-2020\)/)).toBeInTheDocument();
+    });
+  });
 
   it('toggles accordion sections when clicked', async () => {
     vi.mocked(useResumeData).mockReturnValue({
       resumeData: mockResumeData,
       loading: false,
       error: null,
-    })
+    });
 
-    render(<Resume />)
+    render(<Resume />);
 
     // Wait for component to load
     await waitFor(() => {
-      expect(screen.getByText('Summary')).toBeInTheDocument()
-    })
+      expect(screen.getByText('Summary')).toBeInTheDocument();
+    });
 
     // Find the Summary section button
-    const summaryButton = screen.getByRole('button', { name: /summary/i })
-    expect(summaryButton).toBeInTheDocument()
-    
+    const summaryButton = screen.getByRole('button', { name: /summary/i });
+    expect(summaryButton).toBeInTheDocument();
+
     // Check initial state - should be expanded (aria-expanded="true")
-    expect(summaryButton).toHaveAttribute('aria-expanded', 'true')
-    
+    expect(summaryButton).toHaveAttribute('aria-expanded', 'true');
+
     // Find the content that should be visible - use getAllByText and select the one in the main content area
-    const summaryContent = screen.getAllByText('Experienced software developer with 5 years of experience.')[1]
-    expect(summaryContent).toBeInTheDocument()
-    
+    const summaryContent = screen.getAllByText(
+      'Experienced software developer with 5 years of experience.',
+    )[1];
+    expect(summaryContent).toBeInTheDocument();
+
     // Click to collapse
-    fireEvent.click(summaryButton)
-    
+    fireEvent.click(summaryButton);
+
     // After collapse, button should have aria-expanded="false"
     await waitFor(() => {
-      expect(summaryButton).toHaveAttribute('aria-expanded', 'false')
-    })
-    
+      expect(summaryButton).toHaveAttribute('aria-expanded', 'false');
+    });
+
     // Click to expand again
-    fireEvent.click(summaryButton)
-    
+    fireEvent.click(summaryButton);
+
     // Should be expanded again
     await waitFor(() => {
-      expect(summaryButton).toHaveAttribute('aria-expanded', 'true')
-    })
-  })
+      expect(summaryButton).toHaveAttribute('aria-expanded', 'true');
+    });
+  });
 
   it('has proper accessibility attributes for accordion sections', async () => {
     vi.mocked(useResumeData).mockReturnValue({
       resumeData: mockResumeData,
       loading: false,
       error: null,
-    })
+    });
 
-    render(<Resume />)
+    render(<Resume />);
 
     await waitFor(() => {
-      expect(screen.getByText('Summary')).toBeInTheDocument()
-    })
+      expect(screen.getByText('Summary')).toBeInTheDocument();
+    });
 
-    const summaryButton = screen.getByRole('button', { name: /summary/i })
-    
+    const summaryButton = screen.getByRole('button', { name: /summary/i });
+
     // Check ARIA attributes
-    expect(summaryButton).toHaveAttribute('aria-controls')
-    expect(summaryButton).toHaveAttribute('aria-expanded')
-    expect(summaryButton).toHaveAttribute('aria-describedby')
-    
+    expect(summaryButton).toHaveAttribute('aria-controls');
+    expect(summaryButton).toHaveAttribute('aria-expanded');
+    expect(summaryButton).toHaveAttribute('aria-describedby');
+
     // Check that controlled content exists with proper ID
-    const contentId = summaryButton.getAttribute('aria-controls')
-    const contentElement = document.getElementById(contentId!)
-    expect(contentElement).toBeInTheDocument()
-    expect(contentElement).toHaveAttribute('role', 'region')
-    expect(contentElement).toHaveAttribute('aria-labelledby')
-  })
-})
+    const contentId = summaryButton.getAttribute('aria-controls');
+    const contentElement = document.getElementById(contentId!);
+    expect(contentElement).toBeInTheDocument();
+    expect(contentElement).toHaveAttribute('role', 'region');
+    expect(contentElement).toHaveAttribute('aria-labelledby');
+  });
+});

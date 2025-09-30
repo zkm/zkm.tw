@@ -1,4 +1,3 @@
-
 # 🚀 [zkm.tw — Portfolio](https://zkm.tw)
 
 <p align="center">
@@ -99,7 +98,6 @@ yarn test:coverage
 
 GA4 is integrated via gtag in index.html using measurement ID G-2J7SWPGLE4. If you prefer GTM, replace the GA snippet with your GTM container snippet.
 
-
 ## Deployment
 
 Deployment is now handled automatically via GitHub Actions:
@@ -142,7 +140,6 @@ public/
     profile.json
     resume.json
 ```
-
 
 ---
 
