@@ -14,6 +14,11 @@ export interface ResumeData {
     languages: {
       [key: string]: string[];
     };
+    // Explicit categories for typed access in the Resume component
+    frontend?: string[];
+    backend?: string[];
+    infrastructure?: string[];
+    security?: string[];
     frameworks: string[];
     cms: string[];
     cloud: string[];
