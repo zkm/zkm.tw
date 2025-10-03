@@ -4,54 +4,41 @@ import { useProfileData } from '../hooks/useProfileData';
 import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
 const Resume = React.lazy(() => import('./Resume'));
 
-// Local SVG icon components to avoid external dependency on 'lucide-react'
-type IconProps = React.SVGProps<SVGSVGElement> & { size?: number };
+// Use local SVG files for social icons to guarantee rendering across browsers
+// and avoid any currentColor/fill inheritance quirks.
+import iconGithub from './icons/icon_gh.svg';
+import iconLinkedin from './icons/icon_li.svg';
+import iconInstagram from './icons/icon_ig.svg';
+import iconMastodon from './icons/icon_mst.svg';
+import iconX from './icons/icon_x.svg';
+import iconStackOverflow from './icons/icon_stackoverflow.svg';
 
-const Github: React.FC<IconProps> = ({ size = 24, className, ...rest }) => (
-  <svg
+type ImageIconProps = { size?: number; className?: string; alt?: string };
+const ImageIcon: React.FC<ImageIconProps & { src: string }> = ({
+  src,
+  size = 24,
+  className,
+  alt = '',
+}) => (
+  <img
+    src={src}
+    alt={alt}
     width={size}
     height={size}
-    viewBox="0 0 24 24"
-    fill="currentColor"
-    className={className}
-    xmlns="http://www.w3.org/2000/svg"
-    {...rest}
-  >
-    <path d="M12 0.5C5.73 0.5 0.9 5.34 0.9 11.61c0 4.77 3.09 8.82 7.38 10.25.54.1.74-.24.74-.53 0-.26-.01-1-.02-1.95-3 .66-3.64-1.38-3.64-1.38-.49-1.24-1.2-1.57-1.2-1.57-.98-.67.07-.66.07-.66 1.08.08 1.65 1.11 1.65 1.11.96 1.65 2.52 1.17 3.13.9.1-.71.38-1.17.69-1.44-2.4-.27-4.92-1.2-4.92-5.34 0-1.18.42-2.15 1.11-2.91-.11-.27-.48-1.36.11-2.83 0 0 .91-.29 2.98 1.1.86-.24 1.78-.36 2.7-.36.92 0 1.84.12 2.7.36 2.07-1.39 2.98-1.1 2.98-1.1.59 1.47.22 2.56.11 2.83.69.76 1.11 1.73 1.11 2.91 0 4.15-2.53 5.07-4.94 5.34.39.34.73 1.02.73 2.06 0 1.49-.01 2.69-.01 3.06 0 .29.2.64.75.53 4.29-1.43 7.38-5.48 7.38-10.25C23.1 5.34 18.27 0.5 12 0.5z" />
-  </svg>
+    className={`filter invert ${className ?? ''}`}
+    loading="lazy"
+    decoding="async"
+  />
 );
 
-const Linkedin: React.FC<IconProps> = ({ size = 24, className, ...rest }) => (
-  <svg
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    fill="currentColor"
-    className={className}
-    xmlns="http://www.w3.org/2000/svg"
-    {...rest}
-  >
-    <rect x="2" y="2" width="20" height="20" rx="3" />
-    <rect x="6" y="10" width="2.5" height="7" fill="white" />
-    <circle cx="7.25" cy="7.5" r="1.25" fill="white" />
-    <path d="M13 10.5v1.2c0 .6-.01 3.3-2.5 3.3s-2.5-2.7-2.5-3.3V10.5h-2v7h2v-3c0 .01.23 2.3 2.5 2.3 2.27 0 2.5-2.3 2.5-2.3v3h2v-7h-2z" fill="white" />
-  </svg>
+const Github: React.FC<ImageIconProps> = (props) => (
+  <ImageIcon src={iconGithub} alt="GitHub" {...props} />
 );
-
-const Instagram: React.FC<IconProps> = ({ size = 24, className, ...rest }) => (
-  <svg
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    fill="currentColor"
-    className={className}
-    xmlns="http://www.w3.org/2000/svg"
-    {...rest}
-  >
-    <rect x="3" y="3" width="18" height="18" rx="5" />
-    <circle cx="12" cy="12" r="3.5" fill="white" />
-    <circle cx="17.6" cy="6.4" r="0.9" fill="white" />
-  </svg>
+const Linkedin: React.FC<ImageIconProps> = (props) => (
+  <ImageIcon src={iconLinkedin} alt="LinkedIn" {...props} />
+);
+const Instagram: React.FC<ImageIconProps> = (props) => (
+  <ImageIcon src={iconInstagram} alt="Instagram" {...props} />
 );
 
 const FileText: React.FC<IconProps> = ({ size = 24, className, ...rest }) => (
@@ -71,42 +58,18 @@ const FileText: React.FC<IconProps> = ({ size = 24, className, ...rest }) => (
   </svg>
 );
 
-// Custom SVG components for icons not available in Lucide
-const MastodonIcon = () => (
-  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="currentColor"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path d="M23.193 7.879c0-5.206-3.411-6.732-3.411-6.732C18.062.357 15.108.025 12.041 0h-.076c-3.068.025-6.02.357-7.74 1.147 0 0-3.411 1.526-3.411 6.732 0 1.192-.023 2.618.015 4.129.124 5.092.934 10.109 5.641 11.355 2.17.574 4.034.695 5.535.612 2.722-.15 4.25-.972 4.25-.972l-.09-1.975s-1.945.613-4.129.539c-2.165-.074-4.449-.233-4.799-2.891a5.499 5.499 0 0 1-.048-.745s2.125.52 4.817.643c1.646.075 3.19-.097 4.758-.283 3.007-.359 5.625-2.212 5.954-3.905.517-2.665.475-6.507.475-6.507zm-4.024 6.709h-2.497V8.469c0-1.29-.543-1.944-1.628-1.944-1.2 0-1.802.776-1.802 2.312v3.349h-2.483v-3.35c0-1.536-.602-2.312-1.802-2.312-1.085 0-1.628.655-1.628 1.944v6.119H4.832V8.284c0-1.289.328-2.313.987-3.07.68-.758 1.569-1.146 2.674-1.146 1.278 0 2.246.491 2.886 1.474L12 6.585l.622-1.043c.64-.983 1.608-1.474 2.886-1.474 1.104 0 1.994.388 2.674 1.146.658.757.986 1.781.986 3.07v6.304z" />
-  </svg>
+const MastodonIcon: React.FC<ImageIconProps> = (props) => (
+  <ImageIcon src={iconMastodon} alt="Mastodon" {...props} />
+);
+const XIcon: React.FC<ImageIconProps> = (props) => (
+  <ImageIcon src={iconX} alt="X" {...props} />
+);
+const StackOverflowIcon: React.FC<ImageIconProps> = (props) => (
+  <ImageIcon src={iconStackOverflow} alt="Stack Overflow" {...props} />
 );
 
-const XIcon = () => (
-  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="currentColor"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path d="M14.258 10.152L23.176 0h-2.113l-7.747 8.813L7.133 0H0l9.352 13.328L0 23.973h2.113l8.176-9.309 6.531 9.309h7.133zm-2.895 3.293l-.949-1.328L2.875 1.56h3.246l6.086 8.523.945 1.328 7.91 11.078h-3.246zm0 0" />
-  </svg>
-);
-
-const StackOverflowIcon = () => (
-  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 800 800"
-    fill="currentColor"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path d="M189.4,629.2v65.3h315.2v-65.3H189.4z M194.8,511.9l-4.5,65.3 l314.4,21.3l4.1-64.9L194.8,511.9L194.8,511.9z M97.9,484.8V800H150H563h33.2V484.8h-52.1v262.7H150V484.8H97.9L97.9,484.8z  M218.6,373.1L203,436.3l305.8,75.9l15.6-63.6L218.6,373.1z M286.3,215.1l-33.2,56.2L524.8,431l33.2-56.6L286.3,215.1z M452.1,65.3 l-54.2,36.5l175.3,261.5l54.2-36.1L452.1,65.3L452.1,65.3z M663.9,0l-64.9,7.8l38.2,312.8l64.9-7.8L663.9,0z" />
-  </svg>
-);
+// Keep this type for FileText inline icon
+type IconProps = React.SVGProps<SVGSVGElement> & { size?: number };
 
 // Icon mapping for social platforms
 const iconMap = {
