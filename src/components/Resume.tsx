@@ -6,6 +6,7 @@ import { Chart, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend }
 Chart.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 import { useResumeData } from '../hooks/useResumeData';
+import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
 import {
   Award,
   GraduationCap,
@@ -86,10 +87,10 @@ const RevealPhone: React.FC = () => {
 
   return (
     <div className="flex items-center gap-2">
-      <Phone className="inline text-yellow-400 flex-shrink-0" size={16} aria-hidden="true" />
+      <Phone className="inline text-yellow-300 flex-shrink-0" size={16} aria-hidden="true" />
       {!revealed ? (
         <button
-          className="underline text-yellow-300 hover:text-yellow-400"
+          className="underline text-yellow-200 hover:text-yellow-100 min-h-[44px] focus-visible:ring-2 focus-visible:ring-yellow-400 rounded px-2"
           onClick={onReveal}
           aria-label="Reveal phone number"
         >
@@ -97,12 +98,12 @@ const RevealPhone: React.FC = () => {
         </button>
       ) : prettyText && telHref ? (
         <>
-          <a id="tel" className="underline text-yellow-300 hover:text-yellow-400" href={telHref}>
+          <a id="tel" className="underline text-yellow-200 hover:text-yellow-100" href={telHref}>
             {prettyText}
           </a>
           <button
             onClick={onCopy}
-            className="ml-2 text-xs px-2 py-1 rounded bg-slate-800 text-yellow-300 hover:bg-slate-700 inline-flex items-center gap-1"
+            className="ml-2 text-xs px-3 py-2 rounded bg-slate-800 text-yellow-200 hover:bg-slate-700 inline-flex items-center gap-1 min-h-[44px] min-w-[44px] justify-center focus-visible:ring-2 focus-visible:ring-yellow-400"
             aria-label="Copy phone number"
           >
             {copied ? <CheckIcon size={14} /> : <CopyIcon size={14} />}
@@ -110,13 +111,13 @@ const RevealPhone: React.FC = () => {
           </button>
         </>
       ) : (
-        <span className="text-red-400">(error)</span>
+        <span className="text-red-300">(error)</span>
       )}
 
       <noscript>
         <span className="ml-2 align-middle">
           <svg width="140" height="16" aria-label="Phone number image">
-            <text x="0" y="12" fontFamily="monospace" fontSize="14" fill="#FDE68A">
+            <text x="0" y="12" fontFamily="monospace" fontSize="14" fill="#FDE047">
               (773) 980-9599
             </text>
           </svg>
@@ -165,10 +166,10 @@ const RevealEmail: React.FC = () => {
 
   return (
     <div className="flex items-center gap-2">
-      <Mail className="inline text-yellow-400 flex-shrink-0" size={16} aria-hidden="true" />
+      <Mail className="inline text-yellow-300 flex-shrink-0" size={16} aria-hidden="true" />
       {!revealed ? (
         <button
-          className="underline text-yellow-300 hover:text-yellow-400"
+          className="underline text-yellow-200 hover:text-yellow-100 min-h-[44px] focus-visible:ring-2 focus-visible:ring-yellow-400 rounded px-2"
           onClick={onReveal}
           aria-label="Reveal email address"
         >
@@ -176,12 +177,12 @@ const RevealEmail: React.FC = () => {
         </button>
       ) : em && mailto ? (
         <>
-          <a className="underline hover:text-yellow-300" href={mailto}>
+          <a className="underline text-yellow-200 hover:text-yellow-100" href={mailto}>
             {em}
           </a>
           <button
             onClick={onCopy}
-            className="ml-2 text-xs px-2 py-1 rounded bg-slate-800 text-yellow-300 hover:bg-slate-700 inline-flex items-center gap-1"
+            className="ml-2 text-xs px-3 py-2 rounded bg-slate-800 text-yellow-200 hover:bg-slate-700 inline-flex items-center gap-1 min-h-[44px] min-w-[44px] justify-center focus-visible:ring-2 focus-visible:ring-yellow-400"
             aria-label="Copy email address"
           >
             {copied ? <CheckIcon size={14} /> : <CopyIcon size={14} />}
@@ -189,13 +190,13 @@ const RevealEmail: React.FC = () => {
           </button>
         </>
       ) : (
-        <span className="text-red-400">(error)</span>
+        <span className="text-red-300">(error)</span>
       )}
 
       <noscript>
         <span className="ml-2 align-middle">
           <svg width="210" height="16" aria-label="Email image">
-            <text x="0" y="12" fontFamily="monospace" fontSize="14" fill="#FDE68A">
+            <text x="0" y="12" fontFamily="monospace" fontSize="14" fill="#FDE047">
               me@zachschneider.com
             </text>
           </svg>
@@ -208,6 +209,7 @@ const RevealEmail: React.FC = () => {
 const Resume: React.FC = () => {
   // ✅ All hooks at the top, always called in the same order
   const { resumeData, loading, error } = useResumeData();
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   // Pull name/title/site from JSON (safe); keep phone/email via reveal components
   const name = resumeData?.personalInfo?.name ?? 'Zach Schneider';
@@ -274,7 +276,7 @@ const Resume: React.FC = () => {
       >
         <div className="text-center">
           <div
-            className="animate-spin rounded-full h-24 w-24 border-b-2 border-blue-600 mx-auto"
+            className={`${prefersReducedMotion ? '' : 'animate-spin'} rounded-full h-24 w-24 border-b-2 border-blue-600 mx-auto`}
             role="status"
             aria-label="Loading spinner"
           ></div>
@@ -313,7 +315,7 @@ const Resume: React.FC = () => {
         <button
           id={headerId}
           onClick={() => setOpen(!open)}
-          className="w-full text-left p-4 bg-gray-50 hover:bg-gray-100 rounded-lg border border-gray-200 transition-colors duration-200 flex items-center justify-between font-semibold text-gray-900"
+          className="w-full text-left p-4 bg-gray-50 hover:bg-gray-100 rounded-lg border border-gray-200 transition-colors duration-200 flex items-center justify-between font-semibold text-gray-900 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
           aria-expanded={open}
           aria-controls={contentId}
           aria-describedby={descriptionId}
@@ -370,31 +372,31 @@ const Resume: React.FC = () => {
           data-nosnippet
         >
           <div className="mb-8 w-full">
-            <h1 className="text-3xl font-extrabold mb-2 text-yellow-400 tracking-tight text-left">
+            <h1 className="text-3xl font-extrabold mb-2 text-yellow-300 tracking-tight text-left">
               {name}
             </h1>
-            <p className="text-lg font-semibold mb-4 text-gray-200 text-left">{title}</p>
+            <p className="text-lg font-semibold mb-4 text-gray-100 text-left">{title}</p>
           </div>
 
           <div className="w-full mt-6">
-            <h2 className="text-xl font-bold text-yellow-400 mb-2 uppercase tracking-wide text-left">
+            <h2 className="text-xl font-bold text-yellow-300 mb-2 uppercase tracking-wide text-left">
               About Me
             </h2>
-            <p className="text-gray-200 text-base mb-6 leading-relaxed text-left">
+            <p className="text-gray-100 text-base mb-6 leading-relaxed text-left">
               {resumeData?.summary}
             </p>
 
-            <h2 className="text-xl font-bold text-yellow-400 mb-2 uppercase tracking-wide text-left">
+            <h2 className="text-xl font-bold text-yellow-300 mb-2 uppercase tracking-wide text-left">
               Languages
             </h2>
-            <ul className="text-gray-200 text-base mb-6 space-y-1 text-left">
+            <ul className="text-gray-100 text-base mb-6 space-y-1 text-left">
               <li>English</li>
             </ul>
 
-            <h2 className="text-xl font-bold text-yellow-400 mb-2 uppercase tracking-wide text-left">
+            <h2 className="text-xl font-bold text-yellow-300 mb-2 uppercase tracking-wide text-left">
               Contact
             </h2>
-            <ul className="text-gray-200 text-base space-y-2 text-left">
+            <ul className="text-gray-100 text-base space-y-2 text-left">
               <li>
                 <RevealEmail />
               </li>
@@ -402,12 +404,13 @@ const Resume: React.FC = () => {
                 <RevealPhone />
               </li>
               <li className="flex items-center gap-2">
-                <Globe className="inline text-yellow-400" aria-hidden="true" />
+                <Globe className="inline text-yellow-300" aria-hidden="true" />
                 <a
                   href={website}
-                  className="underline hover:text-yellow-300"
+                  className="underline text-yellow-200 hover:text-yellow-100"
                   rel="me"
                   target="_blank"
+                  aria-label={`Visit ${new URL(website).host} (opens in new window)`}
                 >
                   {new URL(website).host}
                 </a>
@@ -614,7 +617,8 @@ const Resume: React.FC = () => {
                           href={exp.companyUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-blue-600 hover:text-blue-800 underline"
+                          className="text-blue-600 hover:text-blue-800 underline focus-visible:ring-2 focus-visible:ring-blue-400 rounded"
+                          aria-label={`${exp.company} (opens in new window)`}
                         >
                           {exp.company}
                         </a>

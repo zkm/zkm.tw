@@ -2,6 +2,21 @@ import '@testing-library/jest-dom';
 import React from 'react';
 import { vi, beforeAll, afterAll } from 'vitest';
 
+// Mock window.matchMedia for accessibility tests (prefers-reduced-motion)
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  value: vi.fn().mockImplementation((query: string) => ({
+    matches: false, // Default: no reduced motion preference
+    media: query,
+    onchange: null,
+    addListener: vi.fn(), // Deprecated but still used by some libraries
+    removeListener: vi.fn(), // Deprecated but still used by some libraries
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    dispatchEvent: vi.fn(),
+  })),
+});
+
 // Suppress React act warnings in test environment
 const originalError = console.error;
 beforeAll(() => {
