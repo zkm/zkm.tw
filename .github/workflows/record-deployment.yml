@@ -11,22 +11,22 @@ jobs:
       deployments: write
       contents: read
     steps:
-      - name: Start deployment record
+      - name: Start deployment record (Production)
         id: start
         uses: bobheadxi/deployments@v1
         with:
           step: start
           token: ${{ secrets.GITHUB_TOKEN }}
-          env: github-pages
+          env: Production
           ref: ${{ github.ref }}
 
-      - name: Mark deployment successful
+      - name: Mark deployment successful (Production)
         if: always()
         uses: bobheadxi/deployments@v1
         with:
           step: finish
           token: ${{ secrets.GITHUB_TOKEN }}
-          env: github-pages
+          env: Production
           status: success
           deployment_id: ${{ steps.start.outputs.deployment_id }}
           env_url: http://zkm.tw/
