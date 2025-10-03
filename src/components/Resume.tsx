@@ -7,25 +7,52 @@ Chart.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 import { useResumeData } from '../hooks/useResumeData';
 import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
-import {
-  Award,
-  GraduationCap,
-  HeartHandshake,
-  Briefcase,
-  Code2,
-  Mail,
-  Phone,
-  Globe,
-  Star,
-  Book,
-  Users,
-  Copy as CopyIcon,
-  Check as CheckIcon,
-  Shield,
-  Palette,
-  Server,
-  Settings,
-} from 'lucide-react';
+// Lightweight local icon stubs to avoid requiring 'lucide-react' and its types.
+// These are simple, accessible SVG placeholders that match the same component API
+// used in this file (size prop, className, etc.). Replace with proper icons later
+// if/when the dependency is installed.
+type IconProps = React.SVGProps<SVGSVGElement> & { size?: number };
+
+const createIcon = (path?: string) => {
+  const Icon: React.FC<IconProps> = ({ size = 16, className, ...props }) => (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+      focusable="false"
+      {...props}
+    >
+      {/* Minimal generic path; real icons can be swapped in later */}
+      {path ? <path d={path} /> : <circle cx="12" cy="12" r="8" />}
+    </svg>
+  );
+  return Icon;
+};
+
+const Award = createIcon();
+const GraduationCap = createIcon();
+const HeartHandshake = createIcon();
+const Briefcase = createIcon();
+const Code2 = createIcon();
+const Mail = createIcon();
+const Phone = createIcon();
+const Globe = createIcon();
+const Star = createIcon();
+const Book = createIcon();
+const Users = createIcon();
+const CopyIcon = createIcon();
+const CheckIcon = createIcon();
+const Shield = createIcon();
+const Palette = createIcon();
+const Server = createIcon();
+const Settings = createIcon();
 
 /** --- small shared helper --- */
 const base64Decode = (str: string) => {

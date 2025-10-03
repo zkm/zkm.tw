@@ -117,8 +117,9 @@ describe('Portfolio', () => {
     render(<Portfolio />);
 
     await waitFor(() => {
-      expect(screen.getByTestId('github-icon')).toBeInTheDocument();
-      expect(screen.getByTestId('linkedin-icon')).toBeInTheDocument();
+      // Check for social links by their aria-labels
+      expect(screen.getByLabelText(/github.*opens in new window/i)).toBeInTheDocument();
+      expect(screen.getByLabelText(/linkedin.*opens in new window/i)).toBeInTheDocument();
     });
   });
 

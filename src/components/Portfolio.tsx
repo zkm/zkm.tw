@@ -1,9 +1,75 @@
 import React, { useState, Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Instagram, FileText } from 'lucide-react';
 import { useProfileData } from '../hooks/useProfileData';
 import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
 const Resume = React.lazy(() => import('./Resume'));
+
+// Local SVG icon components to avoid external dependency on 'lucide-react'
+type IconProps = React.SVGProps<SVGSVGElement> & { size?: number };
+
+const Github: React.FC<IconProps> = ({ size = 24, className, ...rest }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className}
+    xmlns="http://www.w3.org/2000/svg"
+    {...rest}
+  >
+    <path d="M12 0.5C5.73 0.5 0.9 5.34 0.9 11.61c0 4.77 3.09 8.82 7.38 10.25.54.1.74-.24.74-.53 0-.26-.01-1-.02-1.95-3 .66-3.64-1.38-3.64-1.38-.49-1.24-1.2-1.57-1.2-1.57-.98-.67.07-.66.07-.66 1.08.08 1.65 1.11 1.65 1.11.96 1.65 2.52 1.17 3.13.9.1-.71.38-1.17.69-1.44-2.4-.27-4.92-1.2-4.92-5.34 0-1.18.42-2.15 1.11-2.91-.11-.27-.48-1.36.11-2.83 0 0 .91-.29 2.98 1.1.86-.24 1.78-.36 2.7-.36.92 0 1.84.12 2.7.36 2.07-1.39 2.98-1.1 2.98-1.1.59 1.47.22 2.56.11 2.83.69.76 1.11 1.73 1.11 2.91 0 4.15-2.53 5.07-4.94 5.34.39.34.73 1.02.73 2.06 0 1.49-.01 2.69-.01 3.06 0 .29.2.64.75.53 4.29-1.43 7.38-5.48 7.38-10.25C23.1 5.34 18.27 0.5 12 0.5z" />
+  </svg>
+);
+
+const Linkedin: React.FC<IconProps> = ({ size = 24, className, ...rest }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className}
+    xmlns="http://www.w3.org/2000/svg"
+    {...rest}
+  >
+    <rect x="2" y="2" width="20" height="20" rx="3" />
+    <rect x="6" y="10" width="2.5" height="7" fill="white" />
+    <circle cx="7.25" cy="7.5" r="1.25" fill="white" />
+    <path d="M13 10.5v1.2c0 .6-.01 3.3-2.5 3.3s-2.5-2.7-2.5-3.3V10.5h-2v7h2v-3c0 .01.23 2.3 2.5 2.3 2.27 0 2.5-2.3 2.5-2.3v3h2v-7h-2z" fill="white" />
+  </svg>
+);
+
+const Instagram: React.FC<IconProps> = ({ size = 24, className, ...rest }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className}
+    xmlns="http://www.w3.org/2000/svg"
+    {...rest}
+  >
+    <rect x="3" y="3" width="18" height="18" rx="5" />
+    <circle cx="12" cy="12" r="3.5" fill="white" />
+    <circle cx="17.6" cy="6.4" r="0.9" fill="white" />
+  </svg>
+);
+
+const FileText: React.FC<IconProps> = ({ size = 24, className, ...rest }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className}
+    xmlns="http://www.w3.org/2000/svg"
+    {...rest}
+  >
+    <path d="M6 2h7l5 5v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z" />
+    <path d="M13 3v5h5" fill="white" opacity="0.2" />
+    <rect x="8" y="11" width="8" height="1.5" rx="0.3" fill="white" opacity="0.9" />
+    <rect x="8" y="14" width="8" height="1.5" rx="0.3" fill="white" opacity="0.9" />
+  </svg>
+);
 
 // Custom SVG components for icons not available in Lucide
 const MastodonIcon = () => (
