@@ -1,0 +1,32 @@
+name: Record Deployment
+
+on:
+  push:
+    branches: [ production ]
+
+jobs:
+  record:
+    runs-on: ubuntu-latest
+    permissions:
+      deployments: write
+      contents: read
+    steps:
+      - name: Start deployment record
+        id: start
+        uses: bobheadxi/deployments@v1
+        with:
+          step: start
+          token: ${{ secrets.GITHUB_TOKEN }}
+          env: github-pages
+          ref: ${{ github.ref }}
+
+      - name: Mark deployment successful
+        if: always()
+        uses: bobheadxi/deployments@v1
+        with:
+          step: finish
+          token: ${{ secrets.GITHUB_TOKEN }}
+          env: github-pages
+          status: success
+          deployment_id: ${{ steps.start.outputs.deployment_id }}
+          env_url: http://zkm.tw/
