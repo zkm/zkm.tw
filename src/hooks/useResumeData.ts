@@ -28,6 +28,7 @@ export interface ResumeData {
   };
   workExperience: Array<{
     company: string;
+    companyUrl?: string;
     position: string;
     period: string;
     responsibilities: string[];

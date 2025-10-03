@@ -211,7 +211,7 @@ const Resume: React.FC = () => {
 
   // Pull name/title/site from JSON (safe); keep phone/email via reveal components
   const name = resumeData?.personalInfo?.name ?? 'Zach Schneider';
-  const title = resumeData?.personalInfo?.title ?? 'Web Developer Advisor';
+  const title = resumeData?.personalInfo?.title ?? 'Cosmic Code Crusader';
   const website = resumeData?.personalInfo?.website ?? 'https://www.zachschneider.com';
 
   // ✅ useMemo hooks moved above any conditional return, using safe fallbacks
@@ -607,7 +607,21 @@ const Resume: React.FC = () => {
                 <div key={idx}>
                   <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
                     <Users className="text-blue-400" aria-hidden="true" /> {exp.position}
-                    <span className="text-gray-900 font-normal">@ {exp.company}</span>
+                    <span className="text-gray-900 font-normal">
+                      @{' '}
+                      {exp.companyUrl ? (
+                        <a
+                          href={exp.companyUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-600 hover:text-blue-800 underline"
+                        >
+                          {exp.company}
+                        </a>
+                      ) : (
+                        exp.company
+                      )}
+                    </span>
                   </h3>
                   <p className="text-gray-900 mb-1">{exp.period}</p>
                   <ul className="list-disc list-inside text-gray-900 mb-2">

@@ -181,7 +181,7 @@ const Portfolio: React.FC = () => {
               onClick={() => setShowResume(true)}
               whileHover={{ scale: 1.05, y: -3 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-white text-slate-800 px-8 py-3 rounded-xl font-semibold flex items-center gap-2 mx-auto shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-gray-100"
+              className="bg-white text-slate-800 px-8 py-3 rounded-xl font-semibold flex items-center gap-2 mx-auto shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-gray-100 cursor-pointer"
             >
               <FileText size={20} />
               View Resume
