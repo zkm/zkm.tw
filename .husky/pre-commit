@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Run tests before committing; abort commit if tests fail
+command -v yarn >/dev/null 2>&1 || { echo >&2 "yarn is required but not installed."; exit 1; }
+
+yarn test

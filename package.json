@@ -20,8 +20,9 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "clean": "rm -rf dist",
-    "prebuild": "yarn clean",
-    "predeploy": "yarn test && yarn build",
+    "prebuild": "yarn test && yarn clean",
+    "predeploy": "yarn build",
+    "prepare": "husky install",
     "deploy": "node scripts/deploy.js",
     "docker:dev": "docker-compose up",
     "docker:prod": "docker-compose up web-prod"
@@ -31,8 +32,7 @@
     "chart.js": "^4.5.0",
     "framer-motion": "^12.23.24",
     "jspdf": "^3.0.1",
-    "lucide-react": "0.545.0",
-    "node": "^24.8.0",
+    "lucide-react": "0.546.0",
     "react": "^19.1.1",
     "react-chartjs-2": "^5.3.0",
     "react-dom": "^19.1.1",
@@ -42,7 +42,12 @@
     "styled-system": "^5.1.5",
     "web-vitals": "^5.1.0"
   },
+  "engines": {
+    "node": ">=24 <26"
+  },
+  "packageManager": "yarn@1.22.22",
   "devDependencies": {
+    "husky": "^8.0.3",
     "@eslint/js": "^9.32.0",
     "@tailwindcss/postcss": "^4.1.11",
     "@tailwindcss/typography": "^0.5.16",
