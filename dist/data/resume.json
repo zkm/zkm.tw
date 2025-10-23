@@ -1,0 +1,315 @@
+{
+  "personalInfo": {
+    "name": "Zach Schneider",
+    "title": "Cosmic Code Crusader",
+    "phone": "(773) 980-9599",
+    "email": "me@zachschneider.com",
+    "website": "https://www.zachschneider.com",
+    "portfolio": "https://zkm.tw"
+  },
+  "summary": "Experienced Senior Web Developer with 15+ years of expertise in modern frontend technologies, team leadership, and technical architecture. Proven track record of successfully migrating legacy systems to modern frameworks, leading cross-functional teams, and delivering high-impact web solutions. Passionate about mentoring developers and implementing best practices that drive business results.",
+  "technicalSkills": {
+    "languages": {
+      "HTML": ["HTML5", "Web Components"],
+      "CSS": ["CSS3", "SASS", "Tailwind CSS", "PostCSS"],
+      "JavaScript": ["ES2024", "TypeScript", "React", "Node.js", "Next.js", "Vite"],
+      "Other": ["Python", "Go", "PHP", "Ruby", "Java"]
+    },
+    "frontend": [
+      "HTML5",
+      "CSS3",
+      "JavaScript",
+      "TypeScript",
+      "React 18+",
+      "Next.js",
+      "jQuery",
+      "Angular",
+      "Backbone.js",
+      "SASS",
+      "Tailwind CSS",
+      "Vite"
+    ],
+    "backend": [
+      "Node.js",
+      "Express.js",
+      "Python",
+      "Go",
+      "PHP",
+      "Ruby",
+      "Java",
+      "Ruby on Rails",
+      "WordPress",
+      "Drupal",
+      "AWS",
+      "Azure",
+      "DigitalOcean",
+      "Vercel",
+      "REST APIs",
+      "GraphQL",
+      "AWS SDK",
+      "Lambda",
+      "S3",
+      "Cognito"
+    ],
+    "infrastructure": [
+      "MongoDB",
+      "MySQL",
+      "PostgreSQL",
+      "Redis",
+      "Git",
+      "GitLab",
+      "Docker",
+      "GitHub Actions",
+      "ESLint",
+      "Jenkins",
+      "Kubernetes",
+      "Terraform",
+      "Agile",
+      "SCRUM",
+      "CI/CD",
+      "DevOps"
+    ],
+    "security": [
+      "OWASP",
+      "HIPAA Compliance",
+      "508/WCAG Accessibility",
+      "MFA",
+      "Duo",
+      "Vitest",
+      "Jest",
+      "Cypress",
+      "React Testing Library"
+    ]
+  },
+  "workExperience": [
+    {
+      "company": "GDIT",
+      "companyUrl": "https://www.gdit.com/",
+      "position": "Principal Web Designer/Developer",
+      "period": "Jan 2023 - Present",
+      "responsibilities": [
+        "Develop and maintain JSP pages for a secure, Java-based government web application, ensuring optimized performance, dynamic content delivery, and 508/WCAG accessibility compliance.",
+        "Design and build interactive AI demos using Vite, React, TypeScript, Tailwind CSS, and AWS services (Cognito, Lambda, S3, AWS SDK) to showcase advanced machine learning capabilities.",
+        "Implement secure authentication workflows including MFA, Duo, and OWASP-compliant practices to protect sensitive data and meet federal security requirements.",
+        "Automate workflows and improve productivity by creating and maintaining Ruby, Python, and Bash scripts for development, deployment, and data processing tasks.",
+        "Manage and enhance Drupal-based website, delivering new features, resolving technical issues, and ensuring high performance and accessibility."
+      ]
+    },
+    {
+      "company": "EON Clinics",
+      "companyUrl": "https://web.archive.org/web/20220309192209/https://www.eonclinics.com/",
+      "position": "Senior Web Developer",
+      "period": "May 2020 - Aug 2022",
+      "responsibilities": [
+        "Developed web applications for aesthetic medical practice management and patient scheduling",
+        "Built responsive patient portal interfaces for cosmetic surgery consultations and bookings",
+        "Implemented HIPAA-compliant web solutions for medical data handling and patient privacy",
+        "Created marketing websites and landing pages for multiple clinic locations",
+        "Collaborated with medical staff to digitize patient intake and consultation processes"
+      ]
+    },
+    {
+      "company": "Blick Art Materials",
+      "companyUrl": "https://www.dickblick.com/",
+      "position": "React Developer",
+      "period": "Apr 2019 - Mar 2020",
+      "responsibilities": [
+        "Modernized e-commerce platform for one of America's largest art supply retailers",
+        "Successfully migrated legacy .NET DNN codebase to modern React and Next.js architecture",
+        "Enhanced product catalog and shopping cart functionality for art supplies and materials",
+        "Implemented accessibility standards to serve diverse creative community needs",
+        "Optimized performance for high-traffic periods during back-to-school seasons"
+      ]
+    },
+    {
+      "company": "NCSA",
+      "companyUrl": "https://www.ncsasports.org/",
+      "position": "Senior Front-End Engineer",
+      "period": "Apr 2016 - Dec 2018",
+      "responsibilities": [
+        "Developed high-performance front-end applications for sports recruiting platform",
+        "Built responsive web interfaces for athlete profiles and college recruitment tools",
+        "Implemented user-friendly dashboards for coaches, athletes, and college recruiters",
+        "Collaborated with product teams to enhance the recruiting experience for student-athletes",
+        "Optimized platform performance to handle high-volume traffic during recruiting seasons"
+      ]
+    },
+    {
+      "company": "FCB Chicago",
+      "companyUrl": "https://www.fcb.com/",
+      "position": "Freelance Web Developer",
+      "period": "Mar 2016 - Apr 2016",
+      "responsibilities": [
+        "Developed interactive web applications for global advertising campaigns at FCB",
+        "Created single page React.js applications for major brand marketing initiatives",
+        "Collaborated with creative directors and account teams on digital advertising solutions",
+        "Delivered high-performance web experiences under tight campaign deadlines"
+      ]
+    },
+    {
+      "company": "Productive Edge",
+      "companyUrl": "https://www.productiveedge.com/",
+      "position": "Senior Front-End Developer",
+      "period": "Jul 2014 - Dec 2015",
+      "responsibilities": [
+        "Built enterprise web applications and digital transformation solutions for Fortune 500 clients",
+        "Designed and developed interactive kiosk applications using Backbone.js and .NET",
+        "Implemented scalable front-end architectures for high-traffic business applications",
+        "Led technical mentorship programs and established development best practices",
+        "Contributed to company culture initiatives and GitHub workflow standardization"
+      ],
+      "notableProjects": [
+        {
+          "name": "Humana EasyPrice",
+          "period": "Jun 2014 - Dec 2014",
+          "description": "Developed healthcare pricing transparency application for Humana insurance customers. Built interactive web platform allowing users to compare medical procedure costs and make informed healthcare decisions.",
+          "technologies": ["JavaScript", "HTML5", "CSS3", "Backbone.js", ".NET"],
+          "impact": "Enabled healthcare price transparency for Humana customers, improving informed decision-making for medical procedures and healthcare costs."
+        }
+      ]
+    },
+    {
+      "company": "Zócalo Group",
+      "companyUrl": "https://web.archive.org/web/20140122203230/https://zocalogroup.com/",
+      "position": "Web/Interactive Developer",
+      "period": "Jan 2012 - May 2014",
+      "responsibilities": [
+        "Developed interactive web applications for market research and consumer insights projects",
+        "Built internal tools using AngularJS to automate research data collection and analysis",
+        "Created custom survey platforms and data visualization tools for client research",
+        "Introduced and implemented version control systems using GitHub for research team workflows",
+        "Developed applications utilizing JavaScript, PHP, and Angular for market research APIs",
+        "Created HAML and SASS files for Rails application called FanRally"
+      ],
+      "honorsAndAwards": [
+        {
+          "award": "Golden Pixie Award",
+          "issuer": "Pixie Awards (American Pixel Academy)",
+          "date": "Jan 2014",
+          "description": "Received prestigious Golden Pixie Award for interactive animation work on fruitfriends.com project. Recognized for excellence in web animation and interactive design within the digital marketing and web development industry.",
+          "source": "https://web.archive.org/web/20150108141008/http://www.pixieawards.com/previous-winners/5th-annual-award-winners/"
+        }
+      ]
+    },
+    {
+      "company": "Sandbox",
+      "companyUrl": "https://www.sandboxdev.com/",
+      "position": "WordPress Developer",
+      "period": "Apr 2011 - Nov 2012",
+      "responsibilities": [
+        "Developed custom WordPress solutions for creative agency and startup clients",
+        "Created responsive WordPress themes and custom functionality for diverse client needs",
+        "Built content management systems for creative portfolios and business websites",
+        "Implemented e-commerce solutions and custom integrations for small to medium businesses",
+        "Optimized website performance and user experience for creative industry clients"
+      ]
+    },
+    {
+      "company": "Band Digital, Inc.",
+      "companyUrl": "https://web.archive.org/web/20110726135753/http://www.banddigital.com/",
+      "position": "Interactive Developer",
+      "period": "Jun 2011 - Dec 2011",
+      "responsibilities": [
+        "Developed interactive marketing experiences for major consumer brands",
+        "Built landing pages and promotional websites using .NET for enterprise clients like SC Johnson",
+        "Contributed to the Harley Davidson HD1 bike builder configurator (Flex-based app with Ruby backend)",
+        "Created engaging user interfaces for automotive and consumer goods marketing campaigns",
+        "Worked with GIT and SVN in agile environment with daily stand-ups and client collaboration"
+      ]
+    },
+    {
+      "company": "Sears Holdings Corporation",
+      "companyUrl": "https://www.sears.com/",
+      "position": "Front-End Developer Contractor",
+      "period": "Sep 2010 - Feb 2011",
+      "responsibilities": [
+        "Developed promotional web content for major retail e-commerce platforms (Sears.com, Kmart.com, myGofer.com)",
+        "Created interactive marketing campaigns and seasonal promotional landing pages",
+        "Hand-coded custom jQuery carousels, product sliders, and interactive shopping elements",
+        "Enhanced user experience across multiple retail brands serving millions of customers",
+        "Implemented responsive design solutions for emerging mobile commerce trends"
+      ]
+    },
+    {
+      "company": "GyroHSR",
+      "companyUrl": "https://web.archive.org/web/20101130141550/https://gyrohsr.com/",
+      "position": "Web Developer Contractor",
+      "period": "Aug 2010 - Sep 2010",
+      "responsibilities": [
+        "Provided specialized HTML and CSS development for healthcare marketing campaigns",
+        "Created responsive web solutions for pharmaceutical and medical device clients",
+        "Delivered rapid prototypes and production-ready marketing websites",
+        "Collaborated with account teams on healthcare industry advertising initiatives"
+      ]
+    },
+    {
+      "company": "Sandstorm Design",
+      "companyUrl": "https://www.sandstormdesign.com/",
+      "position": "Web Developer",
+      "period": "Jun 2009 - Jun 2010",
+      "responsibilities": [
+        "Developed comprehensive web solutions for design agency clients using full-stack technologies",
+        "Built dynamic websites using HTML (XHTML), CSS, JavaScript, Ajax, jQuery, PHP, and ColdFusion",
+        "Created interactive multimedia experiences combining web development with Flash animation and video editing",
+        "Implemented complex database-driven applications with MySQL backend systems",
+        "Developed custom content management solutions and progressive web forms without plugin dependencies",
+        "Handled complete project lifecycle from server setup and hosting to custom WordPress development",
+        "Created innovative ColdFusion data grids and dynamic image slideshows for client presentations",
+        "Integrated Web Services (WSDL) using ColdFusion for third-party API connections"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Westwood College",
+      "degree": "Bachelor of Science",
+      "field": "Web Design and Multimedia",
+      "period": "2002-2005",
+      "description": "Career-focused degree program from Westwood College (founded 1953, formerly Denver Institute of Technology). Specialized curriculum designed with industry leaders in high-demand technical fields including Computer & Information Technology, Design, and Digital Media. Comprehensive hands-on training covering HTML, CSS, JavaScript, Flash, graphic design, multimedia development, and emerging web technologies. Part of Alta Colleges system with 17 campuses nationwide, emphasizing real-world applications and industry-relevant skills for immediate career readiness."
+    }
+  ],
+  "activitiesAndVolunteer": [
+    {
+      "organization": "Out Our Front Door",
+      "role": "Vice President / Field Guide",
+      "period": "Jan 2018 - Apr 2019",
+      "description": "Served in executive leadership role for environmental education organization, then transitioned to field work providing exploratory adventures by immersing and educating participants in the history, culture, and uniquely beautiful natural habitats of the Lower Lake Michigan Basin Area. Led field experiences connecting urban communities with environmental education and outdoor recreation opportunities."
+    },
+    {
+      "organization": "Learnapalooza Chicago",
+      "role": "Co-Founder/Organizer",
+      "period": "2016 - 2018",
+      "description": "Co-founded and organized Learnapalooza Chicago, a free, day-long neighborhood learning festival focused on skill-sharing and community-driven education. Led technology initiatives for grassroots workshops where neighbors taught neighbors in accessible local spaces, fostering lifelong learning and community engagement across Chicago."
+    },
+    {
+      "organization": "We All Code (formerly CoderDojoChi)",
+      "role": "Volunteer Mentor",
+      "period": "Dec 2014 - Mar 2017",
+      "description": "Mentored youth ages 7-17 in computer programming and web development. Helped teach HTML, CSS, JavaScript, and Python to underrepresented students in Chicago, supporting diversity and inclusion in technology education."
+    },
+    {
+      "organization": "Starter League (formerly Code Academy Chicago)",
+      "role": "Mentor",
+      "description": "Provided mentorship for intensive web development and design bootcamp students. Guided career-changing adults through full-stack development curriculum including Ruby on Rails, JavaScript, and modern web technologies."
+    },
+    {
+      "organization": "Pumping Station: One",
+      "role": "Member/Teacher",
+      "period": "Nov 2009 - Jan 2011",
+      "description": "Active member of Chicago's premier hackerspace and makerspace community. Taught workshops on web development and contributed to collaborative technology projects in a creative, hands-on learning environment.",
+      "notableProjects": [
+        {
+          "name": "Community Technology Projects",
+          "description": "Contributed to various collaborative technology initiatives within Chicago's hackerspace community, focusing on educational workshops and skill-sharing in web development and maker technologies.",
+          "technologies": ["Web Development", "Community Education", "Maker Technologies"],
+          "impact": "Fostered technology education and community collaboration within Chicago's maker movement, contributing to the growth of local tech skills and innovation."
+        }
+      ]
+    },
+    {
+      "organization": "Chicago Marathon and Shamrock Shuffle",
+      "role": "Beer Tent Coordinator",
+      "description": "Organized post-race hospitality coordination for major Chicago running events, demonstrating community leadership and event management skills."
+    }
+  ]
+}
