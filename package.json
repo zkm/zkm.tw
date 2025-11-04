@@ -45,7 +45,7 @@
   "engines": {
     "node": ">=24 <26"
   },
-  "packageManager": "yarn@1.22.22",
+  "packageManager": "yarn@4.10.3",
   "devDependencies": {
     "@eslint/js": "^9.32.0",
     "@tailwindcss/postcss": "^4.1.11",
