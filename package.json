@@ -12,6 +12,8 @@
     "preview": "vite preview",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "verify": "yarn lint && yarn typecheck && yarn test",
+    "fix": "yarn lint:fix && yarn format",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
@@ -20,15 +22,24 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "clean": "rm -rf dist",
-    "prebuild": "yarn test && yarn clean",
+    "prebuild": "yarn verify && yarn clean",
     "predeploy": "yarn build",
     "prepare": "husky",
     "deploy": "node scripts/deploy.js",
-    "docker:dev": "docker-compose up",
-    "docker:prod": "docker-compose up web-prod"
+    "docker:dev": "docker compose up",
+    "docker:prod": "docker compose up web-prod",
+    "docker:down": "docker compose down",
+    "deps:check": "yarn dlx npm-check-updates",
+    "deps:minor": "yarn dlx npm-check-updates -t minor",
+    "deps:apply": "yarn dlx npm-check-updates -u && yarn install",
+    "deps:apply:minor": "yarn dlx npm-check-updates -u -t minor && yarn install",
+    "deps:interactive": "yarn up -i",
+    "deps:interactive:range": "yarn up -i -R",
+    "deps:audit": "yarn npm audit",
+    "ci": "yarn --immutable && yarn verify && yarn build"
   },
   "dependencies": {
-    "axios": "^1.13.1",
+    "axios": "^1.13.2",
     "chart.js": "^4.5.1",
     "framer-motion": "^12.23.24",
     "jspdf": "^3.0.3",
@@ -59,8 +70,8 @@
     "@types/react-dom": "^19.2.2",
     "@types/react-gtm-module": "^2.0.4",
     "@vitejs/plugin-react": "^5.1.0",
-    "@vitest/coverage-v8": "^4.0.6",
-    "@vitest/ui": "^4.0.6",
+    "@vitest/coverage-v8": "^4.0.7",
+    "@vitest/ui": "^4.0.7",
     "autoprefixer": "^10.4.21",
     "eslint": "^9.39.1",
     "eslint-plugin-react": "^7.37.5",
@@ -75,8 +86,8 @@
     "tailwindcss": "^4.1.16",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.46.3",
-    "vite": "^7.1.12",
-    "vitest": "^4.0.6"
+    "vite": "^7.2.1",
+    "vitest": "^4.0.7"
   },
   "browserslist": {
     "production": [
@@ -89,22 +100,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "test": {
-    "globals": true,
-    "environment": "jsdom",
-    "setupFiles": [
-      "./src/test-setup.ts"
-    ],
-    "coverage": {
-      "exclude": [
-        "postcss.config.js",
-        "tailwind.config.js",
-        "scripts/**",
-        "src/main.tsx",
-        "src/index.tsx",
-        "**/*.d.ts"
-      ]
-    }
   }
 }
