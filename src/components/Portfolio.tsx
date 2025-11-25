@@ -61,9 +61,7 @@ const FileText: React.FC<IconProps> = ({ size = 24, className, ...rest }) => (
 const MastodonIcon: React.FC<ImageIconProps> = (props) => (
   <ImageIcon src={iconMastodon} alt="Mastodon" {...props} />
 );
-const XIcon: React.FC<ImageIconProps> = (props) => (
-  <ImageIcon src={iconX} alt="X" {...props} />
-);
+const XIcon: React.FC<ImageIconProps> = (props) => <ImageIcon src={iconX} alt="X" {...props} />;
 const StackOverflowIcon: React.FC<ImageIconProps> = (props) => (
   <ImageIcon src={iconStackOverflow} alt="Stack Overflow" {...props} />
 );
@@ -94,9 +92,7 @@ const Portfolio: React.FC = () => {
       >
         <motion.div
           animate={prefersReducedMotion ? {} : { rotate: 360 }}
-          transition={
-            prefersReducedMotion ? {} : { duration: 1, repeat: Infinity, ease: 'linear' }
-          }
+          transition={prefersReducedMotion ? {} : { duration: 1, repeat: Infinity, ease: 'linear' }}
           className="w-8 h-8 border-2 border-white border-t-transparent rounded-full"
           aria-label="Loading"
           role="status"

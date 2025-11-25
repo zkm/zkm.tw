@@ -9,11 +9,7 @@ export default tseslint.config([
   globalIgnores(['dist', '.yarn']),
   {
     files: ['**/*.{ts,tsx}'],
-    extends: [
-      js.configs.recommended,
-      tseslint.configs.recommended,
-      reactRefresh.configs.vite,
-    ],
+    extends: [js.configs.recommended, tseslint.configs.recommended, reactRefresh.configs.vite],
     plugins: {
       'react-hooks': reactHooks,
     },

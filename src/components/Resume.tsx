@@ -34,7 +34,7 @@ const base64Decode = (str: string) => {
   let output = '';
   str = String(str).replace(/=+$/, '');
   if (str.length % 4 === 1) throw new Error('Invalid base64');
-  for (let bc = 0, bs = 0, buffer, i = 0; (buffer = str.charAt(i++));) {
+  for (let bc = 0, bs = 0, buffer, i = 0; (buffer = str.charAt(i++)); ) {
     const idx = chars.indexOf(buffer);
     if (~idx) {
       bs = bc % 4 ? bs * 64 + idx : idx;
@@ -334,8 +334,9 @@ const Resume: React.FC = () => {
           role="region"
           aria-labelledby={headerId}
           aria-describedby={descriptionId}
-          className={`transition-all duration-300 overflow-hidden ${open ? 'max-h-[5000px] opacity-100 mt-4 mb-8' : 'max-h-0 opacity-0'
-            }`}
+          className={`transition-all duration-300 overflow-hidden ${
+            open ? 'max-h-[5000px] opacity-100 mt-4 mb-8' : 'max-h-0 opacity-0'
+          }`}
         >
           <div
             id={descriptionId}
