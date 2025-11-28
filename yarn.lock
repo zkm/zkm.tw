@@ -3518,14 +3518,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"happy-dom@npm:^20.0.10":
-  version: 20.0.10
-  resolution: "happy-dom@npm:20.0.10"
+"happy-dom@npm:^20.0.11":
+  version: 20.0.11
+  resolution: "happy-dom@npm:20.0.11"
   dependencies:
     "@types/node": "npm:^20.0.0"
     "@types/whatwg-mimetype": "npm:^3.0.2"
     whatwg-mimetype: "npm:^3.0.0"
-  checksum: 10c0/3e05425f3db943885b1d2235d968c8aab08bd32cb0d21bc1c8006db604445f5f6c1364d19b3763395fd748193dc00efd40695e6711ab15e3b9578791c5ce4207
+  checksum: 10c0/818c44630fdb73258d12932646ab966190953820e5d8d032bc6ef51d00d6400097a91d28e212483216898c87d645e1728ae577951256ad989f75da6f9c1f8792
   languageName: node
   linkType: hard
 
@@ -5422,12 +5422,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^3.7.0":
-  version: 3.7.0
-  resolution: "prettier@npm:3.7.0"
+"prettier@npm:^3.7.1":
+  version: 3.7.1
+  resolution: "prettier@npm:3.7.1"
   bin:
     prettier: bin/prettier.cjs
-  checksum: 10c0/ef2ca136ae69d07248b3cbbe199b0862bec3b1f84c94192dd4df572649df1ebb2281f8513269fc328a0f1265851dc564af5723c6bd7a8c0559451aa560bac4d5
+  checksum: 10c0/a6610043ee0a64a3251a948bf82fad3e59d984a8e8dea206400cfa190585417e3343b32c1f6ae7d8f40798a9b4bd91affc08fa7795dd99a9dec5c9bccdf31500
   languageName: node
   linkType: hard
 
@@ -7156,13 +7156,13 @@ __metadata:
     eslint-plugin-react-refresh: "npm:^0.4.24"
     framer-motion: "npm:^12.23.24"
     globals: "npm:^16.5.0"
-    happy-dom: "npm:^20.0.10"
+    happy-dom: "npm:^20.0.11"
     husky: "npm:^9.1.7"
     jsdom: "npm:^27.2.0"
     jspdf: "npm:^3.0.4"
     lucide-react: "npm:^0.555.0"
     postcss: "npm:^8.5.6"
-    prettier: "npm:^3.7.0"
+    prettier: "npm:^3.7.1"
     react: "npm:^19.2.0"
     react-chartjs-2: "npm:^5.3.1"
     react-dom: "npm:^19.2.0"
