@@ -4,7 +4,9 @@ import Portfolio from '../components/Portfolio';
 import { useProfileData } from '../hooks/useProfileData';
 
 // Mock the useProfileData hook
-vi.mock('../hooks/useProfileData');
+vi.mock('../hooks/useProfileData', () => ({
+  useProfileData: vi.fn(),
+}));
 
 // framer-motion is globally mocked in test-setup.ts
 

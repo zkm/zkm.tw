@@ -4,7 +4,9 @@ import App from '../App';
 import { useProfileData } from '../hooks/useProfileData';
 
 // Mock the data hook to prevent async state updates (avoids act warnings)
-vi.mock('../hooks/useProfileData');
+vi.mock('../hooks/useProfileData', () => ({
+  useProfileData: vi.fn(),
+}));
 
 const mockProfileData = {
   profile: {
