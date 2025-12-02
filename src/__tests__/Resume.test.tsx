@@ -2,7 +2,10 @@ import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import Resume from '../components/Resume';
 import { useResumeData } from '../hooks/useResumeData';
-vi.mock('../hooks/useResumeData');
+
+vi.mock('../hooks/useResumeData', () => ({
+  useResumeData: vi.fn(),
+}));
 
 // Mock the Chart.js lazy import
 vi.mock('react-chartjs-2', () => ({
