@@ -12,7 +12,7 @@
     "preview": "vite preview",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "verify": "bun run lint && bun run typecheck && bun test",
+    "verify": "bun run lint && bun run typecheck && bun run test",
     "fix": "bun run lint:fix && bun run format",
     "test": "vitest run",
     "test:watch": "vitest",
