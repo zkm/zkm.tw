@@ -1458,7 +1458,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^24.10.1":
+"@types/node@npm:^24.10.2":
   version: 24.10.2
   resolution: "@types/node@npm:24.10.2"
   dependencies:
@@ -1683,7 +1683,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitejs/plugin-react@npm:^5.1.1":
+"@vitejs/plugin-react@npm:^5.1.2":
   version: 5.1.2
   resolution: "@vitejs/plugin-react@npm:5.1.2"
   dependencies:
@@ -3256,9 +3256,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framer-motion@npm:^12.23.25":
-  version: 12.23.25
-  resolution: "framer-motion@npm:12.23.25"
+"framer-motion@npm:^12.23.26":
+  version: 12.23.26
+  resolution: "framer-motion@npm:12.23.26"
   dependencies:
     motion-dom: "npm:^12.23.23"
     motion-utils: "npm:^12.23.6"
@@ -3274,7 +3274,7 @@ __metadata:
       optional: true
     react-dom:
       optional: true
-  checksum: 10c0/cfcc2da1f3ffe50abe6f657e08b61912acbafffc0a0652d2518c1928e1e23a01a580a2e7feeb9234d7c8028e573a9896519b38fa0f570390b2e4624bafdf4063
+  checksum: 10c0/7dbbc4a392b969804e04a056e3d89a55bf31572dc7f6cd79050b90616fbb84a1762e4ac4e2537c735d347bbf4ceebea126f5c090234149b12cffa3ea6c518a34
   languageName: node
   linkType: hard
 
@@ -4091,7 +4091,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsdom@npm:^27.2.0":
+"jsdom@npm:^27.3.0":
   version: 27.3.0
   resolution: "jsdom@npm:27.3.0"
   dependencies:
@@ -4388,12 +4388,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lucide-react@npm:^0.556.0":
-  version: 0.556.0
-  resolution: "lucide-react@npm:0.556.0"
+"lucide-react@npm:^0.559.0":
+  version: 0.559.0
+  resolution: "lucide-react@npm:0.559.0"
   peerDependencies:
     react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
-  checksum: 10c0/5c73bd317b2cd7d220082d1cc6f78c864819652be87a84c976f2b08aae0bf257b0f066f86f5d84c2cb838ba8fbd2fb1d2b9d84fbe025d9c6cb97dbf1cdbf6bbc
+  checksum: 10c0/0fcab0197949cda2873770c29a8374ca237133555b9ae8cb3987892681b10511728f2ee558eeb09a05cfbe9bef824e2382be7c7d68facacb243e082ad2d6643d
   languageName: node
   linkType: hard
 
@@ -6375,7 +6375,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript-eslint@npm:^8.48.1":
+"typescript-eslint@npm:^8.49.0":
   version: 8.49.0
   resolution: "typescript-eslint@npm:8.49.0"
   dependencies:
@@ -6576,7 +6576,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^6.0.0 || ^7.0.0, vite@npm:^7.2.6":
+"vite@npm:^6.0.0 || ^7.0.0, vite@npm:^7.2.7":
   version: 7.2.7
   resolution: "vite@npm:7.2.7"
   dependencies:
@@ -6916,11 +6916,11 @@ __metadata:
     "@testing-library/jest-dom": "npm:^6.9.1"
     "@testing-library/react": "npm:^16.3.0"
     "@testing-library/user-event": "npm:^14.6.1"
-    "@types/node": "npm:^24.10.1"
+    "@types/node": "npm:^24.10.2"
     "@types/react": "npm:^19.2.7"
     "@types/react-dom": "npm:^19.2.3"
     "@types/react-gtm-module": "npm:^2.0.4"
-    "@vitejs/plugin-react": "npm:^5.1.1"
+    "@vitejs/plugin-react": "npm:^5.1.2"
     "@vitest/coverage-v8": "npm:^4.0.15"
     "@vitest/ui": "npm:^4.0.15"
     autoprefixer: "npm:^10.4.22"
@@ -6930,13 +6930,13 @@ __metadata:
     eslint-plugin-react: "npm:^7.37.5"
     eslint-plugin-react-hooks: "npm:^7.0.1"
     eslint-plugin-react-refresh: "npm:^0.4.24"
-    framer-motion: "npm:^12.23.25"
+    framer-motion: "npm:^12.23.26"
     globals: "npm:^16.5.0"
     happy-dom: "npm:^20.0.11"
     husky: "npm:^9.1.7"
-    jsdom: "npm:^27.2.0"
+    jsdom: "npm:^27.3.0"
     jspdf: "npm:^3.0.4"
-    lucide-react: "npm:^0.556.0"
+    lucide-react: "npm:^0.559.0"
     postcss: "npm:^8.5.6"
     prettier: "npm:^3.7.4"
     react: "npm:^19.2.1"
@@ -6948,8 +6948,8 @@ __metadata:
     styled-system: "npm:^5.1.5"
     tailwindcss: "npm:^4.1.17"
     typescript: "npm:^5.9.3"
-    typescript-eslint: "npm:^8.48.1"
-    vite: "npm:^7.2.6"
+    typescript-eslint: "npm:^8.49.0"
+    vite: "npm:^7.2.7"
     vitest: "npm:^4.0.15"
     web-vitals: "npm:^5.1.0"
   languageName: unknown
