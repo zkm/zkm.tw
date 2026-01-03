@@ -275,7 +275,7 @@ const Portfolio: React.FC = () => {
           transition={prefersReducedMotion ? {} : { delay: 1.2, duration: 0.6 }}
           className="text-gray-100 text-sm bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2 border border-white/20"
         >
-          © 2025 Zach Schneider, All rights reserved
+          © {new Date().getFullYear()} Zach Schneider, All rights reserved
         </motion.div>
       </motion.div>
     </div>
