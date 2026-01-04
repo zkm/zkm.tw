@@ -42,7 +42,7 @@
     "axios": "^1.13.2",
     "chart.js": "^4.5.1",
     "framer-motion": "^12.23.26",
-    "jspdf": "^3.0.4",
+    "jspdf": "^4.0.0",
     "lucide-react": "^0.562.0",
     "react": "^19.2.3",
     "react-chartjs-2": "^5.3.1",
