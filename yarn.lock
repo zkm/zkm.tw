@@ -3266,9 +3266,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framer-motion@npm:^12.23.26":
-  version: 12.23.26
-  resolution: "framer-motion@npm:12.23.26"
+"framer-motion@npm:^12.23.27":
+  version: 12.23.27
+  resolution: "framer-motion@npm:12.23.27"
   dependencies:
     motion-dom: "npm:^12.23.23"
     motion-utils: "npm:^12.23.6"
@@ -3284,7 +3284,7 @@ __metadata:
       optional: true
     react-dom:
       optional: true
-  checksum: 10c0/7dbbc4a392b969804e04a056e3d89a55bf31572dc7f6cd79050b90616fbb84a1762e4ac4e2537c735d347bbf4ceebea126f5c090234149b12cffa3ea6c518a34
+  checksum: 10c0/1c7fd6c1aa7d0bec9e3dd3387f4e5334abab92fb0811bbfd6cc4dd90a5b88f2eee76189dde94d1772b32b843b630d4f0db181d5bfac2dd51d005ac7cc158dc9c
   languageName: node
   linkType: hard
 
@@ -6924,7 +6924,7 @@ __metadata:
     eslint-plugin-react: "npm:^7.37.5"
     eslint-plugin-react-hooks: "npm:^7.0.1"
     eslint-plugin-react-refresh: "npm:^0.4.26"
-    framer-motion: "npm:^12.23.26"
+    framer-motion: "npm:^12.23.27"
     globals: "npm:^17.0.0"
     happy-dom: "npm:^20.0.11"
     husky: "npm:^9.1.7"
