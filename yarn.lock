@@ -1459,21 +1459,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/node@npm:*, @types/node@npm:^25.0.3":
+  version: 25.0.3
+  resolution: "@types/node@npm:25.0.3"
+  dependencies:
+    undici-types: "npm:~7.16.0"
+  checksum: 10c0/b7568f0d765d9469621615e2bb257c7fd1953d95e9acbdb58dffb6627a2c4150d405a4600aa1ad8a40182a94fe5f903cafd3c0a2f5132814debd0e3bfd61f835
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:^20.0.0":
   version: 20.19.27
   resolution: "@types/node@npm:20.19.27"
   dependencies:
     undici-types: "npm:~6.21.0"
   checksum: 10c0/7599c24d80465c1aa6e29b53581fc20ad8862ff33e6eef31d05c1c706868476ee57319c89b802ea972dd4d64ce86d18020aa5344f851fb59b730ea509a63300f
-  languageName: node
-  linkType: hard
-
-"@types/node@npm:^25.0.3":
-  version: 25.0.3
-  resolution: "@types/node@npm:25.0.3"
-  dependencies:
-    undici-types: "npm:~7.16.0"
-  checksum: 10c0/b7568f0d765d9469621615e2bb257c7fd1953d95e9acbdb58dffb6627a2c4150d405a4600aa1ad8a40182a94fe5f903cafd3c0a2f5132814debd0e3bfd61f835
   languageName: node
   linkType: hard
 
@@ -1548,6 +1548,15 @@ __metadata:
   version: 3.0.2
   resolution: "@types/whatwg-mimetype@npm:3.0.2"
   checksum: 10c0/dad39d1e4abe760a0a963c84bbdbd26b1df0eb68aff83bdf6ecbb50ad781ead777f6906d19a87007790b750f7500a12e5624d31fc6a1529d14bd19b5c3a316d1
+  languageName: node
+  linkType: hard
+
+"@types/ws@npm:^8.18.1":
+  version: 8.18.1
+  resolution: "@types/ws@npm:8.18.1"
+  dependencies:
+    "@types/node": "npm:*"
+  checksum: 10c0/61aff1129143fcc4312f083bc9e9e168aa3026b7dd6e70796276dcfb2c8211c4292603f9c4864fae702f2ed86e4abd4d38aa421831c2fd7f856c931a481afbab
   languageName: node
   linkType: hard
 
@@ -3259,12 +3268,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framer-motion@npm:^12.24.7":
-  version: 12.24.7
-  resolution: "framer-motion@npm:12.24.7"
+"framer-motion@npm:^12.24.11":
+  version: 12.24.11
+  resolution: "framer-motion@npm:12.24.11"
   dependencies:
-    motion-dom: "npm:^12.24.3"
-    motion-utils: "npm:^12.23.28"
+    motion-dom: "npm:^12.24.11"
+    motion-utils: "npm:^12.24.10"
     tslib: "npm:^2.4.0"
   peerDependencies:
     "@emotion/is-prop-valid": "*"
@@ -3277,7 +3286,7 @@ __metadata:
       optional: true
     react-dom:
       optional: true
-  checksum: 10c0/97eb073714639b1dd639aeceefaadb35386205457a4c87a19c6de71cf24c729b422325389f59bd26d2559c272c56f38c01f58c7b26a9b379d7c6c754c9c18cc2
+  checksum: 10c0/fc8e3f87a3cfddefc4abbce5467fae27188ef6d8683cf4bf27e141df3d75b56be21f90c0f56799fdf0e785bde18156d559d80b79229c0f22c20982d8e8b7f8d2
   languageName: node
   linkType: hard
 
@@ -3451,14 +3460,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"happy-dom@npm:^20.0.11":
-  version: 20.0.11
-  resolution: "happy-dom@npm:20.0.11"
+"happy-dom@npm:^20.1.0":
+  version: 20.1.0
+  resolution: "happy-dom@npm:20.1.0"
   dependencies:
     "@types/node": "npm:^20.0.0"
     "@types/whatwg-mimetype": "npm:^3.0.2"
+    "@types/ws": "npm:^8.18.1"
     whatwg-mimetype: "npm:^3.0.0"
-  checksum: 10c0/818c44630fdb73258d12932646ab966190953820e5d8d032bc6ef51d00d6400097a91d28e212483216898c87d645e1728ae577951256ad989f75da6f9c1f8792
+    ws: "npm:^8.18.3"
+  checksum: 10c0/a55b5fe6de845124644bc51184c8e761e75936de50ba5f4093ff844802d2b13f700c71a5e8236cb78c2b23c1368125b98f38e3c99e472b6d6becec7ddb720c58
   languageName: node
   linkType: hard
 
@@ -4954,19 +4965,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"motion-dom@npm:^12.24.3":
-  version: 12.24.3
-  resolution: "motion-dom@npm:12.24.3"
+"motion-dom@npm:^12.24.11":
+  version: 12.24.11
+  resolution: "motion-dom@npm:12.24.11"
   dependencies:
-    motion-utils: "npm:^12.23.28"
-  checksum: 10c0/983a457941a86f42caca60c519d5d3bdad289dad1b81880bf724d0ccbb606b04972db31b71b6594a87963292dcf7b8875106ac414f6b2fa5123aa68c875e8e53
+    motion-utils: "npm:^12.24.10"
+  checksum: 10c0/7389f646e99cf40baed1b9bfe50feb6de13e1851a1fabe2578e526ab5730dedc6a13077e66fcbad8b8b25e1006a10a9d62bbf39e4cf44ad18bb2a4325fbcd8de
   languageName: node
   linkType: hard
 
-"motion-utils@npm:^12.23.28":
-  version: 12.23.28
-  resolution: "motion-utils@npm:12.23.28"
-  checksum: 10c0/3cfd3a25c83322c8d6454dd65ec17ad30a69518577166f0e6bdeefc6cafa3a7a73e29d4804b547b15a5c5c41cd1f5ca2d99c0e61d036a64a00ff33796bc286e1
+"motion-utils@npm:^12.24.10":
+  version: 12.24.10
+  resolution: "motion-utils@npm:12.24.10"
+  checksum: 10c0/b73e2e414480b0b162a5cbc9195856d113b5e7c23a055b1613143176694fdfabe87a6a41c3c2f205549e368ca541b609455344bd774d7d836f09a551562042e2
   languageName: node
   linkType: hard
 
@@ -6572,7 +6583,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^6.0.0 || ^7.0.0, vite@npm:^7.3.0":
+"vite@npm:^6.0.0 || ^7.0.0":
   version: 7.3.0
   resolution: "vite@npm:7.3.0"
   dependencies:
@@ -6624,6 +6635,61 @@ __metadata:
   bin:
     vite: bin/vite.js
   checksum: 10c0/0457c196cdd5761ec351c0f353945430fbad330e615b9eeab729c8ae163334f18acdc1d9cd7d9d673dbf111f07f6e4f0b25d4ac32360e65b4a6df9991046f3ff
+  languageName: node
+  linkType: hard
+
+"vite@npm:^7.3.1":
+  version: 7.3.1
+  resolution: "vite@npm:7.3.1"
+  dependencies:
+    esbuild: "npm:^0.27.0"
+    fdir: "npm:^6.5.0"
+    fsevents: "npm:~2.3.3"
+    picomatch: "npm:^4.0.3"
+    postcss: "npm:^8.5.6"
+    rollup: "npm:^4.43.0"
+    tinyglobby: "npm:^0.2.15"
+  peerDependencies:
+    "@types/node": ^20.19.0 || >=22.12.0
+    jiti: ">=1.21.0"
+    less: ^4.0.0
+    lightningcss: ^1.21.0
+    sass: ^1.70.0
+    sass-embedded: ^1.70.0
+    stylus: ">=0.54.8"
+    sugarss: ^5.0.0
+    terser: ^5.16.0
+    tsx: ^4.8.1
+    yaml: ^2.4.2
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  peerDependenciesMeta:
+    "@types/node":
+      optional: true
+    jiti:
+      optional: true
+    less:
+      optional: true
+    lightningcss:
+      optional: true
+    sass:
+      optional: true
+    sass-embedded:
+      optional: true
+    stylus:
+      optional: true
+    sugarss:
+      optional: true
+    terser:
+      optional: true
+    tsx:
+      optional: true
+    yaml:
+      optional: true
+  bin:
+    vite: bin/vite.js
+  checksum: 10c0/5c7548f5f43a23533e53324304db4ad85f1896b1bfd3ee32ae9b866bac2933782c77b350eb2b52a02c625c8ad1ddd4c000df077419410650c982cd97fde8d014
   languageName: node
   linkType: hard
 
@@ -6917,9 +6983,9 @@ __metadata:
     eslint-plugin-react: "npm:^7.37.5"
     eslint-plugin-react-hooks: "npm:^7.0.1"
     eslint-plugin-react-refresh: "npm:^0.4.26"
-    framer-motion: "npm:^12.24.7"
+    framer-motion: "npm:^12.24.11"
     globals: "npm:^17.0.0"
-    happy-dom: "npm:^20.0.11"
+    happy-dom: "npm:^20.1.0"
     husky: "npm:^9.1.7"
     jsdom: "npm:^27.4.0"
     jspdf: "npm:^4.0.0"
@@ -6936,7 +7002,7 @@ __metadata:
     tailwindcss: "npm:^4.1.18"
     typescript: "npm:^5.9.3"
     typescript-eslint: "npm:^8.52.0"
-    vite: "npm:^7.3.0"
+    vite: "npm:^7.3.1"
     vitest: "npm:^4.0.16"
     web-vitals: "npm:^5.1.0"
   languageName: unknown
