@@ -1477,12 +1477,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^25.0.5":
-  version: 25.0.5
-  resolution: "@types/node@npm:25.0.5"
+"@types/node@npm:^25.0.6":
+  version: 25.0.6
+  resolution: "@types/node@npm:25.0.6"
   dependencies:
     undici-types: "npm:~7.16.0"
-  checksum: 10c0/e92f8e29e17ff2d75f774233cad5b96bf7b253d24979162e1fff85993509a3511afe15a456217881f8e59fd5ff0b0d86067e33f57d599d1939a6d73c4f4806c7
+  checksum: 10c0/4ee3b6b606bc28f6840c04d58769e1e75dd8085149908956c874c85f8f8c890990701bcbe783fc2d14017817861dc07fcf23de6fc2805fe491f84eae717b5705
   languageName: node
   linkType: hard
 
@@ -6104,9 +6104,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"styled-components@npm:^6.3.1":
-  version: 6.3.1
-  resolution: "styled-components@npm:6.3.1"
+"styled-components@npm:^6.3.5":
+  version: 6.3.5
+  resolution: "styled-components@npm:6.3.5"
   dependencies:
     "@emotion/is-prop-valid": "npm:1.4.0"
     "@emotion/unitless": "npm:0.10.0"
@@ -6120,7 +6120,7 @@ __metadata:
   peerDependencies:
     react: ">= 16.8.0"
     react-dom: ">= 16.8.0"
-  checksum: 10c0/479e176050631e95742f427d926e941dbb331b696399a17228eff430664b776505bcdbd288d6a99ea16f68c849d31535c16d8a2c175a48d2d6c2800915f7aa6d
+  checksum: 10c0/0c8c547259f96b321fc90e81e9710a8b89ad78d8d792ed479f843b0f084fd72f2bd3ce468f44f57bb5840f8d66113b0ff9b951488481066275f6f24fe7d10a83
   languageName: node
   linkType: hard
 
@@ -6971,7 +6971,7 @@ __metadata:
     "@testing-library/jest-dom": "npm:^6.9.1"
     "@testing-library/react": "npm:^16.3.1"
     "@testing-library/user-event": "npm:^14.6.1"
-    "@types/node": "npm:^25.0.5"
+    "@types/node": "npm:^25.0.6"
     "@types/react": "npm:^19.2.8"
     "@types/react-dom": "npm:^19.2.3"
     "@types/react-gtm-module": "npm:^2.0.4"
@@ -6999,7 +6999,7 @@ __metadata:
     react-dom: "npm:^19.2.3"
     react-gtm-module: "npm:^2.0.11"
     react-markdown: "npm:^10.1.0"
-    styled-components: "npm:^6.3.1"
+    styled-components: "npm:^6.3.5"
     styled-system: "npm:^5.1.5"
     tailwindcss: "npm:^4.1.18"
     typescript: "npm:^5.9.3"
