@@ -1507,12 +1507,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^19.2.8":
-  version: 19.2.8
-  resolution: "@types/react@npm:19.2.8"
+"@types/react@npm:^19.2.9":
+  version: 19.2.9
+  resolution: "@types/react@npm:19.2.9"
   dependencies:
     csstype: "npm:^3.2.2"
-  checksum: 10c0/832834998c4ee971fca72ecf1eb95dc924ad3931a2112c687a4dae498aabd115c5fa4db09186853e34a646226b0223808c8f867df03d17601168f9cf119448de
+  checksum: 10c0/91c6839edd10ebdab4cd686d2a744e6ae078ed5831a36d48284ae92df0463c89bda1084ffdd2e6445f0716236c2c6ae0828b82f70720727632331695f4581d2a
   languageName: node
   linkType: hard
 
@@ -3274,11 +3274,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framer-motion@npm:^12.27.2":
-  version: 12.27.2
-  resolution: "framer-motion@npm:12.27.2"
+"framer-motion@npm:^12.27.5":
+  version: 12.27.5
+  resolution: "framer-motion@npm:12.27.5"
   dependencies:
-    motion-dom: "npm:^12.27.2"
+    motion-dom: "npm:^12.27.5"
     motion-utils: "npm:^12.27.2"
     tslib: "npm:^2.4.0"
   peerDependencies:
@@ -3292,7 +3292,7 @@ __metadata:
       optional: true
     react-dom:
       optional: true
-  checksum: 10c0/25e5421368a55114490ae89ef778862ce5e287089a0d198ad8bc806b4ecc0268197f67fecff58a939e1a050a648bbfdf53ccec5e1e002312ee5ba191cb4c7dcf
+  checksum: 10c0/6d50127c3b27556f8d4daa34a8762fa7f0172cc66240752dc083ff0ce7ceb0053325d9def3c5bcbab00f664dbbe8d484cdc2ff79ee5f6df0069b4f9ba529dfb9
   languageName: node
   linkType: hard
 
@@ -4961,12 +4961,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"motion-dom@npm:^12.27.2":
-  version: 12.27.2
-  resolution: "motion-dom@npm:12.27.2"
+"motion-dom@npm:^12.27.5":
+  version: 12.27.5
+  resolution: "motion-dom@npm:12.27.5"
   dependencies:
     motion-utils: "npm:^12.27.2"
-  checksum: 10c0/cb641b70b03f05f953effce41cca7eb91199224c56a09c48a46cdf5966a157bc946ad196d837bdc62202f5e3eb1d6eb6439bf268f3a3c36153bac5e015e7dc1b
+  checksum: 10c0/260c5cb7a4d9164559d27d1f6c33d79087017c2bde637cb206c31ef2ed9df21f65a2671666a1d2ee0f057e06f94afb364736af5cfaf14f3362fafea987b5a780
   languageName: node
   linkType: hard
 
@@ -6955,7 +6955,7 @@ __metadata:
     "@testing-library/react": "npm:^16.3.2"
     "@testing-library/user-event": "npm:^14.6.1"
     "@types/node": "npm:^25.0.9"
-    "@types/react": "npm:^19.2.8"
+    "@types/react": "npm:^19.2.9"
     "@types/react-dom": "npm:^19.2.3"
     "@types/react-gtm-module": "npm:^2.0.4"
     "@vitejs/plugin-react": "npm:^5.1.2"
@@ -6968,7 +6968,7 @@ __metadata:
     eslint-plugin-react: "npm:^7.37.5"
     eslint-plugin-react-hooks: "npm:^7.0.1"
     eslint-plugin-react-refresh: "npm:^0.4.26"
-    framer-motion: "npm:^12.27.2"
+    framer-motion: "npm:^12.27.5"
     globals: "npm:^17.0.0"
     happy-dom: "npm:^20.3.4"
     husky: "npm:^9.1.7"
