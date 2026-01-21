@@ -34,51 +34,55 @@ header('🏥 Package Health Check Commands');
 
 console.log('\n📋 Main Commands:\n');
 
-command('health', 
+command(
+  'health',
   'Run comprehensive health check on all packages and dependencies.\n' +
-  '    Checks: security, updates, duplicates, licenses, and more.'
+    '    Checks: security, updates, duplicates, licenses, and more.',
 );
 
-command('health:full',
+command(
+  'health:full',
   'Full health check + security audit + outdated package check.\n' +
-  '    Most thorough scan - recommended before releases.'
+    '    Most thorough scan - recommended before releases.',
 );
 
-command('health:report',
+command(
+  'health:report',
   'Generate visual HTML report and SVG badge from last health check.\n' +
-  '    Creates health-check-report.html for viewing in browser.'
+    '    Creates health-check-report.html for viewing in browser.',
 );
 
 console.log('\n🔍 Dependency Commands:\n');
 
-command('deps:audit',
-  'Security audit for known vulnerabilities.\n' +
-  '    Uses bun audit to scan for CVEs.'
+command(
+  'deps:audit',
+  'Security audit for known vulnerabilities.\n' + '    Uses bun audit to scan for CVEs.',
 );
 
-command('deps:check',
-  'Check for outdated packages.\n' +
-  '    Shows available updates without installing them.'
+command(
+  'deps:check',
+  'Check for outdated packages.\n' + '    Shows available updates without installing them.',
 );
 
-command('deps:minor',
+command(
+  'deps:minor',
   'Check for minor and patch updates only.\n' +
-  '    Safer updates that maintain backward compatibility.'
+    '    Safer updates that maintain backward compatibility.',
 );
 
-command('deps:apply',
-  'Apply all available updates.\n' +
-  '    Updates package.json and installs new versions.'
+command(
+  'deps:apply',
+  'Apply all available updates.\n' + '    Updates package.json and installs new versions.',
 );
 
-command('deps:apply:minor',
-  'Apply only minor and patch updates.\n' +
-  '    Safer automated updates for CI/CD.'
+command(
+  'deps:apply:minor',
+  'Apply only minor and patch updates.\n' + '    Safer automated updates for CI/CD.',
 );
 
-command('deps:interactive',
-  'Interactive dependency update mode.\n' +
-  '    Choose which packages to update manually.'
+command(
+  'deps:interactive',
+  'Interactive dependency update mode.\n' + '    Choose which packages to update manually.',
 );
 
 header('📊 Understanding Output');
@@ -95,7 +99,7 @@ console.log('    Critical issue found - must be fixed.\n');
 
 header('📁 Generated Files');
 
-console.log('\n After running health checks, you\'ll find:\n');
+console.log("\n After running health checks, you'll find:\n");
 
 log('  health-check-report.json', COLORS.cyan);
 console.log('    Detailed machine-readable report with all check results.\n');
@@ -146,7 +150,7 @@ console.log('    Implementation details and customization\n');
 header('💡 Tips');
 
 console.log('\n  1. Run health checks regularly (weekly minimum)');
-console.log('  2. Fix errors immediately - don\'t let them pile up');
+console.log("  2. Fix errors immediately - don't let them pile up");
 console.log('  3. Review warnings during planning meetings');
 console.log('  4. Keep dependencies updated for security');
 console.log('  5. Check the HTML report for trends over time\n');

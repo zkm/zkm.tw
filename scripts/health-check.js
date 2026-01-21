@@ -47,7 +47,7 @@ class HealthCheckScanner {
   addCheck(name, status, details = {}) {
     this.results.checks.push({ name, status, details, timestamp: new Date().toISOString() });
     this.results.summary.total++;
-    
+
     if (status === 'passed') {
       this.results.summary.passed++;
       this.log(`✓ ${name}`, COLORS.green);
@@ -73,20 +73,20 @@ class HealthCheckScanner {
       });
       return { success: true, output };
     } catch (error) {
-      return { 
-        success: false, 
-        error: error.message, 
-        output: error.stdout || error.stderr || '' 
+      return {
+        success: false,
+        error: error.message,
+        output: error.stdout || error.stderr || '',
       };
     }
   }
 
   async checkPackageManager() {
     this.section('Package Manager Check');
-    
+
     const packageJson = JSON.parse(readFileSync('package.json', 'utf8'));
     const packageManager = packageJson.packageManager || 'unknown';
-    
+
     this.addCheck('Package Manager Defined', packageManager !== 'unknown' ? 'passed' : 'warning', {
       message: `Using: ${packageManager}`,
     });
@@ -119,10 +119,10 @@ class HealthCheckScanner {
 
   async checkSecurity() {
     this.section('Security Vulnerability Scan');
-    
+
     // Try bun audit first (since package.json mentions bun)
     let result = this.execCommand('bun audit --json', { silent: true });
-    
+
     if (!result.success) {
       // Fallback to npm audit
       result = this.execCommand('npm audit --json', { silent: true });
@@ -131,17 +131,19 @@ class HealthCheckScanner {
     if (result.success && result.output) {
       try {
         const auditData = JSON.parse(result.output);
-        
+
         // Handle different audit output formats
-        const vulnerabilities = auditData.vulnerabilities || auditData.metadata?.vulnerabilities || {};
+        const vulnerabilities =
+          auditData.vulnerabilities || auditData.metadata?.vulnerabilities || {};
         const summary = auditData.metadata || auditData;
-        
-        const totalVulns = summary.total || 
-                          (vulnerabilities.info || 0) + 
-                          (vulnerabilities.low || 0) + 
-                          (vulnerabilities.moderate || 0) + 
-                          (vulnerabilities.high || 0) + 
-                          (vulnerabilities.critical || 0);
+
+        const totalVulns =
+          summary.total ||
+          (vulnerabilities.info || 0) +
+            (vulnerabilities.low || 0) +
+            (vulnerabilities.moderate || 0) +
+            (vulnerabilities.high || 0) +
+            (vulnerabilities.critical || 0);
 
         if (totalVulns === 0) {
           this.addCheck('Security Vulnerabilities', 'passed', {
@@ -153,7 +155,7 @@ class HealthCheckScanner {
           const moderate = vulnerabilities.moderate || 0;
           const low = vulnerabilities.low || 0;
 
-          const status = (critical > 0 || high > 0) ? 'error' : 'warning';
+          const status = critical > 0 || high > 0 ? 'error' : 'warning';
           this.addCheck('Security Vulnerabilities', status, {
             message: `Found ${totalVulns} vulnerabilities (Critical: ${critical}, High: ${high}, Moderate: ${moderate}, Low: ${low})`,
             critical,
@@ -177,15 +179,15 @@ class HealthCheckScanner {
 
   async checkOutdatedPackages() {
     this.section('Outdated Packages Check');
-    
+
     // Try npm outdated
     const result = this.execCommand('npm outdated --json', { silent: true });
-    
+
     if (result.output) {
       try {
         const outdated = JSON.parse(result.output);
         const outdatedCount = Object.keys(outdated).length;
-        
+
         if (outdatedCount === 0) {
           this.addCheck('Package Updates', 'passed', {
             message: 'All packages are up to date',
@@ -194,11 +196,11 @@ class HealthCheckScanner {
           const majorUpdates = [];
           const minorUpdates = [];
           const patchUpdates = [];
-          
+
           Object.entries(outdated).forEach(([name, info]) => {
             const current = info.current;
             const latest = info.latest;
-            
+
             if (this.isMajorUpdate(current, latest)) {
               majorUpdates.push(name);
             } else if (this.isMinorUpdate(current, latest)) {
@@ -243,15 +245,15 @@ class HealthCheckScanner {
 
   async checkDependencyTree() {
     this.section('Dependency Tree Analysis');
-    
+
     // Check for duplicate dependencies
     const result = this.execCommand('npm ls --json --all', { silent: true });
-    
+
     if (result.output) {
       try {
         const tree = JSON.parse(result.output);
         const duplicates = this.findDuplicateDependencies(tree);
-        
+
         if (duplicates.length === 0) {
           this.addCheck('Duplicate Dependencies', 'passed', {
             message: 'No duplicate dependencies found',
@@ -276,13 +278,13 @@ class HealthCheckScanner {
 
   findDuplicateDependencies(tree, versions = {}) {
     if (!tree.dependencies) return [];
-    
+
     Object.entries(tree.dependencies).forEach(([name, info]) => {
       if (!versions[name]) {
         versions[name] = new Set();
       }
       versions[name].add(info.version);
-      
+
       if (info.dependencies) {
         this.findDuplicateDependencies(info, versions);
       }
@@ -295,16 +297,16 @@ class HealthCheckScanner {
 
   async checkLicenses() {
     this.section('License Compliance Check');
-    
+
     // Read package.json dependencies
     const packageJson = JSON.parse(readFileSync('package.json', 'utf8'));
     const allDeps = {
       ...packageJson.dependencies,
       ...packageJson.devDependencies,
     };
-    
+
     const totalPackages = Object.keys(allDeps).length;
-    
+
     this.addCheck('License Declaration', 'passed', {
       message: `Project License: ${packageJson.license || 'Not specified'}`,
     });
@@ -319,9 +321,9 @@ class HealthCheckScanner {
 
   async checkEngines() {
     this.section('Engine Compatibility Check');
-    
+
     const packageJson = JSON.parse(readFileSync('package.json', 'utf8'));
-    
+
     if (packageJson.engines) {
       this.addCheck('Engine Requirements Defined', 'passed', {
         message: `Node: ${packageJson.engines.node || 'Not specified'}`,
@@ -330,7 +332,7 @@ class HealthCheckScanner {
       // Check current Node version
       const nodeVersion = process.version;
       const requiredNode = packageJson.engines.node;
-      
+
       if (requiredNode) {
         // Simple check - in production you'd want semver comparison
         this.addCheck('Node Version', 'passed', {
@@ -346,19 +348,19 @@ class HealthCheckScanner {
 
   async checkScripts() {
     this.section('NPM Scripts Health Check');
-    
+
     const packageJson = JSON.parse(readFileSync('package.json', 'utf8'));
     const scripts = packageJson.scripts || {};
-    
+
     const essentialScripts = ['build', 'test', 'lint'];
-    const found = essentialScripts.filter(s => scripts[s]);
-    
+    const found = essentialScripts.filter((s) => scripts[s]);
+
     if (found.length === essentialScripts.length) {
       this.addCheck('Essential Scripts', 'passed', {
         message: 'All essential scripts present (build, test, lint)',
       });
     } else {
-      const missing = essentialScripts.filter(s => !scripts[s]);
+      const missing = essentialScripts.filter((s) => !scripts[s]);
       this.addCheck('Essential Scripts', 'warning', {
         message: `Missing scripts: ${missing.join(', ')}`,
       });
@@ -371,7 +373,7 @@ class HealthCheckScanner {
 
   async checkTypeScript() {
     this.section('TypeScript Configuration Check');
-    
+
     if (existsSync('tsconfig.json')) {
       this.addCheck('TypeScript Config', 'passed', {
         message: 'tsconfig.json found',
@@ -380,8 +382,8 @@ class HealthCheckScanner {
       // Check if @types packages are installed
       const packageJson = JSON.parse(readFileSync('package.json', 'utf8'));
       const devDeps = packageJson.devDependencies || {};
-      const typePackages = Object.keys(devDeps).filter(d => d.startsWith('@types/'));
-      
+      const typePackages = Object.keys(devDeps).filter((d) => d.startsWith('@types/'));
+
       this.addCheck('TypeScript Type Definitions', 'passed', {
         message: `${typePackages.length} @types packages installed`,
       });
@@ -394,13 +396,13 @@ class HealthCheckScanner {
 
   async checkTesting() {
     this.section('Testing Infrastructure Check');
-    
+
     const packageJson = JSON.parse(readFileSync('package.json', 'utf8'));
     const allDeps = { ...packageJson.dependencies, ...packageJson.devDependencies };
-    
+
     const testFrameworks = ['vitest', 'jest', 'mocha', 'jasmine', 'ava'];
-    const foundFramework = testFrameworks.find(f => allDeps[f]);
-    
+    const foundFramework = testFrameworks.find((f) => allDeps[f]);
+
     if (foundFramework) {
       this.addCheck('Test Framework', 'passed', {
         message: `Using ${foundFramework}`,
@@ -425,13 +427,13 @@ class HealthCheckScanner {
 
   async checkBuildTools() {
     this.section('Build Tools Check');
-    
+
     const packageJson = JSON.parse(readFileSync('package.json', 'utf8'));
     const allDeps = { ...packageJson.dependencies, ...packageJson.devDependencies };
-    
+
     const buildTools = ['vite', 'webpack', 'rollup', 'parcel', 'esbuild'];
-    const foundTool = buildTools.find(t => allDeps[t]);
-    
+    const foundTool = buildTools.find((t) => allDeps[t]);
+
     if (foundTool) {
       this.addCheck('Build Tool', 'passed', {
         message: `Using ${foundTool}`,
@@ -445,24 +447,22 @@ class HealthCheckScanner {
 
   printSummary() {
     this.section('Health Check Summary');
-    
+
     const { summary } = this.results;
     const passRate = ((summary.passed / summary.total) * 100).toFixed(1);
-    
+
     console.log(`Total Checks: ${summary.total}`);
     this.log(`✓ Passed: ${summary.passed}`, COLORS.green);
     this.log(`⚠ Warnings: ${summary.warnings}`, COLORS.yellow);
     this.log(`✗ Errors: ${summary.errors}`, COLORS.red);
     console.log(`\nPass Rate: ${passRate}%`);
-    
-    const overallStatus = summary.errors === 0 ? 
-      (summary.warnings === 0 ? 'HEALTHY' : 'NEEDS ATTENTION') : 
-      'UNHEALTHY';
-    
-    const statusColor = summary.errors === 0 ? 
-      (summary.warnings === 0 ? COLORS.green : COLORS.yellow) : 
-      COLORS.red;
-    
+
+    const overallStatus =
+      summary.errors === 0 ? (summary.warnings === 0 ? 'HEALTHY' : 'NEEDS ATTENTION') : 'UNHEALTHY';
+
+    const statusColor =
+      summary.errors === 0 ? (summary.warnings === 0 ? COLORS.green : COLORS.yellow) : COLORS.red;
+
     this.log(`\nOverall Status: ${overallStatus}`, COLORS.bright + statusColor);
   }
 
@@ -474,8 +474,8 @@ class HealthCheckScanner {
 
   async run() {
     this.log('\n🏥 Package Health Check Scanner', COLORS.bright + COLORS.magenta);
-    this.log('=' .repeat(60), COLORS.magenta);
-    
+    this.log('='.repeat(60), COLORS.magenta);
+
     await this.checkPackageManager();
     await this.checkSecurity();
     await this.checkOutdatedPackages();
@@ -486,10 +486,10 @@ class HealthCheckScanner {
     await this.checkTypeScript();
     await this.checkTesting();
     await this.checkBuildTools();
-    
+
     this.printSummary();
     await this.saveReport();
-    
+
     // Exit with error code if there are errors
     if (this.results.summary.errors > 0) {
       process.exit(1);
@@ -499,7 +499,7 @@ class HealthCheckScanner {
 
 // Run the health check
 const scanner = new HealthCheckScanner();
-scanner.run().catch(error => {
+scanner.run().catch((error) => {
   console.error('Health check failed:', error);
   process.exit(1);
 });
