@@ -49,3 +49,7 @@ yarn-error.log*
 # Optional: ignore all empty files
 **/.empty
 
+# Health check reports
+health-check-report.json
+health-check-report.html
+health-check-badge.svg

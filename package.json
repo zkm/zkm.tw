@@ -36,6 +36,10 @@
     "deps:interactive": "bun update --interactive",
     "deps:interactive:range": "bun update --interactive",
     "deps:audit": "bun audit",
+    "health": "node scripts/health-check.js",
+    "health:full": "bun run health && bun run deps:audit && bun run deps:check",
+    "health:report": "node scripts/generate-health-report.js",
+    "health:help": "node scripts/health-help.js",
     "ci": "bun install --frozen-lockfile && bun run verify && bun run build"
   },
   "dependencies": {
@@ -55,6 +59,15 @@
   },
   "engines": {
     "node": ">=24 <26"
+  },
+  "resolutions": {
+    "postcss": "^8.5.6",
+    "js-tokens": "^9.0.1",
+    "aria-query": "^5.3.2",
+    "dom-accessibility-api": "^0.6.3",
+    "ansi-styles": "^5.2.0",
+    "react-is": "^17.0.2",
+    "@types/node": "25.0.9"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.2",
@@ -100,5 +113,9 @@
       "last 1 safari version"
     ]
   },
-  "packageManager": "yarn@4.12.0"
+  "packageManager": "yarn@4.12.0",
+  "trustedDependencies": [
+    "core-js",
+    "esbuild"
+  ]
 }
