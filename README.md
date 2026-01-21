@@ -22,41 +22,55 @@ Modern React + TypeScript portfolio powered by Vite, Tailwind CSS, and Framer Mo
 
 ## Getting started
 
-Prereqs: Node 20+, Yarn 1.x.
+Prereqs: Node 24+, Bun 1.x.
 
 Install deps
 
 ```bash
-yarn install
+bun install
 ```
 
 Dev server
 
 ```bash
-yarn dev
+bun dev
 ```
 
 Build
 
 ```bash
-yarn build
+bun run build
 ```
 
 Preview
 
 ```bash
-yarn preview
+bun run preview
 ```
 
 ## Scripts
 
-- lint: eslint .
-- test: vitest run
-- test:watch: vitest
-- test:coverage: vitest run --coverage
-- docker:dev: docker-compose up Vite dev (5173, HMR 24678)
-- docker:prod: docker-compose up web-prod (nginx at 8080)
-- deploy: builds, switches to production branch, rsyncs dist/, commits if changed, pushes, and switches back
+- `dev`: start Vite dev server
+- `build`: build for production
+- `preview`: preview production build
+- `lint` / `lint:fix`: run/fix ESLint
+- `typecheck`: check TypeScript types
+- `format` / `format:check`: format/check code with Prettier
+- `test`: run tests once
+- `test:watch`: run tests in watch mode
+- `test:coverage`: generate coverage report
+- `test:ui`: run tests with UI dashboard
+- `clean`: remove dist/ directory
+- `verify`: lint, typecheck, and test
+- `fix`: lint:fix and format
+- `docker:dev`: run dev with Docker (5173, HMR 24678)
+- `docker:prod`: run production build with nginx (8080)
+- `docker:down`: stop Docker containers
+- `health` / `health:full`: health checks and audit
+- `health:report`: generate health report
+- `deps:check` / `deps:audit`: check/audit dependencies
+- `deploy`: build and deploy to GitHub Pages
+- `ci`: CI workflow (install, verify, build)
 
 ## Docker
 
@@ -69,8 +83,8 @@ yarn preview
 Common
 
 ```bash
-yarn docker:dev   # dev with HMR
-yarn docker:prod  # serve built site on :8080
+bun run docker:dev   # dev with HMR
+bun run docker:prod  # serve built site on :8080
 ```
 
 ## Tests
@@ -82,9 +96,10 @@ yarn docker:prod  # serve built site on :8080
 Run
 
 ```bash
-yarn test
-yarn test:watch
-yarn test:coverage
+bun run test
+bun run test:watch
+bun run test:coverage
+bun run test:ui
 ```
 
 ## Data & components
@@ -103,7 +118,7 @@ GA4 is integrated via gtag in index.html using measurement ID G-2J7SWPGLE4. If y
 Deployment is now handled automatically via GitHub Actions:
 
 ```bash
-yarn deploy
+bun run deploy
 ```
 
 This will:
