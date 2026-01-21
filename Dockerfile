@@ -22,7 +22,7 @@ CMD ["bun", "run", "dev", "--host", "0.0.0.0"]
 FROM base AS build
 WORKDIR /app
 COPY . .
-RUN bun run build
+RUN bun run clean && bunx tsc -b tsconfig.app.json tsconfig.node.json && bunx vite build
 
 # ---------- Production (static) ----------
 FROM nginx:alpine AS prod
