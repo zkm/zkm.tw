@@ -100,7 +100,7 @@ class HealthCheckScanner {
     };
 
     let lockFileFound = false;
-    for (const [file, pm] of Object.entries(lockFiles)) {
+    for (const [file] of Object.entries(lockFiles)) {
       if (existsSync(file)) {
         lockFileFound = true;
         this.addCheck('Lock File Present', 'passed', {
