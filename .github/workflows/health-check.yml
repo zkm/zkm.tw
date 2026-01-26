@@ -26,6 +26,10 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
+      - name: Generate package-lock for dependency review
+        if: github.event_name == 'pull_request'
+        run: npm install --package-lock-only --legacy-peer-deps
+
       - name: Run Health Check
         run: node scripts/health-check.js
         continue-on-error: true
