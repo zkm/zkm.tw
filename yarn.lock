@@ -2080,14 +2080,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.13.3":
-  version: 1.13.3
-  resolution: "axios@npm:1.13.3"
+"axios@npm:^1.13.4":
+  version: 1.13.4
+  resolution: "axios@npm:1.13.4"
   dependencies:
     follow-redirects: "npm:^1.15.6"
     form-data: "npm:^4.0.4"
     proxy-from-env: "npm:^1.1.0"
-  checksum: 10c0/86f0770624d9f14a3f8f8738c8b8f7f7fbb7b0d4ad38757db1de2d71007a0311bc597661c5ff4b4a9ee6350c6956a7282e3a281fcdf7b5b32054e35a8801e2ce
+  checksum: 10c0/474c00b7d71f4de4ad562589dae6b615149df7c2583bbc5ebba96229f3f85bfb0775d23705338df072f12e48d3e85685c065a3cf6855d58968a672d19214c728
   languageName: node
   linkType: hard
 
@@ -3406,10 +3406,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globals@npm:^17.1.0":
-  version: 17.1.0
-  resolution: "globals@npm:17.1.0"
-  checksum: 10c0/4a4a17847676a09f164b8bdce7df105a4f484d6d44586e374087ba9ec7089cbf4c578b8648838dee9917074199c542ce157ea3c07b266f708dfb1652010900c8
+"globals@npm:^17.2.0":
+  version: 17.2.0
+  resolution: "globals@npm:17.2.0"
+  checksum: 10c0/fd25a98b08c1d31082337cbbb5ff1b90b9980e1db69a8621fb942bdb2cdca8aa54d61466742e8bf4910578ea5fa903b8bf83bffd1b2d45551cc614830dba910b
   languageName: node
   linkType: hard
 
@@ -3437,9 +3437,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"happy-dom@npm:^20.3.9":
-  version: 20.3.9
-  resolution: "happy-dom@npm:20.3.9"
+"happy-dom@npm:^20.4.0":
+  version: 20.4.0
+  resolution: "happy-dom@npm:20.4.0"
   dependencies:
     "@types/node": "npm:>=20.0.0"
     "@types/whatwg-mimetype": "npm:^3.0.2"
@@ -3447,7 +3447,7 @@ __metadata:
     entities: "npm:^4.5.0"
     whatwg-mimetype: "npm:^3.0.0"
     ws: "npm:^8.18.3"
-  checksum: 10c0/32d4a540dddc0fc3d42a880b17a64bf2f8cf87927861765224a5536cd7ccd7e068d047e86817d85f61d48013da7fd7ff76feb69e8ac9e50a86e598daa1933daa
+  checksum: 10c0/1f7d13720fce45f0de9649778f11e35d59e38d0229cdec6f30162d86087381a0a64b8efa3d3c755cc76fe95b07df3e1ded19e599e544dda14c8988002211c81b
   languageName: node
   linkType: hard
 
@@ -6869,15 +6869,15 @@ __metadata:
     "@vitest/coverage-v8": "npm:^4.0.18"
     "@vitest/ui": "npm:^4.0.18"
     autoprefixer: "npm:^10.4.23"
-    axios: "npm:^1.13.3"
+    axios: "npm:^1.13.4"
     chart.js: "npm:^4.5.1"
     eslint: "npm:^9.39.2"
     eslint-plugin-react: "npm:^7.37.5"
     eslint-plugin-react-hooks: "npm:^7.0.1"
     eslint-plugin-react-refresh: "npm:^0.4.26"
     framer-motion: "npm:^12.29.2"
-    globals: "npm:^17.1.0"
-    happy-dom: "npm:^20.3.9"
+    globals: "npm:^17.2.0"
+    happy-dom: "npm:^20.4.0"
     husky: "npm:^9.1.7"
     jsdom: "npm:^27.4.0"
     jspdf: "npm:^4.0.0"
