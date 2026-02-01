@@ -2929,12 +2929,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react-refresh@npm:^0.4.26":
-  version: 0.4.26
-  resolution: "eslint-plugin-react-refresh@npm:0.4.26"
+"eslint-plugin-react-refresh@npm:^0.5.0":
+  version: 0.5.0
+  resolution: "eslint-plugin-react-refresh@npm:0.5.0"
   peerDependencies:
-    eslint: ">=8.40"
-  checksum: 10c0/11c2b25b7a7025e621b02970c4cf3815b0b77486027df9f8bb731cc52972156804fd163b0f99404b33e36a3c60cd1a1be8199ba64c66b5276da3173bbb5ab6e7
+    eslint: ">=9"
+  checksum: 10c0/2c561ce28db5ee8aeffa9acd1908da4181198ff7c21dbd544c9ceff22acb7cfac5ccea61647eda0c8fef993892b030f83713138d0af205264f946c953305163d
   languageName: node
   linkType: hard
 
@@ -3406,10 +3406,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globals@npm:^17.2.0":
-  version: 17.2.0
-  resolution: "globals@npm:17.2.0"
-  checksum: 10c0/fd25a98b08c1d31082337cbbb5ff1b90b9980e1db69a8621fb942bdb2cdca8aa54d61466742e8bf4910578ea5fa903b8bf83bffd1b2d45551cc614830dba910b
+"globals@npm:^17.3.0":
+  version: 17.3.0
+  resolution: "globals@npm:17.3.0"
+  checksum: 10c0/7f21443ecaa60c6e9ff56d9fb6f10a9b5f9514e7f22e5392f715472bb220ce31c865ebf414a32695150e733fb3e1013e6322dbce70fddd1e066f372b8d55a4b8
   languageName: node
   linkType: hard
 
@@ -6874,9 +6874,9 @@ __metadata:
     eslint: "npm:^9.39.2"
     eslint-plugin-react: "npm:^7.37.5"
     eslint-plugin-react-hooks: "npm:^7.0.1"
-    eslint-plugin-react-refresh: "npm:^0.4.26"
+    eslint-plugin-react-refresh: "npm:^0.5.0"
     framer-motion: "npm:^12.29.2"
-    globals: "npm:^17.2.0"
+    globals: "npm:^17.3.0"
     happy-dom: "npm:^20.4.0"
     husky: "npm:^9.1.7"
     jsdom: "npm:^27.4.0"
