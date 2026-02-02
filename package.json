@@ -45,7 +45,7 @@
   "dependencies": {
     "axios": "^1.13.4",
     "chart.js": "^4.5.1",
-    "framer-motion": "^12.29.3",
+    "framer-motion": "^12.30.0",
     "jspdf": "^4.1.0",
     "lucide-react": "^0.563.0",
     "react": "^19.2.4",
@@ -67,7 +67,21 @@
     "dom-accessibility-api": "^0.6.3",
     "ansi-styles": "^5.2.0",
     "react-is": "^17.0.2",
-    "@types/node": "25.1.0"
+    "@types/node": "^25.2.0",
+    "acorn": "^8.11.0",
+    "lru-cache": "^10.4.3",
+    "semver": "^7.6.0",
+    "yallist": "^4.0.0",
+    "string-width": "^5.1.2",
+    "strip-ansi": "^7.1.0",
+    "wrap-ansi": "^8.1.0",
+    "color-convert": "^2.0.1",
+    "color-name": "^1.1.4",
+    "has-flag": "^4.0.0",
+    "supports-color": "^9.4.0",
+    "chalk": "^5.3.0",
+    "cliui": "^8.0.1",
+    "get-caller-file": "^2.0.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.2",
