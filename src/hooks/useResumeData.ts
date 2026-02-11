@@ -9,6 +9,7 @@ export interface ResumeData {
     website: string;
     portfolio: string;
   };
+  experienceStartYear?: number;
   summary: string;
   technicalSkills: {
     languages: {

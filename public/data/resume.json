@@ -7,7 +7,8 @@
     "website": "https://www.zachschneider.com",
     "portfolio": "https://zkm.tw"
   },
-  "summary": "Experienced Senior Web Developer with 15+ years of expertise in modern frontend technologies, team leadership, and technical architecture. Proven track record of successfully migrating legacy systems to modern frameworks, leading cross-functional teams, and delivering high-impact web solutions. Passionate about mentoring developers and implementing best practices that drive business results.",
+  "experienceStartYear": 2002,
+  "summary": "Experienced Senior Web Developer with {experienceYears} of expertise in modern frontend technologies, team leadership, and technical architecture. Proven track record of successfully migrating legacy systems to modern frameworks, leading cross-functional teams, and delivering high-impact web solutions. Passionate about mentoring developers and implementing best practices that drive business results.",
   "technicalSkills": {
     "languages": {
       "HTML": ["HTML5", "Web Components"],

@@ -215,6 +215,16 @@ const Resume: React.FC = () => {
   const name = resumeData?.personalInfo?.name ?? 'Zach Schneider';
   const title = resumeData?.personalInfo?.title ?? 'Cosmic Code Crusader';
   const website = resumeData?.personalInfo?.website ?? 'https://www.zachschneider.com';
+  const experienceStartYear = resumeData?.experienceStartYear;
+  const experienceYears =
+    typeof experienceStartYear === 'number'
+      ? Math.max(0, new Date().getFullYear() - experienceStartYear)
+      : null;
+  const summaryRaw = resumeData?.summary ?? '';
+  const summary =
+    experienceYears !== null
+      ? summaryRaw.replace('{experienceYears}', `${experienceYears}+ years`)
+      : summaryRaw;
 
   // ✅ useMemo hooks moved above any conditional return, using safe fallbacks
   const chartData = React.useMemo(() => {
@@ -383,9 +393,7 @@ const Resume: React.FC = () => {
             <h2 className="text-xl font-bold text-yellow-300 mb-2 uppercase tracking-wide text-left">
               About Me
             </h2>
-            <p className="text-gray-100 text-base mb-6 leading-relaxed text-left">
-              {resumeData?.summary}
-            </p>
+            <p className="text-gray-100 text-base mb-6 leading-relaxed text-left">{summary}</p>
 
             <h2 className="text-xl font-bold text-yellow-300 mb-2 uppercase tracking-wide text-left">
               Languages
@@ -433,9 +441,7 @@ const Resume: React.FC = () => {
               </>
             }
           >
-            <p className="text-gray-900 leading-relaxed text-lg font-normal">
-              {resumeData?.summary}
-            </p>
+            <p className="text-gray-900 leading-relaxed text-lg font-normal">{summary}</p>
           </CollapsibleSection>
 
           {/* Skills + Chart */}

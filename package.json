@@ -69,7 +69,6 @@
     "react-is": "^17.0.2",
     "@types/node": "^25.2.2",
     "acorn": "^8.11.0",
-    "lru-cache": "^10.4.3",
     "semver": "^7.6.0",
     "yallist": "^4.0.0",
     "string-width": "^5.1.2",
