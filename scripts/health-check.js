@@ -93,7 +93,6 @@ class HealthCheckScanner {
 
     // Check if lock file exists
     const lockFiles = {
-      'bun.lock': 'bun',
       'package-lock.json': 'npm',
       'pnpm-lock.yaml': 'pnpm',
       'yarn.lock': 'yarn',
@@ -120,11 +119,10 @@ class HealthCheckScanner {
   async checkSecurity() {
     this.section('Security Vulnerability Scan');
 
-    // Try bun audit first (since package.json mentions bun)
-    let result = this.execCommand('bun audit --json', { silent: true });
+    // Try Yarn audit first, then fall back to npm audit
+    let result = this.execCommand('yarn npm audit --all --json', { silent: true });
 
     if (!result.success) {
-      // Fallback to npm audit
       result = this.execCommand('npm audit --json', { silent: true });
     }
 

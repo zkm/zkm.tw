@@ -1,4 +1,4 @@
 # Run tests before committing; abort commit if tests fail
-command -v bun >/dev/null 2>&1 || { echo >&2 "bun is required but not installed."; exit 1; }
+command -v yarn >/dev/null 2>&1 || { echo >&2 "yarn is required but not installed."; exit 1; }
 
-bun run test
+yarn test

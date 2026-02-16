@@ -21,16 +21,14 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'yarn'
 
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: latest
+      - name: Enable Corepack
+        run: corepack enable
 
       - name: Install dependencies
-        run: bun install --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Run Health Check
         run: node scripts/health-check.js
@@ -46,11 +44,11 @@ jobs:
           retention-days: 30
 
       - name: Security Audit
-        run: bun audit
+        run: yarn npm audit --all
         continue-on-error: true
 
       - name: Check for outdated packages
-        run: bunx npm-check-updates
+        run: yarn dlx npm-check-updates
         continue-on-error: true
 
       - name: Comment PR with Health Check Results

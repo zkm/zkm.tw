@@ -17,19 +17,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          bun-version: latest
+          node-version: '24'
+          cache: 'yarn'
+
+      - name: Enable Corepack
+        run: corepack enable
 
       - name: Install dependencies
-        run: bun install --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Run tests
-        run: bun run test
+        run: yarn test
 
       - name: Build
-        run: bun run build
+        run: yarn build
 
       - name: Deployment Note
         run: echo "🎯 Code is ready! DigitalOcean will deploy automatically from master branch."

@@ -26,7 +26,7 @@ function header(title) {
 }
 
 function command(cmd, description) {
-  log(`  $ bun run ${cmd}`, COLORS.green);
+  log(`  $ yarn ${cmd}`, COLORS.green);
   console.log(`    ${description}\n`);
 }
 
@@ -56,7 +56,7 @@ console.log('\n🔍 Dependency Commands:\n');
 
 command(
   'deps:audit',
-  'Security audit for known vulnerabilities.\n' + '    Uses bun audit to scan for CVEs.',
+  'Security audit for known vulnerabilities.\n' + '    Uses yarn npm audit to scan for CVEs.',
 );
 
 command(
@@ -123,19 +123,19 @@ header('🎯 Quick Examples');
 console.log('\n Common workflows:\n');
 
 log('  Before committing:', COLORS.magenta);
-console.log('  $ bun run health\n');
+console.log('  $ yarn health\n');
 
 log('  Before releasing:', COLORS.magenta);
-console.log('  $ bun run health:full\n');
+console.log('  $ yarn health:full\n');
 
 log('  View results visually:', COLORS.magenta);
-console.log('  $ bun run health:report && open health-check-report.html\n');
+console.log('  $ yarn health:report && open health-check-report.html\n');
 
 log('  Fix security issues:', COLORS.magenta);
-console.log('  $ bun run deps:audit\n  $ bun update <vulnerable-package>\n');
+console.log('  $ yarn deps:audit\n  $ yarn up <vulnerable-package>\n');
 
 log('  Update dependencies safely:', COLORS.magenta);
-console.log('  $ bun run deps:interactive\n');
+console.log('  $ yarn deps:interactive\n');
 
 header('📚 Documentation');
 

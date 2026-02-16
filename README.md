@@ -22,30 +22,30 @@ Modern React + TypeScript portfolio powered by Vite, Tailwind CSS, and Framer Mo
 
 ## Getting started
 
-Prereqs: Node 24+, Bun 1.x.
+Prereqs: Node 24+, Yarn 4 (via Corepack).
 
 Install deps
 
 ```bash
-bun install
+yarn install
 ```
 
 Dev server
 
 ```bash
-bun dev
+yarn dev
 ```
 
 Build
 
 ```bash
-bun run build
+yarn build
 ```
 
 Preview
 
 ```bash
-bun run preview
+yarn preview
 ```
 
 ## Scripts
@@ -83,8 +83,8 @@ bun run preview
 Common
 
 ```bash
-bun run docker:dev   # dev with HMR
-bun run docker:prod  # serve built site on :8080
+yarn docker:dev   # dev with HMR
+yarn docker:prod  # serve built site on :8080
 ```
 
 ## Tests
@@ -96,10 +96,10 @@ bun run docker:prod  # serve built site on :8080
 Run
 
 ```bash
-bun run test
-bun run test:watch
-bun run test:coverage
-bun run test:ui
+yarn test
+yarn test:watch
+yarn test:coverage
+yarn test:ui
 ```
 
 ## Data & components
@@ -118,7 +118,7 @@ GA4 is integrated via gtag in index.html using measurement ID G-2J7SWPGLE4. If y
 Deployment is now handled automatically via GitHub Actions:
 
 ```bash
-bun run deploy
+yarn deploy
 ```
 
 This will:
