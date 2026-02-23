@@ -25,7 +25,7 @@
     "prebuild": "yarn verify && yarn clean",
     "predeploy": "yarn build",
     "prepare": "husky",
-    "deploy": "node scripts/deploy.js",
+    "deploy": "yarn build && node scripts/deploy.js",
     "docker:dev": "docker compose up web",
     "docker:prod": "docker compose up web-prod",
     "docker:down": "docker compose down",
