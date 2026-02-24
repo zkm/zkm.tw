@@ -16,6 +16,15 @@ function run(command, description) {
   }
 }
 
+function hasStagedChanges() {
+  try {
+    execSync('git diff --cached --quiet', { stdio: 'ignore' });
+    return false;
+  } catch {
+    return true;
+  }
+}
+
 function deploy() {
   console.log('🚀 Starting deployment process...');
 
@@ -36,10 +45,14 @@ function deploy() {
     );
     run(`cp -r ${BACKUP_DIR}/* .`, 'Copying build files');
     run('git add .', 'Staging files');
-    run('git commit -m "Update production build for deployment"', 'Committing changes');
-    run('git push origin production', 'Pushing to production');
 
-    console.log('🎉 Deployment complete!');
+    if (hasStagedChanges()) {
+      run('git commit -m "Update production build for deployment"', 'Committing changes');
+      run('git push origin production', 'Pushing to production');
+      console.log('🎉 Deployment complete!');
+    } else {
+      console.log('ℹ️ No changes to deploy. Production branch is already up to date.');
+    }
   } finally {
     // Cleanup and return to master
     if (existsSync(BACKUP_DIR)) {
