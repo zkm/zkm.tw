@@ -126,6 +126,13 @@ class HealthCheckScanner {
       result = this.execCommand('npm audit --json', { silent: true });
     }
 
+    if (result.success && !result.output?.trim()) {
+      this.addCheck('Security Vulnerabilities', 'passed', {
+        message: 'No known vulnerabilities found',
+      });
+      return;
+    }
+
     if (result.success && result.output) {
       try {
         const auditData = JSON.parse(result.output);
