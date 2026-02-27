@@ -6,7 +6,7 @@ updates:
       interval: "weekly"
       day: "monday"
       time: "07:00"
-      timezone: "UTC"
+      timezone: "America/Chicago"
     labels:
       - "dependencies"
     open-pull-requests-limit: 5
@@ -27,6 +27,6 @@ updates:
       interval: "weekly"
       day: "monday"
       time: "07:30"
-      timezone: "UTC"
+      timezone: "America/Chicago"
     labels:
       - "dependencies"
