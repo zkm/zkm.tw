@@ -1,32 +1,32 @@
 version: 2
 updates:
-  - package-ecosystem: "npm"
-    directory: "/"
+  - package-ecosystem: 'npm'
+    directory: '/'
     schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "07:00"
-      timezone: "America/Chicago"
+      interval: 'weekly'
+      day: 'monday'
+      time: '07:00'
+      timezone: 'America/Chicago'
     labels:
-      - "dependencies"
+      - 'dependencies'
     open-pull-requests-limit: 5
-    rebase-strategy: "disabled"
+    rebase-strategy: 'disabled'
     groups:
       production-dependencies:
-        dependency-type: "production"
+        dependency-type: 'production'
         patterns:
-          - "*"
+          - '*'
       development-dependencies:
-        dependency-type: "development"
+        dependency-type: 'development'
         patterns:
-          - "*"
+          - '*'
 
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: 'github-actions'
+    directory: '/'
     schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "07:30"
-      timezone: "America/Chicago"
+      interval: 'weekly'
+      day: 'monday'
+      time: '07:30'
+      timezone: 'America/Chicago'
     labels:
-      - "dependencies"
+      - 'dependencies'
