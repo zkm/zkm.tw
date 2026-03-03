@@ -2205,9 +2205,9 @@ __metadata:
   linkType: hard
 
 "caniuse-lite@npm:^1.0.30001759, caniuse-lite@npm:^1.0.30001774":
-  version: 1.0.30001775
-  resolution: "caniuse-lite@npm:1.0.30001775"
-  checksum: 10c0/96e59a83abd171c729db80a93d7a50becebc145102e3c2d2ea4b3749385cae1e6e09155bada486f662fa070009989d043c4c60f1ee64a19eb50139c7e6dbe574
+  version: 1.0.30001776
+  resolution: "caniuse-lite@npm:1.0.30001776"
+  checksum: 10c0/d5a7624ea50548c6c4381979a2900ac451caa7ecbeafec209309da25d547ba1406355cf66d6c6d537d8532ab5a56f2bbc0bf62300a4c3f66aa6fca5954264735
   languageName: node
   linkType: hard
 
@@ -2568,9 +2568,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.5.263":
-  version: 1.5.302
-  resolution: "electron-to-chromium@npm:1.5.302"
-  checksum: 10c0/014413f2b4ec3a0e043c68f6c07a760d230b14e36b8549c5b124f386a6318d9641e69be2aa0df1877395dd99922745c1722c8ecb3d72205f0f3b3b3dc44c8442
+  version: 1.5.307
+  resolution: "electron-to-chromium@npm:1.5.307"
+  checksum: 10c0/eb773a28af0dd7b3717b9bc2b31f332bcb42b43019866e039276db75c8c14063f96e29d19bea47231b4335a319d8518997b2d577dec6b5b237b768c7afdc5588
   languageName: node
   linkType: hard
 
@@ -3186,10 +3186,10 @@ __metadata:
   linkType: hard
 
 "framer-motion@npm:^12.34.3":
-  version: 12.34.3
-  resolution: "framer-motion@npm:12.34.3"
+  version: 12.34.5
+  resolution: "framer-motion@npm:12.34.5"
   dependencies:
-    motion-dom: "npm:^12.34.3"
+    motion-dom: "npm:^12.34.5"
     motion-utils: "npm:^12.29.2"
     tslib: "npm:^2.4.0"
   peerDependencies:
@@ -3203,7 +3203,7 @@ __metadata:
       optional: true
     react-dom:
       optional: true
-  checksum: 10c0/e36d8d2b33200c6d8ad8af6508090276674dcd239da8026ab19ec4f739b8943197c7b1777f28f96c7149f65ccd35efb5905cbdfdaf6e75017bcd7cc4eb69328b
+  checksum: 10c0/d2924dcd559a8f79a8cef11e2d13125e4d5005c9ee0d308b68d6f395e1c03d82249efa7ab62245dadf8435a1e95560efa409780d03a936c78a1799df5b46b971
   languageName: node
   linkType: hard
 
@@ -3371,8 +3371,8 @@ __metadata:
   linkType: hard
 
 "happy-dom@npm:^20.7.0":
-  version: 20.7.0
-  resolution: "happy-dom@npm:20.7.0"
+  version: 20.8.3
+  resolution: "happy-dom@npm:20.8.3"
   dependencies:
     "@types/node": "npm:>=20.0.0"
     "@types/whatwg-mimetype": "npm:^3.0.2"
@@ -3380,7 +3380,7 @@ __metadata:
     entities: "npm:^7.0.1"
     whatwg-mimetype: "npm:^3.0.0"
     ws: "npm:^8.18.3"
-  checksum: 10c0/775161e92f2512883c67492539a5870cb3742c2a6ef0bd9feeb660f784b08cdc279519f98e1b6cfcfe222ce9e757753d2f16bffd4b6bceacdba1b2c62bca529f
+  checksum: 10c0/79a2b6d32e2f778b015511c9d2de7f7859954cbd27a30720736e60552a88e0345ffc8b2c5e77140c5f2f7fef95c563aea7ab0b2edba5d8c7edd5676b43ecef55
   languageName: node
   linkType: hard
 
@@ -4806,12 +4806,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"motion-dom@npm:^12.34.3":
-  version: 12.34.3
-  resolution: "motion-dom@npm:12.34.3"
+"motion-dom@npm:^12.34.5":
+  version: 12.34.5
+  resolution: "motion-dom@npm:12.34.5"
   dependencies:
     motion-utils: "npm:^12.29.2"
-  checksum: 10c0/9a336be96dbb24a2ea3cafe401043553bc326274d118b86d6414e505cd394f26c071cd420d2e71c2cf19e76abc89bfdac4a7c5c1b3842eca56b11d6b8687dfdc
+  checksum: 10c0/49a5ade7c59b1c54be0fdc8f77ed49201401bd8ec89e583af431f0d0815d101c61ec1e63dd941ddf2c1e5dbaddfe28acde681692305f07e5520f2f1507e2faf5
   languageName: node
   linkType: hard
 
@@ -5152,13 +5152,13 @@ __metadata:
   linkType: hard
 
 "postcss@npm:^8.5.6":
-  version: 8.5.6
-  resolution: "postcss@npm:8.5.6"
+  version: 8.5.8
+  resolution: "postcss@npm:8.5.8"
   dependencies:
     nanoid: "npm:^3.3.11"
     picocolors: "npm:^1.1.1"
     source-map-js: "npm:^1.2.1"
-  checksum: 10c0/5127cc7c91ed7a133a1b7318012d8bfa112da9ef092dddf369ae699a1f10ebbd89b1b9f25f3228795b84585c72aabd5ced5fc11f2ba467eedf7b081a66fad024
+  checksum: 10c0/dd918f7127ee7c60a0295bae2e72b3787892296e1d1c3c564d7a2a00c68d8df83cadc3178491259daa19ccc54804fb71ed8c937c6787e08d8bd4bedf8d17044c
   languageName: node
   linkType: hard
 
