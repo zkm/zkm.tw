@@ -43,7 +43,7 @@
     "ci": "yarn install --immutable && yarn verify && yarn build"
   },
   "dependencies": {
-    "axios": "^1.13.5",
+    "axios": "^1.14.0",
     "chart.js": "^4.5.1",
     "framer-motion": "^12.34.3",
     "jspdf": "^4.2.0",
