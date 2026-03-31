@@ -117,7 +117,7 @@ const Portfolio: React.FC = () => {
   if (showResume) {
     return (
       <Suspense fallback={<div className="text-white">Loading resume...</div>}>
-        <Resume />
+        <Resume onBack={() => setShowResume(false)} />
       </Suspense>
     );
   }

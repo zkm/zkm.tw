@@ -36,6 +36,8 @@ vi.mock('lucide-react', () => ({
   Send: () => <div data-testid="send-icon">Send</div>,
   User: () => <div data-testid="user-icon">User</div>,
   Bot: () => <div data-testid="bot-icon">Bot</div>,
+  Plus: () => <div data-testid="plus-icon">Plus</div>,
+  Minus: () => <div data-testid="minus-icon">Minus</div>,
 }));
 
 const mockResumeData = {

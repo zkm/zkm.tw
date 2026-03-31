@@ -17,6 +17,8 @@ import {
   Palette,
   Server,
   Settings,
+  Plus,
+  Minus,
 } from 'lucide-react';
 
 // Lazy-load just the Bar component to keep the main bundle small
@@ -206,7 +208,7 @@ const RevealEmail: React.FC = () => {
   );
 };
 
-const Resume: React.FC = () => {
+const Resume: React.FC<{ onBack?: () => void }> = ({ onBack }) => {
   // ✅ All hooks at the top, always called in the same order
   const { resumeData, loading, error } = useResumeData();
   const prefersReducedMotion = usePrefersReducedMotion();
@@ -331,12 +333,11 @@ const Resume: React.FC = () => {
           aria-describedby={descriptionId}
         >
           <span className="flex items-center gap-3 text-xl">{title}</span>
-          <span
-            className={`transform transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
-            aria-hidden="true"
-          >
-            ▼
-          </span>
+          {open ? (
+            <Minus size={20} aria-hidden="true" className="flex-shrink-0" />
+          ) : (
+            <Plus size={20} aria-hidden="true" className="flex-shrink-0" />
+          )}
         </button>
 
         <div
@@ -376,388 +377,401 @@ const Resume: React.FC = () => {
         }
       `}</style>
 
-      <div className="flex flex-col md:flex-row w-full max-w-6xl mx-auto p-6 gap-8">
-        {/* Sidebar/Profile */}
-        <aside
-          className="w-full md:w-1/3 bg-slate-900 rounded-2xl shadow-xl p-8 flex flex-col items-start text-white"
-          data-nosnippet
-        >
-          <div className="mb-8 w-full">
-            <h1 className="text-3xl font-extrabold mb-2 text-yellow-300 tracking-tight text-left">
-              {name}
-            </h1>
-            <p className="text-lg font-semibold mb-4 text-gray-100 text-left">{title}</p>
-          </div>
-
-          <div className="w-full mt-6">
-            <h2 className="text-xl font-bold text-yellow-300 mb-2 uppercase tracking-wide text-left">
-              About Me
-            </h2>
-            <p className="text-gray-100 text-base mb-6 leading-relaxed text-left">{summary}</p>
-
-            <h2 className="text-xl font-bold text-yellow-300 mb-2 uppercase tracking-wide text-left">
-              Languages
-            </h2>
-            <ul className="text-gray-100 text-base mb-6 space-y-1 text-left">
-              <li>English</li>
-            </ul>
-
-            <h2 className="text-xl font-bold text-yellow-300 mb-2 uppercase tracking-wide text-left">
-              Contact
-            </h2>
-            <ul className="text-gray-100 text-base space-y-2 text-left">
-              <li>
-                <RevealEmail />
-              </li>
-              <li>
-                <RevealPhone />
-              </li>
-              <li className="flex items-center gap-2">
-                <Globe className="inline text-yellow-300" aria-hidden="true" />
-                <a
-                  href={website}
-                  className="underline text-yellow-200 hover:text-yellow-100"
-                  rel="me"
-                  target="_blank"
-                  aria-label={`Visit ${new URL(website).host} (opens in new window)`}
-                >
-                  {new URL(website).host}
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <span id="sr-live" className="sr-only" aria-live="polite" />
-        </aside>
-
-        {/* Main Content */}
-        <section className="w-full md:w-2/3 bg-white rounded-2xl shadow-xl p-8 text-left">
-          {/* Professional Summary */}
-          <CollapsibleSection
-            id="summary"
-            title={
-              <>
-                <Book className="text-blue-400" aria-hidden="true" /> Summary
-              </>
-            }
+      <div className="flex flex-col w-full max-w-6xl mx-auto p-6 gap-4">
+        {onBack && (
+          <button
+            onClick={onBack}
+            className="self-start flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
+            aria-label="Back to portfolio"
           >
-            <p className="text-gray-900 leading-relaxed text-lg font-normal">{summary}</p>
-          </CollapsibleSection>
-
-          {/* Skills + Chart */}
-          <CollapsibleSection
-            id="skills"
-            title={
-              <>
-                <Code2 className="text-blue-400" aria-hidden="true" /> Skills
-              </>
-            }
+            &#8592; Back
+          </button>
+        )}
+        <div className="flex flex-col md:flex-row w-full gap-8">
+          {/* Sidebar/Profile */}
+          <aside
+            className="w-full md:w-1/3 bg-slate-900 rounded-2xl shadow-xl p-8 flex flex-col items-start text-white"
+            data-nosnippet
           >
-            <div className="space-y-6">
-              {/* Programming Languages */}
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3 border-b border-gray-200 pb-2 flex items-center gap-2">
-                  <Code2 className="text-blue-500" size={20} />
-                  Programming Languages
-                </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {Object.entries(resumeData?.technicalSkills?.languages || {}).map(
-                    ([lang, skills]) => {
-                      const langConfig = {
-                        HTML: {
-                          color: 'text-orange-600',
-                          bg: 'bg-orange-50',
-                          border: 'border-orange-200',
-                        },
-                        CSS: {
-                          color: 'text-blue-600',
-                          bg: 'bg-blue-50',
+            <div className="mb-8 w-full">
+              <h1 className="text-3xl font-extrabold mb-2 text-yellow-300 tracking-tight text-left">
+                {name}
+              </h1>
+              <p className="text-lg font-semibold mb-4 text-gray-100 text-left">{title}</p>
+            </div>
+
+            <div className="w-full mt-6">
+              <h2 className="text-xl font-bold text-yellow-300 mb-2 uppercase tracking-wide text-left">
+                About Me
+              </h2>
+              <p className="text-gray-100 text-base mb-6 leading-relaxed text-left">{summary}</p>
+
+              <h2 className="text-xl font-bold text-yellow-300 mb-2 uppercase tracking-wide text-left">
+                Languages
+              </h2>
+              <ul className="text-gray-100 text-base mb-6 space-y-1 text-left">
+                <li>English</li>
+              </ul>
+
+              <h2 className="text-xl font-bold text-yellow-300 mb-2 uppercase tracking-wide text-left">
+                Contact
+              </h2>
+              <ul className="text-gray-100 text-base space-y-2 text-left">
+                <li>
+                  <RevealEmail />
+                </li>
+                <li>
+                  <RevealPhone />
+                </li>
+                <li className="flex items-center gap-2">
+                  <Globe className="inline text-yellow-300" aria-hidden="true" />
+                  <a
+                    href={website}
+                    className="underline text-yellow-200 hover:text-yellow-100"
+                    rel="me"
+                    target="_blank"
+                    aria-label={`Visit ${new URL(website).host} (opens in new window)`}
+                  >
+                    {new URL(website).host}
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <span id="sr-live" className="sr-only" aria-live="polite" />
+          </aside>
+
+          {/* Main Content */}
+          <section className="w-full md:w-2/3 bg-white rounded-2xl shadow-xl p-8 text-left">
+            {/* Professional Summary */}
+            <CollapsibleSection
+              id="summary"
+              title={
+                <>
+                  <Book className="text-blue-400" aria-hidden="true" /> Summary
+                </>
+              }
+            >
+              <p className="text-gray-900 leading-relaxed text-lg font-normal">{summary}</p>
+            </CollapsibleSection>
+
+            {/* Skills + Chart */}
+            <CollapsibleSection
+              id="skills"
+              title={
+                <>
+                  <Code2 className="text-blue-400" aria-hidden="true" /> Skills
+                </>
+              }
+            >
+              <div className="space-y-6">
+                {/* Programming Languages */}
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3 border-b border-gray-200 pb-2 flex items-center gap-2">
+                    <Code2 className="text-blue-500" size={20} />
+                    Programming Languages
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {Object.entries(resumeData?.technicalSkills?.languages || {}).map(
+                      ([lang, skills]) => {
+                        const langConfig = {
+                          HTML: {
+                            color: 'text-orange-600',
+                            bg: 'bg-orange-50',
+                            border: 'border-orange-200',
+                          },
+                          CSS: {
+                            color: 'text-blue-600',
+                            bg: 'bg-blue-50',
+                            border: 'border-blue-200',
+                          },
+                          JavaScript: {
+                            color: 'text-yellow-600',
+                            bg: 'bg-yellow-50',
+                            border: 'border-yellow-200',
+                          },
+                          Other: {
+                            color: 'text-purple-600',
+                            bg: 'bg-purple-50',
+                            border: 'border-purple-200',
+                          },
+                        }[lang] || {
+                          color: 'text-gray-600',
+                          bg: 'bg-gray-50',
+                          border: 'border-gray-200',
+                        };
+
+                        return (
+                          <div
+                            key={lang}
+                            className={`flex items-start gap-3 p-3 rounded-lg ${langConfig.bg} ${langConfig.border} border`}
+                          >
+                            <span
+                              className={`font-semibold min-w-[80px] text-sm ${langConfig.color}`}
+                            >
+                              {lang}:
+                            </span>
+                            <span className="text-gray-700 text-sm">
+                              {Array.isArray(skills) ? skills.join(', ') : skills}
+                            </span>
+                          </div>
+                        );
+                      },
+                    )}
+                  </div>
+                </div>
+
+                {/* Tech Stack Grid */}
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3 border-b border-gray-200 pb-2 flex items-center gap-2">
+                    <Star className="text-purple-500" size={20} />
+                    Technology Stack
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {skillGroups.map(([key, label]) => {
+                      const items = resumeData?.technicalSkills?.[key] as string[] | undefined;
+                      const isArray = Array.isArray(items);
+                      if (!isArray || items.length === 0) return null;
+
+                      const categoryConfig = {
+                        frontend: {
+                          icon: <Palette size={18} />,
+                          color: 'text-blue-700',
+                          bg: 'bg-gradient-to-br from-blue-50 to-indigo-50',
                           border: 'border-blue-200',
+                          tagBg: 'bg-blue-100',
+                          tagHover: 'hover:bg-blue-200',
+                          shadow: 'hover:shadow-blue-200/30',
                         },
-                        JavaScript: {
-                          color: 'text-yellow-600',
-                          bg: 'bg-yellow-50',
-                          border: 'border-yellow-200',
+                        backend: {
+                          icon: <Server size={18} />,
+                          color: 'text-emerald-700',
+                          bg: 'bg-gradient-to-br from-emerald-50 to-green-50',
+                          border: 'border-emerald-200',
+                          tagBg: 'bg-emerald-100',
+                          tagHover: 'hover:bg-emerald-200',
+                          shadow: 'hover:shadow-emerald-200/30',
                         },
-                        Other: {
-                          color: 'text-purple-600',
-                          bg: 'bg-purple-50',
+                        infrastructure: {
+                          icon: <Settings size={18} />,
+                          color: 'text-purple-700',
+                          bg: 'bg-gradient-to-br from-purple-50 to-violet-50',
                           border: 'border-purple-200',
+                          tagBg: 'bg-purple-100',
+                          tagHover: 'hover:bg-purple-200',
+                          shadow: 'hover:shadow-purple-200/30',
                         },
-                      }[lang] || {
-                        color: 'text-gray-600',
-                        bg: 'bg-gray-50',
+                        security: {
+                          icon: <Shield size={18} />,
+                          color: 'text-orange-700',
+                          bg: 'bg-gradient-to-br from-orange-50 to-red-50',
+                          border: 'border-orange-200',
+                          tagBg: 'bg-orange-100',
+                          tagHover: 'hover:bg-orange-200',
+                          shadow: 'hover:shadow-orange-200/30',
+                        },
+                      }[key] || {
+                        icon: <Code2 size={18} />,
+                        color: 'text-gray-700',
+                        bg: 'bg-gradient-to-br from-gray-50 to-slate-50',
                         border: 'border-gray-200',
+                        tagBg: 'bg-gray-100',
+                        tagHover: 'hover:bg-gray-200',
+                        shadow: 'hover:shadow-gray-200/30',
                       };
-
                       return (
                         <div
-                          key={lang}
-                          className={`flex items-start gap-3 p-3 rounded-lg ${langConfig.bg} ${langConfig.border} border`}
+                          key={key}
+                          className={`${categoryConfig.bg} ${categoryConfig.border} border-2 rounded-xl p-6 hover:shadow-lg transition-all duration-300 ${categoryConfig.shadow} transform hover:-translate-y-1`}
                         >
-                          <span
-                            className={`font-semibold min-w-[80px] text-sm ${langConfig.color}`}
+                          <h4
+                            className={`font-bold mb-4 text-base uppercase tracking-wider flex items-center gap-3 ${categoryConfig.color}`}
                           >
-                            {lang}:
-                          </span>
-                          <span className="text-gray-700 text-sm">
-                            {Array.isArray(skills) ? skills.join(', ') : skills}
-                          </span>
+                            {categoryConfig.icon}
+                            <span className="font-extrabold">{label}</span>
+                          </h4>
+                          <div className="flex flex-wrap gap-2">
+                            {items.map((item: string) => (
+                              <span
+                                key={item}
+                                className={`${categoryConfig.tagBg} ${categoryConfig.tagHover} text-gray-800 px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 border border-transparent hover:border-gray-300 hover:scale-105 cursor-default`}
+                              >
+                                {item}
+                              </span>
+                            ))}
+                          </div>
                         </div>
                       );
-                    },
-                  )}
+                    })}
+                  </div>
                 </div>
               </div>
 
-              {/* Tech Stack Grid */}
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3 border-b border-gray-200 pb-2 flex items-center gap-2">
-                  <Star className="text-purple-500" size={20} />
-                  Technology Stack
-                </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {skillGroups.map(([key, label]) => {
-                    const items = resumeData?.technicalSkills?.[key] as string[] | undefined;
-                    const isArray = Array.isArray(items);
-                    if (!isArray || items.length === 0) return null;
+              <div className="mt-6">
+                <React.Suspense
+                  fallback={<div className="h-40 bg-gray-100 rounded animate-pulse" />}
+                >
+                  <BarChart data={chartData} options={chartOptions} />
+                </React.Suspense>
+              </div>
+            </CollapsibleSection>
 
-                    const categoryConfig = {
-                      frontend: {
-                        icon: <Palette size={18} />,
-                        color: 'text-blue-700',
-                        bg: 'bg-gradient-to-br from-blue-50 to-indigo-50',
-                        border: 'border-blue-200',
-                        tagBg: 'bg-blue-100',
-                        tagHover: 'hover:bg-blue-200',
-                        shadow: 'hover:shadow-blue-200/30',
-                      },
-                      backend: {
-                        icon: <Server size={18} />,
-                        color: 'text-emerald-700',
-                        bg: 'bg-gradient-to-br from-emerald-50 to-green-50',
-                        border: 'border-emerald-200',
-                        tagBg: 'bg-emerald-100',
-                        tagHover: 'hover:bg-emerald-200',
-                        shadow: 'hover:shadow-emerald-200/30',
-                      },
-                      infrastructure: {
-                        icon: <Settings size={18} />,
-                        color: 'text-purple-700',
-                        bg: 'bg-gradient-to-br from-purple-50 to-violet-50',
-                        border: 'border-purple-200',
-                        tagBg: 'bg-purple-100',
-                        tagHover: 'hover:bg-purple-200',
-                        shadow: 'hover:shadow-purple-200/30',
-                      },
-                      security: {
-                        icon: <Shield size={18} />,
-                        color: 'text-orange-700',
-                        bg: 'bg-gradient-to-br from-orange-50 to-red-50',
-                        border: 'border-orange-200',
-                        tagBg: 'bg-orange-100',
-                        tagHover: 'hover:bg-orange-200',
-                        shadow: 'hover:shadow-orange-200/30',
-                      },
-                    }[key] || {
-                      icon: <Code2 size={18} />,
-                      color: 'text-gray-700',
-                      bg: 'bg-gradient-to-br from-gray-50 to-slate-50',
-                      border: 'border-gray-200',
-                      tagBg: 'bg-gray-100',
-                      tagHover: 'hover:bg-gray-200',
-                      shadow: 'hover:shadow-gray-200/30',
-                    };
-                    return (
-                      <div
-                        key={key}
-                        className={`${categoryConfig.bg} ${categoryConfig.border} border-2 rounded-xl p-6 hover:shadow-lg transition-all duration-300 ${categoryConfig.shadow} transform hover:-translate-y-1`}
-                      >
-                        <h4
-                          className={`font-bold mb-4 text-base uppercase tracking-wider flex items-center gap-3 ${categoryConfig.color}`}
-                        >
-                          {categoryConfig.icon}
-                          <span className="font-extrabold">{label}</span>
-                        </h4>
-                        <div className="flex flex-wrap gap-2">
-                          {items.map((item: string) => (
-                            <span
-                              key={item}
-                              className={`${categoryConfig.tagBg} ${categoryConfig.tagHover} text-gray-800 px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 border border-transparent hover:border-gray-300 hover:scale-105 cursor-default`}
-                            >
-                              {item}
-                            </span>
-                          ))}
+            {/* Work Experience */}
+            <CollapsibleSection
+              id="experience"
+              title={
+                <>
+                  <Briefcase className="text-blue-400" aria-hidden="true" /> Experience
+                </>
+              }
+            >
+              <div className="space-y-8">
+                {resumeData?.workExperience?.map((exp, idx: number) => (
+                  <div key={idx}>
+                    <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                      <Users className="text-blue-400" aria-hidden="true" /> {exp.position}
+                      <span className="text-gray-900 font-normal">
+                        @{' '}
+                        {exp.companyUrl ? (
+                          <a
+                            href={exp.companyUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-600 hover:text-blue-800 underline focus-visible:ring-2 focus-visible:ring-blue-400 rounded"
+                            aria-label={`${exp.company} (opens in new window)`}
+                          >
+                            {exp.company}
+                          </a>
+                        ) : (
+                          exp.company
+                        )}
+                      </span>
+                    </h3>
+                    <p className="text-gray-900 mb-1">{exp.period}</p>
+                    <ul className="list-disc list-inside text-gray-900 mb-2">
+                      {exp.responsibilities?.map((r: string, i: number) => (
+                        <li key={i}>{r}</li>
+                      ))}
+                    </ul>
+
+                    {(exp.notableProjects?.length ?? 0) > 0 && (
+                      <div className="ml-4 mt-2">
+                        <div className="p-3 my-2 rounded bg-blue-50 border-l-4 border-blue-400">
+                          <h4 className="font-medium text-blue-900 flex items-center gap-2">
+                            <Star aria-hidden="true" /> Notable Projects:
+                          </h4>
+                          <ul className="list-disc list-inside text-gray-900">
+                            {exp.notableProjects?.map((proj, pi: number) => (
+                              <li key={pi}>
+                                <strong>{proj.name}</strong>: {proj.description}{' '}
+                                <span className="text-gray-700">
+                                  [{proj.technologies?.join(', ')}]
+                                </span>
+                              </li>
+                            ))}
+                          </ul>
                         </div>
                       </div>
-                    );
-                  })}
-                </div>
+                    )}
+
+                    {(exp.honorsAndAwards?.length ?? 0) > 0 && (
+                      <div className="ml-4 mt-2">
+                        <div className="p-3 my-2 rounded bg-yellow-50 border-l-4 border-yellow-400">
+                          <h4 className="font-medium text-yellow-900 flex items-center gap-2">
+                            <Award aria-hidden="true" /> Honors & Awards:
+                          </h4>
+                          <ul className="list-disc list-inside text-gray-900">
+                            {exp.honorsAndAwards?.map((award, ai: number) => (
+                              <li key={ai}>
+                                <strong>{award.award}</strong>{' '}
+                                <span className="text-gray-700">({award.date})</span> -{' '}
+                                <span className="text-gray-800">{award.issuer}</span>:{' '}
+                                {award.description}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ))}
               </div>
-            </div>
+            </CollapsibleSection>
 
-            <div className="mt-6">
-              <React.Suspense fallback={<div className="h-40 bg-gray-100 rounded animate-pulse" />}>
-                <BarChart data={chartData} options={chartOptions} />
-              </React.Suspense>
-            </div>
-          </CollapsibleSection>
+            {/* Education */}
+            <CollapsibleSection
+              id="education"
+              title={
+                <>
+                  <GraduationCap className="text-blue-400" aria-hidden="true" /> Education
+                </>
+              }
+            >
+              <div className="space-y-8">
+                {resumeData?.education?.map((edu, idx: number) => (
+                  <div key={idx}>
+                    <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                      <Book className="text-blue-400" aria-hidden="true" /> {edu.degree},{' '}
+                      <span className="text-gray-900 font-normal">{edu.institution}</span>
+                    </h3>
+                    <p className="text-gray-900 mb-1">
+                      {edu.field} ({edu.period})
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </CollapsibleSection>
 
-          {/* Work Experience */}
-          <CollapsibleSection
-            id="experience"
-            title={
-              <>
-                <Briefcase className="text-blue-400" aria-hidden="true" /> Experience
-              </>
-            }
-          >
-            <div className="space-y-8">
-              {resumeData?.workExperience?.map((exp, idx: number) => (
-                <div key={idx}>
-                  <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                    <Users className="text-blue-400" aria-hidden="true" /> {exp.position}
-                    <span className="text-gray-900 font-normal">
-                      @{' '}
-                      {exp.companyUrl ? (
-                        <a
-                          href={exp.companyUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-blue-600 hover:text-blue-800 underline focus-visible:ring-2 focus-visible:ring-blue-400 rounded"
-                          aria-label={`${exp.company} (opens in new window)`}
-                        >
-                          {exp.company}
-                        </a>
-                      ) : (
-                        exp.company
-                      )}
-                    </span>
-                  </h3>
-                  <p className="text-gray-900 mb-1">{exp.period}</p>
-                  <ul className="list-disc list-inside text-gray-900 mb-2">
-                    {exp.responsibilities?.map((r: string, i: number) => (
-                      <li key={i}>{r}</li>
-                    ))}
-                  </ul>
+            {/* Activities & Volunteer */}
+            <CollapsibleSection
+              id="activities"
+              title={
+                <>
+                  <HeartHandshake className="text-blue-400" aria-hidden="true" /> Activities
+                </>
+              }
+            >
+              <div className="space-y-8">
+                {resumeData?.activitiesAndVolunteer?.map((act, idx: number) => (
+                  <div key={idx}>
+                    <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                      <Users className="text-blue-400" aria-hidden="true" /> {act.role}{' '}
+                      <span className="text-gray-900 font-normal">at {act.organization}</span>
+                    </h3>
+                    <p className="text-gray-900 mb-1">{act.period}</p>
+                    <p className="text-gray-900 mb-2">{act.description}</p>
 
-                  {(exp.notableProjects?.length ?? 0) > 0 && (
-                    <div className="ml-4 mt-2">
-                      <div className="p-3 my-2 rounded bg-blue-50 border-l-4 border-blue-400">
-                        <h4 className="font-medium text-blue-900 flex items-center gap-2">
-                          <Star aria-hidden="true" /> Notable Projects:
-                        </h4>
-                        <ul className="list-disc list-inside text-gray-900">
-                          {exp.notableProjects?.map((proj, pi: number) => (
-                            <li key={pi}>
-                              <strong>{proj.name}</strong>: {proj.description}{' '}
-                              <span className="text-gray-700">
-                                [{proj.technologies?.join(', ')}]
-                              </span>
-                            </li>
-                          ))}
-                        </ul>
+                    {(act.notableProjects?.length ?? 0) > 0 && (
+                      <div className="ml-4 mt-2">
+                        <div className="p-3 my-2 rounded bg-blue-50 border-l-4 border-blue-400">
+                          <h4 className="font-medium text-blue-900 flex items-center gap-2">
+                            <Star aria-hidden="true" /> Notable Projects:
+                          </h4>
+                          <ul className="list-disc list-inside text-gray-900">
+                            {act.notableProjects?.map((proj, pi: number) => (
+                              <li key={pi}>
+                                <strong>{proj.name}</strong>: {proj.description}{' '}
+                                <span className="text-gray-700">
+                                  [{proj.technologies?.join(', ')}]
+                                </span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
                       </div>
-                    </div>
-                  )}
+                    )}
+                  </div>
+                ))}
+              </div>
+            </CollapsibleSection>
 
-                  {(exp.honorsAndAwards?.length ?? 0) > 0 && (
-                    <div className="ml-4 mt-2">
-                      <div className="p-3 my-2 rounded bg-yellow-50 border-l-4 border-yellow-400">
-                        <h4 className="font-medium text-yellow-900 flex items-center gap-2">
-                          <Award aria-hidden="true" /> Honors & Awards:
-                        </h4>
-                        <ul className="list-disc list-inside text-gray-900">
-                          {exp.honorsAndAwards?.map((award, ai: number) => (
-                            <li key={ai}>
-                              <strong>{award.award}</strong>{' '}
-                              <span className="text-gray-700">({award.date})</span> -{' '}
-                              <span className="text-gray-800">{award.issuer}</span>:{' '}
-                              {award.description}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ))}
+            {/* References note */}
+            <div className="pt-8 border-t border-gray-200">
+              <h2 className="text-2xl font-bold text-black mb-3 tracking-tight">References</h2>
+              <p className="text-gray-800">Available upon request.</p>
             </div>
-          </CollapsibleSection>
-
-          {/* Education */}
-          <CollapsibleSection
-            id="education"
-            title={
-              <>
-                <GraduationCap className="text-blue-400" aria-hidden="true" /> Education
-              </>
-            }
-          >
-            <div className="space-y-8">
-              {resumeData?.education?.map((edu, idx: number) => (
-                <div key={idx}>
-                  <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                    <Book className="text-blue-400" aria-hidden="true" /> {edu.degree},{' '}
-                    <span className="text-gray-900 font-normal">{edu.institution}</span>
-                  </h3>
-                  <p className="text-gray-900 mb-1">
-                    {edu.field} ({edu.period})
-                  </p>
-                </div>
-              ))}
-            </div>
-          </CollapsibleSection>
-
-          {/* Activities & Volunteer */}
-          <CollapsibleSection
-            id="activities"
-            title={
-              <>
-                <HeartHandshake className="text-blue-400" aria-hidden="true" /> Activities
-              </>
-            }
-          >
-            <div className="space-y-8">
-              {resumeData?.activitiesAndVolunteer?.map((act, idx: number) => (
-                <div key={idx}>
-                  <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                    <Users className="text-blue-400" aria-hidden="true" /> {act.role}{' '}
-                    <span className="text-gray-900 font-normal">at {act.organization}</span>
-                  </h3>
-                  <p className="text-gray-900 mb-1">{act.period}</p>
-                  <p className="text-gray-900 mb-2">{act.description}</p>
-
-                  {(act.notableProjects?.length ?? 0) > 0 && (
-                    <div className="ml-4 mt-2">
-                      <div className="p-3 my-2 rounded bg-blue-50 border-l-4 border-blue-400">
-                        <h4 className="font-medium text-blue-900 flex items-center gap-2">
-                          <Star aria-hidden="true" /> Notable Projects:
-                        </h4>
-                        <ul className="list-disc list-inside text-gray-900">
-                          {act.notableProjects?.map((proj, pi: number) => (
-                            <li key={pi}>
-                              <strong>{proj.name}</strong>: {proj.description}{' '}
-                              <span className="text-gray-700">
-                                [{proj.technologies?.join(', ')}]
-                              </span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </CollapsibleSection>
-
-          {/* References note */}
-          <div className="pt-8 border-t border-gray-200">
-            <h2 className="text-2xl font-bold text-black mb-3 tracking-tight">References</h2>
-            <p className="text-gray-800">Available upon request.</p>
-          </div>
-        </section>
+          </section>
+        </div>
       </div>
     </main>
   );
