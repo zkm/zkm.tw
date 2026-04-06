@@ -17,7 +17,8 @@ COPY . .
 # Vite dev server and HMR port
 EXPOSE 5173 24678
 ENV NODE_ENV=development
-CMD ["yarn", "dev", "--", "--host", "0.0.0.0"]
+ENTRYPOINT []
+CMD ["yarn", "dev", "--host", "0.0.0.0"]
 
 # ---------- Build ----------
 FROM base AS build
