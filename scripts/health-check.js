@@ -258,15 +258,36 @@ class HealthCheckScanner {
       try {
         const tree = JSON.parse(result.output);
         const duplicates = this.findDuplicateDependencies(tree);
+        const packageJson = JSON.parse(readFileSync('package.json', 'utf8'));
+        const directDependencies = new Set([
+          ...Object.keys(packageJson.dependencies || {}),
+          ...Object.keys(packageJson.devDependencies || {}),
+        ]);
+        const { actionable, unavoidable } = this.classifyDuplicates(
+          duplicates,
+          directDependencies,
+        );
 
         if (duplicates.length === 0) {
           this.addCheck('Duplicate Dependencies', 'passed', {
             message: 'No duplicate dependencies found',
           });
+        } else if (actionable.length === 0) {
+          this.addCheck('Duplicate Dependencies', 'passed', {
+            message: `Found ${duplicates.length} duplicate packages, all unavoidable transitive cross-major dependencies`,
+            duplicateCount: duplicates.length,
+            actionableCount: 0,
+            unavoidableCount: unavoidable.length,
+            unavoidable: unavoidable.slice(0, 5), // Show first 5
+          });
         } else {
           this.addCheck('Duplicate Dependencies', 'warning', {
-            message: `Found ${duplicates.length} packages with multiple versions`,
-            duplicates: duplicates.slice(0, 5), // Show first 5
+            message: `${actionable.length} actionable duplicate packages found (${unavoidable.length} unavoidable transitive cross-major duplicates ignored)`,
+            duplicateCount: duplicates.length,
+            actionableCount: actionable.length,
+            unavoidableCount: unavoidable.length,
+            actionable: actionable.slice(0, 5), // Show first 5
+            unavoidable: unavoidable.slice(0, 5), // Show first 5
           });
         }
       } catch (err) {
@@ -298,6 +319,37 @@ class HealthCheckScanner {
     return Object.entries(versions)
       .filter(([, v]) => v.size > 1)
       .map(([name, v]) => ({ name, versions: Array.from(v) }));
+  }
+
+  classifyDuplicates(duplicates, directDependencies) {
+    const actionable = [];
+    const unavoidable = [];
+
+    duplicates.forEach((dup) => {
+      const majorVersions = new Set(
+        dup.versions
+          .map((version) => this.getMajorVersion(version))
+          .filter((major) => major !== null),
+      );
+
+      const isDirect = directDependencies.has(dup.name);
+      const isCrossMajor = majorVersions.size > 1;
+
+      if (!isDirect && isCrossMajor) {
+        unavoidable.push(dup);
+      } else {
+        actionable.push(dup);
+      }
+    });
+
+    return { actionable, unavoidable };
+  }
+
+  getMajorVersion(version) {
+    if (typeof version !== 'string') return null;
+
+    const match = version.match(/^(\d+)\./);
+    return match ? Number.parseInt(match[1], 10) : null;
   }
 
   async checkLicenses() {
