@@ -22,6 +22,6 @@ services:
     image: zkm-tw-prod
     container_name: zkm-tw-web-prod
     ports:
-      - '8080:80'
+      - '8082:8080'
     environment:
       - NODE_ENV=production
