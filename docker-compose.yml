@@ -11,7 +11,7 @@ services:
     environment:
       - NODE_ENV=development
     volumes:
-      - .:/app
+      - .:/app:z
       - /app/node_modules
 
   web-prod:
