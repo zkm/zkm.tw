@@ -43,19 +43,19 @@
     "ci": "yarn install --immutable && yarn verify && yarn build"
   },
   "dependencies": {
-    "axios": "^1.13.5",
+    "axios": "^1.15.0",
     "chart.js": "^4.5.1",
-    "framer-motion": "^12.34.3",
-    "jspdf": "^4.2.0",
-    "lucide-react": "^0.x",
-    "react": "^19.2.4",
+    "framer-motion": "^12.38.0",
+    "jspdf": "^4.2.1",
+    "lucide-react": "^1.8.0",
+    "react": "^19.2.5",
     "react-chartjs-2": "^5.3.1",
-    "react-dom": "^19.2.4",
+    "react-dom": "^19.2.5",
     "react-gtm-module": "^2.0.11",
     "react-markdown": "^10.1.0",
-    "styled-components": "^6.3.11",
+    "styled-components": "^6.4.0",
     "styled-system": "^5.1.5",
-    "web-vitals": "^5.1.0"
+    "web-vitals": "^5.2.0"
   },
   "engines": {
     "node": ">=24 <26"
@@ -84,35 +84,35 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@tailwindcss/postcss": "^4.2.1",
+    "@tailwindcss/postcss": "^4.2.2",
     "@tailwindcss/typography": "^0.5.19",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
-    "@types/node": "^25.3.1",
+    "@types/node": "^25.6.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@types/react-gtm-module": "^2.0.4",
-    "@vitejs/plugin-react": "^5.1.4",
-    "@vitest/coverage-v8": "^4.0.18",
-    "@vitest/ui": "^4.0.18",
-    "autoprefixer": "^10.4.27",
-    "eslint": "^10.0.2",
+    "@vitejs/plugin-react": "^6.0.1",
+    "@vitest/coverage-v8": "^4.1.4",
+    "@vitest/ui": "^4.1.4",
+    "autoprefixer": "^10.5.0",
+    "eslint": "^10.2.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.5.2",
-    "globals": "^17.3.0",
-    "happy-dom": "^20.7.0",
+    "globals": "^17.5.0",
+    "happy-dom": "^20.9.0",
     "husky": "^9.1.7",
-    "jsdom": "^28.1.0",
-    "postcss": "^8.5.6",
-    "prettier": "^3.8.1",
-    "tailwindcss": "^4.2.1",
-    "typescript": "^5.9.3",
-    "typescript-eslint": "^8.56.1",
-    "vite": "^7.3.1",
-    "vitest": "^4.0.18"
+    "jsdom": "^29.0.2",
+    "postcss": "^8.5.9",
+    "prettier": "^3.8.2",
+    "tailwindcss": "^4.2.2",
+    "typescript": "^6.0.2",
+    "typescript-eslint": "^8.58.2",
+    "vite": "^8.0.8",
+    "vitest": "^4.1.4"
   },
   "browserslist": {
     "production": [
@@ -126,7 +126,7 @@
       "last 1 safari version"
     ]
   },
-  "packageManager": "yarn@4.12.0",
+  "packageManager": "yarn@4.14.1",
   "trustedDependencies": [
     "core-js",
     "esbuild"
