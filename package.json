@@ -97,20 +97,20 @@
     "@vitejs/plugin-react": "^6.0.1",
     "@vitest/coverage-v8": "^4.1.4",
     "@vitest/ui": "^4.1.4",
-    "autoprefixer": "^10.4.27",
+    "autoprefixer": "^10.5.0",
     "eslint": "^10.2.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.5.0",
-    "happy-dom": "^20.8.9",
+    "happy-dom": "^20.9.0",
     "husky": "^9.1.7",
     "jsdom": "^29.0.2",
     "postcss": "^8.5.9",
     "prettier": "^3.8.2",
     "tailwindcss": "^4.2.2",
     "typescript": "^6.0.2",
-    "typescript-eslint": "^8.58.1",
+    "typescript-eslint": "^8.58.2",
     "vite": "^8.0.8",
     "vitest": "^4.1.4"
   },
@@ -126,7 +126,7 @@
       "last 1 safari version"
     ]
   },
-  "packageManager": "yarn@4.13.0",
+  "packageManager": "yarn@4.14.1",
   "trustedDependencies": [
     "core-js",
     "esbuild"
