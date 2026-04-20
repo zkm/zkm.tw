@@ -111,11 +111,7 @@ yarn test:ui
 
 ## Analytics
 
-GA4 is loaded in index.html and initialized in public/analytics.js using measurement ID G-2J7SWPGLE4.
-
-## Deployment
-
-Deployment is handled by the deploy script and the production branch workflow:
+GA4 is loaded in index.html and initialized in public/analytics.js
 
 ```bash
 yarn deploy
@@ -127,18 +123,6 @@ This will:
 2. Replace the `production` branch contents with your built `dist` assets
 3. Commit and push to `production`
 4. Trigger GitHub Actions deployment recording for `production`
-
-### Custom Domain
-
-Your site is published at [zkm.tw](https://zkm.tw) using a CNAME file in `public/CNAME`.
-
-**If you change your domain, update `public/CNAME` and run `yarn deploy` to publish to production.**
-
-### Troubleshooting
-
-- Check deployment status in the GitHub Actions tab
-- Ensure GitHub Pages is configured to publish from the `production` branch
-- Confirm your DNS records point to GitHub Pages
 
 ## Project structure
 
