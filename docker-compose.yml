@@ -24,3 +24,12 @@ services:
       - '8082:8080'
     environment:
       - NODE_ENV=production
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    tmpfs:
+      - /tmp
+      - /var/cache/nginx
+      - /var/run

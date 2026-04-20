@@ -2,7 +2,7 @@ name: Deploy to DigitalOcean
 
 on:
   push:
-    branches: [master]
+    branches: [main, master]
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 concurrency:
@@ -36,4 +36,4 @@ jobs:
         run: yarn build
 
       - name: Deployment Note
-        run: echo "🎯 Code is ready! DigitalOcean will deploy automatically from master branch."
+        run: echo "🎯 Code is ready! DigitalOcean will deploy automatically from main/master branch."

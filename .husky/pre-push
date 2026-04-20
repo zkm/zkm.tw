@@ -1,4 +1,4 @@
-# Run fast checks before committing; keep heavier checks in pre-push/CI
+# Run tests before pushing; abort push if tests fail
 command -v yarn >/dev/null 2>&1 || { echo >&2 "yarn is required but not installed."; exit 1; }
 
-yarn lint
+yarn test

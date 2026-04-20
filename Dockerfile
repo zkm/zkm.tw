@@ -7,7 +7,8 @@ USER root
 # Install dependencies first (use lockfile if present)
 COPY package.json yarn.lock .yarnrc.yml ./
 COPY .yarn/ .yarn/
-RUN yarn install --immutable
+RUN yarn install --immutable && chown -R 65532:65532 /app
+USER 65532
 
 # ---------- Development ----------
 FROM base AS dev
@@ -28,5 +29,6 @@ RUN yarn clean && yarn tsc -b tsconfig.app.json tsconfig.node.json && yarn vite 
 
 # ---------- Production (static) ----------
 FROM cgr.dev/chainguard/nginx:latest AS prod
+COPY nginx.conf /etc/nginx/nginx.conf
 COPY --from=build /app/dist /usr/share/nginx/html
 EXPOSE 8080

@@ -2,9 +2,9 @@ name: Package Health Check
 
 on:
   push:
-    branches: [main, develop]
+    branches: [main, master, develop]
   pull_request:
-    branches: [main, develop]
+    branches: [main, master, develop]
   schedule:
     # Run weekly on Monday at 9:00 AM UTC
     - cron: '0 9 * * 1'
@@ -13,6 +13,10 @@ on:
 jobs:
   health-check:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
 
     steps:
       - name: Checkout code
@@ -43,7 +47,12 @@ jobs:
           path: health-check-report.json
           retention-days: 30
 
-      - name: Security Audit
+      - name: Security Audit (Blocking on PR)
+        if: github.event_name == 'pull_request'
+        run: yarn npm audit --all
+
+      - name: Security Audit (Non-Blocking)
+        if: github.event_name != 'pull_request'
         run: yarn npm audit --all
         continue-on-error: true
 

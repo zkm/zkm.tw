@@ -2,20 +2,29 @@
 
 ## Supported Versions
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
+Security updates are provided for the latest major version.
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+| Version | Supported |
+| ------- | --------- |
+| 4.x     | Yes       |
+| < 4.0   | No        |
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
+Please report vulnerabilities privately by emailing me@zachschneider.com with:
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+- A clear description of the issue and impact.
+- Steps to reproduce or a proof of concept.
+- Affected URLs, files, and versions.
+
+### Response Targets
+
+- Initial response: within 72 hours.
+- Triage decision: within 7 days.
+- Fix timeline: depends on severity and complexity.
+
+### Disclosure Policy
+
+- Do not open public issues for active vulnerabilities.
+- Coordinated disclosure is preferred after a patch is available.
+- Credit can be provided in release notes on request.
