@@ -113,6 +113,10 @@ yarn test:ui
 
 GA4 is loaded in index.html and initialized in public/analytics.js
 
+## Deployment
+
+Deployment is handled by the deploy script and the production branch workflow:
+
 ```bash
 yarn deploy
 ```
