@@ -22,7 +22,7 @@ Modern React + TypeScript portfolio powered by Vite, Tailwind CSS, and Framer Mo
 
 ## Getting started
 
-Prereqs: Node 24+, Yarn 4 (via Corepack).
+Prerequisites: Node 24+, Yarn 4 (via Corepack).
 
 Install deps
 
