@@ -2,8 +2,8 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/React-19-blue?logo=react" alt="React" />
-  <img src="https://img.shields.io/badge/TypeScript-5-blue?logo=typescript" alt="TypeScript" />
-  <img src="https://img.shields.io/badge/Vite-7-646CFF?logo=vite" alt="Vite" />
+  <img src="https://img.shields.io/badge/TypeScript-6-blue?logo=typescript" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Vite-8-646CFF?logo=vite" alt="Vite" />
   <img src="https://img.shields.io/badge/TailwindCSS-4-38B2AC?logo=tailwindcss" alt="Tailwind CSS" />
   <img src="https://img.shields.io/badge/Framer%20Motion-12-black?logo=framer" alt="Framer Motion" />
   <img src="https://img.shields.io/badge/Chart.js-4-orange?logo=chartdotjs" alt="Chart.js" />
@@ -14,7 +14,7 @@ Modern React + TypeScript portfolio powered by Vite, Tailwind CSS, and Framer Mo
 
 ## Stack
 
-- React 19, TypeScript, Vite 7
+- React 19, TypeScript 6, Vite 8
 - Tailwind CSS 4, PostCSS, Styled Components
 - Framer Motion (animations), Lucide Icons
 - Chart.js + react-chartjs-2 (lazy-loaded Bar)
@@ -64,7 +64,7 @@ yarn preview
 - `verify`: lint, typecheck, and test
 - `fix`: lint:fix and format
 - `docker:dev`: run dev with Docker (5173, HMR 24678)
-- `docker:prod`: run production build with nginx (8080)
+- `docker:prod`: run production build with nginx (8082)
 - `docker:down`: stop Docker containers
 - `health` / `health:full`: health checks and audit
 - `health:report`: generate health report
@@ -77,14 +77,14 @@ yarn preview
 - Dockerfile has multi-stage targets: dev (Vite), build, prod (nginx)
 - docker-compose.yml defines:
   - web: bind-mount dev with hot reload on http://localhost:5173
-  - web-prod: serves built assets via nginx on http://localhost:8080
+  - web-prod: serves built assets via nginx on http://localhost:8082
 - .dockerignore is configured to keep the build context small
 
 Common
 
 ```bash
 yarn docker:dev   # dev with HMR
-yarn docker:prod  # serve built site on :8080
+yarn docker:prod  # serve built site on :8082
 ```
 
 ## Tests
@@ -111,11 +111,11 @@ yarn test:ui
 
 ## Analytics
 
-GA4 is integrated via gtag in index.html using measurement ID G-2J7SWPGLE4. If you prefer GTM, replace the GA snippet with your GTM container snippet.
+GA4 is loaded in index.html and initialized in public/analytics.js using measurement ID G-2J7SWPGLE4.
 
 ## Deployment
 
-Deployment is now handled automatically via GitHub Actions:
+Deployment is handled by the deploy script and the production branch workflow:
 
 ```bash
 yarn deploy
@@ -123,20 +123,21 @@ yarn deploy
 
 This will:
 
-1. Run tests and build your project
-2. Commit and push changes to the `master` branch
-3. Trigger a GitHub Actions workflow that builds and deploys to GitHub Pages
+1. Build your project
+2. Replace the `production` branch contents with your built `dist` assets
+3. Commit and push to `production`
+4. Trigger GitHub Actions deployment recording for `production`
 
 ### Custom Domain
 
 Your site is published at [zkm.tw](https://zkm.tw) using a CNAME file in `public/CNAME`.
 
-**If you change your domain, update `public/CNAME` and push to master.**
+**If you change your domain, update `public/CNAME` and run `yarn deploy` to publish to production.**
 
 ### Troubleshooting
 
 - Check deployment status in the GitHub Actions tab
-- Ensure GitHub Pages source is set to "GitHub Actions" in repository settings
+- Ensure GitHub Pages is configured to publish from the `production` branch
 - Confirm your DNS records point to GitHub Pages
 
 ## Project structure

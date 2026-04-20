@@ -25,8 +25,13 @@ function hasStagedChanges() {
   }
 }
 
+function getCurrentBranch() {
+  return execSync('git branch --show-current', { encoding: 'utf8' }).trim();
+}
+
 function deploy() {
   console.log('🚀 Starting deployment process...');
+  const originalBranch = getCurrentBranch();
 
   // Backup dist folder
   if (existsSync('dist')) {
@@ -54,11 +59,11 @@ function deploy() {
       console.log('ℹ️ No changes to deploy. Production branch is already up to date.');
     }
   } finally {
-    // Cleanup and return to master
+    // Cleanup and return to the original working branch
     if (existsSync(BACKUP_DIR)) {
       rmSync(BACKUP_DIR, { recursive: true, force: true });
     }
-    run('git checkout master', 'Returning to master');
+    run(`git checkout ${originalBranch}`, `Returning to ${originalBranch}`);
   }
 }
 
