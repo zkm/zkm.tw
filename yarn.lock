@@ -71,9 +71,9 @@ __metadata:
   linkType: hard
 
 "@babel/compat-data@npm:^7.28.6":
-  version: 7.29.0
-  resolution: "@babel/compat-data@npm:7.29.0"
-  checksum: 10c0/08f348554989d23aa801bf1405aa34b15e841c0d52d79da7e524285c77a5f9d298e70e11d91cc578d8e2c9542efc586d50c5f5cf8e1915b254a9dcf786913a94
+  version: 7.29.3
+  resolution: "@babel/compat-data@npm:7.29.3"
+  checksum: 10c0/81bddd53ce1b1395576fbb7cb739631a976f6b421cd260e6cf2715a9691b9a0ec12ca5c4e1bb88088e60dc87875f6e4ef7fa8674f1dc96ae1bd7c357416605a7
   languageName: node
   linkType: hard
 
@@ -188,13 +188,13 @@ __metadata:
   linkType: hard
 
 "@babel/parser@npm:^7.24.4, @babel/parser@npm:^7.28.6, @babel/parser@npm:^7.29.0":
-  version: 7.29.2
-  resolution: "@babel/parser@npm:7.29.2"
+  version: 7.29.3
+  resolution: "@babel/parser@npm:7.29.3"
   dependencies:
     "@babel/types": "npm:^7.29.0"
   bin:
     parser: ./bin/babel-parser.js
-  checksum: 10c0/e5a4e69e3ac7acdde995f37cf299a68458cfe7009dff66bd0962fd04920bef287201169006af365af479c08ff216bfefbb595e331f87f6ae7283858aebbc3317
+  checksum: 10c0/f06920c819550c0db689e4c5b626bf55ba3cebf80ebe9ccfa434e134036cf3de50951fe759f74abb2dae381989239860bde46d4600328578ad1f7114c3711a6d
   languageName: node
   linkType: hard
 
@@ -1769,11 +1769,11 @@ __metadata:
   linkType: hard
 
 "baseline-browser-mapping@npm:^2.10.12":
-  version: 2.10.24
-  resolution: "baseline-browser-mapping@npm:2.10.24"
+  version: 2.10.25
+  resolution: "baseline-browser-mapping@npm:2.10.25"
   bin:
     baseline-browser-mapping: dist/cli.cjs
-  checksum: 10c0/ae41f20b7d594909eac68e54b876127a456c99e85f49ba928a79c97ea288007617ad6638ddd1e36db45bbacef7b95b0f436d347602b2e1be2047099fcbbd5f37
+  checksum: 10c0/3955a01d1ca9487b23805b89250465911c0aa7aa1bd7b6207ab64257c945ad50e37d2d6d33b559e47e20cf1d3b1930fc15115bfbc340e84fd33c238a01bdebb6
   languageName: node
   linkType: hard
 
@@ -2178,14 +2178,14 @@ __metadata:
   linkType: hard
 
 "dompurify@npm:^3.3.1":
-  version: 3.4.1
-  resolution: "dompurify@npm:3.4.1"
+  version: 3.4.2
+  resolution: "dompurify@npm:3.4.2"
   dependencies:
     "@types/trusted-types": "npm:^2.0.7"
   dependenciesMeta:
     "@types/trusted-types":
       optional: true
-  checksum: 10c0/440a4246020cb54b82ef2cb66381e4d310a0c470f9994655e61b6122811f0eaa00a2f9665d2bed30ca3f58932ba7bb0d5e26fdfce61c8daf35d21a3f5a799e48
+  checksum: 10c0/23ab3ab079480a49e1426c4ee7279e393913fa7f2193c4142a5be54d4163dbdd969558675876c6b8bbcbf2ad5d1bc3e00bf902acf142fff12e50274a65ae95b3
   languageName: node
   linkType: hard
 
@@ -2201,9 +2201,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.5.328":
-  version: 1.5.344
-  resolution: "electron-to-chromium@npm:1.5.344"
-  checksum: 10c0/36624a59b2da4cb2bdee3085f5fc814bc0ba5830162a26f45c4b189177455869fd9d9c2e05fa28e69a45fb95c04d3e995962ff0e1658f552dcbe147a731c4f1d
+  version: 1.5.348
+  resolution: "electron-to-chromium@npm:1.5.348"
+  checksum: 10c0/d9637b3ba53c0c8bc2430f65ff7f368403cdeb1fc9bfef2e44eabe4c0515bea244feedf3fd1848c474fe9586eba81d88507f24e0bdf0e21480b30439319b9509
   languageName: node
   linkType: hard
 
@@ -3451,9 +3451,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsdom@npm:^29.1.0":
-  version: 29.1.0
-  resolution: "jsdom@npm:29.1.0"
+"jsdom@npm:^29.1.1":
+  version: 29.1.1
+  resolution: "jsdom@npm:29.1.1"
   dependencies:
     "@asamuzakjp/css-color": "npm:^5.1.11"
     "@asamuzakjp/dom-selector": "npm:^7.1.1"
@@ -3481,7 +3481,7 @@ __metadata:
   peerDependenciesMeta:
     canvas:
       optional: true
-  checksum: 10c0/875f298f8b1267b4bb4ddecdf94a6d279a01ea55fe14f43b89d56eb5dc3ffe81e93356181620d58d06c43b934e5d9f0c61810a971c38c1613a0b57c060eab85b
+  checksum: 10c0/20e2174b09d9d06393cb48e1392b7a1cb7191d6656a6f7b3b8fbf9853b4ab0ef60b4a42c2c55f71b55ca5da50ffa75bcdc6986210963182e7993c6f9cd4f499b
   languageName: node
   linkType: hard
 
@@ -4239,11 +4239,11 @@ __metadata:
   linkType: hard
 
 "nanoid@npm:^3.3.11":
-  version: 3.3.11
-  resolution: "nanoid@npm:3.3.11"
+  version: 3.3.12
+  resolution: "nanoid@npm:3.3.12"
   bin:
     nanoid: bin/nanoid.cjs
-  checksum: 10c0/40e7f70b3d15f725ca072dfc4f74e81fcf1fbb02e491cf58ac0c79093adc9b0a73b152bcde57df4b79cd097e13023d7504acb38404a4da7bc1cd8e887b82fe0b
+  checksum: 10c0/ba142b7b39e11e80c16dd74b0365d407880c87c1cf7e1480956981ae940ee36060fa5b6f092cd1e315184dd19244c657bd017d03327bd3c62247d691c5e8edfb
   languageName: node
   linkType: hard
 
@@ -4530,13 +4530,13 @@ __metadata:
   linkType: hard
 
 "postcss@npm:^8.5.6":
-  version: 8.5.12
-  resolution: "postcss@npm:8.5.12"
+  version: 8.5.13
+  resolution: "postcss@npm:8.5.13"
   dependencies:
     nanoid: "npm:^3.3.11"
     picocolors: "npm:^1.1.1"
     source-map-js: "npm:^1.2.1"
-  checksum: 10c0/5baebaf574c567bc1b3d61197f38af4ce5920b8f611c887fb6bc3dcc14af00253c169dbf19897bc889cce0b0d9818ab5eb4ea0caedf02b0bab10da8a43ce8c12
+  checksum: 10c0/3aa7c8cbdfbfd99b34406a433cef56d164dd135fc9cb9e63d487cc363291f877a55ec7b8ff6ec15348c17c2d98a43be46bfad671e6340403041a3e79f70c2f2f
   languageName: node
   linkType: hard
 
@@ -6003,10 +6003,10 @@ __metadata:
     globals: "npm:^17.5.0"
     happy-dom: "npm:^20.9.0"
     husky: "npm:^9.1.7"
-    jsdom: "npm:^29.1.0"
+    jsdom: "npm:^29.1.1"
     jspdf: "npm:^4.2.1"
     lucide-react: "npm:^1.14.0"
-    postcss: "npm:^8.5.12"
+    postcss: "npm:^8.5.13"
     prettier: "npm:^3.8.3"
     react: "npm:^19.2.5"
     react-chartjs-2: "npm:^5.3.1"
@@ -6034,9 +6034,9 @@ __metadata:
   linkType: hard
 
 "zod@npm:^3.25.0 || ^4.0.0":
-  version: 4.3.6
-  resolution: "zod@npm:4.3.6"
-  checksum: 10c0/860d25a81ab41d33aa25f8d0d07b091a04acb426e605f396227a796e9e800c44723ed96d0f53a512b57be3d1520f45bf69c0cb3b378a232a00787a2609625307
+  version: 4.4.1
+  resolution: "zod@npm:4.4.1"
+  checksum: 10c0/55714c4bea81f7851ac46bf9edfde7c63ed6677a6cc8971ed3a526a079de3ffbe2bd56160327d22e070f72854fc4485b98ab7373255b6b69d64d9067caec864e
   languageName: node
   linkType: hard
 
