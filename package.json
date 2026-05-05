@@ -106,11 +106,11 @@
     "happy-dom": "^20.9.0",
     "husky": "^9.1.7",
     "jsdom": "^29.1.1",
-    "postcss": "^8.5.13",
+    "postcss": "^8.5.14",
     "prettier": "^3.8.3",
     "tailwindcss": "^4.2.2",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.59.1",
+    "typescript-eslint": "^8.59.2",
     "vite": "^8.0.10",
     "vitest": "^4.1.4"
   },
