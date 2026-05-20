@@ -5,138 +5,140 @@ import { useProfileData } from '../hooks/useProfileData';
 
 // Mock the useProfileData hook
 vi.mock('../hooks/useProfileData', () => ({
-  useProfileData: vi.fn(),
+    useProfileData: vi.fn(),
 }));
 
 // framer-motion is globally mocked in test-setup.ts
 
 // Mock lucide-react icons
 vi.mock('lucide-react', () => ({
-  Github: () => <div data-testid="github-icon">Github</div>,
-  Linkedin: () => <div data-testid="linkedin-icon">Linkedin</div>,
-  Instagram: () => <div data-testid="instagram-icon">Instagram</div>,
-  FileText: () => <div data-testid="file-text-icon">FileText</div>,
-  MessageCircle: () => <div data-testid="message-circle-icon">MessageCircle</div>,
-  X: () => <div data-testid="x-icon">X</div>,
-  Send: () => <div data-testid="send-icon">Send</div>,
-  User: () => <div data-testid="user-icon">User</div>,
-  Bot: () => <div data-testid="bot-icon">Bot</div>,
+    Github: () => <div data-testid="github-icon">Github</div>,
+    Linkedin: () => <div data-testid="linkedin-icon">Linkedin</div>,
+    Instagram: () => <div data-testid="instagram-icon">Instagram</div>,
+    FileText: () => <div data-testid="file-text-icon">FileText</div>,
+    MessageCircle: () => <div data-testid="message-circle-icon">MessageCircle</div>,
+    X: () => <div data-testid="x-icon">X</div>,
+    Send: () => <div data-testid="send-icon">Send</div>,
+    User: () => <div data-testid="user-icon">User</div>,
+    Bot: () => <div data-testid="bot-icon">Bot</div>,
 }));
 
 // Mock Resume component
 vi.mock('./Resume', () => ({
-  default: () => <div data-testid="resume-component">Resume Component</div>,
+    default: () => <div data-testid="resume-component">Resume Component</div>,
 }));
 
 const mockProfileData = {
-  name: 'John Doe',
-  title: 'Software Developer',
-  bio: 'Passionate developer with 5 years of experience',
-  profileImage: '/images/profile.jpg',
-  backgroundImage: '/images/background.jpg',
-  socialLinks: [
-    {
-      platform: 'github',
-      url: 'https://github.com/johndoe',
-      username: 'johndoe',
-      icon: 'github',
-      display: true,
-    },
-    {
-      platform: 'linkedin',
-      url: 'https://linkedin.com/in/johndoe',
-      username: 'johndoe',
-      icon: 'linkedin',
-      display: true,
-    },
-  ],
-  profile: {
     name: 'John Doe',
     title: 'Software Developer',
-    tagline: 'Passionate developer with 5 years of experience',
-    image: '/images/profile.jpg',
-  },
-  resume: { enabled: true },
-  contact: { cta: 'Contact me', message: 'Feel free to reach out for collaboration!' },
+    bio: 'Passionate developer with 5 years of experience',
+    profileImage: '/images/profile.jpg',
+    backgroundImage: '/images/background.jpg',
+    socialLinks: [
+        {
+            platform: 'github',
+            url: 'https://github.com/johndoe',
+            username: 'johndoe',
+            icon: 'github',
+            display: true,
+        },
+        {
+            platform: 'linkedin',
+            url: 'https://linkedin.com/in/johndoe',
+            username: 'johndoe',
+            icon: 'linkedin',
+            display: true,
+        },
+    ],
+    profile: {
+        name: 'John Doe',
+        title: 'Software Developer',
+        tagline: 'Passionate developer with 5 years of experience',
+        image: '/images/profile.jpg',
+    },
+    resume: { enabled: true },
+    contact: { cta: 'Contact me', message: 'Feel free to reach out for collaboration!' },
 };
 
 describe('Portfolio', () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
-  });
-
-  it('renders loading state', () => {
-    vi.mocked(useProfileData).mockReturnValue({
-      data: null,
-      loading: true,
-      error: null,
+    beforeEach(() => {
+        vi.clearAllMocks();
     });
 
-    render(<Portfolio />);
-    // Check for spinner by role or class
-    expect(
-      document.querySelector('.w-8.h-8.border-2.border-white.border-t-transparent.rounded-full'),
-    ).toBeInTheDocument();
-  });
+    it('renders loading state', () => {
+        vi.mocked(useProfileData).mockReturnValue({
+            data: null,
+            loading: true,
+            error: null,
+        });
 
-  it('renders error state', () => {
-    vi.mocked(useProfileData).mockReturnValue({
-      data: null,
-      loading: false,
-      error: 'Failed to load profile data',
+        render(<Portfolio />);
+        // Check for spinner by role or class
+        expect(
+            document.querySelector(
+                '.w-8.h-8.border-2.border-white.border-t-transparent.rounded-full',
+            ),
+        ).toBeInTheDocument();
     });
 
-    render(<Portfolio />);
-    expect(screen.getByText('Oops!')).toBeInTheDocument();
-    expect(screen.getByText('Failed to load profile data')).toBeInTheDocument();
-  });
+    it('renders error state', () => {
+        vi.mocked(useProfileData).mockReturnValue({
+            data: null,
+            loading: false,
+            error: 'Failed to load profile data',
+        });
 
-  it('renders portfolio data when loaded', async () => {
-    vi.mocked(useProfileData).mockReturnValue({
-      data: mockProfileData,
-      loading: false,
-      error: null,
+        render(<Portfolio />);
+        expect(screen.getByText('Oops!')).toBeInTheDocument();
+        expect(screen.getByText('Failed to load profile data')).toBeInTheDocument();
     });
 
-    render(<Portfolio />);
+    it('renders portfolio data when loaded', async () => {
+        vi.mocked(useProfileData).mockReturnValue({
+            data: mockProfileData,
+            loading: false,
+            error: null,
+        });
 
-    await waitFor(() => {
-      expect(screen.getByText('John Doe')).toBeInTheDocument();
-      expect(screen.getByText('Software Developer')).toBeInTheDocument();
-      expect(
-        screen.getByText('Passionate developer with 5 years of experience'),
-      ).toBeInTheDocument();
-    });
-  });
+        render(<Portfolio />);
 
-  it('renders social links', async () => {
-    vi.mocked(useProfileData).mockReturnValue({
-      data: mockProfileData,
-      loading: false,
-      error: null,
-    });
-
-    render(<Portfolio />);
-
-    await waitFor(() => {
-      // Check for social links by their aria-labels
-      expect(screen.getByLabelText(/github.*opens in new window/i)).toBeInTheDocument();
-      expect(screen.getByLabelText(/linkedin.*opens in new window/i)).toBeInTheDocument();
-    });
-  });
-
-  it('shows portfolio view by default', async () => {
-    vi.mocked(useProfileData).mockReturnValue({
-      data: mockProfileData,
-      loading: false,
-      error: null,
+        await waitFor(() => {
+            expect(screen.getByText('John Doe')).toBeInTheDocument();
+            expect(screen.getByText('Software Developer')).toBeInTheDocument();
+            expect(
+                screen.getByText('Passionate developer with 5 years of experience'),
+            ).toBeInTheDocument();
+        });
     });
 
-    render(<Portfolio />);
+    it('renders social links', async () => {
+        vi.mocked(useProfileData).mockReturnValue({
+            data: mockProfileData,
+            loading: false,
+            error: null,
+        });
 
-    await waitFor(() => {
-      expect(screen.getByText('John Doe')).toBeInTheDocument();
-      expect(screen.queryByTestId('resume-component')).not.toBeInTheDocument();
+        render(<Portfolio />);
+
+        await waitFor(() => {
+            // Check for social links by their aria-labels
+            expect(screen.getByLabelText(/github.*opens in new window/i)).toBeInTheDocument();
+            expect(screen.getByLabelText(/linkedin.*opens in new window/i)).toBeInTheDocument();
+        });
     });
-  });
+
+    it('shows portfolio view by default', async () => {
+        vi.mocked(useProfileData).mockReturnValue({
+            data: mockProfileData,
+            loading: false,
+            error: null,
+        });
+
+        render(<Portfolio />);
+
+        await waitFor(() => {
+            expect(screen.getByText('John Doe')).toBeInTheDocument();
+            expect(screen.queryByTestId('resume-component')).not.toBeInTheDocument();
+        });
+    });
 });

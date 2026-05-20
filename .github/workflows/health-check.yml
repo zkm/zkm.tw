@@ -1,115 +1,115 @@
 name: Package Health Check
 
 on:
-  push:
-    branches: [main, master, develop]
-  pull_request:
-    branches: [main, master, develop]
-  schedule:
-    # Run weekly on Monday at 9:00 AM UTC
-    - cron: '0 9 * * 1'
-  workflow_dispatch: # Allow manual triggering
+    push:
+        branches: [main, master, develop]
+    pull_request:
+        branches: [main, master, develop]
+    schedule:
+        # Run weekly on Monday at 9:00 AM UTC
+        - cron: '0 9 * * 1'
+    workflow_dispatch: # Allow manual triggering
 
 jobs:
-  health-check:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
-      issues: write
+    health-check:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+            pull-requests: write
+            issues: write
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v6
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v6
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: '24'
-          cache: 'yarn'
+            - name: Setup Node.js
+              uses: actions/setup-node@v6
+              with:
+                  node-version: '24'
+                  cache: 'yarn'
 
-      - name: Enable Corepack
-        run: corepack enable
+            - name: Enable Corepack
+              run: corepack enable
 
-      - name: Install dependencies
-        run: yarn install --immutable
+            - name: Install dependencies
+              run: yarn install --immutable
 
-      - name: Run Health Check
-        run: node scripts/health-check.js
-        continue-on-error: true
-        id: health-check
+            - name: Run Health Check
+              run: node scripts/health-check.js
+              continue-on-error: true
+              id: health-check
 
-      - name: Upload Health Check Report
-        uses: actions/upload-artifact@v7
-        if: always()
-        with:
-          name: health-check-report
-          path: health-check-report.json
-          retention-days: 30
+            - name: Upload Health Check Report
+              uses: actions/upload-artifact@v7
+              if: always()
+              with:
+                  name: health-check-report
+                  path: health-check-report.json
+                  retention-days: 30
 
-      - name: Security Audit (Blocking on PR)
-        if: github.event_name == 'pull_request'
-        run: yarn npm audit --all
+            - name: Security Audit (Blocking on PR)
+              if: github.event_name == 'pull_request'
+              run: yarn npm audit --all
 
-      - name: Security Audit (Non-Blocking)
-        if: github.event_name != 'pull_request'
-        run: yarn npm audit --all
-        continue-on-error: true
+            - name: Security Audit (Non-Blocking)
+              if: github.event_name != 'pull_request'
+              run: yarn npm audit --all
+              continue-on-error: true
 
-      - name: Check for outdated packages
-        run: yarn dlx npm-check-updates
-        continue-on-error: true
+            - name: Check for outdated packages
+              run: yarn dlx npm-check-updates
+              continue-on-error: true
 
-      - name: Comment PR with Health Check Results
-        if: github.event_name == 'pull_request' && always()
-        uses: actions/github-script@v9
-        with:
-          script: |
-            const fs = require('fs');
+            - name: Comment PR with Health Check Results
+              if: github.event_name == 'pull_request' && always()
+              uses: actions/github-script@v9
+              with:
+                  script: |
+                      const fs = require('fs');
 
-            if (!fs.existsSync('health-check-report.json')) {
-              console.log('Health check report not found');
-              return;
-            }
+                      if (!fs.existsSync('health-check-report.json')) {
+                        console.log('Health check report not found');
+                        return;
+                      }
 
-            const report = JSON.parse(fs.readFileSync('health-check-report.json', 'utf8'));
-            const { summary } = report;
+                      const report = JSON.parse(fs.readFileSync('health-check-report.json', 'utf8'));
+                      const { summary } = report;
 
-            const passRate = ((summary.passed / summary.total) * 100).toFixed(1);
-            const status = summary.errors === 0 ? 
-              (summary.warnings === 0 ? '✅ HEALTHY' : '⚠️ NEEDS ATTENTION') : 
-              '❌ UNHEALTHY';
+                      const passRate = ((summary.passed / summary.total) * 100).toFixed(1);
+                      const status = summary.errors === 0 ? 
+                        (summary.warnings === 0 ? '✅ HEALTHY' : '⚠️ NEEDS ATTENTION') : 
+                        '❌ UNHEALTHY';
 
-            const body = `## 🏥 Package Health Check Report
+                      const body = `## 🏥 Package Health Check Report
 
-            **Status:** ${status}
-            **Pass Rate:** ${passRate}%
+                      **Status:** ${status}
+                      **Pass Rate:** ${passRate}%
 
-            ### Summary
-            - ✓ Passed: ${summary.passed}
-            - ⚠️ Warnings: ${summary.warnings}
-            - ✗ Errors: ${summary.errors}
-            - Total Checks: ${summary.total}
+                      ### Summary
+                      - ✓ Passed: ${summary.passed}
+                      - ⚠️ Warnings: ${summary.warnings}
+                      - ✗ Errors: ${summary.errors}
+                      - Total Checks: ${summary.total}
 
-            ### Recent Checks
-            ${report.checks.slice(-5).map(check => {
-              const icon = check.status === 'passed' ? '✓' : check.status === 'warning' ? '⚠️' : '✗';
-              return `- ${icon} ${check.name}: ${check.details.message || check.status}`;
-            }).join('\n')}
+                      ### Recent Checks
+                      ${report.checks.slice(-5).map(check => {
+                        const icon = check.status === 'passed' ? '✓' : check.status === 'warning' ? '⚠️' : '✗';
+                        return `- ${icon} ${check.name}: ${check.details.message || check.status}`;
+                      }).join('\n')}
 
-            <details>
-            <summary>View Full Report</summary>
+                      <details>
+                      <summary>View Full Report</summary>
 
-            \`\`\`json
-            ${JSON.stringify(report, null, 2)}
-            \`\`\`
+                      \`\`\`json
+                      ${JSON.stringify(report, null, 2)}
+                      \`\`\`
 
-            </details>
-            `;
+                      </details>
+                      `;
 
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: body
-            });
+                      github.rest.issues.createComment({
+                        issue_number: context.issue.number,
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        body: body
+                      });

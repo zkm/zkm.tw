@@ -9,20 +9,20 @@ import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { join } from 'path';
 
 const BADGE_COLORS = {
-  passed: '#4c1',
-  warning: '#fe7d37',
-  error: '#e05d44',
+    passed: '#4c1',
+    warning: '#fe7d37',
+    error: '#e05d44',
 };
 
 function generateBadge(status, passRate) {
-  const color =
-    status === 'HEALTHY'
-      ? BADGE_COLORS.passed
-      : status === 'NEEDS ATTENTION'
-        ? BADGE_COLORS.warning
-        : BADGE_COLORS.error;
+    const color =
+        status === 'HEALTHY'
+            ? BADGE_COLORS.passed
+            : status === 'NEEDS ATTENTION'
+              ? BADGE_COLORS.warning
+              : BADGE_COLORS.error;
 
-  return `
+    return `
 <svg xmlns="http://www.w3.org/2000/svg" width="180" height="20">
   <linearGradient id="b" x2="0" y2="100%">
     <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
@@ -47,15 +47,19 @@ function generateBadge(status, passRate) {
 }
 
 function generateStatusPage(report) {
-  const { summary, checks } = report;
-  const passRate = ((summary.passed / summary.total) * 100).toFixed(1);
-  const status =
-    summary.errors === 0 ? (summary.warnings === 0 ? 'HEALTHY' : 'NEEDS ATTENTION') : 'UNHEALTHY';
+    const { summary, checks } = report;
+    const passRate = ((summary.passed / summary.total) * 100).toFixed(1);
+    const status =
+        summary.errors === 0
+            ? summary.warnings === 0
+                ? 'HEALTHY'
+                : 'NEEDS ATTENTION'
+            : 'UNHEALTHY';
 
-  const statusColor =
-    summary.errors === 0 ? (summary.warnings === 0 ? '#4caf50' : '#ff9800') : '#f44336';
+    const statusColor =
+        summary.errors === 0 ? (summary.warnings === 0 ? '#4caf50' : '#ff9800') : '#f44336';
 
-  return `
+    return `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -230,8 +234,8 @@ function generateStatusPage(report) {
     <div class="checks">
       <h2>Detailed Check Results</h2>
       ${checks
-        .map(
-          (check) => `
+          .map(
+              (check) => `
         <div class="check-item ${check.status}">
           <div class="check-icon">
             ${check.status === 'passed' ? '✅' : check.status === 'warning' ? '⚠️' : '❌'}
@@ -242,8 +246,8 @@ function generateStatusPage(report) {
           </div>
         </div>
       `,
-        )
-        .join('')}
+          )
+          .join('')}
     </div>
     
     <div class="footer">
@@ -256,32 +260,36 @@ function generateStatusPage(report) {
 }
 
 function main() {
-  const reportPath = join(process.cwd(), 'health-check-report.json');
+    const reportPath = join(process.cwd(), 'health-check-report.json');
 
-  if (!existsSync(reportPath)) {
-    console.error('❌ health-check-report.json not found. Run health check first.');
-    process.exit(1);
-  }
+    if (!existsSync(reportPath)) {
+        console.error('❌ health-check-report.json not found. Run health check first.');
+        process.exit(1);
+    }
 
-  const report = JSON.parse(readFileSync(reportPath, 'utf8'));
-  const { summary } = report;
-  const passRate = ((summary.passed / summary.total) * 100).toFixed(1);
-  const status =
-    summary.errors === 0 ? (summary.warnings === 0 ? 'HEALTHY' : 'NEEDS ATTENTION') : 'UNHEALTHY';
+    const report = JSON.parse(readFileSync(reportPath, 'utf8'));
+    const { summary } = report;
+    const passRate = ((summary.passed / summary.total) * 100).toFixed(1);
+    const status =
+        summary.errors === 0
+            ? summary.warnings === 0
+                ? 'HEALTHY'
+                : 'NEEDS ATTENTION'
+            : 'UNHEALTHY';
 
-  // Generate badge
-  const badge = generateBadge(status, passRate);
-  const badgePath = join(process.cwd(), 'health-check-badge.svg');
-  writeFileSync(badgePath, badge);
-  console.log(`✅ Badge generated: ${badgePath}`);
+    // Generate badge
+    const badge = generateBadge(status, passRate);
+    const badgePath = join(process.cwd(), 'health-check-badge.svg');
+    writeFileSync(badgePath, badge);
+    console.log(`✅ Badge generated: ${badgePath}`);
 
-  // Generate status page
-  const statusPage = generateStatusPage(report);
-  const statusPagePath = join(process.cwd(), 'health-check-report.html');
-  writeFileSync(statusPagePath, statusPage);
-  console.log(`✅ Status page generated: ${statusPagePath}`);
+    // Generate status page
+    const statusPage = generateStatusPage(report);
+    const statusPagePath = join(process.cwd(), 'health-check-report.html');
+    writeFileSync(statusPagePath, statusPage);
+    console.log(`✅ Status page generated: ${statusPagePath}`);
 
-  console.log(`\n📊 Overall Status: ${status} (${passRate}% pass rate)`);
+    console.log(`\n📊 Overall Status: ${status} (${passRate}% pass rate)`);
 }
 
 main();

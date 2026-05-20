@@ -6,65 +6,65 @@ import { existsSync, rmSync } from 'fs';
 const BACKUP_DIR = '/tmp/zkm-dist-backup';
 
 function run(command, description) {
-  console.log(`🔄 ${description}...`);
-  try {
-    execSync(command, { stdio: 'inherit' });
-    console.log(`✅ ${description} complete`);
-  } catch (error) {
-    console.error(`❌ ${description} failed`);
-    process.exit(1);
-  }
+    console.log(`🔄 ${description}...`);
+    try {
+        execSync(command, { stdio: 'inherit' });
+        console.log(`✅ ${description} complete`);
+    } catch (error) {
+        console.error(`❌ ${description} failed`);
+        process.exit(1);
+    }
 }
 
 function hasStagedChanges() {
-  try {
-    execSync('git diff --cached --quiet', { stdio: 'ignore' });
-    return false;
-  } catch {
-    return true;
-  }
+    try {
+        execSync('git diff --cached --quiet', { stdio: 'ignore' });
+        return false;
+    } catch {
+        return true;
+    }
 }
 
 function getCurrentBranch() {
-  return execSync('git branch --show-current', { encoding: 'utf8' }).trim();
+    return execSync('git branch --show-current', { encoding: 'utf8' }).trim();
 }
 
 function deploy() {
-  console.log('🚀 Starting deployment process...');
-  const originalBranch = getCurrentBranch();
+    console.log('🚀 Starting deployment process...');
+    const originalBranch = getCurrentBranch();
 
-  // Backup dist folder
-  if (existsSync('dist')) {
-    run(`cp -r dist ${BACKUP_DIR}`, 'Backing up dist folder');
-  } else {
-    console.error('❌ No dist folder found. Run "yarn build" first.');
-    process.exit(1);
-  }
-
-  try {
-    // Switch to production branch and deploy
-    run('git checkout production', 'Switching to production branch');
-    run(
-      'find . -maxdepth 1 -not -name ".git" -not -name "." -not -name ".." -exec rm -rf {} +',
-      'Cleaning production branch',
-    );
-    run(`cp -r ${BACKUP_DIR}/* .`, 'Copying build files');
-    run('git add .', 'Staging files');
-
-    if (hasStagedChanges()) {
-      run('git commit -m "Update production build for deployment"', 'Committing changes');
-      run('git push origin production', 'Pushing to production');
-      console.log('🎉 Deployment complete!');
+    // Backup dist folder
+    if (existsSync('dist')) {
+        run(`cp -r dist ${BACKUP_DIR}`, 'Backing up dist folder');
     } else {
-      console.log('ℹ️ No changes to deploy. Production branch is already up to date.');
+        console.error('❌ No dist folder found. Run "yarn build" first.');
+        process.exit(1);
     }
-  } finally {
-    // Cleanup and return to the original working branch
-    if (existsSync(BACKUP_DIR)) {
-      rmSync(BACKUP_DIR, { recursive: true, force: true });
+
+    try {
+        // Switch to production branch and deploy
+        run('git checkout production', 'Switching to production branch');
+        run(
+            'find . -maxdepth 1 -not -name ".git" -not -name "." -not -name ".." -exec rm -rf {} +',
+            'Cleaning production branch',
+        );
+        run(`cp -r ${BACKUP_DIR}/* .`, 'Copying build files');
+        run('git add .', 'Staging files');
+
+        if (hasStagedChanges()) {
+            run('git commit -m "Update production build for deployment"', 'Committing changes');
+            run('git push origin production', 'Pushing to production');
+            console.log('🎉 Deployment complete!');
+        } else {
+            console.log('ℹ️ No changes to deploy. Production branch is already up to date.');
+        }
+    } finally {
+        // Cleanup and return to the original working branch
+        if (existsSync(BACKUP_DIR)) {
+            rmSync(BACKUP_DIR, { recursive: true, force: true });
+        }
+        run(`git checkout ${originalBranch}`, `Returning to ${originalBranch}`);
     }
-    run(`git checkout ${originalBranch}`, `Returning to ${originalBranch}`);
-  }
 }
 
 deploy();

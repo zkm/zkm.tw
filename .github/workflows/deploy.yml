@@ -1,39 +1,39 @@
 name: Deploy to DigitalOcean
 
 on:
-  push:
-    branches: [main, master]
+    push:
+        branches: [main, master]
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 concurrency:
-  group: 'deployment'
-  cancel-in-progress: false
+    group: 'deployment'
+    cancel-in-progress: false
 
 jobs:
-  # Build and test job
-  test-and-build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+    # Build and test job
+    test-and-build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v6
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: '24'
-          cache: 'yarn'
+            - name: Setup Node.js
+              uses: actions/setup-node@v6
+              with:
+                  node-version: '24'
+                  cache: 'yarn'
 
-      - name: Enable Corepack
-        run: corepack enable
+            - name: Enable Corepack
+              run: corepack enable
 
-      - name: Install dependencies
-        run: yarn install --immutable
+            - name: Install dependencies
+              run: yarn install --immutable
 
-      - name: Run tests
-        run: yarn test
+            - name: Run tests
+              run: yarn test
 
-      - name: Build
-        run: yarn build
+            - name: Build
+              run: yarn build
 
-      - name: Deployment Note
-        run: echo "🎯 Code is ready! DigitalOcean will deploy automatically from main/master branch."
+            - name: Deployment Note
+              run: echo "🎯 Code is ready! DigitalOcean will deploy automatically from main/master branch."

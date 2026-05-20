@@ -1,19 +1,19 @@
 @import 'tailwindcss';
 
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 body {
-  font-family:
-    'Inter',
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    sans-serif;
-  overflow-x: hidden;
+    font-family:
+        'Inter',
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        'Segoe UI',
+        Roboto,
+        sans-serif;
+    overflow-x: hidden;
 }
 
 /* Accessibility: Enhanced focus indicators for WCAG 2.1 AA compliance */
@@ -23,43 +23,43 @@ input:focus-visible,
 textarea:focus-visible,
 select:focus-visible,
 [tabindex]:focus-visible {
-  outline: 3px solid #3b82f6; /* Blue-500 */
-  outline-offset: 2px;
+    outline: 3px solid #3b82f6; /* Blue-500 */
+    outline-offset: 2px;
 }
 
 /* High contrast focus for dark backgrounds */
 .dark-bg a:focus-visible,
 .dark-bg button:focus-visible {
-  outline-color: #fbbf24; /* Yellow-400 for better visibility on dark */
+    outline-color: #fbbf24; /* Yellow-400 for better visibility on dark */
 }
 
 /* Ensure focus is visible even on custom styled elements */
 *:focus:not(:focus-visible) {
-  outline: none;
+    outline: none;
 }
 
 /* Screen reader only utility */
 .sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
 }
 
 /* Make sr-only elements visible when focused */
 .sr-only:focus,
 .sr-only:active {
-  position: static;
-  width: auto;
-  height: auto;
-  padding: 0.5rem 1rem;
-  margin: 0;
-  overflow: visible;
-  clip: auto;
-  white-space: normal;
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0.5rem 1rem;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
 }

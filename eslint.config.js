@@ -6,20 +6,20 @@ import tseslint from 'typescript-eslint';
 import { globalIgnores } from 'eslint/config';
 
 export default tseslint.config([
-  globalIgnores(['dist', '.yarn']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [js.configs.recommended, tseslint.configs.recommended, reactRefresh.configs.vite],
-    plugins: {
-      'react-hooks': reactHooks,
+    globalIgnores(['dist', '.yarn']),
+    {
+        files: ['**/*.{ts,tsx}'],
+        extends: [js.configs.recommended, tseslint.configs.recommended, reactRefresh.configs.vite],
+        plugins: {
+            'react-hooks': reactHooks,
+        },
+        rules: {
+            'react-hooks/rules-of-hooks': 'error',
+            'react-hooks/exhaustive-deps': 'warn',
+        },
+        languageOptions: {
+            ecmaVersion: 2020,
+            globals: globals.browser,
+        },
     },
-    rules: {
-      'react-hooks/rules-of-hooks': 'error',
-      'react-hooks/exhaustive-deps': 'warn',
-    },
-    languageOptions: {
-      ecmaVersion: 2020,
-      globals: globals.browser,
-    },
-  },
 ]);

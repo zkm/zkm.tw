@@ -6,28 +6,28 @@
  */
 
 const COLORS = {
-  reset: '\x1b[0m',
-  bright: '\x1b[1m',
-  cyan: '\x1b[36m',
-  yellow: '\x1b[33m',
-  green: '\x1b[32m',
-  blue: '\x1b[34m',
-  magenta: '\x1b[35m',
+    reset: '\x1b[0m',
+    bright: '\x1b[1m',
+    cyan: '\x1b[36m',
+    yellow: '\x1b[33m',
+    green: '\x1b[32m',
+    blue: '\x1b[34m',
+    magenta: '\x1b[35m',
 };
 
 function log(message, color = COLORS.reset) {
-  console.log(`${color}${message}${COLORS.reset}`);
+    console.log(`${color}${message}${COLORS.reset}`);
 }
 
 function header(title) {
-  console.log('\n' + '='.repeat(60));
-  log(title, COLORS.bright + COLORS.cyan);
-  console.log('='.repeat(60));
+    console.log('\n' + '='.repeat(60));
+    log(title, COLORS.bright + COLORS.cyan);
+    console.log('='.repeat(60));
 }
 
 function command(cmd, description) {
-  log(`  $ yarn ${cmd}`, COLORS.green);
-  console.log(`    ${description}\n`);
+    log(`  $ yarn ${cmd}`, COLORS.green);
+    console.log(`    ${description}\n`);
 }
 
 header('🏥 Package Health Check Commands');
@@ -35,54 +35,54 @@ header('🏥 Package Health Check Commands');
 console.log('\n📋 Main Commands:\n');
 
 command(
-  'health',
-  'Run comprehensive health check on all packages and dependencies.\n' +
-    '    Checks: security, updates, duplicates, licenses, and more.',
+    'health',
+    'Run comprehensive health check on all packages and dependencies.\n' +
+        '    Checks: security, updates, duplicates, licenses, and more.',
 );
 
 command(
-  'health:full',
-  'Full health check + security audit + outdated package check.\n' +
-    '    Most thorough scan - recommended before releases.',
+    'health:full',
+    'Full health check + security audit + outdated package check.\n' +
+        '    Most thorough scan - recommended before releases.',
 );
 
 command(
-  'health:report',
-  'Generate visual HTML report and SVG badge from last health check.\n' +
-    '    Creates health-check-report.html for viewing in browser.',
+    'health:report',
+    'Generate visual HTML report and SVG badge from last health check.\n' +
+        '    Creates health-check-report.html for viewing in browser.',
 );
 
 console.log('\n🔍 Dependency Commands:\n');
 
 command(
-  'deps:audit',
-  'Security audit for known vulnerabilities.\n' + '    Uses yarn npm audit to scan for CVEs.',
+    'deps:audit',
+    'Security audit for known vulnerabilities.\n' + '    Uses yarn npm audit to scan for CVEs.',
 );
 
 command(
-  'deps:check',
-  'Check for outdated packages.\n' + '    Shows available updates without installing them.',
+    'deps:check',
+    'Check for outdated packages.\n' + '    Shows available updates without installing them.',
 );
 
 command(
-  'deps:minor',
-  'Check for minor and patch updates only.\n' +
-    '    Safer updates that maintain backward compatibility.',
+    'deps:minor',
+    'Check for minor and patch updates only.\n' +
+        '    Safer updates that maintain backward compatibility.',
 );
 
 command(
-  'deps:apply',
-  'Apply all available updates.\n' + '    Updates package.json and installs new versions.',
+    'deps:apply',
+    'Apply all available updates.\n' + '    Updates package.json and installs new versions.',
 );
 
 command(
-  'deps:apply:minor',
-  'Apply only minor and patch updates.\n' + '    Safer automated updates for CI/CD.',
+    'deps:apply:minor',
+    'Apply only minor and patch updates.\n' + '    Safer automated updates for CI/CD.',
 );
 
 command(
-  'deps:interactive',
-  'Interactive dependency update mode.\n' + '    Choose which packages to update manually.',
+    'deps:interactive',
+    'Interactive dependency update mode.\n' + '    Choose which packages to update manually.',
 );
 
 header('📊 Understanding Output');

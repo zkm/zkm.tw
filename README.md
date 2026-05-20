@@ -76,8 +76,8 @@ yarn preview
 
 - Dockerfile has multi-stage targets: dev (Vite), build, prod (nginx)
 - docker-compose.yml defines:
-  - web: bind-mount dev with hot reload on http://localhost:5173
-  - web-prod: serves built assets via nginx on http://localhost:8082
+    - web: bind-mount dev with hot reload on http://localhost:5173
+    - web-prod: serves built assets via nginx on http://localhost:8082
 - .dockerignore is configured to keep the build context small
 
 Common

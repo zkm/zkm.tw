@@ -5,47 +5,47 @@ import { useProfileData } from '../hooks/useProfileData';
 
 // Mock the data hook to prevent async state updates (avoids act warnings)
 vi.mock('../hooks/useProfileData', () => ({
-  useProfileData: vi.fn(),
+    useProfileData: vi.fn(),
 }));
 
 const mockProfileData = {
-  profile: {
-    name: 'John Doe',
-    title: 'Software Developer',
-    tagline: 'Passionate developer',
-    image: '/images/profile.jpg',
-  },
-  socialLinks: [
-    { platform: 'github', url: 'https://github.com/johndoe', icon: 'github', display: true },
-  ],
-  resume: { enabled: true },
-  contact: { cta: 'Contact me', message: 'Feel free to reach out!' },
+    profile: {
+        name: 'John Doe',
+        title: 'Software Developer',
+        tagline: 'Passionate developer',
+        image: '/images/profile.jpg',
+    },
+    socialLinks: [
+        { platform: 'github', url: 'https://github.com/johndoe', icon: 'github', display: true },
+    ],
+    resume: { enabled: true },
+    contact: { cta: 'Contact me', message: 'Feel free to reach out!' },
 };
 
 describe('App', () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
-  });
-
-  it('renders without crashing', () => {
-    vi.mocked(useProfileData).mockReturnValue({
-      data: mockProfileData,
-      loading: false,
-      error: null,
+    beforeEach(() => {
+        vi.clearAllMocks();
     });
-    render(<App />);
-    expect(document.body).toBeInTheDocument();
-  });
 
-  it('renders the Portfolio component', () => {
-    vi.mocked(useProfileData).mockReturnValue({
-      data: mockProfileData,
-      loading: false,
-      error: null,
+    it('renders without crashing', () => {
+        vi.mocked(useProfileData).mockReturnValue({
+            data: mockProfileData,
+            loading: false,
+            error: null,
+        });
+        render(<App />);
+        expect(document.body).toBeInTheDocument();
     });
-    render(<App />);
-    // Since Portfolio is the main component, we just check that it renders
-    // without throwing an error
-    expect(document.querySelector('div')).toBeInTheDocument();
-  });
+
+    it('renders the Portfolio component', () => {
+        vi.mocked(useProfileData).mockReturnValue({
+            data: mockProfileData,
+            loading: false,
+            error: null,
+        });
+        render(<App />);
+        // Since Portfolio is the main component, we just check that it renders
+        // without throwing an error
+        expect(document.querySelector('div')).toBeInTheDocument();
+    });
 });
