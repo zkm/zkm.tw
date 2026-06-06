@@ -1146,12 +1146,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:>=20.0.0, @types/node@npm:^25.9.1":
+"@types/node@npm:*, @types/node@npm:>=20.0.0":
   version: 25.9.1
   resolution: "@types/node@npm:25.9.1"
   dependencies:
     undici-types: "npm:>=7.24.0 <7.24.7"
   checksum: 10c0/9a04682842bebbcf21a1779dfeab9aa733d7bd7bbc0a0edb641ab3a9a3d43eac543225acf669c334f458f1956443ebc072bc3c72840c543b8b356cab5c82d456
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^25.9.2":
+  version: 25.9.2
+  resolution: "@types/node@npm:25.9.2"
+  dependencies:
+    undici-types: "npm:>=7.24.0 <7.24.7"
+  checksum: 10c0/f14c0d56361febb985eccc45cf0834ee6e2f07c4389a636f3e1a55ebde320077a80bface18c9afd3092f5fa295925502c1a9d55f805efa813f634aa9c941cbac
   languageName: node
   linkType: hard
 
@@ -1185,12 +1194,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^19.2.16":
-  version: 19.2.16
-  resolution: "@types/react@npm:19.2.16"
+"@types/react@npm:^19.2.17":
+  version: 19.2.17
+  resolution: "@types/react@npm:19.2.17"
   dependencies:
     csstype: "npm:^3.2.2"
-  checksum: 10c0/96f2850b67c5aa4a695bc32eb06c7609acdda1c0c597ace21ad24a5b9e2ccbccd97c0643253579fd629789a422a3694b4bbcb26e5fc6aec5f0357820bf0ee81c
+  checksum: 10c0/bc2c4af96b3e480604424de70d5ebda90c5f4b485df471858c0bc2d7d70364b606ec3c4d8579f94f01aa0c6c0591f56bcf14cba5689f5eea4b74250ccdc3a232
   languageName: node
   linkType: hard
 
@@ -6008,8 +6017,8 @@ __metadata:
     "@testing-library/jest-dom": "npm:^6.9.1"
     "@testing-library/react": "npm:^16.3.2"
     "@testing-library/user-event": "npm:^14.6.1"
-    "@types/node": "npm:^25.9.1"
-    "@types/react": "npm:^19.2.16"
+    "@types/node": "npm:^25.9.2"
+    "@types/react": "npm:^19.2.17"
     "@types/react-dom": "npm:^19.2.3"
     "@types/react-gtm-module": "npm:^2.0.4"
     "@vitejs/plugin-react": "npm:^6.0.2"
