@@ -219,10 +219,16 @@ const RevealEmail: React.FC = () => {
                         className="w-full max-w-md rounded-2xl border border-slate-600 bg-slate-900 p-6 shadow-2xl"
                         onClick={(event) => event.stopPropagation()}
                     >
-                        <h3 id="resume-email-modal-title" className="text-xl font-bold text-yellow-100">
+                        <h3
+                            id="resume-email-modal-title"
+                            className="text-xl font-bold text-yellow-100"
+                        >
                             Email Contact
                         </h3>
-                        <p id="resume-email-modal-description" className="mt-2 text-sm text-slate-300">
+                        <p
+                            id="resume-email-modal-description"
+                            className="mt-2 text-sm text-slate-300"
+                        >
                             Choose how to connect.
                         </p>
 

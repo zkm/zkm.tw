@@ -261,7 +261,9 @@ const Portfolio: React.FC = () => {
                     className="mb-8 flex items-center justify-between gap-4"
                 >
                     <p className="uppercase tracking-[0.22em] text-sm text-[#f2cf8f]">ZKM.TW</p>
-                    {profile.location && <p className="text-sm text-[#d6dfed]">{profile.location}</p>}
+                    {profile.location && (
+                        <p className="text-sm text-[#d6dfed]">{profile.location}</p>
+                    )}
                 </motion.div>
 
                 <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
@@ -284,11 +286,15 @@ const Portfolio: React.FC = () => {
                             {profile.title}
                         </p>
 
-                        <p className="mt-6 text-base md:text-lg text-[#b8c7da] max-w-xl">{profile.tagline}</p>
+                        <p className="mt-6 text-base md:text-lg text-[#b8c7da] max-w-xl">
+                            {profile.tagline}
+                        </p>
 
                         {profile.about && (
                             <div className="mt-6 max-w-3xl rounded-2xl border border-[#8cb5c2]/25 bg-[#132038]/55 p-5 backdrop-blur-sm">
-                                <p className="text-sm uppercase tracking-[0.14em] text-[#8cb5c2] mb-2">About</p>
+                                <p className="text-sm uppercase tracking-[0.14em] text-[#8cb5c2] mb-2">
+                                    About
+                                </p>
                                 <p className="text-[#d6dfed] leading-relaxed">{profile.about}</p>
                             </div>
                         )}
@@ -339,7 +345,11 @@ const Portfolio: React.FC = () => {
                         <div className="rounded-3xl border border-[#f2cf8f]/35 bg-[#111b2f]/85 p-5 md:p-6 shadow-[0_18px_50px_rgba(3,8,20,0.45)] backdrop-blur-md">
                             <motion.div
                                 animate={canAnimate ? { y: [0, -8, 0] } : {}}
-                                transition={canAnimate ? { duration: 4, repeat: Infinity, ease: 'easeInOut' } : {}}
+                                transition={
+                                    canAnimate
+                                        ? { duration: 4, repeat: Infinity, ease: 'easeInOut' }
+                                        : {}
+                                }
                                 className="relative rounded-2xl overflow-hidden border border-[#8cb5c2]/35 aspect-[4/5]"
                             >
                                 <img
@@ -359,7 +369,9 @@ const Portfolio: React.FC = () => {
                                 </div>
                                 <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/65 to-transparent">
                                     <p className="font-semibold text-[#f9f4e8]">{profile.name}</p>
-                                    <p className="text-sm text-[#d6dfed]">Builder of practical web experiences</p>
+                                    <p className="text-sm text-[#d6dfed]">
+                                        Builder of practical web experiences
+                                    </p>
                                 </div>
                             </motion.div>
 
@@ -375,9 +387,20 @@ const Portfolio: React.FC = () => {
                                                 href={social.url}
                                                 rel={social.rel || 'noreferrer noopener'}
                                                 target="_blank"
-                                                initial={canAnimate ? { opacity: 0, y: 8 } : { opacity: 1 }}
+                                                initial={
+                                                    canAnimate
+                                                        ? { opacity: 0, y: 8 }
+                                                        : { opacity: 1 }
+                                                }
                                                 animate={{ opacity: 1, y: 0 }}
-                                                transition={canAnimate ? { delay: 0.3 + index * 0.06, duration: 0.25 } : {}}
+                                                transition={
+                                                    canAnimate
+                                                        ? {
+                                                              delay: 0.3 + index * 0.06,
+                                                              duration: 0.25,
+                                                          }
+                                                        : {}
+                                                }
                                                 whileHover={canAnimate ? { y: -2 } : {}}
                                                 className="flex items-center gap-3 rounded-xl border border-[#8cb5c2]/30 bg-[#142032]/75 p-3 text-sm hover:border-[#f2cf8f]/75 transition-colors"
                                                 aria-label={`${social.platform} (opens in new window)`}
@@ -385,7 +408,9 @@ const Portfolio: React.FC = () => {
                                                 <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#0e1424] border border-[#8cb5c2]/35">
                                                     <IconComponent size={18} />
                                                 </span>
-                                                <span className="text-[#e8eef7]">{social.platform}</span>
+                                                <span className="text-[#e8eef7]">
+                                                    {social.platform}
+                                                </span>
                                             </motion.a>
                                         );
                                     })}
@@ -419,10 +444,16 @@ const Portfolio: React.FC = () => {
                             className="w-full max-w-md rounded-2xl border border-[#8cb5c2]/35 bg-[#111b2f]/95 p-6 shadow-[0_28px_60px_rgba(0,0,0,0.5)]"
                             onClick={(event) => event.stopPropagation()}
                         >
-                            <h2 id="contact-modal-title" className="text-2xl font-bold text-[#f9f4e8]">
+                            <h2
+                                id="contact-modal-title"
+                                className="text-2xl font-bold text-[#f9f4e8]"
+                            >
                                 Say Hello
                             </h2>
-                            <p id="contact-modal-description" className="mt-2 text-sm text-[#b8c7da]">
+                            <p
+                                id="contact-modal-description"
+                                className="mt-2 text-sm text-[#b8c7da]"
+                            >
                                 Pick how you want to reach out.
                             </p>
 
