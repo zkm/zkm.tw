@@ -5,6 +5,7 @@ export interface ProfileData {
         name: string;
         title: string;
         tagline: string;
+        about?: string;
         image: string;
         location?: string;
         email?: string;

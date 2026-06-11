@@ -73,12 +73,8 @@ describe('Portfolio', () => {
         });
 
         render(<Portfolio />);
-        // Check for spinner by role or class
-        expect(
-            document.querySelector(
-                '.w-8.h-8.border-2.border-white.border-t-transparent.rounded-full',
-            ),
-        ).toBeInTheDocument();
+        // Check for spinner by role
+        expect(screen.getByRole('status')).toBeInTheDocument();
     });
 
     it('renders error state', () => {
@@ -89,8 +85,8 @@ describe('Portfolio', () => {
         });
 
         render(<Portfolio />);
-        expect(screen.getByText('Oops!')).toBeInTheDocument();
-        expect(screen.getByText('Failed to load profile data')).toBeInTheDocument();
+        expect(screen.getByText('Data unavailable')).toBeInTheDocument();
+        expect(screen.getByText('Failed to load profile data.')).toBeInTheDocument();
     });
 
     it('renders portfolio data when loaded', async () => {
@@ -103,7 +99,7 @@ describe('Portfolio', () => {
         render(<Portfolio />);
 
         await waitFor(() => {
-            expect(screen.getByText('John Doe')).toBeInTheDocument();
+            expect(screen.getByRole('heading', { name: 'John Doe' })).toBeInTheDocument();
             expect(screen.getByText('Software Developer')).toBeInTheDocument();
             expect(
                 screen.getByText('Passionate developer with 5 years of experience'),
@@ -137,7 +133,7 @@ describe('Portfolio', () => {
         render(<Portfolio />);
 
         await waitFor(() => {
-            expect(screen.getByText('John Doe')).toBeInTheDocument();
+            expect(screen.getByRole('heading', { name: 'John Doe' })).toBeInTheDocument();
             expect(screen.queryByTestId('resume-component')).not.toBeInTheDocument();
         });
     });

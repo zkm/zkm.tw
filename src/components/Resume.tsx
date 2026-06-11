@@ -138,13 +138,15 @@ const RevealPhone: React.FC = () => {
  * ========================= */
 const RevealEmail: React.FC = () => {
     const obfuscatedEmail = '=02bj5iclRWal5GajNHajFmeAVWb';
-    const [revealed, setRevealed] = React.useState(false);
+    const [showModal, setShowModal] = React.useState(false);
     const [copied, setCopied] = React.useState(false);
+    const closeButtonRef = React.useRef<HTMLButtonElement | null>(null);
+    const lastFocusedElementRef = React.useRef<HTMLElement | null>(null);
 
     const decodeEmail = React.useCallback(() => {
         try {
             const reversed = obfuscatedEmail.split('').reverse().join('');
-            const decoded = base64Decode(reversed); // "me@zachschneider.com"
+            const decoded = base64Decode(reversed);
             if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(decoded)) return null;
             return decoded;
         } catch {
@@ -153,11 +155,33 @@ const RevealEmail: React.FC = () => {
     }, []);
 
     const onReveal = () => {
-        setRevealed(true);
+        lastFocusedElementRef.current = document.activeElement as HTMLElement;
+        setShowModal(true);
         const live = document.getElementById('sr-live');
         const em = decodeEmail();
-        if (live && em) live.textContent = `Email revealed: ${em}`;
+        if (live && em) live.textContent = 'Email contact options opened.';
     };
+
+    const onCloseModal = () => {
+        setShowModal(false);
+        setCopied(false);
+        lastFocusedElementRef.current?.focus();
+    };
+
+    React.useEffect(() => {
+        if (showModal) closeButtonRef.current?.focus();
+    }, [showModal]);
+
+    React.useEffect(() => {
+        if (!showModal) return;
+
+        const onKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'Escape') onCloseModal();
+        };
+
+        document.addEventListener('keydown', onKeyDown);
+        return () => document.removeEventListener('keydown', onKeyDown);
+    }, [showModal]);
 
     const onCopy = async () => {
         const em = decodeEmail();
@@ -167,43 +191,85 @@ const RevealEmail: React.FC = () => {
         setTimeout(() => setCopied(false), 1500);
     };
 
-    const em = revealed ? decodeEmail() : null;
+    const em = decodeEmail();
     const mailto = em ? `mailto:${em}` : undefined;
 
     return (
         <div className="flex items-center gap-2">
             <Mail className="inline text-yellow-300 flex-shrink-0" size={16} aria-hidden="true" />
-            {!revealed ? (
-                <button
-                    className="underline text-yellow-200 hover:text-yellow-100 min-h-[44px] focus-visible:ring-2 focus-visible:ring-yellow-400 rounded px-2"
-                    onClick={onReveal}
-                    aria-label="Reveal email address"
+            <button
+                className="underline text-yellow-200 hover:text-yellow-100 min-h-[44px] focus-visible:ring-2 focus-visible:ring-yellow-400 rounded px-2"
+                onClick={onReveal}
+                aria-label="Reveal email address"
+            >
+                Reveal
+            </button>
+
+            {showModal && em && mailto && (
+                <div
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
+                    role="presentation"
+                    onClick={onCloseModal}
                 >
-                    Reveal
-                </button>
-            ) : em && mailto ? (
-                <>
-                    <a className="underline text-yellow-200 hover:text-yellow-100" href={mailto}>
-                        {em}
-                    </a>
-                    <button
-                        onClick={onCopy}
-                        className="ml-2 text-xs px-3 py-2 rounded bg-slate-800 text-yellow-200 hover:bg-slate-700 inline-flex items-center gap-1 min-h-[44px] min-w-[44px] justify-center focus-visible:ring-2 focus-visible:ring-yellow-400"
-                        aria-label="Copy email address"
+                    <div
+                        role="dialog"
+                        aria-modal="true"
+                        aria-labelledby="resume-email-modal-title"
+                        aria-describedby="resume-email-modal-description"
+                        className="w-full max-w-md rounded-2xl border border-slate-600 bg-slate-900 p-6 shadow-2xl"
+                        onClick={(event) => event.stopPropagation()}
                     >
-                        {copied ? <CheckIcon size={14} /> : <CopyIcon size={14} />}
-                        {copied ? 'Copied' : 'Copy'}
-                    </button>
-                </>
-            ) : (
-                <span className="text-red-300">(error)</span>
+                        <h3 id="resume-email-modal-title" className="text-xl font-bold text-yellow-100">
+                            Email Contact
+                        </h3>
+                        <p id="resume-email-modal-description" className="mt-2 text-sm text-slate-300">
+                            Choose how to connect.
+                        </p>
+
+                        <p className="mt-4 rounded-lg border border-slate-600 bg-slate-800 px-4 py-3 text-yellow-100">
+                            {em}
+                        </p>
+
+                        <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    window.location.href = mailto;
+                                }}
+                                className="rounded-xl bg-yellow-300 px-4 py-3 font-semibold text-slate-900 hover:bg-yellow-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 transition-colors"
+                            >
+                                Open Mail App
+                            </button>
+                            <button
+                                type="button"
+                                onClick={onCopy}
+                                className="rounded-xl border border-slate-500 bg-slate-800 px-4 py-3 font-semibold text-yellow-100 hover:border-yellow-300 hover:text-yellow-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 transition-colors inline-flex items-center justify-center gap-2"
+                                aria-label="Copy email address"
+                            >
+                                {copied ? <CheckIcon size={14} /> : <CopyIcon size={14} />}
+                                {copied ? 'Copied' : 'Copy Email'}
+                            </button>
+                        </div>
+
+                        <button
+                            type="button"
+                            onClick={onCloseModal}
+                            ref={closeButtonRef}
+                            className="mt-4 w-full rounded-xl border border-slate-500 px-4 py-3 text-slate-100 hover:border-yellow-300 hover:text-yellow-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 transition-colors"
+                        >
+                            Close
+                        </button>
+                    </div>
+                </div>
             )}
+
+            {showModal && !em && <span className="text-red-300">(error)</span>}
 
             <noscript>
                 <span className="ml-2 align-middle">
                     <svg width="210" height="16" aria-label="Email image">
                         <text x="0" y="12" fontFamily="monospace" fontSize="14" fill="#FDE047">
-                            me@zachschneider.com
+                            me [at] zachschneider [dot] com
                         </text>
                     </svg>
                 </span>
@@ -212,7 +278,7 @@ const RevealEmail: React.FC = () => {
     );
 };
 
-const Resume: React.FC<{ onBack?: () => void }> = ({ onBack }) => {
+const Resume: React.FC = () => {
     // ✅ All hooks at the top, always called in the same order
     const { resumeData, loading, error } = useResumeData();
     const prefersReducedMotion = usePrefersReducedMotion();
@@ -389,15 +455,6 @@ const Resume: React.FC<{ onBack?: () => void }> = ({ onBack }) => {
       `}</style>
 
             <div className="flex flex-col w-full max-w-6xl mx-auto p-6 gap-4">
-                {onBack && (
-                    <button
-                        onClick={onBack}
-                        className="self-start flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
-                        aria-label="Back to portfolio"
-                    >
-                        &#8592; Back
-                    </button>
-                )}
                 <div className="flex flex-col md:flex-row w-full gap-8">
                     {/* Sidebar/Profile */}
                     <aside
