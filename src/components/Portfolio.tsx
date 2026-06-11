@@ -25,21 +25,16 @@ const ImageIcon: React.FC<ImageIconProps & { src: string }> = ({
         alt={alt}
         width={size}
         height={size}
+        aria-hidden={alt ? undefined : true}
         className={`filter invert ${className ?? ''}`}
         loading="lazy"
         decoding="async"
     />
 );
 
-const Github: React.FC<ImageIconProps> = (props) => (
-    <ImageIcon src={iconGithub} alt="GitHub" {...props} />
-);
-const Linkedin: React.FC<ImageIconProps> = (props) => (
-    <ImageIcon src={iconLinkedin} alt="LinkedIn" {...props} />
-);
-const Instagram: React.FC<ImageIconProps> = (props) => (
-    <ImageIcon src={iconInstagram} alt="Instagram" {...props} />
-);
+const Github: React.FC<ImageIconProps> = (props) => <ImageIcon src={iconGithub} {...props} />;
+const Linkedin: React.FC<ImageIconProps> = (props) => <ImageIcon src={iconLinkedin} {...props} />;
+const Instagram: React.FC<ImageIconProps> = (props) => <ImageIcon src={iconInstagram} {...props} />;
 
 const FileText: React.FC<IconProps> = ({ size = 24, className, ...rest }) => (
     <svg
@@ -59,11 +54,11 @@ const FileText: React.FC<IconProps> = ({ size = 24, className, ...rest }) => (
 );
 
 const MastodonIcon: React.FC<ImageIconProps> = (props) => (
-    <ImageIcon src={iconMastodon} alt="Mastodon" {...props} />
+    <ImageIcon src={iconMastodon} {...props} />
 );
-const XIcon: React.FC<ImageIconProps> = (props) => <ImageIcon src={iconX} alt="X" {...props} />;
+const XIcon: React.FC<ImageIconProps> = (props) => <ImageIcon src={iconX} {...props} />;
 const StackOverflowIcon: React.FC<ImageIconProps> = (props) => (
-    <ImageIcon src={iconStackOverflow} alt="Stack Overflow" {...props} />
+    <ImageIcon src={iconStackOverflow} {...props} />
 );
 
 // Keep this type for FileText inline icon
@@ -306,7 +301,6 @@ const Portfolio: React.FC = () => {
                                     whileHover={canAnimate ? { y: -2, scale: 1.02 } : {}}
                                     whileTap={canAnimate ? { scale: 0.98 } : {}}
                                     className="inline-flex items-center gap-2 rounded-xl bg-[#f2cf8f] text-[#1b2438] px-6 py-3 font-semibold shadow-[0_10px_24px_rgba(242,166,90,0.28)] hover:bg-[#f4d79e] transition-colors cursor-pointer"
-                                    aria-label="View full resume"
                                 >
                                     <FileText size={19} />
                                     View Resume
@@ -318,7 +312,6 @@ const Portfolio: React.FC = () => {
                                     type="button"
                                     onClick={onSayHello}
                                     className="inline-flex cursor-pointer items-center rounded-xl border border-[#8cb5c2]/50 bg-[#142032]/80 px-6 py-3 font-semibold text-[#d6dfed] hover:border-[#f2cf8f]/70 hover:text-[#f2cf8f] transition-colors"
-                                    aria-label="Open email client"
                                 >
                                     Say Hello
                                 </button>
@@ -352,18 +345,29 @@ const Portfolio: React.FC = () => {
                                 }
                                 className="relative rounded-2xl overflow-hidden border border-[#8cb5c2]/35 aspect-[4/5]"
                             >
-                                <img
-                                    src={profile.image || '/logo.webp'}
-                                    alt={profile.name}
-                                    className="w-full h-full object-cover"
-                                    loading="eager"
-                                    onError={(e) => {
-                                        const target = e.target as HTMLImageElement;
-                                        target.style.display = 'none';
-                                        const fallback = target.nextElementSibling as HTMLElement;
-                                        if (fallback) fallback.style.display = 'flex';
-                                    }}
-                                />
+                                <picture>
+                                    {profile.image && (
+                                        <source
+                                            srcSet={profile.image.replace(/\.\w+$/, '.webp')}
+                                            type="image/webp"
+                                        />
+                                    )}
+                                    <img
+                                        src={profile.image || '/logo.webp'}
+                                        alt={profile.name}
+                                        className="w-full h-full object-cover"
+                                        loading="eager"
+                                        fetchPriority="high"
+                                        decoding="sync"
+                                        onError={(e) => {
+                                            const target = e.target as HTMLImageElement;
+                                            target.style.display = 'none';
+                                            const fallback =
+                                                target.nextElementSibling as HTMLElement;
+                                            if (fallback) fallback.style.display = 'flex';
+                                        }}
+                                    />
+                                </picture>
                                 <div className="hidden w-full h-full items-center justify-center text-5xl font-bold bg-gradient-to-br from-[#1f6f8b] to-[#f2a65a] text-[#0e1424]">
                                     ZS
                                 </div>
