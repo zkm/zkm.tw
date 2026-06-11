@@ -1,12 +1,11 @@
 {
     "profile": {
         "name": "Zach Schneider",
-        "title": "Creative technologist crafting user-friendly digital experiences",
+        "title": "Cosmic Code Crusader",
         "tagline": "Software Engineer • Builder • Coffee-First Human",
-        "image": "/zach-photo.jpg",
-        "location": "Minnesota, USA",
-        "email": "hello@zachschneider.dev",
-        "phone": "+1 (XXX) XXX-XXXX"
+        "about": "Hi there! I'm Zach, a full-stack developer with a passion for building beautiful, functional websites. I've worked in the tech industry for over a decade and have had the opportunity to contribute to a wide range of projects, from small business websites to large-scale web applications. In my free time, I enjoy keeping up with the latest developments in web development and spending time with my family. I'm always looking for new challenges and opportunities to learn and grow as a developer.",
+        "image": "/logo.webp",
+        "location": "Wisconsin, USA"
     },
     "socialLinks": [
         {
@@ -51,7 +50,7 @@
         "enabled": true,
         "pdfUrl": "/resume/zach-schneider-resume.pdf",
         "dataUrl": "/data/resume.json",
-        "lastUpdated": "2026-01-01"
+        "lastUpdated": "2026-6-11"
     },
     "contact": {
         "cta": "Let's work together",
