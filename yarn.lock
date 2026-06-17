@@ -2934,9 +2934,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"happy-dom@npm:^20.10.4":
-  version: 20.10.4
-  resolution: "happy-dom@npm:20.10.4"
+"happy-dom@npm:^20.10.5":
+  version: 20.10.5
+  resolution: "happy-dom@npm:20.10.5"
   dependencies:
     "@types/node": "npm:>=20.0.0"
     "@types/whatwg-mimetype": "npm:^3.0.2"
@@ -2945,7 +2945,7 @@ __metadata:
     entities: "npm:^7.0.1"
     whatwg-mimetype: "npm:^3.0.0"
     ws: "npm:^8.21.0"
-  checksum: 10c0/cc45b7392e13f8da8069df0206381ad4b531086df2e5dc1b5bcb5e88c6c7df0262154925708e338fed3bb041907ad9bf77a24c437706bb3e9f7753bc1816d652
+  checksum: 10c0/7682dbaa2d53b924664e7fe5819441137cfd8d10fee4d5836523997e571c1f021696e95c1f579e5c5eccdb4788a0906b5d70202ae86bd51233d8c2e7ee0f8683
   languageName: node
   linkType: hard
 
@@ -3793,12 +3793,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lucide-react@npm:^1.18.0":
-  version: 1.18.0
-  resolution: "lucide-react@npm:1.18.0"
+"lucide-react@npm:^1.20.0":
+  version: 1.20.0
+  resolution: "lucide-react@npm:1.20.0"
   peerDependencies:
     react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
-  checksum: 10c0/91b52cec3e38f4b362f538f4e78a597434fc6e70f7a8fe3ccbc12c43ede886f8b32880c38ec4c9e5c949d3f32beb94e6985be0bb40341b031b2b9ca45010576b
+  checksum: 10c0/4bf86add73b29f395fa08be2751cd53939f667c3fa99c54f2f22e422f7a4d83c647c57352de67eea8496884d9c3d45ff1204bad2318304f479b1655609f15632
   languageName: node
   linkType: hard
 
@@ -6053,11 +6053,11 @@ __metadata:
     eslint-plugin-react-refresh: "npm:^0.5.3"
     framer-motion: "npm:^12.40.0"
     globals: "npm:^17.6.0"
-    happy-dom: "npm:^20.10.4"
+    happy-dom: "npm:^20.10.5"
     husky: "npm:^9.1.7"
     jsdom: "npm:^29.1.1"
     jspdf: "npm:^4.2.1"
-    lucide-react: "npm:^1.18.0"
+    lucide-react: "npm:^1.20.0"
     postcss: "npm:^8.5.15"
     prettier: "npm:^3.8.4"
     react: "npm:^19.2.7"
