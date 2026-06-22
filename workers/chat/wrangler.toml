@@ -1,0 +1,16 @@
+name = "zkm-chat"
+main = "src/index.ts"
+compatibility_date = "2025-01-01"
+
+routes = [
+    { pattern = "zkm.tw/api/chat", zone_name = "zkm.tw" }
+]
+
+[[kv_namespaces]]
+binding = "CHAT_KV"
+id = "REPLACE_WITH_KV_NAMESPACE_ID"
+
+[vars]
+DAILY_BUDGET_REQUESTS = "500"
+
+# Set the real secret with: wrangler secret put ANTHROPIC_API_KEY

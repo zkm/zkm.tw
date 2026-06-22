@@ -17,6 +17,9 @@ Object.defineProperty(window, 'matchMedia', {
     })),
 });
 
+// jsdom does not implement scrollIntoView
+Element.prototype.scrollIntoView = vi.fn();
+
 // Suppress React act warnings in test environment
 const originalError = console.error;
 beforeAll(() => {

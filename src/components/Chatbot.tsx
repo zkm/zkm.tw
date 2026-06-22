@@ -32,83 +32,27 @@ const Chatbot: React.FC = () => {
         scrollToBottom();
     }, [messages]);
 
-    const getResponse = (userMessage: string): string => {
-        const message = userMessage.toLowerCase();
+    const fetchResponse = async (history: Message[]): Promise<string> => {
+        const response = await fetch('/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                messages: history.map((m) => ({
+                    role: m.isBot ? 'assistant' : 'user',
+                    content: m.text,
+                })),
+            }),
+        });
 
-        // Skills related questions
-        if (
-            message.includes('skills') ||
-            message.includes('technology') ||
-            message.includes('tech')
-        ) {
-            return "I'm a versatile full-stack developer with expertise across many areas:\n\n🖥️ **Frontend**: I work extensively with React, TypeScript, Vue.js, Next.js, and Tailwind CSS\n\n⚙️ **Backend**: I'm proficient in Node.js, Python, PHP, Laravel, and Express\n\n☁️ **Infrastructure**: I have strong experience with AWS, Docker, Kubernetes, and Terraform\n\n🔒 **Security**: I focus heavily on OAuth, JWT, SSL/TLS, and security auditing\n\nI'm passionate about creating secure, scalable applications with great user experiences!";
+        if (response.status === 429) {
+            return "You're sending messages a bit fast — give it a minute and try again!";
+        }
+        if (!response.ok) {
+            return "Sorry, I'm having trouble responding right now. Please try again in a bit.";
         }
 
-        // Experience questions
-        if (message.includes('experience') || message.includes('work') || message.includes('job')) {
-            return "I have extensive experience as a Senior Full Stack Developer. My work focuses on:\n\n• **Enterprise Applications**: I build scalable web applications for large organizations\n• **Cloud Architecture**: I design and implement cloud-native solutions\n• **Team Leadership**: I enjoy mentoring developers and leading technical projects\n• **Security**: I implement robust security measures and compliance standards\n\nI'm passionate about writing clean, maintainable code and staying current with emerging technologies.";
-        }
-
-        // Education questions
-        if (
-            message.includes('education') ||
-            message.includes('learn') ||
-            message.includes('study')
-        ) {
-            return "I'm a lifelong learner who stays current with technology trends through:\n\n• Continuous learning and professional development\n• Open source contributions\n• Technical conferences and workshops\n• Industry certifications and training\n\nI believe in sharing knowledge and helping others grow in their tech careers!";
-        }
-
-        // Contact questions
-        if (message.includes('contact') || message.includes('reach') || message.includes('hire')) {
-            return "You can reach me through several channels:\n\n• **LinkedIn**: For professional networking and career opportunities\n• **GitHub**: Check out my open source projects and contributions\n• **Email**: For direct professional inquiries\n\nI'm always interested in discussing new opportunities, collaborations, or just talking tech!";
-        }
-
-        // Projects questions
-        if (
-            message.includes('project') ||
-            message.includes('portfolio') ||
-            message.includes('build')
-        ) {
-            return "I've worked on a variety of exciting projects:\n\n• **Enterprise Web Applications**: Large-scale React and Vue.js applications\n• **API Development**: RESTful and GraphQL APIs with Node.js and Python\n• **Cloud Infrastructure**: AWS and containerized deployments\n• **Security Solutions**: Authentication systems and security auditing tools\n\nThis very portfolio site is built with React, TypeScript, and Tailwind CSS - showcasing modern web development practices I love using!";
-        }
-
-        // Hobbies/personal questions
-        if (
-            message.includes('hobby') ||
-            message.includes('personal') ||
-            message.includes('fun') ||
-            message.includes('interest')
-        ) {
-            return "When I'm not coding, I enjoy:\n\n• **Technology Exploration**: Experimenting with new frameworks and tools\n• **Community Involvement**: Contributing to open source projects\n• **Problem Solving**: Tackling complex technical challenges\n• **Continuous Learning**: Reading tech blogs and taking online courses\n\nI'm passionate about using technology to solve real-world problems and make a positive impact!";
-        }
-
-        // Location questions
-        if (
-            message.includes('location') ||
-            message.includes('where') ||
-            message.includes('based')
-        ) {
-            return "I'm a remote-friendly developer who has experience working with distributed teams across different time zones. I'm adaptable to various working arrangements and enjoy collaborating with teams worldwide!";
-        }
-
-        // Greeting responses
-        if (message.includes('hello') || message.includes('hi') || message.includes('hey')) {
-            return "Hello! Great to meet you! I'm here to answer any questions about my professional background, skills, or experience. What would you like to know?";
-        }
-
-        // Thank you responses
-        if (message.includes('thank') || message.includes('thanks')) {
-            return "You're very welcome! Feel free to ask me anything else about my background or experience. I'm here to help! 😊";
-        }
-
-        // Default responses for unmatched queries
-        const defaultResponses = [
-            "That's an interesting question! While I might not have specific information about that, I can tell you about my skills, experience, projects, or how to contact me. What would you like to know?",
-            "I'd love to help! I'm most knowledgeable about my professional background, technical skills, and career experience. Try asking about my skills, projects, or experience!",
-            'Great question! I can share information about my technical expertise, work experience, or professional background. What specific area interests you most?',
-        ];
-
-        return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
+        const data = await response.json();
+        return data.text || "Sorry, I didn't catch that — could you try rephrasing?";
     };
 
     const handleSendMessage = async () => {
@@ -121,26 +65,22 @@ const Chatbot: React.FC = () => {
             timestamp: new Date(),
         };
 
-        setMessages((prev) => [...prev, userMessage]);
+        const nextMessages = [...messages, userMessage];
+        setMessages(nextMessages);
         setInputText('');
         setIsTyping(true);
 
-        // Simulate typing delay
-        setTimeout(
-            () => {
-                const response = getResponse(inputText);
-                const botMessage: Message = {
-                    id: Date.now() + 1,
-                    text: response,
-                    isBot: true,
-                    timestamp: new Date(),
-                };
+        const responseText = await fetchResponse(nextMessages);
 
-                setMessages((prev) => [...prev, botMessage]);
-                setIsTyping(false);
-            },
-            1000 + Math.random() * 1000,
-        ); // Random delay between 1-2 seconds
+        const botMessage: Message = {
+            id: Date.now() + 1,
+            text: responseText,
+            isBot: true,
+            timestamp: new Date(),
+        };
+
+        setMessages((prev) => [...prev, botMessage]);
+        setIsTyping(false);
     };
 
     const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -330,7 +270,7 @@ const Chatbot: React.FC = () => {
                                         onChange={(e) => setInputText(e.target.value)}
                                         onKeyPress={handleKeyPress}
                                         placeholder="Ask me about my experience..."
-                                        className="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:border-blue-500 text-sm"
+                                        className="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:border-blue-500 text-sm text-gray-800 placeholder:text-gray-400"
                                     />
                                     <button
                                         onClick={handleSendMessage}

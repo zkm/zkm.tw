@@ -5,4 +5,10 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
     plugins: [react()],
     base: '/',
+    server: {
+        proxy: {
+            // Forwards to the chat Worker running via `wrangler dev` (see workers/chat)
+            '/api': 'http://localhost:8787',
+        },
+    },
 });
