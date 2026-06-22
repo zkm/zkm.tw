@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { useProfileData } from '../hooks/useProfileData';
 import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
 const Resume = React.lazy(() => import('./Resume'));
-import Chatbot from './Chatbot';
 
 // Use local SVG files for social icons to guarantee rendering across browsers
 // and avoid any currentColor/fill inheritance quirks.
@@ -540,7 +539,6 @@ const Portfolio: React.FC = () => {
                 )}
             </motion.div>
 
-            <Chatbot />
         </div>
     );
 };
