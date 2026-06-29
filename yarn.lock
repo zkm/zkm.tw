@@ -2,7 +2,7 @@
 # Manual changes might be lost - proceed with caution!
 
 __metadata:
-  version: 9
+  version: 10
   cacheKey: 10c0
 
 "@adobe/css-tools@npm:^4.4.0":
@@ -3792,12 +3792,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lucide-react@npm:^1.21.0":
-  version: 1.21.0
-  resolution: "lucide-react@npm:1.21.0"
+"lucide-react@npm:^1.22.0":
+  version: 1.22.0
+  resolution: "lucide-react@npm:1.22.0"
   peerDependencies:
     react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
-  checksum: 10c0/55f914e3bc06425064efb4d4d77031c2565294910c362ffd1f5b2eaabd8ee31d682b5749dde5e1d3071ecbf625bbce0d810d1a271a27ecc60b50e908a4f6133d
+  checksum: 10c0/6d7066773c2d5f1a3e8f274d4544d2e6fb133f284c843ce89c041c7d2d6e265e5bed48c057724553405bdc4c943547642ceac25c2b807d5efbb1e75d0127de92
   languageName: node
   linkType: hard
 
@@ -4597,12 +4597,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^3.8.5":
-  version: 3.9.0
-  resolution: "prettier@npm:3.9.0"
+"prettier@npm:^3.9.3":
+  version: 3.9.3
+  resolution: "prettier@npm:3.9.3"
   bin:
     prettier: bin/prettier.cjs
-  checksum: 10c0/f3d8395e0b61f61895d11e14c144bd450ec752ddbda49895590f1038c74ae06cb013ae498da326663c4dfb7ef38d7ec9d43d9b87251c98b5c27c7da8ed0d6e6c
+  checksum: 10c0/56623a03f0a1a791413b76458dbcab1dff8e5a7d02744be98ccc589a3a8cf8371dda8fba68f2d2336ded8475ed40f6eaf66f0f4d39df33235656018f64d2fdac
   languageName: node
   linkType: hard
 
@@ -6056,9 +6056,9 @@ __metadata:
     husky: "npm:^9.1.7"
     jsdom: "npm:^29.1.1"
     jspdf: "npm:^4.2.1"
-    lucide-react: "npm:^1.21.0"
-    postcss: "npm:^8.5.15"
-    prettier: "npm:^3.8.5"
+    lucide-react: "npm:^1.22.0"
+    postcss: "npm:^8.5.16"
+    prettier: "npm:^3.9.3"
     react: "npm:^19.2.7"
     react-chartjs-2: "npm:^5.3.1"
     react-dom: "npm:^19.2.7"
