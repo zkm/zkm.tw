@@ -33,3 +33,5 @@ services:
             - /tmp
             - /var/cache/nginx
             - /var/run
+            - /var/lib/nginx/tmp:uid=65532,gid=65532,mode=1777
+            - /var/lib/nginx/logs:uid=65532,gid=65532,mode=1777
