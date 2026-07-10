@@ -49,6 +49,7 @@ The root `vite dev` server proxies `/api` to `http://localhost:8787` (see `vite.
 ## Deployment
 
 Two separate mechanisms exist — check which is actually current before assuming:
+
 - `.github/workflows/deploy.yml` runs on push to `main`/`master`: installs, tests, builds, and just logs that DigitalOcean deploys automatically from that branch (no explicit deploy step in CI).
 - `scripts/deploy.js` (`yarn deploy`) is a manual flow: builds locally, then checks out the `production` branch, wipes it, copies in `dist/`, commits, and pushes — used for GitHub Pages-style static hosting of the built assets.
 

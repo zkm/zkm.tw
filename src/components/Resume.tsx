@@ -36,7 +36,7 @@ const base64Decode = (str: string) => {
     let output = '';
     str = String(str).replace(/=+$/, '');
     if (str.length % 4 === 1) throw new Error('Invalid base64');
-    for (let bc = 0, bs = 0, buffer, i = 0; (buffer = str.charAt(i++)); ) {
+    for (let bc = 0, bs = 0, buffer, i = 0; (buffer = str.charAt(i++));) {
         const idx = chars.indexOf(buffer);
         if (~idx) {
             bs = bc % 4 ? bs * 64 + idx : idx;
@@ -612,8 +612,7 @@ const Resume: React.FC = () => {
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         {skillGroups.map(([key, label]) => {
                                             const items = resumeData?.technicalSkills?.[key] as
-                                                | string[]
-                                                | undefined;
+                                                string[] | undefined;
                                             const isArray = Array.isArray(items);
                                             if (!isArray || items.length === 0) return null;
 
