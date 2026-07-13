@@ -110,7 +110,7 @@
         "happy-dom": "^20.10.6",
         "husky": "^9.1.7",
         "jsdom": "^29.1.1",
-        "postcss": "^8.5.17",
+        "postcss": "^8.5.19",
         "prettier": "^3.9.5",
         "tailwindcss": "^4.3.2",
         "typescript": "^6.0.3",
@@ -130,7 +130,7 @@
             "last 1 safari version"
         ]
     },
-    "packageManager": "yarn@4.17.0",
+    "packageManager": "yarn@4.17.1",
     "trustedDependencies": [
         "core-js",
         "esbuild"
