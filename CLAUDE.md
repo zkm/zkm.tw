@@ -23,6 +23,8 @@ Run tests matching a name: `yarn vitest run -t "renders resume"`
 
 Other scripts of note: `yarn deploy` (build + push `dist/` to the `production` branch, see below), `yarn health` / `health:full` / `health:report` (scripts/*.js), `yarn deps:check` / `deps:audit`.
 
+Docker (`docker-compose.yml`, multi-stage `Dockerfile`) is a local convenience, not the production path: `yarn docker:dev` runs Vite with HMR on `:5173`/`:24678`; `yarn docker:prod` builds and serves `dist/` via nginx (Chainguard image + `nginx.conf`) on `:8082`. Actual production is DigitalOcean App Platform in static-site mode — the nginx/Docker prod target does not reflect prod headers/routing.
+
 ### Chat worker (`workers/chat/`)
 
 This is a separate Yarn project (its own `package.json`/lockfile), not part of the root workspace.
