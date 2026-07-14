@@ -4,7 +4,6 @@ export interface ResumeData {
     personalInfo: {
         name: string;
         title: string;
-        phone: string;
         email?: string;
         website: string;
         portfolio: string;
