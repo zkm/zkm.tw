@@ -37,10 +37,6 @@ yarn wrangler deploy    # deploy to Cloudflare
 
 The root `vite dev` server proxies `/api` to `http://localhost:8787` (see `vite.config.ts`), so run `wrangler dev` alongside `yarn dev` to exercise the chat widget locally. Secrets (`ANTHROPIC_API_KEY`) are set via `wrangler secret put` and are not present in the repo (`.dev.vars.example` shows the shape).
 
-### Docker
-
-`docker-compose.yml` defines two services built from the multi-stage `Dockerfile`: `web` (dev target, Vite on `:5173` + HMR websocket on `:24678`, bind-mounted) and `web-prod` (prod target, built assets served by nginx on `:8082`, run read-only/non-root as a hardening measure). `yarn docker:dev` / `yarn docker:prod` / `yarn docker:down` wrap `docker compose up`/`down` for these.
-
 ## Architecture
 
 - **Entry**: `src/main.tsx` → `App.tsx` → `Portfolio.tsx`. `Resume.tsx` is lazy-loaded (`React.lazy`) and shown inside `Portfolio` as a collapsible/modal section, not a separate route — there is no router.
