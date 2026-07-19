@@ -2950,9 +2950,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"happy-dom@npm:^20.10.6":
-  version: 20.10.6
-  resolution: "happy-dom@npm:20.10.6"
+"happy-dom@npm:^20.11.0":
+  version: 20.11.0
+  resolution: "happy-dom@npm:20.11.0"
   dependencies:
     "@types/node": "npm:>=20.0.0"
     "@types/whatwg-mimetype": "npm:^3.0.2"
@@ -2961,7 +2961,7 @@ __metadata:
     entities: "npm:^7.0.1"
     whatwg-mimetype: "npm:^3.0.0"
     ws: "npm:^8.21.0"
-  checksum: 10c0/3cf22def886b0876b00bb04b9fbaab6c05c041fbcf0869978b6fba9eddccc45a5fc6dab14e369502be9019da43eda44ad1bee3019029ef71bb0c7db3351f4a42
+  checksum: 10c0/ef63674e3c3485c3793bbf4b18f842bc443cc53f430a36c278008fed6b2c873c14e29cd840d010565cc99038b851a47a566c96b984bcf534ab94ead099aa0529
   languageName: node
   linkType: hard
 
@@ -5261,9 +5261,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"styled-components@npm:^6.4.3":
-  version: 6.4.3
-  resolution: "styled-components@npm:6.4.3"
+"styled-components@npm:^6.4.4":
+  version: 6.4.4
+  resolution: "styled-components@npm:6.4.4"
   dependencies:
     "@emotion/is-prop-valid": "npm:1.4.0"
     css-to-react-native: "npm:3.2.0"
@@ -5281,7 +5281,7 @@ __metadata:
       optional: true
     react-native:
       optional: true
-  checksum: 10c0/158514feb0a502dfa7f95610a8270faa56be2572c12902b7bf5c2855bf9fdd5d76a5909d67dcbecf627ee40511f4161f8016b23f9fef22c14f7911337359647c
+  checksum: 10c0/ed574b053a85adab543958bde7eb80ea9bf6075dc0c54f8763b2d7251c4ce940a5151513fbc7af8c5be5100c387a55d0b175c0270a829ff37ec6f88b72ac4bca
   languageName: node
   linkType: hard
 
@@ -6135,19 +6135,19 @@ __metadata:
     eslint-plugin-react-refresh: "npm:^0.5.3"
     framer-motion: "npm:^12.42.2"
     globals: "npm:^17.7.0"
-    happy-dom: "npm:^20.10.6"
+    happy-dom: "npm:^20.11.0"
     husky: "npm:^9.1.7"
     jsdom: "npm:^29.1.1"
     jspdf: "npm:^4.2.1"
     lucide-react: "npm:^1.25.0"
-    postcss: "npm:^8.5.19"
+    postcss: "npm:^8.5.20"
     prettier: "npm:^3.9.5"
     react: "npm:^19.2.7"
     react-chartjs-2: "npm:^5.3.1"
     react-dom: "npm:^19.2.7"
     react-gtm-module: "npm:^2.0.11"
     react-markdown: "npm:^10.1.0"
-    styled-components: "npm:^6.4.3"
+    styled-components: "npm:^6.4.4"
     styled-system: "npm:^5.1.5"
     tailwindcss: "npm:^4.3.3"
     typescript: "npm:^6.0.3"
