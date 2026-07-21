@@ -2,12 +2,11 @@
     "personalInfo": {
         "name": "Zach Schneider",
         "title": "Cosmic Code Crusader",
-        "phone": "(773) 980-9599",
         "website": "https://www.zachschneider.com",
         "portfolio": "https://zkm.tw"
     },
     "experienceStartYear": 2002,
-    "summary": "Experienced Senior Web Developer with {experienceYears} of expertise in modern frontend technologies, team leadership, and technical architecture. Proven track record of successfully migrating legacy systems to modern frameworks, leading cross-functional teams, and delivering high-impact web solutions. Passionate about mentoring developers and implementing best practices that drive business results.",
+    "summary": "Experienced Principal Web Developer with {experienceYears} of expertise in modern frontend technologies, team leadership, and technical architecture. Proven track record of successfully migrating legacy systems to modern frameworks, leading cross-functional teams, and delivering high-impact web solutions. Passionate about mentoring developers and implementing best practices that drive business results.",
     "technicalSkills": {
         "languages": {
             "HTML": ["HTML5", "Web Components"],
@@ -85,7 +84,7 @@
         {
             "company": "GDIT",
             "companyUrl": "https://www.gdit.com/",
-            "position": "Principal Web Designer/Developer",
+            "position": "Cloud Developer Principal",
             "period": "Jan 2023 - Present",
             "responsibilities": [
                 "Develop and maintain JSP pages for a secure, Java-based government web application, ensuring optimized performance, dynamic content delivery, and 508/WCAG accessibility compliance.",
