@@ -85,13 +85,36 @@
             "company": "GDIT",
             "companyUrl": "https://www.gdit.com/",
             "position": "Cloud Developer Principal",
-            "period": "Jan 2023 - Present",
+            "period": "Jul 2026 - Present",
             "responsibilities": [
-                "Develop and maintain JSP pages for a secure, Java-based government web application, ensuring optimized performance, dynamic content delivery, and 508/WCAG accessibility compliance.",
-                "Design and build interactive AI demos using Vite, React, TypeScript, Tailwind CSS, and AWS services (Cognito, Lambda, S3, AWS SDK) to showcase advanced machine learning capabilities.",
-                "Implement secure authentication workflows including MFA, Duo, and OWASP-compliant practices to protect sensitive data and meet federal security requirements.",
-                "Automate workflows and improve productivity by creating and maintaining Ruby, Python, and Bash scripts for development, deployment, and data processing tasks.",
-                "Manage and enhance Drupal-based website, delivering new features, resolving technical issues, and ensuring high performance and accessibility."
+                "Shifting focus from application-level web development toward cloud architecture, advising on AWS infrastructure design, service selection, and technical strategy across projects.",
+                "Applying a cloud-first lens to legacy government systems, identifying opportunities to modernize infrastructure and reduce operational overhead.",
+                "Carrying forward security and compliance expertise (OWASP, MFA, 508/WCAG) into cloud-based solution design for federal requirements."
+            ]
+        },
+        {
+            "company": "GDIT",
+            "companyUrl": "https://www.gdit.com/",
+            "position": "Web Designer Principal",
+            "period": "Aug 2025 - Jul 2026",
+            "responsibilities": [
+                "Promoted to Principal, expanding design and front-end architecture authority beyond the original JSP application to additional GDIT web properties.",
+                "Mentored developers and set technical direction on UI/UX decisions, establishing standards for accessibility and design consistency across projects.",
+                "Continued designing and building interactive AI demos (Vite, React, TypeScript, Tailwind CSS, AWS) while taking ownership of broader technical and design strategy.",
+                "Balanced hands-on delivery with increasing leadership responsibility, guiding architecture decisions rather than just implementing them."
+            ]
+        },
+        {
+            "company": "GDIT",
+            "companyUrl": "https://www.gdit.com/",
+            "position": "Web Developer Advisor",
+            "period": "Jan 2023 - Aug 2025",
+            "responsibilities": [
+                "Developed and maintained JSP pages for a secure, Java-based government web application, ensuring optimized performance, dynamic content delivery, and 508/WCAG accessibility compliance.",
+                "Designed and built interactive AI demos using Vite, React, TypeScript, Tailwind CSS, and AWS services (Cognito, Lambda, S3, AWS SDK) to showcase advanced machine learning capabilities.",
+                "Implemented secure authentication workflows including MFA, Duo, and OWASP-compliant practices to protect sensitive data and meet federal security requirements.",
+                "Automated workflows and improved productivity by creating and maintaining Ruby, Python, and Bash scripts for development, deployment, and data processing tasks.",
+                "Managed and enhanced Drupal-based websites, delivering new features, resolving technical issues, and ensuring high performance and accessibility."
             ]
         },
         {
