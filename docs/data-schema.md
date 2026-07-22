@@ -43,7 +43,12 @@ technicalSkills: {
   frameworks, cms, cloud, tools, testing, methodologies: string[]
 }
 workExperience: [{
-  company, companyUrl?, position, period, responsibilities: string[],
+  company, companyUrl?,
+  # single-position entry (most companies):
+  position?, period?, responsibilities?: string[],
+  # OR multiple titles at the same company (e.g. promotions), newest first —
+  # takes precedence over the single-position fields above when present:
+  positions?: [{ position, period, responsibilities: string[] }],
   notableProjects?: [{ name, period?, description, technologies: string[] }]
 }]
 education: [{ institution, degree, field, period, description }]
@@ -65,3 +70,8 @@ prompt. It only reads: `profile.profile.{name,about,location}` and
 `resume.{summary,technicalSkills,workExperience,education}`. Renaming/removing any of
 those specific fields changes what the AI chat widget knows about you, with up to 1h of
 cache staleness after a prod deploy (`SYSTEM_PROMPT_TTL_SECONDS`).
+
+`workExperience`'s grouped `positions` shape is handled explicitly in
+`workers/chat/src/index.ts` (flattened into one prompt line per position) — it has its
+own copy of the type, kept in sync manually with `useResumeData.ts` since the worker is
+a separate project (no shared types package).

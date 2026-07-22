@@ -123,6 +123,28 @@ const mockResumeData = {
     ],
 };
 
+const mockResumeDataWithGroupedPositions = {
+    ...mockResumeData,
+    workExperience: [
+        {
+            company: 'Tech Corp',
+            companyUrl: 'https://techcorp.example.com',
+            positions: [
+                {
+                    position: 'Principal Engineer',
+                    period: '2023-Present',
+                    responsibilities: ['Set technical direction across teams'],
+                },
+                {
+                    position: 'Senior Developer',
+                    period: '2020-2023',
+                    responsibilities: ['Developed web applications'],
+                },
+            ],
+        },
+    ],
+};
+
 describe('Resume', () => {
     beforeEach(() => {
         vi.clearAllMocks();
@@ -184,6 +206,24 @@ describe('Resume', () => {
             expect(screen.getByText('Experience')).toBeInTheDocument();
             expect(screen.getByText('Tech Corp')).toBeInTheDocument();
             expect(screen.getByText('Senior Developer')).toBeInTheDocument();
+        });
+    });
+
+    it('renders grouped positions for a company with multiple titles', async () => {
+        vi.mocked(useResumeData).mockReturnValue({
+            resumeData: mockResumeDataWithGroupedPositions,
+            loading: false,
+            error: null,
+        });
+
+        render(<Resume />);
+
+        await waitFor(() => {
+            expect(screen.getByText('Tech Corp')).toBeInTheDocument();
+            expect(screen.getByText('Principal Engineer')).toBeInTheDocument();
+            expect(screen.getByText('Senior Developer')).toBeInTheDocument();
+            expect(screen.getByText('2023-Present')).toBeInTheDocument();
+            expect(screen.getByText('2020-2023')).toBeInTheDocument();
         });
     });
 

@@ -714,92 +714,147 @@ const Resume: React.FC = () => {
                             }
                         >
                             <div className="space-y-8">
-                                {resumeData?.workExperience?.map((exp, idx: number) => (
-                                    <div key={idx}>
-                                        <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                                            <Users className="text-blue-400" aria-hidden="true" />{' '}
-                                            {exp.position}
-                                            <span className="text-gray-900 font-normal">
-                                                @{' '}
-                                                {exp.companyUrl ? (
-                                                    <a
-                                                        href={exp.companyUrl}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="text-blue-600 hover:text-blue-800 underline focus-visible:ring-2 focus-visible:ring-blue-400 rounded"
-                                                        aria-label={`${exp.company} (opens in new window)`}
-                                                    >
-                                                        {exp.company}
-                                                    </a>
-                                                ) : (
-                                                    exp.company
+                                {resumeData?.workExperience?.map((exp, idx: number) => {
+                                    const companyLabel = exp.companyUrl ? (
+                                        <a
+                                            href={exp.companyUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-blue-600 hover:text-blue-800 underline focus-visible:ring-2 focus-visible:ring-blue-400 rounded"
+                                            aria-label={`${exp.company} (opens in new window)`}
+                                        >
+                                            {exp.company}
+                                        </a>
+                                    ) : (
+                                        exp.company
+                                    );
+
+                                    const extras = (
+                                        <>
+                                            {(exp.notableProjects?.length ?? 0) > 0 && (
+                                                <div className="ml-4 mt-2">
+                                                    <div className="p-3 my-2 rounded bg-blue-50 border-l-4 border-blue-400">
+                                                        <h4 className="font-medium text-blue-900 flex items-center gap-2">
+                                                            <Star aria-hidden="true" /> Notable
+                                                            Projects:
+                                                        </h4>
+                                                        <ul className="list-disc list-inside text-gray-900">
+                                                            {exp.notableProjects?.map(
+                                                                (proj, pi: number) => (
+                                                                    <li key={pi}>
+                                                                        <strong>
+                                                                            {proj.name}
+                                                                        </strong>
+                                                                        : {proj.description}{' '}
+                                                                        <span className="text-gray-700">
+                                                                            [
+                                                                            {proj.technologies?.join(
+                                                                                ', ',
+                                                                            )}
+                                                                            ]
+                                                                        </span>
+                                                                    </li>
+                                                                ),
+                                                            )}
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            {(exp.honorsAndAwards?.length ?? 0) > 0 && (
+                                                <div className="ml-4 mt-2">
+                                                    <div className="p-3 my-2 rounded bg-yellow-50 border-l-4 border-yellow-400">
+                                                        <h4 className="font-medium text-yellow-900 flex items-center gap-2">
+                                                            <Award aria-hidden="true" /> Honors &
+                                                            Awards:
+                                                        </h4>
+                                                        <ul className="list-disc list-inside text-gray-900">
+                                                            {exp.honorsAndAwards?.map(
+                                                                (award, ai: number) => (
+                                                                    <li key={ai}>
+                                                                        <strong>
+                                                                            {award.award}
+                                                                        </strong>{' '}
+                                                                        <span className="text-gray-700">
+                                                                            ({award.date})
+                                                                        </span>{' '}
+                                                                        -{' '}
+                                                                        <span className="text-gray-800">
+                                                                            {award.issuer}
+                                                                        </span>
+                                                                        : {award.description}
+                                                                    </li>
+                                                                ),
+                                                            )}
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </>
+                                    );
+
+                                    if (exp.positions && exp.positions.length > 0) {
+                                        return (
+                                            <div key={idx}>
+                                                <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                                                    <Briefcase
+                                                        className="text-blue-400"
+                                                        aria-hidden="true"
+                                                    />{' '}
+                                                    {companyLabel}
+                                                </h3>
+                                                <div className="mt-3 space-y-4 border-l-2 border-gray-200 pl-4">
+                                                    {exp.positions.map((pos, pidx) => (
+                                                        <div key={pidx}>
+                                                            <h4 className="text-base font-semibold text-gray-900 flex items-center gap-2">
+                                                                <Users
+                                                                    className="text-blue-400"
+                                                                    aria-hidden="true"
+                                                                />{' '}
+                                                                {pos.position}
+                                                            </h4>
+                                                            <p className="text-gray-900 mb-1">
+                                                                {pos.period}
+                                                            </p>
+                                                            <ul className="list-disc list-inside text-gray-900 mb-2">
+                                                                {pos.responsibilities?.map(
+                                                                    (r: string, i: number) => (
+                                                                        <li key={i}>{r}</li>
+                                                                    ),
+                                                                )}
+                                                            </ul>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                                {extras}
+                                            </div>
+                                        );
+                                    }
+
+                                    return (
+                                        <div key={idx}>
+                                            <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                                                <Users
+                                                    className="text-blue-400"
+                                                    aria-hidden="true"
+                                                />{' '}
+                                                {exp.position}
+                                                <span className="text-gray-900 font-normal">
+                                                    @ {companyLabel}
+                                                </span>
+                                            </h3>
+                                            <p className="text-gray-900 mb-1">{exp.period}</p>
+                                            <ul className="list-disc list-inside text-gray-900 mb-2">
+                                                {exp.responsibilities?.map(
+                                                    (r: string, i: number) => (
+                                                        <li key={i}>{r}</li>
+                                                    ),
                                                 )}
-                                            </span>
-                                        </h3>
-                                        <p className="text-gray-900 mb-1">{exp.period}</p>
-                                        <ul className="list-disc list-inside text-gray-900 mb-2">
-                                            {exp.responsibilities?.map((r: string, i: number) => (
-                                                <li key={i}>{r}</li>
-                                            ))}
-                                        </ul>
-
-                                        {(exp.notableProjects?.length ?? 0) > 0 && (
-                                            <div className="ml-4 mt-2">
-                                                <div className="p-3 my-2 rounded bg-blue-50 border-l-4 border-blue-400">
-                                                    <h4 className="font-medium text-blue-900 flex items-center gap-2">
-                                                        <Star aria-hidden="true" /> Notable
-                                                        Projects:
-                                                    </h4>
-                                                    <ul className="list-disc list-inside text-gray-900">
-                                                        {exp.notableProjects?.map(
-                                                            (proj, pi: number) => (
-                                                                <li key={pi}>
-                                                                    <strong>{proj.name}</strong>:{' '}
-                                                                    {proj.description}{' '}
-                                                                    <span className="text-gray-700">
-                                                                        [
-                                                                        {proj.technologies?.join(
-                                                                            ', ',
-                                                                        )}
-                                                                        ]
-                                                                    </span>
-                                                                </li>
-                                                            ),
-                                                        )}
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        )}
-
-                                        {(exp.honorsAndAwards?.length ?? 0) > 0 && (
-                                            <div className="ml-4 mt-2">
-                                                <div className="p-3 my-2 rounded bg-yellow-50 border-l-4 border-yellow-400">
-                                                    <h4 className="font-medium text-yellow-900 flex items-center gap-2">
-                                                        <Award aria-hidden="true" /> Honors &
-                                                        Awards:
-                                                    </h4>
-                                                    <ul className="list-disc list-inside text-gray-900">
-                                                        {exp.honorsAndAwards?.map(
-                                                            (award, ai: number) => (
-                                                                <li key={ai}>
-                                                                    <strong>{award.award}</strong>{' '}
-                                                                    <span className="text-gray-700">
-                                                                        ({award.date})
-                                                                    </span>{' '}
-                                                                    -{' '}
-                                                                    <span className="text-gray-800">
-                                                                        {award.issuer}
-                                                                    </span>
-                                                                    : {award.description}
-                                                                </li>
-                                                            ),
-                                                        )}
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        )}
-                                    </div>
-                                ))}
+                                            </ul>
+                                            {extras}
+                                        </div>
+                                    );
+                                })}
                             </div>
                         </CollapsibleSection>
 

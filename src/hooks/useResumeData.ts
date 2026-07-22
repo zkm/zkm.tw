@@ -29,9 +29,17 @@ export interface ResumeData {
     workExperience: Array<{
         company: string;
         companyUrl?: string;
-        position: string;
-        period: string;
-        responsibilities: string[];
+        // Single-position entry (most companies). Omitted when `positions` is used instead.
+        position?: string;
+        period?: string;
+        responsibilities?: string[];
+        // Multiple titles held at the same company (e.g. promotions), newest first.
+        // When present, takes precedence over the single-position fields above.
+        positions?: Array<{
+            position: string;
+            period: string;
+            responsibilities: string[];
+        }>;
         notableProjects?: Array<{
             name: string;
             period?: string;

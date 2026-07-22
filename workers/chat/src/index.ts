@@ -17,10 +17,16 @@ interface ResumeJson {
     summary?: string;
     technicalSkills?: Record<string, string[] | Record<string, unknown>>;
     workExperience?: Array<{
-        position: string;
         company: string;
-        period: string;
+        position?: string;
+        period?: string;
         responsibilities?: string[];
+        // Multiple titles held at the same company (e.g. promotions), newest first.
+        positions?: Array<{
+            position: string;
+            period: string;
+            responsibilities?: string[];
+        }>;
     }>;
     education?: Array<{ degree?: string; title?: string; institution?: string }>;
 }
@@ -66,9 +72,15 @@ async function buildSystemPrompt(env: Env): Promise<string> {
     const resume = await resumeRes.json<ResumeJson>();
 
     const workExperience = (resume.workExperience ?? [])
-        .map(
-            (job) =>
-                `- ${job.position} at ${job.company} (${job.period}): ${(job.responsibilities ?? []).join(' ')}`,
+        .flatMap((job) =>
+            job.positions && job.positions.length > 0
+                ? job.positions.map(
+                      (pos) =>
+                          `- ${pos.position} at ${job.company} (${pos.period}): ${(pos.responsibilities ?? []).join(' ')}`,
+                  )
+                : [
+                      `- ${job.position} at ${job.company} (${job.period}): ${(job.responsibilities ?? []).join(' ')}`,
+                  ],
         )
         .join('\n');
 
