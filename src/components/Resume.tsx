@@ -742,9 +742,7 @@ const Resume: React.FC = () => {
                                                             {exp.notableProjects?.map(
                                                                 (proj, pi: number) => (
                                                                     <li key={pi}>
-                                                                        <strong>
-                                                                            {proj.name}
-                                                                        </strong>
+                                                                        <strong>{proj.name}</strong>
                                                                         : {proj.description}{' '}
                                                                         <span className="text-gray-700">
                                                                             [
