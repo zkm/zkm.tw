@@ -89,7 +89,7 @@
                     "position": "Cloud Developer Principal",
                     "period": "Jul 2026 - Present",
                     "responsibilities": [
-                        "Building and advising on web applications spanning Python, R, and React with AWS Lambda, deployed across AWS and RHEL environments, while advising on infrastructure design, service selection, and technical strategy.",
+                        "Building and maintaining web applications spanning Python, R, and React with AWS Lambda, deployed across AWS and RHEL environments, while advising on infrastructure design, service selection, and technical strategy.",
                         "Applying a cloud-first lens to legacy government systems, identifying opportunities to modernize infrastructure and reduce operational overhead.",
                         "Carrying forward security and compliance expertise (OWASP, MFA, 508/WCAG) into cloud-based solution design for federal requirements."
                     ]
