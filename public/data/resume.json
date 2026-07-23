@@ -87,7 +87,7 @@
             "positions": [
                 {
                     "position": "Cloud Developer Principal",
-                    "period": "Jul 2026 - Present",
+                    "period": "2026 - Present",
                     "responsibilities": [
                         "Building and maintaining web applications spanning Python, R, and React with AWS Lambda, deployed across AWS and RHEL environments, while advising on infrastructure design, service selection, and technical strategy.",
                         "Applying a cloud-first lens to legacy government systems, identifying opportunities to modernize infrastructure and reduce operational overhead.",
@@ -96,7 +96,7 @@
                 },
                 {
                     "position": "Web Designer Principal",
-                    "period": "Aug 2025 - Jul 2026",
+                    "period": "2025 - 2026",
                     "responsibilities": [
                         "Promoted to Principal, expanding design and front-end architecture authority beyond the original JSP application to additional GDIT web properties.",
                         "Mentored developers and set technical direction on UI/UX decisions, establishing standards for accessibility and design consistency across projects.",
@@ -106,7 +106,7 @@
                 },
                 {
                     "position": "Web Developer Advisor",
-                    "period": "Jan 2023 - Aug 2025",
+                    "period": "2023 - 2025",
                     "responsibilities": [
                         "Developed and maintained JSP pages for a secure, Java-based government web application, ensuring optimized performance, dynamic content delivery, and 508/WCAG accessibility compliance.",
                         "Designed and built interactive AI demos using Vite, React, TypeScript, Tailwind CSS, and AWS services (Cognito, Lambda, S3, AWS SDK) to showcase advanced machine learning capabilities.",
@@ -121,7 +121,7 @@
             "company": "EON Clinics",
             "companyUrl": "https://web.archive.org/web/20220309192209/https://www.eonclinics.com/",
             "position": "Senior Web Developer",
-            "period": "May 2020 - Dec 2022",
+            "period": "2020 - 2022",
             "responsibilities": [
                 "Developed web applications for aesthetic medical practice management and patient scheduling.",
                 "Built responsive patient portal interfaces for cosmetic surgery consultations and bookings.",
@@ -134,7 +134,7 @@
             "company": "Blick Art Materials",
             "companyUrl": "https://www.dickblick.com/",
             "position": "React Developer",
-            "period": "Apr 2019 - Mar 2020",
+            "period": "2019 - 2020",
             "responsibilities": [
                 "Modernized e-commerce platform for one of America's largest art supply retailers.",
                 "Successfully migrated legacy .NET DNN codebase to modern React and Next.js architecture.",
@@ -147,7 +147,7 @@
             "company": "NCSA",
             "companyUrl": "https://www.ncsasports.org/",
             "position": "Senior Front-End Engineer",
-            "period": "Apr 2016 - Dec 2018",
+            "period": "2016 - 2018",
             "responsibilities": [
                 "Developed high-performance front-end applications for sports recruiting platform.",
                 "Built responsive web interfaces for athlete profiles and college recruitment tools.",
@@ -160,7 +160,7 @@
             "company": "FCB Chicago",
             "companyUrl": "https://www.fcb.com/",
             "position": "Freelance Web Developer",
-            "period": "Mar 2016 - Apr 2016",
+            "period": "2016",
             "responsibilities": [
                 "Developed interactive web applications for global advertising campaigns at FCB.",
                 "Created single page React.js applications for major brand marketing initiatives.",
@@ -172,7 +172,7 @@
             "company": "Productive Edge",
             "companyUrl": "https://www.productiveedge.com/",
             "position": "Senior Front-End Developer",
-            "period": "Jul 2014 - Dec 2015",
+            "period": "2014 - 2015",
             "responsibilities": [
                 "Built enterprise web applications and digital transformation solutions for Fortune 500 clients.",
                 "Designed and developed interactive kiosk applications using Backbone.js and .NET.",
@@ -183,7 +183,7 @@
             "notableProjects": [
                 {
                     "name": "Humana EasyPrice",
-                    "period": "Jun 2014 - Dec 2014",
+                    "period": "2014",
                     "description": "Developed healthcare pricing transparency application for Humana insurance customers. Built interactive web platform allowing users to compare medical procedure costs and make informed healthcare decisions.",
                     "technologies": ["JavaScript", "HTML5", "CSS3", "Backbone.js", ".NET"],
                     "impact": "Enabled healthcare price transparency for Humana customers, improving informed decision-making for medical procedures and healthcare costs."
@@ -194,7 +194,7 @@
             "company": "Zócalo Group",
             "companyUrl": "https://web.archive.org/web/20140122203230/https://zocalogroup.com/",
             "position": "Web/Interactive Developer",
-            "period": "Jan 2012 - May 2014",
+            "period": "2012 - 2014",
             "responsibilities": [
                 "Developed interactive web applications for market research and consumer insights projects.",
                 "Built internal tools using AngularJS to automate research data collection and analysis.",
@@ -207,7 +207,7 @@
                 {
                     "award": "Golden Pixie Award",
                     "issuer": "Pixie Awards (American Pixel Academy)",
-                    "date": "Jan 2014",
+                    "date": "2014",
                     "description": "Received prestigious Golden Pixie Award for interactive animation work on fruitfriends.com project. Recognized for excellence in web animation and interactive design within the digital marketing and web development industry.",
                     "source": "https://web.archive.org/web/20150108141008/http://www.pixieawards.com/previous-winners/5th-annual-award-winners/"
                 }
@@ -217,7 +217,7 @@
             "company": "Sandbox",
             "companyUrl": "https://www.sandboxdev.com/",
             "position": "WordPress Developer",
-            "period": "Apr 2011 - Nov 2012",
+            "period": "2011 - 2012",
             "responsibilities": [
                 "Developed custom WordPress solutions for creative agency and startup clients.",
                 "Created responsive WordPress themes and custom functionality for diverse client needs.",
@@ -230,7 +230,7 @@
             "company": "Band Digital, Inc.",
             "companyUrl": "https://web.archive.org/web/20110726135753/http://www.banddigital.com/",
             "position": "Interactive Developer",
-            "period": "Jun 2011 - Dec 2011",
+            "period": "2011",
             "responsibilities": [
                 "Developed interactive marketing experiences for major consumer brands.",
                 "Built landing pages and promotional websites using .NET for enterprise clients like SC Johnson.",
@@ -243,7 +243,7 @@
             "company": "Sears Holdings Corporation",
             "companyUrl": "https://www.sears.com/",
             "position": "Front-End Developer Contractor",
-            "period": "Sep 2010 - Feb 2011",
+            "period": "2010 - 2011",
             "responsibilities": [
                 "Developed promotional web content for major retail e-commerce platforms (Sears.com, Kmart.com, myGofer.com).",
                 "Created interactive marketing campaigns and seasonal promotional landing pages.",
@@ -256,7 +256,7 @@
             "company": "GyroHSR",
             "companyUrl": "https://web.archive.org/web/20101130141550/https://gyrohsr.com/",
             "position": "Web Developer Contractor",
-            "period": "Aug 2010 - Sep 2010",
+            "period": "2010",
             "responsibilities": [
                 "Provided specialized HTML and CSS development for healthcare marketing campaigns.",
                 "Created responsive web solutions for pharmaceutical and medical device clients.",
@@ -268,7 +268,7 @@
             "company": "Sandstorm Design",
             "companyUrl": "https://www.sandstormdesign.com/",
             "position": "Web Developer",
-            "period": "Jun 2009 - Jun 2010",
+            "period": "2009 - 2010",
             "responsibilities": [
                 "Developed comprehensive web solutions for design agency clients using full-stack technologies.",
                 "Built dynamic websites using HTML (XHTML), CSS, JavaScript, Ajax, jQuery, PHP, and ColdFusion.",
@@ -294,7 +294,7 @@
         {
             "organization": "Out Our Front Door",
             "role": "Vice President / Field Guide",
-            "period": "Jan 2018 - Apr 2019",
+            "period": "2018 - 2019",
             "description": "Served in executive leadership role for environmental education organization, then transitioned to field work providing exploratory adventures by immersing and educating participants in the history, culture, and uniquely beautiful natural habitats of the Lower Lake Michigan Basin Area. Led field experiences connecting urban communities with environmental education and outdoor recreation opportunities."
         },
         {
@@ -306,7 +306,7 @@
         {
             "organization": "We All Code (formerly CoderDojoChi)",
             "role": "Volunteer Mentor",
-            "period": "Dec 2014 - Mar 2017",
+            "period": "2014 - 2017",
             "description": "Mentored youth ages 7-17 in computer programming and web development. Helped teach HTML, CSS, JavaScript, and Python to underrepresented students in Chicago, supporting diversity and inclusion in technology education."
         },
         {
@@ -317,7 +317,7 @@
         {
             "organization": "Pumping Station: One",
             "role": "Member/Teacher",
-            "period": "Nov 2009 - Jan 2011",
+            "period": "2009 - 2011",
             "description": "Active member of Chicago's premier hackerspace and makerspace community. Taught workshops on web development and contributed to collaborative technology projects in a creative, hands-on learning environment.",
             "notableProjects": [
                 {
