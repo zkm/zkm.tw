@@ -4154,12 +4154,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lucide-react@npm:^1.26.0":
-  version: 1.26.0
-  resolution: "lucide-react@npm:1.26.0"
+"lucide-react@npm:^1.27.0":
+  version: 1.27.0
+  resolution: "lucide-react@npm:1.27.0"
   peerDependencies:
     react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
-  checksum: 10c0/018125879059e926ba2fe441295237331e563923e0ee80f1d3aeb25edccd6cf71f50a16aa7c447c4da5c33f5ecaf05a81f4475a634a7fa6055b3c8a6710149f0
+  checksum: 10c0/18b078fed81124ee3535350c8aa1718945c94fe87d7f76c815cb49bdf39ed49f6fa53fb9b3aa56653dc8ca3523ea91c76cf3040dfb8b3497b1e6356b29f3e5c9
   languageName: node
   linkType: hard
 
@@ -6205,10 +6205,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"web-vitals@npm:^6.0.0":
-  version: 6.0.0
-  resolution: "web-vitals@npm:6.0.0"
-  checksum: 10c0/2388ab2a760c112f083993db78ebd39b78590a74c75d7b4d446724b49b6b29e52fecf745db2f907d902f2ffedb4243023f4c01ed337864143145d9f3535c6dc0
+"web-vitals@npm:^6.0.1":
+  version: 6.0.1
+  resolution: "web-vitals@npm:6.0.1"
+  checksum: 10c0/99661ff00749b55ab73e53629bb125c945d46835909b4bcdad5f01b1fa28a10aab301c6f86325a7f632894493c6c923b19c97c50e81cc8f243e8a0ca17eeafd6
   languageName: node
   linkType: hard
 
@@ -6421,7 +6421,7 @@ __metadata:
     husky: "npm:^9.1.7"
     jsdom: "npm:^29.1.1"
     jspdf: "npm:^4.2.1"
-    lucide-react: "npm:^1.26.0"
+    lucide-react: "npm:^1.27.0"
     postcss: "npm:^8.5.23"
     prettier: "npm:^3.9.6"
     react: "npm:^19.2.8"
@@ -6436,7 +6436,7 @@ __metadata:
     typescript-eslint: "npm:^8.65.0"
     vite: "npm:^8.1.5"
     vitest: "npm:^4.1.10"
-    web-vitals: "npm:^6.0.0"
+    web-vitals: "npm:^6.0.1"
   languageName: unknown
   linkType: soft
 
