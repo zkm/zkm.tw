@@ -47,7 +47,7 @@
         "chart.js": "^4.5.1",
         "framer-motion": "^12.42.2",
         "jspdf": "^4.2.1",
-        "lucide-react": "^1.26.0",
+        "lucide-react": "^1.27.0",
         "react": "^19.2.8",
         "react-chartjs-2": "^5.3.1",
         "react-dom": "^19.2.8",
@@ -55,7 +55,7 @@
         "react-markdown": "^10.1.0",
         "styled-components": "^6.4.4",
         "styled-system": "^5.1.5",
-        "web-vitals": "^6.0.0"
+        "web-vitals": "^6.0.1"
     },
     "engines": {
         "node": ">=24 <26"
@@ -66,7 +66,7 @@
         "dompurify": "^3.4.11",
         "form-data": "^4.0.6",
         "minimatch": "^10.2.2",
-        "postcss": "^8.5.22",
+        "postcss": "^8.5.23",
         "js-tokens": "^9.0.1",
         "aria-query": "^5.3.2",
         "dom-accessibility-api": "^0.6.3",
@@ -107,10 +107,10 @@
         "eslint-plugin-react": "^7.37.5",
         "eslint-plugin-react-hooks": "^7.1.1",
         "eslint-plugin-react-refresh": "^0.5.3",
-        "globals": "^17.7.0",
+        "globals": "^17.8.0",
         "happy-dom": "^20.11.1",
         "husky": "^9.1.7",
-        "jsdom": "^29.1.1",
+        "jsdom": "^30.0.0",
         "postcss": "^8.5.23",
         "prettier": "^3.9.6",
         "tailwindcss": "^4.3.3",
