@@ -20,7 +20,7 @@ function log(message, color = COLORS.reset) {
 }
 
 function header(title) {
-    console.log('\n' + '='.repeat(60));
+    console.log(`\n${'='.repeat(60)}`);
     log(title, COLORS.bright + COLORS.cyan);
     console.log('='.repeat(60));
 }

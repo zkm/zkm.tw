@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-import { execSync } from 'child_process';
-import { existsSync, rmSync } from 'fs';
+import { execSync } from 'node:child_process';
+import { existsSync, rmSync } from 'node:fs';
 
 const BACKUP_DIR = '/tmp/zkm-dist-backup';
 
@@ -10,7 +10,7 @@ function run(command, description) {
     try {
         execSync(command, { stdio: 'inherit' });
         console.log(`✅ ${description} complete`);
-    } catch (error) {
+    } catch (_error) {
         console.error(`❌ ${description} failed`);
         process.exit(1);
     }

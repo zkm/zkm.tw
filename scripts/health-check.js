@@ -5,9 +5,9 @@
  * Performs comprehensive health checks on all packages and dependencies
  */
 
-import { execSync } from 'child_process';
-import { readFileSync, writeFileSync, existsSync } from 'fs';
-import { join } from 'path';
+import { execSync } from 'node:child_process';
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { join } from 'node:path';
 
 const COLORS = {
     reset: '\x1b[0m',
@@ -39,9 +39,9 @@ class HealthCheckScanner {
     }
 
     section(title) {
-        console.log('\n' + '='.repeat(60));
+        console.log(`\n${'='.repeat(60)}`);
         this.log(title, COLORS.bright + COLORS.cyan);
-        console.log('='.repeat(60) + '\n');
+        console.log(`${'='.repeat(60)}\n`);
     }
 
     addCheck(name, status, details = {}) {
@@ -174,7 +174,7 @@ class HealthCheckScanner {
                         total: totalVulns,
                     });
                 }
-            } catch (err) {
+            } catch (_err) {
                 this.addCheck('Security Vulnerabilities', 'warning', {
                     message: 'Unable to parse audit results',
                 });
@@ -228,7 +228,7 @@ class HealthCheckScanner {
                         patchUpdates: patchUpdates.length,
                     });
                 }
-            } catch (err) {
+            } catch (_err) {
                 this.addCheck('Package Updates', 'passed', {
                     message: 'All packages appear to be up to date',
                 });
@@ -241,8 +241,8 @@ class HealthCheckScanner {
     }
 
     isMajorUpdate(current, latest) {
-        const currentMajor = parseInt(current.split('.')[0]);
-        const latestMajor = parseInt(latest.split('.')[0]);
+        const currentMajor = parseInt(current.split('.')[0], 10);
+        const latestMajor = parseInt(latest.split('.')[0], 10);
         return latestMajor > currentMajor;
     }
 
@@ -294,7 +294,7 @@ class HealthCheckScanner {
                         unavoidable: unavoidable.slice(0, 5), // Show first 5
                     });
                 }
-            } catch (err) {
+            } catch (_err) {
                 this.addCheck('Duplicate Dependencies', 'warning', {
                     message: 'Unable to analyze dependency tree',
                 });
