@@ -5,8 +5,8 @@
  * Creates a simple HTML page showing health check status
  */
 
-import { readFileSync, writeFileSync, existsSync } from 'fs';
-import { join } from 'path';
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { join } from 'node:path';
 
 const BADGE_COLORS = {
     passed: '#4c1',

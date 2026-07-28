@@ -36,8 +36,10 @@ const base64Decode = (str: string) => {
     let output = '';
     str = String(str).replace(/=+$/, '');
     if (str.length % 4 === 1) throw new Error('Invalid base64');
-    for (let bc = 0, bs = 0, buffer, i = 0; (buffer = str.charAt(i++));) {
-        const idx = chars.indexOf(buffer);
+    let bc = 0;
+    let bs = 0;
+    for (let i = 0; i < str.length; i++) {
+        const idx = chars.indexOf(str.charAt(i));
         if (~idx) {
             bs = bc % 4 ? bs * 64 + idx : idx;
             if (bc++ % 4) output += String.fromCharCode(255 & (bs >> ((-2 * bc) & 6)));
@@ -92,6 +94,7 @@ const RevealPhone: React.FC = () => {
             <Phone className="inline text-yellow-300 flex-shrink-0" size={16} aria-hidden="true" />
             {!revealed ? (
                 <button
+                    type="button"
                     className="underline text-yellow-200 hover:text-yellow-100 min-h-[44px] focus-visible:ring-2 focus-visible:ring-yellow-400 rounded px-2"
                     onClick={onReveal}
                     aria-label="Reveal phone number"
@@ -108,6 +111,7 @@ const RevealPhone: React.FC = () => {
                         {prettyText}
                     </a>
                     <button
+                        type="button"
                         onClick={onCopy}
                         className="ml-2 text-xs px-3 py-2 rounded bg-slate-800 text-yellow-200 hover:bg-slate-700 inline-flex items-center gap-1 min-h-[44px] min-w-[44px] justify-center focus-visible:ring-2 focus-visible:ring-yellow-400"
                         aria-label="Copy phone number"
@@ -162,11 +166,11 @@ const RevealEmail: React.FC = () => {
         if (live && em) live.textContent = 'Email contact options opened.';
     };
 
-    const onCloseModal = () => {
+    const onCloseModal = React.useCallback(() => {
         setShowModal(false);
         setCopied(false);
         lastFocusedElementRef.current?.focus();
-    };
+    }, []);
 
     React.useEffect(() => {
         if (showModal) closeButtonRef.current?.focus();
@@ -181,7 +185,7 @@ const RevealEmail: React.FC = () => {
 
         document.addEventListener('keydown', onKeyDown);
         return () => document.removeEventListener('keydown', onKeyDown);
-    }, [showModal]);
+    }, [showModal, onCloseModal]);
 
     const onCopy = async () => {
         const em = decodeEmail();
@@ -198,6 +202,7 @@ const RevealEmail: React.FC = () => {
         <div className="flex items-center gap-2">
             <Mail className="inline text-yellow-300 flex-shrink-0" size={16} aria-hidden="true" />
             <button
+                type="button"
                 className="underline text-yellow-200 hover:text-yellow-100 min-h-[44px] focus-visible:ring-2 focus-visible:ring-yellow-400 rounded px-2"
                 onClick={onReveal}
                 aria-label="Reveal email address"
@@ -206,18 +211,20 @@ const RevealEmail: React.FC = () => {
             </button>
 
             {showModal && em && mailto && (
-                <div
-                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
-                    role="presentation"
-                    onClick={onCloseModal}
-                >
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
+                    <button
+                        type="button"
+                        aria-label="Close dialog"
+                        tabIndex={-1}
+                        className="absolute inset-0 cursor-default appearance-none border-0 bg-transparent p-0"
+                        onClick={onCloseModal}
+                    />
                     <div
                         role="dialog"
                         aria-modal="true"
                         aria-labelledby="resume-email-modal-title"
                         aria-describedby="resume-email-modal-description"
                         className="w-full max-w-md rounded-2xl border border-slate-600 bg-slate-900 p-6 shadow-2xl"
-                        onClick={(event) => event.stopPropagation()}
                     >
                         <h3
                             id="resume-email-modal-title"
@@ -405,6 +412,7 @@ const Resume: React.FC = () => {
             <div className="mb-6">
                 <button
                     id={headerId}
+                    type="button"
                     onClick={() => setOpen(!open)}
                     className="w-full text-left p-4 bg-gray-50 hover:bg-gray-100 rounded-lg border border-gray-200 transition-colors duration-200 flex items-center justify-between font-semibold text-gray-900 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                     aria-expanded={open}
@@ -419,9 +427,8 @@ const Resume: React.FC = () => {
                     )}
                 </button>
 
-                <div
+                <section
                     id={contentId}
-                    role="region"
                     aria-labelledby={headerId}
                     aria-describedby={descriptionId}
                     className={`transition-all duration-300 overflow-hidden ${
@@ -434,14 +441,8 @@ const Resume: React.FC = () => {
                     >
                         {children}
                     </div>
-                </div>
-                {open && (
-                    <div
-                        className="border-b border-gray-200 mt-4"
-                        role="separator"
-                        aria-hidden="true"
-                    ></div>
-                )}
+                </section>
+                {open && <hr className="border-b border-gray-200 mt-4" />}
             </div>
         );
     };
@@ -506,7 +507,7 @@ const Resume: React.FC = () => {
                                     <a
                                         href={website}
                                         className="underline text-yellow-200 hover:text-yellow-100"
-                                        rel="me"
+                                        rel="noopener me"
                                         target="_blank"
                                         aria-label={`Visit ${new URL(website).host} (opens in new window)`}
                                     >
@@ -612,7 +613,8 @@ const Resume: React.FC = () => {
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         {skillGroups.map(([key, label]) => {
                                             const items = resumeData?.technicalSkills?.[key] as
-                                                string[] | undefined;
+                                                | string[]
+                                                | undefined;
                                             const isArray = Array.isArray(items);
                                             if (!isArray || items.length === 0) return null;
 
@@ -714,7 +716,7 @@ const Resume: React.FC = () => {
                             }
                         >
                             <div className="space-y-8">
-                                {resumeData?.workExperience?.map((exp, idx: number) => {
+                                {resumeData?.workExperience?.map((exp) => {
                                     const companyLabel = exp.companyUrl ? (
                                         <a
                                             href={exp.companyUrl}
@@ -739,21 +741,19 @@ const Resume: React.FC = () => {
                                                             Projects:
                                                         </h4>
                                                         <ul className="list-disc list-inside text-gray-900">
-                                                            {exp.notableProjects?.map(
-                                                                (proj, pi: number) => (
-                                                                    <li key={pi}>
-                                                                        <strong>{proj.name}</strong>
-                                                                        : {proj.description}{' '}
-                                                                        <span className="text-gray-700">
-                                                                            [
-                                                                            {proj.technologies?.join(
-                                                                                ', ',
-                                                                            )}
-                                                                            ]
-                                                                        </span>
-                                                                    </li>
-                                                                ),
-                                                            )}
+                                                            {exp.notableProjects?.map((proj) => (
+                                                                <li key={proj.name}>
+                                                                    <strong>{proj.name}</strong>:{' '}
+                                                                    {proj.description}{' '}
+                                                                    <span className="text-gray-700">
+                                                                        [
+                                                                        {proj.technologies?.join(
+                                                                            ', ',
+                                                                        )}
+                                                                        ]
+                                                                    </span>
+                                                                </li>
+                                                            ))}
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -767,23 +767,19 @@ const Resume: React.FC = () => {
                                                             Awards:
                                                         </h4>
                                                         <ul className="list-disc list-inside text-gray-900">
-                                                            {exp.honorsAndAwards?.map(
-                                                                (award, ai: number) => (
-                                                                    <li key={ai}>
-                                                                        <strong>
-                                                                            {award.award}
-                                                                        </strong>{' '}
-                                                                        <span className="text-gray-700">
-                                                                            ({award.date})
-                                                                        </span>{' '}
-                                                                        -{' '}
-                                                                        <span className="text-gray-800">
-                                                                            {award.issuer}
-                                                                        </span>
-                                                                        : {award.description}
-                                                                    </li>
-                                                                ),
-                                                            )}
+                                                            {exp.honorsAndAwards?.map((award) => (
+                                                                <li key={award.award}>
+                                                                    <strong>{award.award}</strong>{' '}
+                                                                    <span className="text-gray-700">
+                                                                        ({award.date})
+                                                                    </span>{' '}
+                                                                    -{' '}
+                                                                    <span className="text-gray-800">
+                                                                        {award.issuer}
+                                                                    </span>
+                                                                    : {award.description}
+                                                                </li>
+                                                            ))}
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -793,7 +789,7 @@ const Resume: React.FC = () => {
 
                                     if (exp.positions && exp.positions.length > 0) {
                                         return (
-                                            <div key={idx}>
+                                            <div key={exp.company}>
                                                 <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
                                                     <Briefcase
                                                         className="text-blue-400"
@@ -802,8 +798,8 @@ const Resume: React.FC = () => {
                                                     {companyLabel}
                                                 </h3>
                                                 <div className="mt-3 space-y-4 border-l-2 border-gray-200 pl-4">
-                                                    {exp.positions.map((pos, pidx) => (
-                                                        <div key={pidx}>
+                                                    {exp.positions.map((pos) => (
+                                                        <div key={pos.position}>
                                                             <h4 className="text-base font-semibold text-gray-900 flex items-center gap-2">
                                                                 <Users
                                                                     className="text-blue-400"
@@ -816,8 +812,8 @@ const Resume: React.FC = () => {
                                                             </p>
                                                             <ul className="list-disc list-inside text-gray-900 mb-2">
                                                                 {pos.responsibilities?.map(
-                                                                    (r: string, i: number) => (
-                                                                        <li key={i}>{r}</li>
+                                                                    (r: string) => (
+                                                                        <li key={r}>{r}</li>
                                                                     ),
                                                                 )}
                                                             </ul>
@@ -830,7 +826,7 @@ const Resume: React.FC = () => {
                                     }
 
                                     return (
-                                        <div key={idx}>
+                                        <div key={exp.company}>
                                             <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
                                                 <Users
                                                     className="text-blue-400"
@@ -843,11 +839,9 @@ const Resume: React.FC = () => {
                                             </h3>
                                             <p className="text-gray-900 mb-1">{exp.period}</p>
                                             <ul className="list-disc list-inside text-gray-900 mb-2">
-                                                {exp.responsibilities?.map(
-                                                    (r: string, i: number) => (
-                                                        <li key={i}>{r}</li>
-                                                    ),
-                                                )}
+                                                {exp.responsibilities?.map((r: string) => (
+                                                    <li key={r}>{r}</li>
+                                                ))}
                                             </ul>
                                             {extras}
                                         </div>
@@ -867,8 +861,8 @@ const Resume: React.FC = () => {
                             }
                         >
                             <div className="space-y-8">
-                                {resumeData?.education?.map((edu, idx: number) => (
-                                    <div key={idx}>
+                                {resumeData?.education?.map((edu) => (
+                                    <div key={`${edu.institution}-${edu.degree}`}>
                                         <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
                                             <Book className="text-blue-400" aria-hidden="true" />{' '}
                                             {edu.degree},{' '}
@@ -895,8 +889,8 @@ const Resume: React.FC = () => {
                             }
                         >
                             <div className="space-y-8">
-                                {resumeData?.activitiesAndVolunteer?.map((act, idx: number) => (
-                                    <div key={idx}>
+                                {resumeData?.activitiesAndVolunteer?.map((act) => (
+                                    <div key={`${act.organization}-${act.role}`}>
                                         <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
                                             <Users className="text-blue-400" aria-hidden="true" />{' '}
                                             {act.role}{' '}
@@ -915,21 +909,16 @@ const Resume: React.FC = () => {
                                                         Projects:
                                                     </h4>
                                                     <ul className="list-disc list-inside text-gray-900">
-                                                        {act.notableProjects?.map(
-                                                            (proj, pi: number) => (
-                                                                <li key={pi}>
-                                                                    <strong>{proj.name}</strong>:{' '}
-                                                                    {proj.description}{' '}
-                                                                    <span className="text-gray-700">
-                                                                        [
-                                                                        {proj.technologies?.join(
-                                                                            ', ',
-                                                                        )}
-                                                                        ]
-                                                                    </span>
-                                                                </li>
-                                                            ),
-                                                        )}
+                                                        {act.notableProjects?.map((proj) => (
+                                                            <li key={proj.name}>
+                                                                <strong>{proj.name}</strong>:{' '}
+                                                                {proj.description}{' '}
+                                                                <span className="text-gray-700">
+                                                                    [{proj.technologies?.join(', ')}
+                                                                    ]
+                                                                </span>
+                                                            </li>
+                                                        ))}
                                                     </ul>
                                                 </div>
                                             </div>

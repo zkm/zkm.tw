@@ -44,6 +44,7 @@ const FileText: React.FC<IconProps> = ({ size = 24, className, ...rest }) => (
         fill="currentColor"
         className={className}
         xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
         {...rest}
     >
         <path d="M6 2h7l5 5v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z" />
@@ -435,18 +436,20 @@ const Portfolio: React.FC = () => {
                 </motion.footer>
 
                 {showContactModal && contactEmail && (
-                    <div
-                        className="fixed inset-0 z-40 flex items-center justify-center bg-[#060912]/75 p-4"
-                        role="presentation"
-                        onClick={onCloseContactModal}
-                    >
+                    <div className="fixed inset-0 z-40 flex items-center justify-center bg-[#060912]/75 p-4">
+                        <button
+                            type="button"
+                            aria-label="Close dialog"
+                            tabIndex={-1}
+                            className="absolute inset-0 cursor-default appearance-none border-0 bg-transparent p-0"
+                            onClick={onCloseContactModal}
+                        />
                         <div
                             role="dialog"
                             aria-modal="true"
                             aria-labelledby="contact-modal-title"
                             aria-describedby="contact-modal-description"
                             className="w-full max-w-md rounded-2xl border border-[#8cb5c2]/35 bg-[#111b2f]/95 p-6 shadow-[0_28px_60px_rgba(0,0,0,0.5)]"
-                            onClick={(event) => event.stopPropagation()}
                         >
                             <h2
                                 id="contact-modal-title"
@@ -495,18 +498,20 @@ const Portfolio: React.FC = () => {
                 )}
 
                 {showResume && (
-                    <div
-                        className="fixed inset-0 z-50 flex items-center justify-center bg-[#060912]/85 p-4 md:p-8"
-                        role="presentation"
-                        onClick={onCloseResume}
-                    >
+                    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#060912]/85 p-4 md:p-8">
+                        <button
+                            type="button"
+                            aria-label="Close dialog"
+                            tabIndex={-1}
+                            className="absolute inset-0 cursor-default appearance-none border-0 bg-transparent p-0"
+                            onClick={onCloseResume}
+                        />
                         <div
                             role="dialog"
                             aria-modal="true"
                             aria-labelledby="resume-dialog-title"
                             aria-describedby="resume-dialog-description"
                             className="relative h-[92vh] w-full max-w-6xl overflow-hidden rounded-2xl border border-[#8cb5c2]/30 bg-[#0e1424] shadow-[0_28px_60px_rgba(0,0,0,0.55)]"
-                            onClick={(event) => event.stopPropagation()}
                         >
                             <h2 id="resume-dialog-title" className="sr-only">
                                 Resume

@@ -308,9 +308,10 @@ describe('Resume', () => {
 
         // Check that controlled content exists with proper ID
         const contentId = summaryButton.getAttribute('aria-controls');
-        const contentElement = document.getElementById(contentId!);
+        if (!contentId) throw new Error('Missing aria-controls');
+        const contentElement = document.getElementById(contentId);
         expect(contentElement).toBeInTheDocument();
-        expect(contentElement).toHaveAttribute('role', 'region');
+        expect(contentElement?.tagName).toBe('SECTION');
         expect(contentElement).toHaveAttribute('aria-labelledby');
     });
 });

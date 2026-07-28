@@ -2,6 +2,7 @@ window.dataLayer = window.dataLayer || [];
 window.gtag =
     window.gtag ||
     function gtag() {
+        // biome-ignore lint/complexity/noArguments: matches Google's documented gtag.js snippet verbatim
         window.dataLayer.push(arguments);
     };
 

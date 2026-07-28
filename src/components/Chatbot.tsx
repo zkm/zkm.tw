@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
+import type React from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, X, Send, User, Bot } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
@@ -24,13 +25,10 @@ const Chatbot: React.FC = () => {
     const [isTyping, setIsTyping] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
-    const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-    };
-
+    // biome-ignore lint/correctness/useExhaustiveDependencies: intentionally re-scrolls on new messages/typing state via ref, not a direct reference
     useEffect(() => {
-        scrollToBottom();
-    }, [messages]);
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, [messages, isTyping]);
 
     const fetchResponse = async (history: Message[]): Promise<string> => {
         const response = await fetch('/api/chat', {
@@ -132,6 +130,7 @@ const Chatbot: React.FC = () => {
                                     </div>
                                 </div>
                                 <button
+                                    type="button"
                                     onClick={() => setIsOpen(false)}
                                     className="w-8 h-8 hover:bg-white/20 rounded-full flex items-center justify-center transition-colors"
                                 >
@@ -273,6 +272,7 @@ const Chatbot: React.FC = () => {
                                         className="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:border-blue-500 text-sm text-gray-800 placeholder:text-gray-400"
                                     />
                                     <button
+                                        type="button"
                                         onClick={handleSendMessage}
                                         disabled={!inputText.trim()}
                                         className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg transition-all duration-200"
