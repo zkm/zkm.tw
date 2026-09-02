@@ -872,12 +872,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/user-event@npm:^14.6.1":
-  version: 14.6.6
-  resolution: "@testing-library/user-event@npm:14.6.6"
+"@testing-library/user-event@npm:^14.6.7":
+  version: 14.6.7
+  resolution: "@testing-library/user-event@npm:14.6.7"
   peerDependencies:
     "@testing-library/dom": ">=7.21.4"
-  checksum: 10c0/2cb82d3a364a2a29da19bb5d2a614aedaa474ac6f599a42fc28c1926056f7b91f5cec37b33452bafcb3f6b37a950024da289dea88ead3c2056c6005c91c7f942
+  checksum: 10c0/21f5e01bea2699b069947ae06d0b0fbabe0e90d2a2206b8f56a3f46126d09bd85320cba3fd3910c4d18710b1873e6966fb9021668966c615aaa14bf35d7df3ef
   languageName: node
   linkType: hard
 
@@ -964,12 +964,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:>=20.0.0, @types/node@npm:^26.3.0":
+"@types/node@npm:*, @types/node@npm:>=20.0.0":
   version: 26.4.0
   resolution: "@types/node@npm:26.4.0"
   dependencies:
     undici-types: "npm:~8.3.0"
   checksum: 10c0/e6fc94ea3b58fb8040b38c465dec1c53c1fd9d2c092c81f699d28799726baf59f12e1600318e79e8e6f985bb919dab6ae820180b942b8e38c51acaad63e8aada
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^26.4.1":
+  version: 26.4.1
+  resolution: "@types/node@npm:26.4.1"
+  dependencies:
+    undici-types: "npm:~8.3.0"
+  checksum: 10c0/29568336db8bc67740744782492af0e81ab1f88d86eaa07e38cf0a4c8bae7250a7b4b85c80ac1014fc98b2bc6d4bcac872b2c494ee0671b3880eada7c1fdbc94
   languageName: node
   linkType: hard
 
@@ -2156,9 +2165,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"happy-dom@npm:^20.12.0":
-  version: 20.12.0
-  resolution: "happy-dom@npm:20.12.0"
+"happy-dom@npm:^20.13.1":
+  version: 20.13.1
+  resolution: "happy-dom@npm:20.13.1"
   dependencies:
     "@types/node": "npm:>=20.0.0"
     "@types/whatwg-mimetype": "npm:^3.0.2"
@@ -2167,7 +2176,7 @@ __metadata:
     entities: "npm:^7.0.1"
     whatwg-mimetype: "npm:^3.0.0"
     ws: "npm:^8.21.0"
-  checksum: 10c0/5937db4ba0b4897743f995565980a4444d6dd8445abf31228b0dd2658819fca1e09ae8da36ba4abf69c38248a3de82c9597d17ed0c5b2083c2de9cdfc4f8056e
+  checksum: 10c0/ec7742f6b994e15a27602f979dd5a5eb395226456a31942e831397463e99f7614d3eeb41ff8ff750f4b9f5818d09cb7895a212577f3e9aefad462857aa115428
   languageName: node
   linkType: hard
 
@@ -4298,8 +4307,8 @@ __metadata:
     "@testing-library/dom": "npm:^10.4.1"
     "@testing-library/jest-dom": "npm:^7.0.0"
     "@testing-library/react": "npm:^16.3.2"
-    "@testing-library/user-event": "npm:^14.6.1"
-    "@types/node": "npm:^26.3.0"
+    "@testing-library/user-event": "npm:^14.6.7"
+    "@types/node": "npm:^26.4.1"
     "@types/react": "npm:^19.2.18"
     "@types/react-dom": "npm:^19.2.4"
     "@types/react-gtm-module": "npm:^2.0.4"
@@ -4311,7 +4320,7 @@ __metadata:
     axios: "npm:^1.20.0"
     chart.js: "npm:^4.5.1"
     framer-motion: "npm:^13.1.0"
-    happy-dom: "npm:^20.12.0"
+    happy-dom: "npm:^20.13.1"
     husky: "npm:^9.1.7"
     jsdom: "npm:^30.0.1"
     jspdf: "npm:^4.2.1"
