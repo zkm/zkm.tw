@@ -27,6 +27,6 @@ jobs:
                   step: finish
                   token: ${{ secrets.GITHUB_TOKEN }}
                   env: Production
-                  status: success
+                  status: ${{ job.status }}
                   deployment_id: ${{ steps.start.outputs.deployment_id }}
-                  env_url: http://zkm.tw/
+                  env_url: https://zkm.tw/

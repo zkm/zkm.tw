@@ -16,17 +16,19 @@ re-read the whole file to reason about the chat widget.
 
 ## Gating, in order, before any Anthropic call
 
-1. **Daily budget** (`checkAndIncrementDailyBudget`): key `budget:<YYYY-MM-DD>` in
-   `CHAT_KV`, limit = `env.DAILY_BUDGET_REQUESTS` (deploy-time secret/var, not in repo),
-   TTL 25h. Exceeded → `503 { error: 'The chat is resting for today — please try again tomorrow.' }`.
-2. **Per-IP rate limit** (`checkAndIncrementRateLimit`): key `rl:<CF-Connecting-IP>`
+1. **Per-IP rate limit** (`checkAndIncrementRateLimit`): key `rl:<CF-Connecting-IP>`
    (falls back to `'unknown'` if header missing — so all header-less requests share one
    bucket), max `RATE_LIMIT_MAX_REQUESTS` (15) per `RATE_LIMIT_WINDOW_SECONDS` (600s)
    sliding-ish window (TTL reset each window, not a true sliding window). Exceeded →
    `429 { error: "You're sending messages a bit fast — try again in a few minutes." }`.
+2. **Body validation** (JSON parse + `validateMessages`), see above.
+3. **Daily budget** (`checkAndIncrementDailyBudget`): key `budget:<YYYY-MM-DD>` in
+   `CHAT_KV`, limit = `env.DAILY_BUDGET_REQUESTS` (deploy-time secret/var, not in repo),
+   TTL 25h. Exceeded → `503 { error: 'The chat is resting for today — please try again tomorrow.' }`.
 
-Both counters are incremented optimistically (increment happens even though the request
-may still fail validation afterward) — a burst of malformed requests still burns budget/rate-limit quota.
+The per-IP counter is incremented even if the request then fails validation, but the shared
+daily budget is only charged for requests that are otherwise valid, so a throttled or
+malformed request can't exhaust it for everyone.
 
 ## System prompt construction (`buildSystemPrompt`)
 
@@ -50,6 +52,8 @@ may still fail validation afterward) — a burst of malformed requests still bur
 ## Anthropic call
 
 - Model `claude-haiku-4-5`, `max_tokens: 300` (`MAX_TOKENS`), `anthropic-version: 2023-06-01`.
+- The request has a 20s timeout (`ANTHROPIC_TIMEOUT_MS`); a network error or timeout →
+  `502 { error: 'Chat is temporarily unavailable' }`.
 - Non-`ok` responses are mapped to specific 502s: `401/403` → "misconfigured (auth)",
   `400` + body containing `"credit balance"` → "misconfigured (billing)", `429` →
   "temporarily overloaded", anything else → generic "temporarily unavailable". The raw

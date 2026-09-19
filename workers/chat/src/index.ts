@@ -43,6 +43,7 @@ const RATE_LIMIT_WINDOW_SECONDS = 600;
 const RATE_LIMIT_MAX_REQUESTS = 15;
 const MODEL = 'claude-haiku-4-5';
 const MAX_TOKENS = 300;
+const ANTHROPIC_TIMEOUT_MS = 20_000;
 
 const corsHeaders = {
     'Content-Type': 'application/json',
@@ -196,14 +197,8 @@ export default {
 
         const ip = request.headers.get('CF-Connecting-IP') ?? 'unknown';
 
-        const withinDailyBudget = await checkAndIncrementDailyBudget(env);
-        if (!withinDailyBudget) {
-            return jsonResponse(
-                { error: 'The chat is resting for today — please try again tomorrow.' },
-                503,
-            );
-        }
-
+        // Per-IP limit runs first so a throttled or malformed request never consumes the
+        // shared daily budget.
         const withinRateLimit = await checkAndIncrementRateLimit(env, ip);
         if (!withinRateLimit) {
             return jsonResponse(
@@ -224,6 +219,14 @@ export default {
             return jsonResponse({ error: 'Invalid message payload' }, 400);
         }
 
+        const withinDailyBudget = await checkAndIncrementDailyBudget(env);
+        if (!withinDailyBudget) {
+            return jsonResponse(
+                { error: 'The chat is resting for today — please try again tomorrow.' },
+                503,
+            );
+        }
+
         let systemPrompt: string;
         try {
             systemPrompt = await buildSystemPrompt(env);
@@ -231,20 +234,27 @@ export default {
             return jsonResponse({ error: 'Chat is temporarily unavailable' }, 502);
         }
 
-        const anthropicResponse = await fetch('https://api.anthropic.com/v1/messages', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-api-key': env.ANTHROPIC_API_KEY,
-                'anthropic-version': '2023-06-01',
-            },
-            body: JSON.stringify({
-                model: MODEL,
-                max_tokens: MAX_TOKENS,
-                system: systemPrompt,
-                messages,
-            }),
-        });
+        let anthropicResponse: Response;
+        try {
+            anthropicResponse = await fetch('https://api.anthropic.com/v1/messages', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-api-key': env.ANTHROPIC_API_KEY,
+                    'anthropic-version': '2023-06-01',
+                },
+                body: JSON.stringify({
+                    model: MODEL,
+                    max_tokens: MAX_TOKENS,
+                    system: systemPrompt,
+                    messages,
+                }),
+                signal: AbortSignal.timeout(ANTHROPIC_TIMEOUT_MS),
+            });
+        } catch (error) {
+            console.error('Anthropic request failed:', error);
+            return jsonResponse({ error: 'Chat is temporarily unavailable' }, 502);
+        }
 
         if (!anthropicResponse.ok) {
             const errorBody = await anthropicResponse.text();

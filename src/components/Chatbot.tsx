@@ -68,7 +68,13 @@ const Chatbot: React.FC = () => {
         setInputText('');
         setIsTyping(true);
 
-        const responseText = await fetchResponse(nextMessages);
+        let responseText: string;
+        try {
+            responseText = await fetchResponse(nextMessages);
+        } catch {
+            responseText =
+                "Sorry, I'm having trouble responding right now. Please try again in a bit.";
+        }
 
         const botMessage: Message = {
             id: Date.now() + 1,
