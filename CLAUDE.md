@@ -10,9 +10,9 @@ Zach Schneider's personal portfolio site (zkm.tw): a single-page React app (Port
 
 ```bash
 yarn dev              # Vite dev server
-yarn build             # tsc -b (app + node project refs) then vite build
+yarn build             # tsc -b (app + node project refs) then vite build; prebuild hook runs `yarn verify` + `yarn clean` first
 yarn verify             # lint + typecheck + test — run this before considering a change done
-yarn fix                # lint:fix + format
+yarn fix                # biome check --write (lint + format; Biome, not ESLint/Prettier — config in biome.json; husky runs on commit)
 yarn test               # vitest run (single run)
 yarn test:watch         # vitest watch mode
 yarn test:coverage      # vitest with coverage
