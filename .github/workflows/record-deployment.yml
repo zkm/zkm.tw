@@ -13,7 +13,7 @@ jobs:
         steps:
             - name: Start deployment record (Production)
               id: start
-              uses: bobheadxi/deployments@v1
+              uses: bobheadxi/deployments@648679e8e4915b27893bd7dbc35cb504dc915bc8 # v1.5.0
               with:
                   step: start
                   token: ${{ secrets.GITHUB_TOKEN }}
@@ -22,7 +22,7 @@ jobs:
 
             - name: Mark deployment successful (Production)
               if: always()
-              uses: bobheadxi/deployments@v1
+              uses: bobheadxi/deployments@648679e8e4915b27893bd7dbc35cb504dc915bc8 # v1.5.0
               with:
                   step: finish
                   token: ${{ secrets.GITHUB_TOKEN }}
