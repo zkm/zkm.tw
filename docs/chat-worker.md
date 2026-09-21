@@ -66,5 +66,5 @@ malformed request can't exhaust it for everyone.
   `workers/chat/wrangler.toml` bindings and whatever secrets are set via
   `wrangler secret put` — none of this is visible from the app repo.
 - Changing `MAX_HISTORY_TURNS`/`MAX_MESSAGES` changes both cost and conversational
-  memory; changing them without also updating `Chatbot.tsx`'s expectations (it sends the
+  memory; changing them without also updating whatever client calls the worker (the removed `Chatbot.tsx` sent the
   full client-side history every turn) can silently change behavior.

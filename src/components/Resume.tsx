@@ -59,7 +59,7 @@ const RevealPhone: React.FC = () => {
     const decodeDigits = React.useCallback(() => {
         try {
             const reversed = obfuscatedPhone.split('').reverse().join('');
-            const decoded = base64Decode(reversed); // "7739809599"
+            const decoded = base64Decode(reversed);
             if (!/^\d{10}$/.test(decoded)) return null;
             return decoded;
         } catch {
@@ -123,16 +123,6 @@ const RevealPhone: React.FC = () => {
             ) : (
                 <span className="text-red-300">(error)</span>
             )}
-
-            <noscript>
-                <span className="ml-2 align-middle">
-                    <svg width="140" height="16" aria-label="Phone number image">
-                        <text x="0" y="12" fontFamily="monospace" fontSize="14" fill="#FDE047">
-                            (773) 980-9599
-                        </text>
-                    </svg>
-                </span>
-            </noscript>
         </div>
     );
 };
