@@ -44,7 +44,7 @@
     },
     "dependencies": {
         "chart.js": "^4.5.1",
-        "framer-motion": "^13.4.0",
+        "framer-motion": "^13.4.1",
         "lucide-react": "^1.47.0",
         "react": "^19.3.0",
         "react-chartjs-2": "^5.3.1",
