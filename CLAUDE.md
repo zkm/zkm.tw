@@ -10,8 +10,9 @@ Zach Schneider's personal portfolio site (zkm.tw): a single-page React app (Port
 
 ```bash
 yarn dev              # Vite dev server
-yarn build             # tsc -b (app + node project refs) then vite build; prebuild hook runs `yarn verify` + `yarn clean` first
+yarn build             # yarn clean, tsc -b (app + node configs), then vite build. Yarn 4 does not run pre/post hooks, so build does NOT run verify
 yarn verify             # lint + typecheck + test — run this before considering a change done
+yarn typecheck:worker   # tsc over workers/chat (needs `yarn install` inside workers/chat; run in CI)
 yarn fix                # biome check --write (lint + format; Biome, not ESLint/Prettier — config in biome.json; husky runs on commit)
 yarn test               # vitest run (single run)
 yarn test:watch         # vitest watch mode
@@ -21,7 +22,7 @@ yarn test:coverage      # vitest with coverage
 Run a single test file: `yarn vitest run src/__tests__/Portfolio.test.tsx`
 Run tests matching a name: `yarn vitest run -t "renders resume"`
 
-Other scripts of note: `yarn deploy` (build + push `dist/` to the `production` branch, see below), `yarn health` / `health:full` / `health:report` (scripts/*.js), `yarn deps:check` / `deps:audit`.
+Other scripts of note: `yarn deploy` (verify + build + push `dist/` to the `production` branch, see below), `yarn health` / `health:full` / `health:report` (scripts/*.js), `yarn deps:check` / `deps:audit`.
 
 Docker (`docker-compose.yml`, multi-stage `Dockerfile`) is a local convenience, not the production path: `yarn docker:dev` runs Vite with HMR on `:5173`/`:24678`; `yarn docker:prod` builds and serves `dist/` via nginx (Chainguard image + `nginx.conf`) on `:8082`. Actual production is DigitalOcean App Platform in static-site mode — the nginx/Docker prod target does not reflect prod headers/routing.
 
@@ -46,13 +47,13 @@ The root `vite dev` server proxies `/api` to `http://localhost:8787` (see `vite.
 - **Email/phone obfuscation**: contact info in `Portfolio.tsx` and `Resume.tsx` is stored reversed + base64-encoded (`decodeObfuscatedEmail`/equivalent) to deter scraping, decoded client-side with `atob`. If you regenerate an obfuscated value, keep the same "base64 then reverse the string" scheme both places it's duplicated (`Portfolio.tsx` and `Resume.tsx` each have their own copy).
 - **Icons**: social icons are local SVG files under `src/components/icons/`, rendered as `<img>` (not inline SVG/React components) specifically to avoid `currentColor`/fill inheritance issues across browsers — see the comment in `Portfolio.tsx`. Non-social icons come from `lucide-react`.
 - **Testing**: Vitest + `@testing-library/react`, jsdom environment (`vitest.config.ts`). `src/test-setup.ts` globally mocks `framer-motion` (strips motion props, renders plain tags) and `lucide-react` (renders `data-testid` stubs) — when adding a new lucide icon or animated component, check whether it needs a corresponding mock entry there for tests to pass.
-- **TypeScript**: project-referenced tsconfig split into `tsconfig.app.json` (src), `tsconfig.node.json` (vite.config.ts), and `tsconfig.test.json` (extends app config, adds vitest types). `yarn build` type-checks both app and node configs before invoking `vite build`; `yarn typecheck` runs `tsc --noEmit` standalone.
+- **TypeScript**: project-referenced tsconfig split into `tsconfig.app.json` (src), `tsconfig.node.json` (vite.config.ts), and `tsconfig.test.json` (extends app config, adds vitest types). `yarn build` type-checks both app and node configs before invoking `vite build`; `yarn typecheck` runs `tsc --noEmit` per config (app, node, test) because the root `tsconfig.json` is solution-style (`files: []`) and a bare `tsc --noEmit` checks nothing.
 
 ## Deployment
 
 Two separate mechanisms exist — check which is actually current before assuming:
 
-- `.github/workflows/deploy.yml` runs on push to `main`/`master`: installs, tests, builds, and just logs that DigitalOcean deploys automatically from that branch (no explicit deploy step in CI).
-- `scripts/deploy.js` (`yarn deploy`) is a manual flow: builds locally, then checks out the `production` branch, wipes it, copies in `dist/`, commits, and pushes — used for GitHub Pages-style static hosting of the built assets.
+- `.github/workflows/deploy.yml` runs on push to `main`/`master`: installs, runs `yarn verify`, builds, and just logs that DigitalOcean deploys automatically from that branch (no explicit deploy step in CI).
+- `scripts/deploy.js` (`yarn deploy`) is a manual flow: takes an existing `dist/`, adds a temporary git worktree of `production` (fast-forwarded to origin), wipes it, copies in `dist/`, commits, and pushes — your working tree is never touched — used for GitHub Pages-style static hosting of the built assets.
 
 `.github/workflows/ci.yml` (install → `yarn verify` → `yarn build`) runs on push/PR to `main`/`master`/`develop` and is the main correctness gate.
