@@ -9,8 +9,9 @@ re-read the whole file to reason about the chat widget.
 - Body: `{ messages: [{ role: 'user' | 'assistant', content: string }] }`.
 - Validation (`validateMessages`): rejects if not an array, empty, or `> MAX_MESSAGES` (20)
   entries; each message's `content` must be non-empty and `<= MAX_MESSAGE_LENGTH` (2000)
-  chars. On any violation → `400 { error: 'Invalid message payload' }`. Valid history is
-  truncated to the last `MAX_HISTORY_TURNS` (6) messages before being sent upstream.
+  chars, and the last message must have role `user`. On any violation → `400 { error: 'Invalid message payload' }`.
+  Valid history is truncated to the last `MAX_HISTORY_TURNS` (6) messages before being sent
+  upstream, then any leading `assistant` messages are dropped (the API needs a user turn first).
 - Success → `200 { text: string }` (empty string if Anthropic returned no text block).
 - Malformed JSON body → `400 { error: 'Invalid JSON' }`.
 
@@ -22,13 +23,14 @@ re-read the whole file to reason about the chat widget.
    sliding-ish window (TTL reset each window, not a true sliding window). Exceeded →
    `429 { error: "You're sending messages a bit fast — try again in a few minutes." }`.
 2. **Body validation** (JSON parse + `validateMessages`), see above.
-3. **Daily budget** (`checkAndIncrementDailyBudget`): key `budget:<YYYY-MM-DD>` in
-   `CHAT_KV`, limit = `env.DAILY_BUDGET_REQUESTS` (deploy-time secret/var, not in repo),
-   TTL 25h. Exceeded → `503 { error: 'The chat is resting for today — please try again tomorrow.' }`.
+3. **Daily budget** (`getDailyBudgetLimit` / `getDailyBudgetCount` / `recordDailyBudgetUse`):
+   key `budget:<YYYY-MM-DD>` in `CHAT_KV`, limit = `env.DAILY_BUDGET_REQUESTS` (deploy-time
+   secret/var, not in repo), TTL 25h. Exceeded → `503 { error: 'The chat is resting for today — please try again tomorrow.' }`.
+   A missing or non-numeric limit fails closed → `502 { error: 'Chat is misconfigured (budget)' }`.
 
-The per-IP counter is incremented even if the request then fails validation, but the shared
-daily budget is only charged for requests that are otherwise valid, so a throttled or
-malformed request can't exhaust it for everyone.
+The per-IP counter is incremented even if the request then fails validation. The daily
+budget is only *checked* at this stage; it is *charged* after Anthropic returns a successful
+response, so throttled, malformed, or upstream-failed requests can't exhaust it for everyone.
 
 ## System prompt construction (`buildSystemPrompt`)
 
@@ -40,7 +42,7 @@ malformed request can't exhaust it for everyone.
   `wrangler dev` still pulls the live prod JSON, not whatever is running under `yarn dev`.
   Either fetch failing (`!ok`) throws → caller returns `502 { error: 'Chat is temporarily unavailable' }`.
 - Prompt fields pulled: `profile.profile.{name,about,location}`,
-  `resume.{summary,technicalSkills,workExperience,education}`. Each `technicalSkills`
+  `resume.{summary,experienceStartYear,technicalSkills,workExperience,education}`. The `{experienceYears}` placeholder in `summary` is replaced with `<current year − experienceStartYear>+ years`, mirroring `Resume.tsx`. Each `technicalSkills`
   category is flattened to `"category: item, item, ..."` (or `JSON.stringify` if the
   value isn't an array, to handle the nested `languages` object in resume.json).
   `workExperience` entries render as `- position at company (period): responsibilities joined by space`.
