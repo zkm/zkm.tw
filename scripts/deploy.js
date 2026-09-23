@@ -1,81 +1,76 @@
 #!/usr/bin/env node
 
 import { execSync } from 'node:child_process';
-import { existsSync, mkdtempSync, rmSync } from 'node:fs';
+import { existsSync, mkdtempSync, realpathSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
 
-function run(command, description) {
+function run(command, description, options = {}) {
     console.log(`🔄 ${description}...`);
     try {
-        execSync(command, { stdio: 'inherit' });
+        execSync(command, { stdio: 'inherit', ...options });
         console.log(`✅ ${description} complete`);
     } catch (_error) {
-        // Throw rather than process.exit so deploy()'s finally block still restores the branch.
+        // Throw rather than process.exit so deploy()'s finally block still cleans up.
         throw new Error(`${description} failed`);
     }
 }
 
-function hasStagedChanges() {
+function hasStagedChanges(cwd) {
     try {
-        execSync('git diff --cached --quiet', { stdio: 'ignore' });
+        execSync('git diff --cached --quiet', { stdio: 'ignore', cwd });
         return false;
     } catch {
         return true;
     }
 }
 
-function getCurrentBranch() {
-    return execSync('git branch --show-current', { encoding: 'utf8' }).trim();
-}
-
-function isWorkingTreeDirty() {
-    return execSync('git status --porcelain', { encoding: 'utf8' }).trim().length > 0;
-}
-
 function deploy() {
     console.log('🚀 Starting deployment process...');
 
-    if (!existsSync('dist')) {
+    const distDir = resolve('dist');
+    if (!existsSync(distDir)) {
         throw new Error('No dist folder found. Run "yarn build" first.');
     }
 
-    // Uncommitted changes would carry over on checkout and get committed to production.
-    if (isWorkingTreeDirty()) {
-        throw new Error('Working tree has uncommitted changes. Commit or stash them first.');
-    }
-
-    const originalBranch = getCurrentBranch();
-    const backupDir = mkdtempSync(join(tmpdir(), 'zkm-dist-'));
+    // Work in a separate worktree so the developer's checkout (including gitignored files like
+    // node_modules and workers/chat/.dev.vars) is never switched, wiped, or left half-deployed.
+    const workDir = realpathSync(mkdtempSync(join(tmpdir(), 'zkm-production-')));
+    let worktreeAdded = false;
 
     try {
-        run(`cp -r dist/. "${backupDir}"`, 'Backing up dist folder');
+        run('git fetch origin production', 'Fetching production branch');
+        run(`git worktree add "${workDir}" production`, 'Checking out production worktree');
+        worktreeAdded = true;
 
-        // Switch to production branch and deploy
-        run('git checkout production', 'Switching to production branch');
+        // Fail before touching anything if local production has diverged from origin.
+        run('git merge --ff-only origin/production', 'Fast-forwarding production', {
+            cwd: workDir,
+        });
+
+        // Only tracked build output lives here, so wiping everything but .git is safe.
         run(
             'find . -maxdepth 1 -not -name ".git" -not -name "." -not -name ".." -exec rm -rf {} +',
             'Cleaning production branch',
+            { cwd: workDir },
         );
-        run(`cp -r "${backupDir}"/. .`, 'Copying build files');
-        run('git add .', 'Staging files');
+        run(`cp -r "${distDir}"/. .`, 'Copying build files', { cwd: workDir });
+        run('git add -A .', 'Staging files', { cwd: workDir });
 
-        if (hasStagedChanges()) {
-            run('git commit -m "Update production build for deployment"', 'Committing changes');
-            run('git push origin production', 'Pushing to production');
+        if (hasStagedChanges(workDir)) {
+            run('git commit -m "Update production build for deployment"', 'Committing changes', {
+                cwd: workDir,
+            });
+            run('git push origin production', 'Pushing to production', { cwd: workDir });
             console.log('🎉 Deployment complete!');
         } else {
             console.log('ℹ️ No changes to deploy. Production branch is already up to date.');
         }
     } finally {
-        // Cleanup and return to the original working branch, even if a step above failed.
-        rmSync(backupDir, { recursive: true, force: true });
-        if (getCurrentBranch() !== originalBranch) {
-            // Discard anything left over from a partial run so the checkout can't be blocked.
-            execSync('git reset --hard', { stdio: 'inherit' });
-            execSync('git clean -fd', { stdio: 'inherit' });
-            run(`git checkout ${originalBranch}`, `Returning to ${originalBranch}`);
+        if (worktreeAdded) {
+            execSync(`git worktree remove --force "${workDir}"`, { stdio: 'inherit' });
         }
+        rmSync(workDir, { recursive: true, force: true });
     }
 }
 

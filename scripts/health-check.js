@@ -120,68 +120,70 @@ class HealthCheckScanner {
         }
     }
 
+    /**
+     * Parses `yarn npm audit --json` output: newline-delimited JSON, one advisory per line,
+     * shaped like {"value": "<package>", "children": {"Severity": "high", ...}}.
+     */
+    parseYarnAudit(output) {
+        const counts = { info: 0, low: 0, moderate: 0, high: 0, critical: 0 };
+        let total = 0;
+
+        for (const line of output.split('\n')) {
+            if (!line.trim()) continue;
+
+            const entry = JSON.parse(line);
+            const severity = String(entry.children?.Severity ?? entry.severity ?? '').toLowerCase();
+            if (severity in counts) counts[severity]++;
+            total++;
+        }
+
+        return { ...counts, total };
+    }
+
     async checkSecurity() {
         this.section('Security Vulnerability Scan');
 
-        // Try Yarn audit first, then fall back to npm audit
-        let result = this.execCommand('yarn npm audit --all --json', { silent: true });
+        // `yarn npm audit` exits non-zero when it finds vulnerabilities, so judge the result by
+        // its output rather than its exit status. There is no npm fallback: this is a Yarn
+        // project with no package-lock.json, so `npm audit` cannot work here.
+        const result = this.execCommand('yarn npm audit --all --json', { silent: true });
+        const output = result.output?.trim() ?? '';
 
-        if (!result.success) {
-            result = this.execCommand('npm audit --json', { silent: true });
-        }
-
-        if (result.success && !result.output?.trim()) {
-            this.addCheck('Security Vulnerabilities', 'passed', {
-                message: 'No known vulnerabilities found',
-            });
+        if (!output) {
+            if (result.success) {
+                this.addCheck('Security Vulnerabilities', 'passed', {
+                    message: 'No known vulnerabilities found',
+                });
+            } else {
+                this.addCheck('Security Vulnerabilities', 'warning', {
+                    message: 'Unable to run security audit',
+                });
+            }
             return;
         }
 
-        if (result.success && result.output) {
-            try {
-                const auditData = JSON.parse(result.output);
+        try {
+            const { total, critical, high, moderate, low } = this.parseYarnAudit(output);
 
-                // Handle different audit output formats
-                const vulnerabilities =
-                    auditData.vulnerabilities || auditData.metadata?.vulnerabilities || {};
-                const summary = auditData.metadata || auditData;
-
-                const totalVulns =
-                    summary.total ||
-                    (vulnerabilities.info || 0) +
-                        (vulnerabilities.low || 0) +
-                        (vulnerabilities.moderate || 0) +
-                        (vulnerabilities.high || 0) +
-                        (vulnerabilities.critical || 0);
-
-                if (totalVulns === 0) {
-                    this.addCheck('Security Vulnerabilities', 'passed', {
-                        message: 'No known vulnerabilities found',
-                    });
-                } else {
-                    const critical = vulnerabilities.critical || 0;
-                    const high = vulnerabilities.high || 0;
-                    const moderate = vulnerabilities.moderate || 0;
-                    const low = vulnerabilities.low || 0;
-
-                    const status = critical > 0 || high > 0 ? 'error' : 'warning';
-                    this.addCheck('Security Vulnerabilities', status, {
-                        message: `Found ${totalVulns} vulnerabilities (Critical: ${critical}, High: ${high}, Moderate: ${moderate}, Low: ${low})`,
-                        critical,
-                        high,
-                        moderate,
-                        low,
-                        total: totalVulns,
-                    });
-                }
-            } catch (_err) {
-                this.addCheck('Security Vulnerabilities', 'warning', {
-                    message: 'Unable to parse audit results',
+            if (total === 0) {
+                this.addCheck('Security Vulnerabilities', 'passed', {
+                    message: 'No known vulnerabilities found',
                 });
+                return;
             }
-        } else {
+
+            const status = critical > 0 || high > 0 ? 'error' : 'warning';
+            this.addCheck('Security Vulnerabilities', status, {
+                message: `Found ${total} vulnerabilities (Critical: ${critical}, High: ${high}, Moderate: ${moderate}, Low: ${low})`,
+                critical,
+                high,
+                moderate,
+                low,
+                total,
+            });
+        } catch (_err) {
             this.addCheck('Security Vulnerabilities', 'warning', {
-                message: 'Unable to run security audit',
+                message: 'Unable to parse audit results',
             });
         }
     }

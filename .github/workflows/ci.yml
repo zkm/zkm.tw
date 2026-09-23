@@ -30,8 +30,15 @@ jobs:
             - name: Install dependencies
               run: yarn install --immutable
 
+            - name: Install chat worker dependencies
+              run: yarn install --immutable
+              working-directory: workers/chat
+
             - name: Verify
               run: yarn verify
+
+            - name: Typecheck chat worker
+              run: yarn typecheck:worker
 
             - name: Build
               run: yarn build
