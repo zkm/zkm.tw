@@ -361,11 +361,16 @@ const Portfolio: React.FC = () => {
                                         fetchPriority="high"
                                         decoding="sync"
                                         onError={(e) => {
-                                            const target = e.target as HTMLImageElement;
-                                            target.style.display = 'none';
+                                            // The placeholder is a sibling of <picture>, not of the <img>.
+                                            const picture = (e.target as HTMLImageElement).closest(
+                                                'picture',
+                                            );
                                             const fallback =
-                                                target.nextElementSibling as HTMLElement;
-                                            if (fallback) fallback.style.display = 'flex';
+                                                picture?.nextElementSibling as HTMLElement | null;
+                                            if (picture && fallback) {
+                                                picture.style.display = 'none';
+                                                fallback.style.display = 'flex';
+                                            }
                                         }}
                                     />
                                 </picture>

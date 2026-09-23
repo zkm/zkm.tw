@@ -314,4 +314,50 @@ describe('Resume', () => {
         expect(contentElement?.tagName).toBe('SECTION');
         expect(contentElement).toHaveAttribute('aria-labelledby');
     });
+    it('keeps a collapsed section collapsed across re-renders', async () => {
+        vi.mocked(useResumeData).mockReturnValue({
+            resumeData: mockResumeData,
+            loading: false,
+            error: null,
+        });
+
+        const { rerender } = render(<Resume />);
+        const summaryButton = await screen.findByRole('button', { name: /summary/i });
+
+        fireEvent.click(summaryButton);
+        expect(summaryButton).toHaveAttribute('aria-expanded', 'false');
+
+        rerender(<Resume />);
+
+        expect(screen.getByRole('button', { name: /summary/i })).toHaveAttribute(
+            'aria-expanded',
+            'false',
+        );
+    });
+
+    it('closes the email modal on Escape without the event reaching outer listeners', async () => {
+        vi.mocked(useResumeData).mockReturnValue({
+            resumeData: mockResumeData,
+            loading: false,
+            error: null,
+        });
+
+        render(<Resume />);
+        const outerListener = vi.fn();
+        document.addEventListener('keydown', outerListener);
+
+        try {
+            fireEvent.click(
+                (await screen.findAllByRole('button', { name: /reveal email address/i }))[0],
+            );
+            expect(screen.getByRole('dialog')).toBeInTheDocument();
+
+            fireEvent.keyDown(document.body, { key: 'Escape' });
+
+            expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+            expect(outerListener).not.toHaveBeenCalled();
+        } finally {
+            document.removeEventListener('keydown', outerListener);
+        }
+    });
 });
