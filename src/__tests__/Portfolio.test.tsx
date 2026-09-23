@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import Portfolio from '../components/Portfolio';
 import { useProfileData } from '../hooks/useProfileData';
@@ -136,5 +136,24 @@ describe('Portfolio', () => {
             expect(screen.getByRole('heading', { name: 'John Doe' })).toBeInTheDocument();
             expect(screen.queryByTestId('resume-component')).not.toBeInTheDocument();
         });
+    });
+
+    it('shows the initials placeholder when the profile image fails to load', async () => {
+        vi.mocked(useProfileData).mockReturnValue({
+            data: mockProfileData,
+            loading: false,
+            error: null,
+        });
+
+        render(<Portfolio />);
+
+        const image = await screen.findByAltText('John Doe');
+        const picture = image.closest('picture') as HTMLElement;
+        const placeholder = screen.getByText('ZS');
+
+        fireEvent.error(image);
+
+        expect(picture.style.display).toBe('none');
+        expect(placeholder.style.display).toBe('flex');
     });
 });

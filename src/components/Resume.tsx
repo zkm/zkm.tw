@@ -169,12 +169,17 @@ const RevealEmail: React.FC = () => {
     React.useEffect(() => {
         if (!showModal) return;
 
+        // Capture phase + stopPropagation so Escape only dismisses this modal, not the
+        // resume dialog (Portfolio) that it is rendered inside.
         const onKeyDown = (event: KeyboardEvent) => {
-            if (event.key === 'Escape') onCloseModal();
+            if (event.key === 'Escape') {
+                event.stopPropagation();
+                onCloseModal();
+            }
         };
 
-        document.addEventListener('keydown', onKeyDown);
-        return () => document.removeEventListener('keydown', onKeyDown);
+        document.addEventListener('keydown', onKeyDown, true);
+        return () => document.removeEventListener('keydown', onKeyDown, true);
     }, [showModal, onCloseModal]);
 
     const onCopy = async () => {
@@ -277,6 +282,56 @@ const RevealEmail: React.FC = () => {
                     </svg>
                 </span>
             </noscript>
+        </div>
+    );
+};
+
+// Module-level so its identity is stable across Resume re-renders (keeps open/closed state).
+const CollapsibleSection: React.FC<{
+    id: string;
+    title: React.ReactNode;
+    children: React.ReactNode;
+}> = ({ id, title, children }) => {
+    const [open, setOpen] = React.useState(true); // Start expanded for better UX
+    const headerId = `${id}-header`;
+    const contentId = `${id}-content`;
+    const descriptionId = `${id}-description`;
+
+    return (
+        <div className="mb-6">
+            <button
+                id={headerId}
+                type="button"
+                onClick={() => setOpen(!open)}
+                className="w-full text-left p-4 bg-gray-50 hover:bg-gray-100 rounded-lg border border-gray-200 transition-colors duration-200 flex items-center justify-between font-semibold text-gray-900 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                aria-expanded={open}
+                aria-controls={contentId}
+                aria-describedby={descriptionId}
+            >
+                <span className="flex items-center gap-3 text-xl">{title}</span>
+                {open ? (
+                    <Minus size={20} aria-hidden="true" className="flex-shrink-0" />
+                ) : (
+                    <Plus size={20} aria-hidden="true" className="flex-shrink-0" />
+                )}
+            </button>
+
+            <section
+                id={contentId}
+                aria-labelledby={headerId}
+                aria-describedby={descriptionId}
+                className={`transition-all duration-300 overflow-hidden ${
+                    open ? 'max-h-[5000px] opacity-100 mt-4 mb-8' : 'max-h-0 opacity-0'
+                }`}
+            >
+                <div
+                    id={descriptionId}
+                    className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm"
+                >
+                    {children}
+                </div>
+            </section>
+            {open && <hr className="border-b border-gray-200 mt-4" />}
         </div>
     );
 };
@@ -387,56 +442,6 @@ const Resume: React.FC = () => {
     }
 
     // ⬇️ Main render after all hooks and conditionals
-    // CollapsibleSection component
-    const CollapsibleSection: React.FC<{
-        id: string;
-        title: React.ReactNode;
-        children: React.ReactNode;
-    }> = ({ id, title, children }) => {
-        const [open, setOpen] = React.useState(true); // Start expanded for better UX
-        const headerId = `${id}-header`;
-        const contentId = `${id}-content`;
-        const descriptionId = `${id}-description`;
-
-        return (
-            <div className="mb-6">
-                <button
-                    id={headerId}
-                    type="button"
-                    onClick={() => setOpen(!open)}
-                    className="w-full text-left p-4 bg-gray-50 hover:bg-gray-100 rounded-lg border border-gray-200 transition-colors duration-200 flex items-center justify-between font-semibold text-gray-900 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                    aria-expanded={open}
-                    aria-controls={contentId}
-                    aria-describedby={descriptionId}
-                >
-                    <span className="flex items-center gap-3 text-xl">{title}</span>
-                    {open ? (
-                        <Minus size={20} aria-hidden="true" className="flex-shrink-0" />
-                    ) : (
-                        <Plus size={20} aria-hidden="true" className="flex-shrink-0" />
-                    )}
-                </button>
-
-                <section
-                    id={contentId}
-                    aria-labelledby={headerId}
-                    aria-describedby={descriptionId}
-                    className={`transition-all duration-300 overflow-hidden ${
-                        open ? 'max-h-[5000px] opacity-100 mt-4 mb-8' : 'max-h-0 opacity-0'
-                    }`}
-                >
-                    <div
-                        id={descriptionId}
-                        className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm"
-                    >
-                        {children}
-                    </div>
-                </section>
-                {open && <hr className="border-b border-gray-200 mt-4" />}
-            </div>
-        );
-    };
-
     return (
         <main
             className="min-h-screen w-full flex items-center justify-center bg-gray-900"
