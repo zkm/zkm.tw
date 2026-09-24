@@ -1,4 +1,5 @@
 import React from 'react';
+import { useFocusTrap } from '../hooks/useFocusTrap';
 import {
     Award,
     GraduationCap,
@@ -135,6 +136,8 @@ const RevealEmail: React.FC = () => {
     const [showModal, setShowModal] = React.useState(false);
     const [copied, setCopied] = React.useState(false);
     const closeButtonRef = React.useRef<HTMLButtonElement | null>(null);
+    const dialogRef = React.useRef<HTMLDivElement | null>(null);
+    useFocusTrap(dialogRef, showModal);
     const lastFocusedElementRef = React.useRef<HTMLElement | null>(null);
 
     const decodeEmail = React.useCallback(() => {
@@ -215,6 +218,7 @@ const RevealEmail: React.FC = () => {
                         onClick={onCloseModal}
                     />
                     <div
+                        ref={dialogRef}
                         role="dialog"
                         aria-modal="true"
                         aria-labelledby="resume-email-modal-title"
@@ -295,7 +299,6 @@ const CollapsibleSection: React.FC<{
     const [open, setOpen] = React.useState(true); // Start expanded for better UX
     const headerId = `${id}-header`;
     const contentId = `${id}-content`;
-    const descriptionId = `${id}-description`;
 
     return (
         <div className="mb-6">
@@ -306,7 +309,6 @@ const CollapsibleSection: React.FC<{
                 className="w-full text-left p-4 bg-gray-50 hover:bg-gray-100 rounded-lg border border-gray-200 transition-colors duration-200 flex items-center justify-between font-semibold text-gray-900 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                 aria-expanded={open}
                 aria-controls={contentId}
-                aria-describedby={descriptionId}
             >
                 <span className="flex items-center gap-3 text-xl">{title}</span>
                 {open ? (
@@ -316,19 +318,21 @@ const CollapsibleSection: React.FC<{
                 )}
             </button>
 
+            {/* Grid-rows transition sizes to content (no fixed max-height clipping);
+                `invisible` when closed removes the content from tab order and the a11y tree. */}
             <section
                 id={contentId}
                 aria-labelledby={headerId}
-                aria-describedby={descriptionId}
-                className={`transition-all duration-300 overflow-hidden ${
-                    open ? 'max-h-[5000px] opacity-100 mt-4 mb-8' : 'max-h-0 opacity-0'
+                className={`grid transition-all duration-300 ${
+                    open
+                        ? 'grid-rows-[1fr] opacity-100 mt-4 mb-8'
+                        : 'invisible grid-rows-[0fr] opacity-0'
                 }`}
             >
-                <div
-                    id={descriptionId}
-                    className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm"
-                >
-                    {children}
+                <div className="min-h-0 overflow-hidden">
+                    <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
+                        {children}
+                    </div>
                 </div>
             </section>
             {open && <hr className="border-b border-gray-200 mt-4" />}
@@ -336,7 +340,9 @@ const CollapsibleSection: React.FC<{
     );
 };
 
-const Resume: React.FC = () => {
+// `embedded`: rendered inside Portfolio's dialog, which already provides the page's
+// main landmark and h1 — so use a plain container and a lower heading level.
+const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
     // ✅ All hooks at the top, always called in the same order
     const { resumeData, loading, error } = useResumeData();
     const prefersReducedMotion = usePrefersReducedMotion();
@@ -345,6 +351,13 @@ const Resume: React.FC = () => {
     const name = resumeData?.personalInfo?.name ?? 'Zach Schneider';
     const title = resumeData?.personalInfo?.title ?? 'Cosmic Code Crusader';
     const website = resumeData?.personalInfo?.website ?? 'https://www.zachschneider.com';
+    const websiteHost = (() => {
+        try {
+            return new URL(website).host;
+        } catch {
+            return website;
+        }
+    })();
     const experienceStartYear = resumeData?.experienceStartYear;
     const experienceYears =
         typeof experienceStartYear === 'number'
@@ -409,13 +422,17 @@ const Resume: React.FC = () => {
         ['security', 'Security & Testing'],
     ];
 
+    const Wrapper = embedded ? 'div' : 'main';
+    const Heading = embedded ? 'h3' : 'h1';
+    const landmarkLabel = (label: string) => (embedded ? {} : { 'aria-label': label });
+
     // ⬇️ Conditional returns AFTER all hooks
     if (loading) {
         return (
-            <main
+            <Wrapper
                 className="min-h-screen flex items-center justify-center bg-gray-900"
                 aria-busy="true"
-                aria-label="Loading resume"
+                {...landmarkLabel('Loading resume')}
             >
                 <div className="text-center">
                     <div
@@ -425,27 +442,27 @@ const Resume: React.FC = () => {
                     ></div>
                     <p className="mt-4 text-gray-300">Loading resume...</p>
                 </div>
-            </main>
+            </Wrapper>
         );
     }
     if (error) {
         return (
-            <main
+            <Wrapper
                 className="min-h-screen flex items-center justify-center bg-red-900"
-                aria-label="Error loading resume"
+                {...landmarkLabel('Error loading resume')}
             >
                 <div className="text-center">
                     <p className="text-red-300">Error loading resume: {error}</p>
                 </div>
-            </main>
+            </Wrapper>
         );
     }
 
     // ⬇️ Main render after all hooks and conditionals
     return (
-        <main
+        <Wrapper
             className="min-h-screen w-full flex items-center justify-center bg-gray-900"
-            aria-label="Resume"
+            {...landmarkLabel('Resume')}
         >
             <style>{`
         @media print {
@@ -464,9 +481,9 @@ const Resume: React.FC = () => {
                         data-nosnippet
                     >
                         <div className="mb-8 w-full">
-                            <h1 className="text-3xl font-extrabold mb-2 text-yellow-300 tracking-tight text-left">
+                            <Heading className="text-3xl font-extrabold mb-2 text-yellow-300 tracking-tight text-left">
                                 {name}
-                            </h1>
+                            </Heading>
                             <p className="text-lg font-semibold mb-4 text-gray-100 text-left">
                                 {title}
                             </p>
@@ -504,9 +521,9 @@ const Resume: React.FC = () => {
                                         className="underline text-yellow-200 hover:text-yellow-100"
                                         rel="noopener me"
                                         target="_blank"
-                                        aria-label={`Visit ${new URL(website).host} (opens in new window)`}
+                                        aria-label={`Visit ${websiteHost} (opens in new window)`}
                                     >
-                                        {new URL(website).host}
+                                        {websiteHost}
                                     </a>
                                 </li>
                             </ul>
@@ -933,7 +950,7 @@ const Resume: React.FC = () => {
                     </section>
                 </div>
             </div>
-        </main>
+        </Wrapper>
     );
 };
 

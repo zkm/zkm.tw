@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { useProfileData } from '../hooks/useProfileData';
 import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
+import { useFocusTrap } from '../hooks/useFocusTrap';
 const Resume = React.lazy(() => import('./Resume'));
 
 // Use local SVG files for social icons to guarantee rendering across browsers
@@ -103,6 +104,10 @@ const Portfolio: React.FC = () => {
     const contactCloseButtonRef = useRef<HTMLButtonElement | null>(null);
     const resumeCloseButtonRef = useRef<HTMLButtonElement | null>(null);
     const lastFocusedElementRef = useRef<HTMLElement | null>(null);
+    const contactDialogRef = useRef<HTMLDivElement | null>(null);
+    const resumeDialogRef = useRef<HTMLDivElement | null>(null);
+    useFocusTrap(contactDialogRef, showContactModal);
+    useFocusTrap(resumeDialogRef, showResume);
 
     useEffect(() => {
         if (!showContactModal) return;
@@ -450,6 +455,7 @@ const Portfolio: React.FC = () => {
                             onClick={onCloseContactModal}
                         />
                         <div
+                            ref={contactDialogRef}
                             role="dialog"
                             aria-modal="true"
                             aria-labelledby="contact-modal-title"
@@ -512,6 +518,7 @@ const Portfolio: React.FC = () => {
                             onClick={onCloseResume}
                         />
                         <div
+                            ref={resumeDialogRef}
                             role="dialog"
                             aria-modal="true"
                             aria-labelledby="resume-dialog-title"
@@ -541,7 +548,7 @@ const Portfolio: React.FC = () => {
                                 }
                             >
                                 <div className="h-full overflow-y-auto">
-                                    <Resume />
+                                    <Resume embedded />
                                 </div>
                             </Suspense>
                         </div>
