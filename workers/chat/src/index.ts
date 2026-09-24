@@ -210,10 +210,19 @@ async function getDailyBudgetCount(env: Env): Promise<number> {
 }
 
 // Charged only after Anthropic answers, so failed upstream calls don't eat the budget.
-async function recordDailyBudgetUse(env: Env, previousCount: number): Promise<void> {
-    await env.CHAT_KV.put(dailyBudgetKey(), String(previousCount + 1), {
-        expirationTtl: 60 * 60 * 25,
-    });
+// KV is eventually consistent and has no atomic increment, so these counters are
+// approximate under concurrency (exact limits would need a Durable Object). Re-read the
+// count right before writing to narrow the lost-update window, and never let a failed
+// (e.g. rate-limited) KV write discard a response that was already paid for.
+async function recordDailyBudgetUse(env: Env): Promise<void> {
+    try {
+        const count = await getDailyBudgetCount(env);
+        await env.CHAT_KV.put(dailyBudgetKey(), String(count + 1), {
+            expirationTtl: 60 * 60 * 25,
+        });
+    } catch (error) {
+        console.error('Failed to record daily budget use:', error);
+    }
 }
 
 export default {
@@ -306,12 +315,18 @@ export default {
             return jsonResponse({ error: 'Chat is temporarily unavailable' }, 502);
         }
 
-        await recordDailyBudgetUse(env, dailyCount);
+        await recordDailyBudgetUse(env);
 
-        const result = await anthropicResponse.json<{
-            content: Array<{ type: string; text?: string }>;
-        }>();
-        const text = result.content?.find((block) => block.type === 'text')?.text ?? '';
+        let text: string;
+        try {
+            const result = await anthropicResponse.json<{
+                content: Array<{ type: string; text?: string }>;
+            }>();
+            text = result.content?.find((block) => block.type === 'text')?.text ?? '';
+        } catch (error) {
+            console.error('Failed to parse Anthropic response:', error);
+            return jsonResponse({ error: 'Chat is temporarily unavailable' }, 502);
+        }
 
         return jsonResponse({ text });
     },

@@ -231,8 +231,8 @@ class HealthCheckScanner {
                     });
                 }
             } catch (_err) {
-                this.addCheck('Package Updates', 'passed', {
-                    message: 'All packages appear to be up to date',
+                this.addCheck('Package Updates', 'warning', {
+                    message: 'Unable to parse outdated package results',
                 });
             }
         } else {
@@ -243,12 +243,14 @@ class HealthCheckScanner {
     }
 
     isMajorUpdate(current, latest) {
+        if (!current || !latest) return false;
         const currentMajor = parseInt(current.split('.')[0], 10);
         const latestMajor = parseInt(latest.split('.')[0], 10);
         return latestMajor > currentMajor;
     }
 
     isMinorUpdate(current, latest) {
+        if (!current || !latest) return false;
         const [currentMajor, currentMinor] = current.split('.').map(Number);
         const [latestMajor, latestMinor] = latest.split('.').map(Number);
         return latestMajor === currentMajor && latestMinor > currentMinor;
@@ -382,6 +384,43 @@ class HealthCheckScanner {
         });
     }
 
+    // Minimal comparator-range check (e.g. ">=24 <26"); no semver dependency needed.
+    satisfiesNodeRange(version, range) {
+        const parse = (v) => {
+            const [major, minor = 0, patch = 0] = v.replace(/^v/, '').split('.').map(Number);
+            return [major, minor, patch];
+        };
+        const compare = (a, b) => {
+            for (let i = 0; i < 3; i++) {
+                if (a[i] !== b[i]) return a[i] - b[i];
+            }
+            return 0;
+        };
+        const current = parse(version);
+        return range.split('||').some((clause) =>
+            clause
+                .trim()
+                .split(/\s+/)
+                .every((comparator) => {
+                    const match = comparator.match(/^(>=|<=|>|<|=)?v?(\d+(?:\.\d+){0,2})$/);
+                    if (!match) return true; // unsupported syntax: don't fail on it
+                    const cmp = compare(current, parse(match[2]));
+                    switch (match[1]) {
+                        case '>=':
+                            return cmp >= 0;
+                        case '>':
+                            return cmp > 0;
+                        case '<=':
+                            return cmp <= 0;
+                        case '<':
+                            return cmp < 0;
+                        default:
+                            return cmp === 0;
+                    }
+                }),
+        );
+    }
+
     async checkEngines() {
         this.section('Engine Compatibility Check');
 
@@ -397,9 +436,11 @@ class HealthCheckScanner {
             const requiredNode = packageJson.engines.node;
 
             if (requiredNode) {
-                // Simple check - in production you'd want semver comparison
-                this.addCheck('Node Version', 'passed', {
-                    message: `Current: ${nodeVersion}, Required: ${requiredNode}`,
+                const satisfied = this.satisfiesNodeRange(nodeVersion, requiredNode);
+                this.addCheck('Node Version', satisfied ? 'passed' : 'error', {
+                    message: satisfied
+                        ? `Current: ${nodeVersion}, Required: ${requiredNode}`
+                        : `Current: ${nodeVersion} does not satisfy required ${requiredNode}`,
                 });
             }
         } else {

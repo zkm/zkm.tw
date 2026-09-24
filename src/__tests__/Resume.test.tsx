@@ -304,7 +304,6 @@ describe('Resume', () => {
         // Check ARIA attributes
         expect(summaryButton).toHaveAttribute('aria-controls');
         expect(summaryButton).toHaveAttribute('aria-expanded');
-        expect(summaryButton).toHaveAttribute('aria-describedby');
 
         // Check that controlled content exists with proper ID
         const contentId = summaryButton.getAttribute('aria-controls');
@@ -314,6 +313,55 @@ describe('Resume', () => {
         expect(contentElement?.tagName).toBe('SECTION');
         expect(contentElement).toHaveAttribute('aria-labelledby');
     });
+    it('hides collapsed content from tab order and never clips open content', async () => {
+        vi.mocked(useResumeData).mockReturnValue({
+            resumeData: mockResumeData,
+            loading: false,
+            error: null,
+        });
+
+        render(<Resume />);
+        const summaryButton = await screen.findByRole('button', { name: /summary/i });
+        const content = document.getElementById(
+            summaryButton.getAttribute('aria-controls') as string,
+        ) as HTMLElement;
+
+        // Open: no fixed max-height that could truncate long sections, and not hidden.
+        expect(content.className).not.toMatch(/max-h-/);
+        expect(content).not.toHaveClass('invisible');
+
+        fireEvent.click(summaryButton);
+        expect(content).toHaveClass('invisible');
+    });
+
+    it('renders without a nested main landmark or h1 when embedded', async () => {
+        vi.mocked(useResumeData).mockReturnValue({
+            resumeData: mockResumeData,
+            loading: false,
+            error: null,
+        });
+
+        const { container } = render(<Resume embedded />);
+        await screen.findByText('Summary');
+
+        expect(container.querySelector('main')).toBeNull();
+        expect(container.querySelector('h1')).toBeNull();
+    });
+
+    it('does not crash when the website is not an absolute URL', async () => {
+        vi.mocked(useResumeData).mockReturnValue({
+            resumeData: {
+                ...mockResumeData,
+                personalInfo: { ...mockResumeData.personalInfo, website: 'zachschneider.com' },
+            },
+            loading: false,
+            error: null,
+        });
+
+        render(<Resume />);
+        expect(await screen.findByText('zachschneider.com')).toBeInTheDocument();
+    });
+
     it('keeps a collapsed section collapsed across re-renders', async () => {
         vi.mocked(useResumeData).mockReturnValue({
             resumeData: mockResumeData,

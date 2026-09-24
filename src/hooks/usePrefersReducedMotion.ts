@@ -5,7 +5,13 @@ import { useEffect, useState } from 'react';
  * for accessibility compliance (WCAG 2.1 Level AA)
  */
 export const usePrefersReducedMotion = (): boolean => {
-    const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+    // Read synchronously so the very first render already honours the preference
+    // (otherwise infinite animations start before the effect can turn them off).
+    const [prefersReducedMotion, setPrefersReducedMotion] = useState<boolean>(
+        () =>
+            typeof window !== 'undefined' &&
+            !!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches,
+    );
 
     useEffect(() => {
         // Check if matchMedia is available (not available in some test environments)
