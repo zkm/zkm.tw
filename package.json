@@ -32,6 +32,7 @@
         "deps:minor": "yarn dlx npm-check-updates -t minor",
         "deps:apply": "yarn dlx npm-check-updates -u && yarn install",
         "deps:apply:minor": "yarn dlx npm-check-updates -u -t minor && yarn install",
+        "deps:up": "node scripts/deps-up.js",
         "deps:interactive": "yarn up -i",
         "deps:interactive:range": "yarn up -i",
         "deps:audit": "yarn npm audit --all",
