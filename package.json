@@ -54,7 +54,7 @@
         "node": ">=24 <26"
     },
     "resolutions": {
-        "jsdom/undici": "^7.28.0",
+        "jsdom/undici": "^7.29.1",
         "node-gyp/undici": "^6.27.0",
         "postcss": "^8.5.28",
         "js-tokens": "^9.0.1",
