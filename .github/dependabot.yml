@@ -30,3 +30,7 @@ updates:
           timezone: 'America/Chicago'
       labels:
           - 'dependencies'
+      groups:
+          codeql-action:
+              patterns:
+                  - 'github/codeql-action*'
