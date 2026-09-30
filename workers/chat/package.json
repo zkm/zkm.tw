@@ -13,6 +13,8 @@
     "resolutions": {
         "sharp": "^0.35.4",
         "tar": "^7.5.19",
-        "node-gyp": "^13.0.2"
+        "node-gyp": "^13.0.2",
+        "miniflare/undici": "^7.29.1",
+        "node-gyp/undici": "^8.10.2"
     }
 }
