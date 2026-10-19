@@ -44,11 +44,11 @@
     },
     "dependencies": {
         "chart.js": "^4.5.1",
-        "framer-motion": "^14.2.0",
-        "lucide-react": "^1.56.0",
-        "react": "^19.3.0",
+        "framer-motion": "^14.3.0",
+        "lucide-react": "^1.58.0",
+        "react": "^19.3.1",
         "react-chartjs-2": "^5.3.1",
-        "react-dom": "^19.3.0"
+        "react-dom": "^19.3.1"
     },
     "engines": {
         "node": ">=24 <26"
