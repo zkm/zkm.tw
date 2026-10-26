@@ -22,7 +22,7 @@ yarn test:coverage      # vitest with coverage
 Run a single test file: `yarn vitest run src/__tests__/Portfolio.test.tsx`
 Run tests matching a name: `yarn vitest run -t "renders resume"`
 
-Other scripts of note: `yarn deploy` (verify + build + push `dist/` to the `production` branch, see below), `yarn health` / `health:full` / `health:report` (scripts/*.js), `yarn deps:check` / `deps:audit`.
+Other scripts of note: `yarn health` / `health:full` / `health:report` (scripts/*.js), `yarn deps:check` / `deps:audit`.
 
 Docker (`docker-compose.yml`, multi-stage `Dockerfile`) is a local convenience, not the production path: `yarn docker:dev` runs Vite with HMR on `:5173`/`:24678`; `yarn docker:prod` builds and serves `dist/` via nginx (Chainguard image + `nginx.conf`) on `:8082`. Actual production is DigitalOcean App Platform in static-site mode — the nginx/Docker prod target does not reflect prod headers/routing.
 
@@ -51,9 +51,10 @@ The root `vite dev` server proxies `/api` to `http://localhost:8787` (see `vite.
 
 ## Deployment
 
-Two separate mechanisms exist — check which is actually current before assuming:
+Merging to `master` deploys. zkm.tw is a DigitalOcean App Platform static site (`jellyfish-app`) that builds `master` itself on every push: Node buildpack, `yarn build`, serving `dist/`. The buildpack honours `engines.node` and `packageManager` (Yarn 4) in `package.json`, so keep those accurate. A failed build leaves the previous deployment live; roll back from the app's Activity tab if a bad build does go live.
 
-- `.github/workflows/deploy.yml` runs on push to `main`/`master`: installs, runs `yarn verify`, builds, and just logs that DigitalOcean deploys automatically from that branch (no explicit deploy step in CI).
-- `scripts/deploy.js` (`yarn deploy`) is a manual flow: takes an existing `dist/`, adds a temporary git worktree of `production` (fast-forwarded to origin), wipes it, copies in `dist/`, commits, and pushes — your working tree is never touched — used for GitHub Pages-style static hosting of the built assets.
+Changing the app's branch through the app spec (rather than a push) redeploys the last commit DigitalOcean has on record for that branch, which can be very old: switching to `master` once redeployed a commit from August 2025. Follow any such change with a fresh push.
+
+`.github/workflows/deploy.yml` runs on push to `main`/`master` (install, `yarn verify`, build) and only notes that DigitalOcean deploys; it has no deploy step. There is no `production` branch or `yarn deploy` script any more; both belonged to the old manual flow that pushed a built `dist/` to `production`.
 
 `.github/workflows/ci.yml` (install → `yarn verify` → `yarn build`) runs on push/PR to `main`/`master`/`develop` and is the main correctness gate.

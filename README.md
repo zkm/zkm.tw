@@ -115,18 +115,7 @@ GA4 is loaded in index.html and initialized in public/analytics.js
 
 ## Deployment
 
-Deployment is handled by the deploy script and the production branch workflow:
-
-```bash
-yarn deploy
-```
-
-This will:
-
-1. Build your project
-2. Replace the `production` branch contents with your built `dist` assets
-3. Commit and push to `production`
-4. Trigger GitHub Actions deployment recording for `production`
+Merging to `master` deploys: DigitalOcean App Platform builds the site from `master` (`yarn build`) and serves `dist/` as a static site. CI (`yarn verify` + `yarn build`) runs on every pull request first.
 
 ## Project structure
 
