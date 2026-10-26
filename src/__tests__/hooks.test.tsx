@@ -43,24 +43,26 @@ describe('usePrefersReducedMotion', () => {
     });
 });
 
-describe('useFocusTrap', () => {
-    const Harness = ({ active }: { active: boolean }) => {
-        const ref = useRef<HTMLDivElement | null>(null);
-        useFocusTrap(ref, active);
-        return (
-            <div>
-                <button type="button">outside</button>
-                <div ref={ref}>
-                    <button type="button">first</button>
-                    <button type="button">last</button>
-                </div>
+// Module level, not inside describe(): a component defined inside a function is a new
+// component on every call (Biome lint/correctness/noComponentHookFactories).
+const FocusTrapHarness = ({ active }: { active: boolean }) => {
+    const ref = useRef<HTMLDivElement | null>(null);
+    useFocusTrap(ref, active);
+    return (
+        <div>
+            <button type="button">outside</button>
+            <div ref={ref}>
+                <button type="button">first</button>
+                <button type="button">last</button>
             </div>
-        );
-    };
+        </div>
+    );
+};
 
+describe('useFocusTrap', () => {
     it('wraps Tab from the last element to the first', async () => {
         const user = userEvent.setup();
-        render(<Harness active />);
+        render(<FocusTrapHarness active />);
         screen.getByText('last').focus();
         await user.tab();
         expect(screen.getByText('first')).toHaveFocus();
@@ -68,7 +70,7 @@ describe('useFocusTrap', () => {
 
     it('wraps Shift+Tab from the first element to the last', async () => {
         const user = userEvent.setup();
-        render(<Harness active />);
+        render(<FocusTrapHarness active />);
         screen.getByText('first').focus();
         await user.tab({ shift: true });
         expect(screen.getByText('last')).toHaveFocus();
@@ -76,7 +78,7 @@ describe('useFocusTrap', () => {
 
     it('does nothing when inactive', async () => {
         const user = userEvent.setup();
-        render(<Harness active={false} />);
+        render(<FocusTrapHarness active={false} />);
         screen.getByText('last').focus();
         await user.tab();
         expect(screen.getByText('last')).not.toHaveFocus();
