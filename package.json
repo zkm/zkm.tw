@@ -24,7 +24,6 @@
         "format:check": "biome format .",
         "clean": "rm -rf dist",
         "prepare": "husky",
-        "deploy": "yarn verify && yarn build && node scripts/deploy.js",
         "docker:dev": "docker compose up web",
         "docker:prod": "docker compose up web-prod",
         "docker:down": "docker compose down",
