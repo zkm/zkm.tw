@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>zkm.tw share card</title>
+<!-- Source for public/og-image.png (link previews). Regenerate from the repo root with:
+     chromium --headless=new --window-size=1200,630 --hide-scrollbars --virtual-time-budget=8000 \
+       --screenshot=public/og-image.png "file://$PWD/docs/og-card.html"
+     (1280x640 for the GitHub social preview: change the body size and --window-size.) -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=Sora:wght@700;800&display=block" rel="stylesheet">
+<style>
+  html, body { margin: 0; }
+  body {
+    width: 1200px; height: 630px; box-sizing: border-box; padding: 0 84px;
+    display: flex; align-items: center; justify-content: space-between; gap: 64px;
+    background:
+      radial-gradient(circle at 85% 20%, rgba(31, 111, 139, 0.55), transparent 55%),
+      radial-gradient(circle at 10% 95%, rgba(242, 166, 90, 0.18), transparent 45%),
+      #0e1424;
+    color: #f9f4e8; font-family: "Plus Jakarta Sans", sans-serif; overflow: hidden;
+  }
+  .text { flex: 1; }
+  .name { font: 800 92px/1.02 "Sora", sans-serif; letter-spacing: -0.02em; margin: 0; }
+  .title { font: 700 40px/1.2 "Sora", sans-serif; color: #f2cf8f; margin: 22px 0 0; }
+  .tagline { font-size: 26px; white-space: nowrap; font-weight: 500; color: rgba(249, 244, 232, 0.78); margin: 18px 0 0; }
+  .url { margin-top: 56px; font: 700 32px/1 "Sora", sans-serif; color: #f2a65a; }
+  .photo {
+    width: 330px; height: 330px; border-radius: 50%; object-fit: cover; flex: none;
+    border: 6px solid #f2cf8f; box-shadow: 0 0 0 14px rgba(242, 207, 143, 0.12), 0 30px 80px rgba(0, 0, 0, 0.45);
+  }
+</style>
+</head>
+<body>
+  <div class="text">
+    <h1 class="name">Zach Schneider</h1>
+    <p class="title">Cosmic Code Crusader</p>
+    <p class="tagline">Software Engineer • Builder • Coffee-First Human</p>
+    <div class="url">zkm.tw</div>
+  </div>
+  <img class="photo" src="../public/zach.jpg" alt="">
+</body>
+</html>
