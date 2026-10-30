@@ -208,6 +208,49 @@ describe('Portfolio resume dialog and browser history', () => {
         expect(window.history.state).toBeNull();
     });
 
+    it('closes the Say Hello dialog on Back without changing the URL', async () => {
+        render(<Portfolio />);
+        fireEvent.click(await screen.findByRole('button', { name: 'Say Hello' }));
+        expect(screen.getByRole('dialog', { name: 'Say Hello' })).toBeInTheDocument();
+        expect(window.history.state).toEqual({ contact: true });
+        expect(window.location.hash).toBe('');
+
+        act(() => window.history.back());
+
+        await waitFor(() =>
+            expect(screen.queryByRole('dialog', { name: 'Say Hello' })).not.toBeInTheDocument(),
+        );
+    });
+
+    it('opens the resume when the hash changes to #resume on the page', async () => {
+        render(<Portfolio />);
+        await screen.findByRole('heading', { name: 'John Doe' });
+
+        act(() => {
+            window.location.hash = '#resume';
+        });
+
+        expect(await screen.findByRole('dialog', { name: 'Resume' })).toBeInTheDocument();
+        fireEvent.click(screen.getByRole('button', { name: 'Close resume' }));
+        await waitFor(() =>
+            expect(screen.queryByRole('dialog', { name: 'Resume' })).not.toBeInTheDocument(),
+        );
+        expect(window.location.hash).toBe('');
+    });
+
+    it('ignores a #resume link when the resume is disabled', async () => {
+        vi.mocked(useProfileData).mockReturnValue({
+            data: { ...mockProfileData, resume: { enabled: false } },
+            loading: false,
+            error: null,
+        });
+        window.history.replaceState(null, '', '/#resume');
+        render(<Portfolio />);
+
+        await screen.findByRole('heading', { name: 'John Doe' });
+        expect(screen.queryByRole('dialog', { name: 'Resume' })).not.toBeInTheDocument();
+    });
+
     it('opens straight to the resume from a #resume link, with Back returning to the page', async () => {
         window.history.replaceState(null, '', '/#resume');
         render(<Portfolio />);
@@ -220,5 +263,91 @@ describe('Portfolio resume dialog and browser history', () => {
             expect(screen.queryByRole('dialog', { name: 'Resume' })).not.toBeInTheDocument(),
         );
         expect(window.location.hash).toBe('');
+    });
+});
+
+describe('Portfolio projects', () => {
+    beforeEach(() => {
+        vi.clearAllMocks();
+    });
+
+    it('lists each project with its links, opening in a new window', async () => {
+        vi.mocked(useProfileData).mockReturnValue({
+            data: {
+                ...mockProfileData,
+                projects: [
+                    {
+                        name: 'Skywatch',
+                        description: 'Copies Emergency Action Messages.',
+                        tech: ['Python'],
+                        links: [
+                            { label: 'Listen live', url: 'https://skywatch.zkm.tw' },
+                            { label: 'Source', url: 'https://github.com/zkm/skywatch' },
+                        ],
+                    },
+                ],
+            },
+            loading: false,
+            error: null,
+        });
+
+        render(<Portfolio />);
+
+        expect(await screen.findByRole('heading', { name: 'Projects' })).toBeInTheDocument();
+        expect(screen.getByRole('heading', { name: 'Skywatch' })).toBeInTheDocument();
+        const live = screen.getByRole('link', {
+            name: 'Skywatch: Listen live (opens in new window)',
+        });
+        expect(live).toHaveAttribute('href', 'https://skywatch.zkm.tw');
+        expect(live).toHaveAttribute('target', '_blank');
+        expect(screen.getByRole('link', { name: /Skywatch: Source/ })).toHaveAttribute(
+            'href',
+            'https://github.com/zkm/skywatch',
+        );
+    });
+
+    it('leaves the section out when there are no projects', async () => {
+        vi.mocked(useProfileData).mockReturnValue({
+            data: mockProfileData,
+            loading: false,
+            error: null,
+        });
+
+        render(<Portfolio />);
+
+        await screen.findByRole('heading', { name: 'John Doe' });
+        expect(screen.queryByRole('heading', { name: 'Projects' })).not.toBeInTheDocument();
+    });
+});
+
+describe('Portfolio current focus', () => {
+    beforeEach(() => {
+        vi.clearAllMocks();
+    });
+
+    it('lists the focus items when the profile has them', async () => {
+        vi.mocked(useProfileData).mockReturnValue({
+            data: { ...mockProfileData, focus: ['Cloud modernization', 'Skywatch'] },
+            loading: false,
+            error: null,
+        });
+
+        render(<Portfolio />);
+
+        expect(await screen.findByText('Cloud modernization')).toBeInTheDocument();
+        expect(screen.getByText('Skywatch')).toBeInTheDocument();
+        expect(screen.queryByText(/Feel free to reach out/)).not.toBeInTheDocument();
+    });
+
+    it('falls back to the contact message without focus items', async () => {
+        vi.mocked(useProfileData).mockReturnValue({
+            data: mockProfileData,
+            loading: false,
+            error: null,
+        });
+
+        render(<Portfolio />);
+
+        expect(await screen.findByText(/Feel free to reach out/)).toBeInTheDocument();
     });
 });

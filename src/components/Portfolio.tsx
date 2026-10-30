@@ -110,27 +110,13 @@ const Portfolio: React.FC = () => {
     useFocusTrap(resumeDialogRef, showResume);
 
     useEffect(() => {
-        if (!showContactModal) return;
-
-        const onKeyDown = (event: KeyboardEvent) => {
-            if (event.key === 'Escape') {
-                setShowContactModal(false);
-                setCopiedEmail(false);
-                lastFocusedElementRef.current?.focus();
-            }
-        };
-
-        document.addEventListener('keydown', onKeyDown);
-        return () => document.removeEventListener('keydown', onKeyDown);
-    }, [showContactModal]);
-
-    useEffect(() => {
         if (showContactModal) contactCloseButtonRef.current?.focus();
     }, [showContactModal]);
 
-    // The resume is a history entry (#resume), so Back (the button, a swipe, Android's
-    // gesture) closes it instead of leaving the site. Every other way of closing it goes
-    // back through history too, which keeps the entry and the dialog in step.
+    // Each dialog is a history entry, so Back (the button, a swipe, Android's gesture)
+    // closes it instead of leaving the site. Every other way of closing one goes back
+    // through history too, which keeps the entries and the dialogs in step. The resume's
+    // entry is #resume (shareable); the contact dialog's leaves the URL alone.
     const openResume = useCallback(() => {
         lastFocusedElementRef.current = document.activeElement as HTMLElement;
         window.history.pushState({ resume: true }, '', '#resume');
@@ -146,11 +132,30 @@ const Portfolio: React.FC = () => {
         }
     }, []);
 
+    const openContact = useCallback(() => {
+        lastFocusedElementRef.current = document.activeElement as HTMLElement;
+        window.history.pushState({ contact: true }, '');
+        setShowContactModal(true);
+    }, []);
+
+    const closeContact = useCallback(() => {
+        if (window.history.state?.contact) {
+            window.history.back();
+        } else {
+            setShowContactModal(false);
+            setCopiedEmail(false);
+            lastFocusedElementRef.current?.focus();
+        }
+    }, []);
+
     useEffect(() => {
         const onPopState = (event: PopStateEvent) => {
-            const open = Boolean(event.state?.resume);
-            setShowResume(open);
-            if (!open) lastFocusedElementRef.current?.focus();
+            const resumeOpen = Boolean(event.state?.resume);
+            const contactOpen = Boolean(event.state?.contact);
+            setShowResume(resumeOpen);
+            setShowContactModal(contactOpen);
+            if (!contactOpen) setCopiedEmail(false);
+            if (!resumeOpen && !contactOpen) lastFocusedElementRef.current?.focus();
         };
 
         window.addEventListener('popstate', onPopState);
@@ -158,12 +163,41 @@ const Portfolio: React.FC = () => {
     }, []);
 
     // zkm.tw/#resume opens straight to the resume, with the page underneath it in history.
+    const resumeEnabled = Boolean(data?.resume.enabled);
     useEffect(() => {
+        if (!resumeEnabled) return;
         if (window.location.hash !== '#resume' || window.history.state?.resume) return;
         const { pathname, search } = window.location;
         window.history.replaceState(null, '', pathname + search);
         openResume();
-    }, [openResume]);
+    }, [resumeEnabled, openResume]);
+
+    // ...and so does changing the hash to #resume on the page (the address bar, an in-page
+    // link). That navigation already made a new history entry; it just needs marking.
+    useEffect(() => {
+        if (!resumeEnabled) return;
+
+        const onHashChange = () => {
+            if (window.location.hash !== '#resume' || window.history.state?.resume) return;
+            lastFocusedElementRef.current = document.activeElement as HTMLElement;
+            window.history.replaceState({ resume: true }, '', '#resume');
+            setShowResume(true);
+        };
+
+        window.addEventListener('hashchange', onHashChange);
+        return () => window.removeEventListener('hashchange', onHashChange);
+    }, [resumeEnabled]);
+
+    useEffect(() => {
+        if (!showContactModal) return;
+
+        const onKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'Escape') closeContact();
+        };
+
+        document.addEventListener('keydown', onKeyDown);
+        return () => document.removeEventListener('keydown', onKeyDown);
+    }, [showContactModal, closeContact]);
 
     useEffect(() => {
         if (!showResume) return;
@@ -218,19 +252,8 @@ const Portfolio: React.FC = () => {
         );
     }
 
-    const { profile, socialLinks, resume } = data;
+    const { profile, socialLinks, resume, projects = [] } = data;
     const contactEmail = profile.email || decodeObfuscatedEmail(obfuscatedPrimaryEmail);
-
-    const onSayHello = () => {
-        lastFocusedElementRef.current = document.activeElement as HTMLElement;
-        setShowContactModal(true);
-    };
-
-    const onCloseContactModal = () => {
-        setShowContactModal(false);
-        setCopiedEmail(false);
-        lastFocusedElementRef.current?.focus();
-    };
 
     const onOpenMailClient = () => {
         if (!contactEmail) return;
@@ -374,7 +397,7 @@ const Portfolio: React.FC = () => {
                             {contactEmail && (
                                 <button
                                     type="button"
-                                    onClick={onSayHello}
+                                    onClick={openContact}
                                     className="jazz-pop jazz-pop-teal inline-flex cursor-pointer items-center rounded-xl border border-[#8cb5c2]/50 bg-[#142032]/80 px-6 py-3 font-semibold text-[#d6dfed] hover:border-[#b48cff] hover:bg-[#6511aa]/40 hover:text-[#f9f4e8]"
                                 >
                                     Say Hello
@@ -386,9 +409,23 @@ const Portfolio: React.FC = () => {
                             <p className="text-sm uppercase tracking-[0.14em] text-[#8cb5c2] mb-2">
                                 Current Focus
                             </p>
-                            <p className="text-[#e5ecf5] leading-relaxed">
-                                {data.contact.cta} - {data.contact.message}
-                            </p>
+                            {data.focus && data.focus.length > 0 ? (
+                                <ul className="space-y-2 text-[#e5ecf5] leading-relaxed">
+                                    {data.focus.map((item) => (
+                                        <li key={item} className="flex gap-3">
+                                            <span
+                                                className="mt-2 h-2 w-2 flex-none rotate-45 bg-[#02cacc]"
+                                                aria-hidden="true"
+                                            />
+                                            <span>{item}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            ) : (
+                                <p className="text-[#e5ecf5] leading-relaxed">
+                                    {data.contact.cta} - {data.contact.message}
+                                </p>
+                            )}
                         </div>
                     </motion.div>
 
@@ -491,6 +528,73 @@ const Portfolio: React.FC = () => {
                     </motion.div>
                 </section>
 
+                {projects.length > 0 && (
+                    <motion.section
+                        variants={fadeInUp}
+                        initial={canAnimate ? 'hidden' : 'show'}
+                        animate="show"
+                        transition={{ delay: 0.3, duration: 0.5 }}
+                        className="mt-16"
+                        aria-labelledby="projects-heading"
+                    >
+                        <h2
+                            id="projects-heading"
+                            className="font-display text-3xl md:text-4xl tracking-tight text-[#f9f4e8]"
+                        >
+                            Projects
+                        </h2>
+                        <div className="jazz-zigzag mt-3 w-28" aria-hidden="true" />
+
+                        <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                            {projects.map((project) => (
+                                <article
+                                    key={project.name}
+                                    className="flex flex-col rounded-2xl border border-[#02cacc]/35 bg-[#111b2f]/85 p-6 shadow-[8px_8px_0_rgba(101,17,170,0.45)] backdrop-blur-sm"
+                                >
+                                    <h3 className="font-display text-xl text-[#02cacc]">
+                                        {project.name}
+                                    </h3>
+                                    <p className="mt-3 flex-1 leading-relaxed text-[#d6dfed]">
+                                        {project.description}
+                                    </p>
+
+                                    {project.tech && project.tech.length > 0 && (
+                                        <ul
+                                            className="mt-4 flex flex-wrap gap-2"
+                                            aria-label="Built with"
+                                        >
+                                            {project.tech.map((item) => (
+                                                <li
+                                                    key={item}
+                                                    className="rounded-md bg-[#02cacc]/10 px-2 py-1 text-xs font-semibold text-[#7fe3e4]"
+                                                >
+                                                    {item}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    )}
+
+                                    <div className="mt-5 flex flex-wrap gap-2">
+                                        {project.links.map((link) => (
+                                            <a
+                                                key={link.url}
+                                                href={link.url}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="jazz-pop jazz-pop-teal inline-flex items-center gap-1 rounded-lg border border-[#8cb5c2]/45 bg-[#142032]/80 px-3 py-2 text-sm font-semibold text-[#e8eef7] hover:border-[#b48cff] hover:bg-[#6511aa]/40 hover:text-[#f9f4e8]"
+                                                aria-label={`${project.name}: ${link.label} (opens in new window)`}
+                                            >
+                                                {link.label}
+                                                <span aria-hidden="true">↗</span>
+                                            </a>
+                                        ))}
+                                    </div>
+                                </article>
+                            ))}
+                        </div>
+                    </motion.section>
+                )}
+
                 <motion.footer
                     variants={fadeInUp}
                     initial={canAnimate ? 'hidden' : 'show'}
@@ -512,7 +616,7 @@ const Portfolio: React.FC = () => {
                             aria-label="Close dialog"
                             tabIndex={-1}
                             className="absolute inset-0 cursor-default appearance-none border-0 bg-transparent p-0"
-                            onClick={onCloseContactModal}
+                            onClick={closeContact}
                         />
                         <div
                             ref={contactDialogRef}
@@ -558,7 +662,7 @@ const Portfolio: React.FC = () => {
 
                             <button
                                 type="button"
-                                onClick={onCloseContactModal}
+                                onClick={closeContact}
                                 ref={contactCloseButtonRef}
                                 className="mt-4 w-full rounded-xl border border-[#8cb5c2]/30 bg-transparent px-4 py-3 text-[#d6dfed] hover:border-[#02cacc]/70 hover:text-[#02cacc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#02cacc] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0e1424] transition-colors"
                             >
@@ -583,7 +687,7 @@ const Portfolio: React.FC = () => {
                             aria-modal="true"
                             aria-labelledby="resume-dialog-title"
                             aria-describedby="resume-dialog-description"
-                            className="relative h-[92dvh] w-full max-w-6xl overflow-hidden rounded-2xl border border-[#8cb5c2]/30 bg-[#0e1424] shadow-[0_28px_60px_rgba(0,0,0,0.55)]"
+                            className="relative h-[92vh] supports-[height:100dvh]:h-[92dvh] w-full max-w-6xl overflow-hidden rounded-2xl border border-[#8cb5c2]/30 bg-[#0e1424] shadow-[0_28px_60px_rgba(0,0,0,0.55)]"
                         >
                             <h2 id="resume-dialog-title" className="sr-only">
                                 Resume

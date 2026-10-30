@@ -18,6 +18,10 @@ resume: { enabled, pdfUrl?, dataUrl?, lastUpdated? }     # dataUrl isn't in Prof
                                                           # the JSON — Resume.tsx fetches
                                                           # resume.json directly instead
 contact: { cta, message }
+focus?: string[]                                         # "Current Focus" bullets; without it
+                                                          # the card shows contact.cta - message
+projects?: [{ name, description, tech?: string[],        # the Projects section; omitted
+              links: [{ label, url }] }]                  # or empty = no section
 ```
 
 `email`/`phone` are normally absent here — the real values live obfuscated inline in
