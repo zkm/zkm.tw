@@ -1,7 +1,7 @@
 {
     "name": "zkm.tw",
     "private": true,
-    "version": "4.0.8",
+    "version": "4.0.9",
     "type": "module",
     "repository": "git@github.com:zkm/zkm.tw.git",
     "author": "Zach Schneider <me@zachschneider.com>",
