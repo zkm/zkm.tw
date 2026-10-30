@@ -1,4 +1,4 @@
-import { render, screen, waitFor, fireEvent } from '@testing-library/react';
+import { act, render, screen, waitFor, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import Portfolio from '../components/Portfolio';
 import { useProfileData } from '../hooks/useProfileData';
@@ -23,8 +23,8 @@ vi.mock('lucide-react', () => ({
     Bot: () => <div data-testid="bot-icon">Bot</div>,
 }));
 
-// Mock Resume component
-vi.mock('./Resume', () => ({
+// Mock Resume component (the path is relative to this file, so it names the component's module)
+vi.mock('../components/Resume', () => ({
     default: () => <div data-testid="resume-component">Resume Component</div>,
 }));
 
@@ -155,5 +155,70 @@ describe('Portfolio', () => {
 
         expect(picture.style.display).toBe('none');
         expect(placeholder.style.display).toBe('flex');
+    });
+});
+
+describe('Portfolio resume dialog and browser history', () => {
+    beforeEach(() => {
+        vi.clearAllMocks();
+        vi.mocked(useProfileData).mockReturnValue({
+            data: mockProfileData,
+            loading: false,
+            error: null,
+        });
+        window.history.replaceState(null, '', '/');
+    });
+
+    const openResume = async () => {
+        fireEvent.click(await screen.findByRole('button', { name: /view resume/i }));
+        return screen.getByRole('dialog', { name: 'Resume' });
+    };
+
+    it('adds a #resume history entry when the resume opens', async () => {
+        render(<Portfolio />);
+        await openResume();
+
+        expect(window.location.hash).toBe('#resume');
+        expect(window.history.state).toEqual({ resume: true });
+    });
+
+    it('closes the resume on Back instead of leaving the page', async () => {
+        render(<Portfolio />);
+        await openResume();
+
+        act(() => window.history.back());
+
+        await waitFor(() =>
+            expect(screen.queryByRole('dialog', { name: 'Resume' })).not.toBeInTheDocument(),
+        );
+        expect(window.location.hash).toBe('');
+        expect(screen.getByRole('heading', { name: 'John Doe' })).toBeInTheDocument();
+    });
+
+    it('steps back out of the #resume entry when the close button is used', async () => {
+        render(<Portfolio />);
+        await openResume();
+
+        fireEvent.click(screen.getByRole('button', { name: 'Close resume' }));
+
+        await waitFor(() =>
+            expect(screen.queryByRole('dialog', { name: 'Resume' })).not.toBeInTheDocument(),
+        );
+        expect(window.location.hash).toBe('');
+        expect(window.history.state).toBeNull();
+    });
+
+    it('opens straight to the resume from a #resume link, with Back returning to the page', async () => {
+        window.history.replaceState(null, '', '/#resume');
+        render(<Portfolio />);
+
+        expect(await screen.findByRole('dialog', { name: 'Resume' })).toBeInTheDocument();
+
+        act(() => window.history.back());
+
+        await waitFor(() =>
+            expect(screen.queryByRole('dialog', { name: 'Resume' })).not.toBeInTheDocument(),
+        );
+        expect(window.location.hash).toBe('');
     });
 });

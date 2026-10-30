@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, Suspense } from 'react';
+import React, { useCallback, useEffect, useRef, useState, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { useProfileData } from '../hooks/useProfileData';
 import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
@@ -128,19 +128,53 @@ const Portfolio: React.FC = () => {
         if (showContactModal) contactCloseButtonRef.current?.focus();
     }, [showContactModal]);
 
+    // The resume is a history entry (#resume), so Back (the button, a swipe, Android's
+    // gesture) closes it instead of leaving the site. Every other way of closing it goes
+    // back through history too, which keeps the entry and the dialog in step.
+    const openResume = useCallback(() => {
+        lastFocusedElementRef.current = document.activeElement as HTMLElement;
+        window.history.pushState({ resume: true }, '', '#resume');
+        setShowResume(true);
+    }, []);
+
+    const closeResume = useCallback(() => {
+        if (window.history.state?.resume) {
+            window.history.back(); // the popstate handler below closes the dialog
+        } else {
+            setShowResume(false);
+            lastFocusedElementRef.current?.focus();
+        }
+    }, []);
+
+    useEffect(() => {
+        const onPopState = (event: PopStateEvent) => {
+            const open = Boolean(event.state?.resume);
+            setShowResume(open);
+            if (!open) lastFocusedElementRef.current?.focus();
+        };
+
+        window.addEventListener('popstate', onPopState);
+        return () => window.removeEventListener('popstate', onPopState);
+    }, []);
+
+    // zkm.tw/#resume opens straight to the resume, with the page underneath it in history.
+    useEffect(() => {
+        if (window.location.hash !== '#resume' || window.history.state?.resume) return;
+        const { pathname, search } = window.location;
+        window.history.replaceState(null, '', pathname + search);
+        openResume();
+    }, [openResume]);
+
     useEffect(() => {
         if (!showResume) return;
 
         const onKeyDown = (event: KeyboardEvent) => {
-            if (event.key === 'Escape') {
-                setShowResume(false);
-                lastFocusedElementRef.current?.focus();
-            }
+            if (event.key === 'Escape') closeResume();
         };
 
         document.addEventListener('keydown', onKeyDown);
         return () => document.removeEventListener('keydown', onKeyDown);
-    }, [showResume]);
+    }, [showResume, closeResume]);
 
     useEffect(() => {
         if (showResume) resumeCloseButtonRef.current?.focus();
@@ -195,16 +229,6 @@ const Portfolio: React.FC = () => {
     const onCloseContactModal = () => {
         setShowContactModal(false);
         setCopiedEmail(false);
-        lastFocusedElementRef.current?.focus();
-    };
-
-    const onOpenResume = () => {
-        lastFocusedElementRef.current = document.activeElement as HTMLElement;
-        setShowResume(true);
-    };
-
-    const onCloseResume = () => {
-        setShowResume(false);
         lastFocusedElementRef.current?.focus();
     };
 
@@ -339,7 +363,7 @@ const Portfolio: React.FC = () => {
                             {resume.enabled && (
                                 <button
                                     type="button"
-                                    onClick={onOpenResume}
+                                    onClick={openResume}
                                     className="jazz-pop inline-flex items-center gap-2 rounded-xl bg-[#02cacc] text-[#1b2438] px-6 py-3 font-semibold hover:bg-[#3fdcdd] cursor-pointer"
                                 >
                                     <FileText size={19} />
@@ -551,7 +575,7 @@ const Portfolio: React.FC = () => {
                             aria-label="Close dialog"
                             tabIndex={-1}
                             className="absolute inset-0 cursor-default appearance-none border-0 bg-transparent p-0"
-                            onClick={onCloseResume}
+                            onClick={closeResume}
                         />
                         <div
                             ref={resumeDialogRef}
@@ -559,7 +583,7 @@ const Portfolio: React.FC = () => {
                             aria-modal="true"
                             aria-labelledby="resume-dialog-title"
                             aria-describedby="resume-dialog-description"
-                            className="relative h-[92vh] w-full max-w-6xl overflow-hidden rounded-2xl border border-[#8cb5c2]/30 bg-[#0e1424] shadow-[0_28px_60px_rgba(0,0,0,0.55)]"
+                            className="relative h-[92dvh] w-full max-w-6xl overflow-hidden rounded-2xl border border-[#8cb5c2]/30 bg-[#0e1424] shadow-[0_28px_60px_rgba(0,0,0,0.55)]"
                         >
                             <h2 id="resume-dialog-title" className="sr-only">
                                 Resume
@@ -569,7 +593,7 @@ const Portfolio: React.FC = () => {
                             </p>
                             <button
                                 type="button"
-                                onClick={onCloseResume}
+                                onClick={closeResume}
                                 ref={resumeCloseButtonRef}
                                 className="absolute right-4 top-4 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#8cb5c2]/45 bg-[#111b2f]/90 text-[#e8eef7] hover:border-[#02cacc]/70 hover:text-[#02cacc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#02cacc] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0e1424] transition-colors"
                                 aria-label="Close resume"
