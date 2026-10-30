@@ -165,7 +165,7 @@ const Portfolio: React.FC = () => {
                 <motion.div
                     animate={canAnimate ? { rotate: 360 } : {}}
                     transition={canAnimate ? { duration: 1, repeat: Infinity, ease: 'linear' } : {}}
-                    className="w-10 h-10 border-2 border-[#f2cf8f] border-t-transparent rounded-full"
+                    className="w-10 h-10 border-2 border-[#02cacc] border-t-transparent rounded-full"
                     aria-label="Loading"
                     role="status"
                 />
@@ -176,7 +176,7 @@ const Portfolio: React.FC = () => {
     if (error || !data) {
         return (
             <div className="min-h-screen bg-[#0e1424] flex items-center justify-center p-6">
-                <div className="text-center border border-[#f2cf8f]/30 rounded-3xl p-10 bg-[#111b2f]/90 shadow-[0_24px_60px_rgba(0,0,0,0.45)]">
+                <div className="text-center border border-[#02cacc]/30 rounded-3xl p-10 bg-[#111b2f]/90 shadow-[0_24px_60px_rgba(0,0,0,0.45)]">
                     <h2 className="text-3xl font-bold text-[#f9f4e8] mb-3">Data unavailable</h2>
                     <p className="text-[#d6dfed]">Failed to load profile data.</p>
                 </div>
@@ -223,24 +223,24 @@ const Portfolio: React.FC = () => {
         <div className="min-h-screen relative overflow-hidden dark-bg bg-[#0e1424] text-[#f9f4e8]">
             <a
                 href="#main-content"
-                className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-[#f2cf8f] focus:text-[#0e1424] focus:px-4 focus:py-2 focus:rounded-md focus:shadow-lg"
+                className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-[#02cacc] focus:text-[#0e1424] focus:px-4 focus:py-2 focus:rounded-md focus:shadow-lg"
             >
                 Skip to main content
             </a>
 
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <div
-                    className={`absolute -top-36 -left-24 w-[420px] h-[420px] rounded-full blur-3xl bg-[#1f6f8b]/35 ${canAnimate ? 'animate-pulse' : ''}`}
+                    className={`absolute -top-36 -left-24 w-[420px] h-[420px] rounded-full blur-3xl bg-[#02cacc]/20 ${canAnimate ? 'animate-pulse' : ''}`}
                 ></div>
                 <div
-                    className={`absolute -bottom-32 right-0 w-[480px] h-[480px] rounded-full blur-3xl bg-[#f2a65a]/25 ${canAnimate ? 'animate-pulse' : ''}`}
+                    className={`absolute -bottom-32 right-0 w-[480px] h-[480px] rounded-full blur-3xl bg-[#6511aa]/35 ${canAnimate ? 'animate-pulse' : ''}`}
                     style={canAnimate ? { animationDelay: '2s' } : {}}
                 ></div>
                 <div
                     className="absolute inset-0 opacity-15"
                     style={{
                         backgroundImage:
-                            'linear-gradient(to right, rgba(242,207,143,0.18) 1px, transparent 1px), linear-gradient(to bottom, rgba(242,207,143,0.16) 1px, transparent 1px)',
+                            'linear-gradient(to right, rgba(2,202,204,0.12) 1px, transparent 1px), linear-gradient(to bottom, rgba(2,202,204,0.10) 1px, transparent 1px)',
                         backgroundSize: '56px 56px',
                     }}
                 ></div>
@@ -261,7 +261,7 @@ const Portfolio: React.FC = () => {
                     transition={{ duration: 0.45 }}
                     className="mb-8 flex items-center justify-between gap-4"
                 >
-                    <p className="uppercase tracking-[0.22em] text-sm text-[#f2cf8f]">ZKM.TW</p>
+                    <p className="uppercase tracking-[0.22em] text-sm text-[#02cacc]">ZKM.TW</p>
                     {profile.location && (
                         <p className="text-sm text-[#d6dfed]">{profile.location}</p>
                     )}
@@ -275,7 +275,7 @@ const Portfolio: React.FC = () => {
                         transition={{ delay: 0.1, duration: 0.5 }}
                         className="lg:col-span-7"
                     >
-                        <p className="inline-flex items-center rounded-full border border-[#f2cf8f]/70 bg-[#f2cf8f]/10 px-4 py-2 text-xs uppercase tracking-[0.15em] text-[#f2cf8f] mb-5">
+                        <p className="inline-flex items-center rounded-full border border-[#02cacc]/70 bg-[#02cacc]/10 px-4 py-2 text-xs uppercase tracking-[0.15em] text-[#02cacc] mb-5">
                             Creative Technologist
                         </p>
 
@@ -306,7 +306,7 @@ const Portfolio: React.FC = () => {
                                     onClick={onOpenResume}
                                     whileHover={canAnimate ? { y: -2, scale: 1.02 } : {}}
                                     whileTap={canAnimate ? { scale: 0.98 } : {}}
-                                    className="inline-flex items-center gap-2 rounded-xl bg-[#f2cf8f] text-[#1b2438] px-6 py-3 font-semibold shadow-[0_10px_24px_rgba(242,166,90,0.28)] hover:bg-[#f4d79e] transition-colors cursor-pointer"
+                                    className="inline-flex items-center gap-2 rounded-xl bg-[#02cacc] text-[#1b2438] px-6 py-3 font-semibold shadow-[0_10px_24px_rgba(2,202,204,0.28)] hover:bg-[#3fdcdd] transition-colors cursor-pointer"
                                 >
                                     <FileText size={19} />
                                     View Resume
@@ -317,7 +317,7 @@ const Portfolio: React.FC = () => {
                                 <button
                                     type="button"
                                     onClick={onSayHello}
-                                    className="inline-flex cursor-pointer items-center rounded-xl border border-[#8cb5c2]/50 bg-[#142032]/80 px-6 py-3 font-semibold text-[#d6dfed] hover:border-[#f2cf8f]/70 hover:text-[#f2cf8f] transition-colors"
+                                    className="inline-flex cursor-pointer items-center rounded-xl border border-[#8cb5c2]/50 bg-[#142032]/80 px-6 py-3 font-semibold text-[#d6dfed] hover:border-[#02cacc]/70 hover:text-[#02cacc] transition-colors"
                                 >
                                     Say Hello
                                 </button>
@@ -341,7 +341,7 @@ const Portfolio: React.FC = () => {
                         transition={{ delay: 0.22, duration: 0.5 }}
                         className="lg:col-span-5"
                     >
-                        <div className="rounded-3xl border border-[#f2cf8f]/35 bg-[#111b2f]/85 p-5 md:p-6 shadow-[0_18px_50px_rgba(3,8,20,0.45)] backdrop-blur-md">
+                        <div className="rounded-3xl border border-[#02cacc]/35 bg-[#111b2f]/85 p-5 md:p-6 shadow-[0_18px_50px_rgba(3,8,20,0.45)] backdrop-blur-md">
                             <motion.div
                                 animate={canAnimate ? { y: [0, -8, 0] } : {}}
                                 transition={
@@ -379,7 +379,7 @@ const Portfolio: React.FC = () => {
                                         }}
                                     />
                                 </picture>
-                                <div className="hidden w-full h-full items-center justify-center text-5xl font-bold bg-gradient-to-br from-[#1f6f8b] to-[#f2a65a] text-[#0e1424]">
+                                <div className="hidden w-full h-full items-center justify-center text-5xl font-bold bg-gradient-to-br from-[#02cacc] to-[#6511aa] text-[#0e1424]">
                                     ZS
                                 </div>
                                 <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/65 to-transparent">
@@ -417,7 +417,7 @@ const Portfolio: React.FC = () => {
                                                         : {}
                                                 }
                                                 whileHover={canAnimate ? { y: -2 } : {}}
-                                                className="flex items-center gap-3 rounded-xl border border-[#8cb5c2]/30 bg-[#142032]/75 p-3 text-sm hover:border-[#f2cf8f]/75 transition-colors"
+                                                className="flex items-center gap-3 rounded-xl border border-[#8cb5c2]/30 bg-[#142032]/75 p-3 text-sm hover:border-[#02cacc]/75 transition-colors"
                                                 aria-label={`${social.platform} (opens in new window)`}
                                             >
                                                 <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#0e1424] border border-[#8cb5c2]/35">
@@ -483,14 +483,14 @@ const Portfolio: React.FC = () => {
                                 <button
                                     type="button"
                                     onClick={onOpenMailClient}
-                                    className="rounded-xl bg-[#f2cf8f] px-4 py-3 font-semibold text-[#1b2438] hover:bg-[#f4d79e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f2cf8f] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0e1424] transition-colors"
+                                    className="rounded-xl bg-[#02cacc] px-4 py-3 font-semibold text-[#1b2438] hover:bg-[#3fdcdd] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#02cacc] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0e1424] transition-colors"
                                 >
                                     Open Mail App
                                 </button>
                                 <button
                                     type="button"
                                     onClick={onCopyEmail}
-                                    className="rounded-xl border border-[#8cb5c2]/45 bg-[#142032]/80 px-4 py-3 font-semibold text-[#d6dfed] hover:border-[#f2cf8f]/70 hover:text-[#f2cf8f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f2cf8f] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0e1424] transition-colors"
+                                    className="rounded-xl border border-[#8cb5c2]/45 bg-[#142032]/80 px-4 py-3 font-semibold text-[#d6dfed] hover:border-[#02cacc]/70 hover:text-[#02cacc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#02cacc] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0e1424] transition-colors"
                                 >
                                     {copiedEmail ? 'Copied' : 'Copy Email'}
                                 </button>
@@ -500,7 +500,7 @@ const Portfolio: React.FC = () => {
                                 type="button"
                                 onClick={onCloseContactModal}
                                 ref={contactCloseButtonRef}
-                                className="mt-4 w-full rounded-xl border border-[#8cb5c2]/30 bg-transparent px-4 py-3 text-[#d6dfed] hover:border-[#f2cf8f]/70 hover:text-[#f2cf8f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f2cf8f] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0e1424] transition-colors"
+                                className="mt-4 w-full rounded-xl border border-[#8cb5c2]/30 bg-transparent px-4 py-3 text-[#d6dfed] hover:border-[#02cacc]/70 hover:text-[#02cacc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#02cacc] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0e1424] transition-colors"
                             >
                                 Close
                             </button>
@@ -535,7 +535,7 @@ const Portfolio: React.FC = () => {
                                 type="button"
                                 onClick={onCloseResume}
                                 ref={resumeCloseButtonRef}
-                                className="absolute right-4 top-4 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#8cb5c2]/45 bg-[#111b2f]/90 text-[#e8eef7] hover:border-[#f2cf8f]/70 hover:text-[#f2cf8f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f2cf8f] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0e1424] transition-colors"
+                                className="absolute right-4 top-4 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#8cb5c2]/45 bg-[#111b2f]/90 text-[#e8eef7] hover:border-[#02cacc]/70 hover:text-[#02cacc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#02cacc] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0e1424] transition-colors"
                                 aria-label="Close resume"
                             >
                                 X
