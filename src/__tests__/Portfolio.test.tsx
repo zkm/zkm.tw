@@ -208,6 +208,49 @@ describe('Portfolio resume dialog and browser history', () => {
         expect(window.history.state).toBeNull();
     });
 
+    it('closes the Say Hello dialog on Back without changing the URL', async () => {
+        render(<Portfolio />);
+        fireEvent.click(await screen.findByRole('button', { name: 'Say Hello' }));
+        expect(screen.getByRole('dialog', { name: 'Say Hello' })).toBeInTheDocument();
+        expect(window.history.state).toEqual({ contact: true });
+        expect(window.location.hash).toBe('');
+
+        act(() => window.history.back());
+
+        await waitFor(() =>
+            expect(screen.queryByRole('dialog', { name: 'Say Hello' })).not.toBeInTheDocument(),
+        );
+    });
+
+    it('opens the resume when the hash changes to #resume on the page', async () => {
+        render(<Portfolio />);
+        await screen.findByRole('heading', { name: 'John Doe' });
+
+        act(() => {
+            window.location.hash = '#resume';
+        });
+
+        expect(await screen.findByRole('dialog', { name: 'Resume' })).toBeInTheDocument();
+        fireEvent.click(screen.getByRole('button', { name: 'Close resume' }));
+        await waitFor(() =>
+            expect(screen.queryByRole('dialog', { name: 'Resume' })).not.toBeInTheDocument(),
+        );
+        expect(window.location.hash).toBe('');
+    });
+
+    it('ignores a #resume link when the resume is disabled', async () => {
+        vi.mocked(useProfileData).mockReturnValue({
+            data: { ...mockProfileData, resume: { enabled: false } },
+            loading: false,
+            error: null,
+        });
+        window.history.replaceState(null, '', '/#resume');
+        render(<Portfolio />);
+
+        await screen.findByRole('heading', { name: 'John Doe' });
+        expect(screen.queryByRole('dialog', { name: 'Resume' })).not.toBeInTheDocument();
+    });
+
     it('opens straight to the resume from a #resume link, with Back returning to the page', async () => {
         window.history.replaceState(null, '', '/#resume');
         render(<Portfolio />);
