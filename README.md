@@ -37,7 +37,7 @@ yarn verify     # lint + typecheck + tests; run before opening a PR
 | Script | What it does |
 |---|---|
 | `dev` / `build` / `preview` | Vite dev server, production build into `dist/`, serve that build |
-| `verify` | `lint`, `typecheck` and `test`: what CI runs |
+| `verify` | `lint`, `format:check`, `typecheck` and `test`: what CI runs |
 | `fix` | Biome lint and format, writing fixes (`lint`, `lint:fix`, `format`, `format:check` do one part) |
 | `typecheck` | `tsc` over the app, Node and test configs; `typecheck:worker` covers `workers/chat` |
 | `test` / `test:watch` / `test:ui` | Vitest once, in watch mode, or with its browser UI |

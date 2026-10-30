@@ -24,6 +24,16 @@
             "bracketSpacing": true
         }
     },
+    "yaml": {
+        "formatter": {
+            "enabled": false
+        }
+    },
+    "markdown": {
+        "formatter": {
+            "enabled": false
+        }
+    },
     "css": {
         "formatter": {
             "quoteStyle": "single"
