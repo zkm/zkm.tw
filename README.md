@@ -5,9 +5,15 @@
   <img src="https://img.shields.io/badge/TypeScript-6-blue?logo=typescript" alt="TypeScript" />
   <img src="https://img.shields.io/badge/Vite-8-646CFF?logo=vite" alt="Vite" />
   <img src="https://img.shields.io/badge/TailwindCSS-4-38B2AC?logo=tailwindcss" alt="Tailwind CSS" />
-  <img src="https://img.shields.io/badge/Framer%20Motion-12-black?logo=framer" alt="Framer Motion" />
+  <img src="https://img.shields.io/badge/Framer%20Motion-14-black?logo=framer" alt="Framer Motion" />
   <img src="https://img.shields.io/badge/Chart.js-4-orange?logo=chartdotjs" alt="Chart.js" />
-  <img src="https://img.shields.io/badge/GitHub%20Actions-Automated-blue?logo=githubactions" alt="GitHub Actions" />
+</p>
+
+<p align="center">
+  <a href="https://github.com/zkm/zkm.tw/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/zkm/zkm.tw/ci.yml?branch=master&label=CI&logo=githubactions&logoColor=white" alt="CI" /></a>
+  <a href="https://github.com/zkm/zkm.tw/actions/workflows/deploy.yml"><img src="https://img.shields.io/github/actions/workflow/status/zkm/zkm.tw/deploy.yml?event=push&label=deploy&logo=digitalocean&logoColor=white" alt="Deploy" /></a>
+  <a href="https://github.com/zkm/zkm.tw/releases/latest"><img src="https://img.shields.io/github/v/release/zkm/zkm.tw?label=release" alt="Latest release" /></a>
+  <img src="https://img.shields.io/badge/Node-24-5FA04E?logo=nodedotjs&logoColor=white" alt="Node 24" />
 </p>
 
 Modern React + TypeScript portfolio powered by Vite, Tailwind CSS, and Framer Motion.
