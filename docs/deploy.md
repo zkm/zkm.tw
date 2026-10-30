@@ -55,7 +55,8 @@ The repository is public, so:
 Commands are fish. The app is `jellyfish-app`, id `3a8de4fa-4b95-40c5-ae94-db82a40331cd`.
 
 **1. A token just for deploys.** DigitalOcean → API → Generate New Token, custom scopes,
-`app` read and update. Keep it on the clipboard for step 3.
+`app` read and update. Keep it on the clipboard for step 3. It doesn't need `account:read`:
+the workflow skips `doctl auth init`, which would check the token against the account endpoint.
 
 **2. The `production` environment**: you approve each deploy, and only `v*` tags may use it.
 (GitHub matches environment names without regard to case, so this updates the existing

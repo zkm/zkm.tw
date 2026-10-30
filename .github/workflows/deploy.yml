@@ -106,13 +106,17 @@ jobs:
             - name: Move the release branch to the tag
               run: git push --force origin "$GITHUB_SHA:refs/heads/release"
 
+            # no_auth: `doctl auth init` checks the token against /v2/account, which needs
+            # account:read. The token is scoped to apps only, so doctl reads it from the env instead.
             - uses: digitalocean/action-doctl@v2
               with:
-                  token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+                  no_auth: true
 
             # create-deployment --wait returns when the deployment ends, whether or not it succeeded,
             # so check that it went live and that DigitalOcean built the tag's commit.
             - name: Deploy
+              env:
+                  DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
               run: |
                   id=$(doctl apps create-deployment "$APP_ID" --force-rebuild --wait --format ID --no-header)
                   doctl apps get-deployment "$APP_ID" "$id" -o json > deployment.json
