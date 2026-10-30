@@ -10,7 +10,6 @@ updates:
       labels:
           - 'dependencies'
       open-pull-requests-limit: 5
-      rebase-strategy: 'disabled'
       groups:
           production-dependencies:
               dependency-type: 'production'
@@ -32,7 +31,6 @@ updates:
       labels:
           - 'dependencies'
       open-pull-requests-limit: 5
-      rebase-strategy: 'disabled'
       groups:
           worker-dependencies:
               patterns:
