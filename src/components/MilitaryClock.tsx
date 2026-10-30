@@ -85,9 +85,15 @@ const MilitaryClock: React.FC<{ timeZone: string }> = ({ timeZone }) => {
             },
             60_000 - (Date.now() % 60_000),
         );
+        // Browsers slow timers in hidden tabs, so catch up as soon as the tab is shown again
+        const onVisibilityChange = () => {
+            if (document.visibilityState === 'visible') tick();
+        };
+        document.addEventListener('visibilitychange', onVisibilityChange);
         return () => {
             clearTimeout(timeout);
             if (interval) clearInterval(interval);
+            document.removeEventListener('visibilitychange', onVisibilityChange);
         };
     }, []);
 

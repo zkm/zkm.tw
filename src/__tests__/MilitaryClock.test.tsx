@@ -54,6 +54,23 @@ describe('MilitaryClock', () => {
         expect(screen.getByText('16:37R')).toBeInTheDocument();
     });
 
+    it('catches up straight away when a hidden tab is shown again', () => {
+        vi.useFakeTimers();
+        vi.setSystemTime(new Date('2026-10-30T21:36:00Z'));
+        render(<MilitaryClock timeZone="America/Chicago" />);
+        expect(screen.getByText('16:36R')).toBeInTheDocument();
+
+        // Hours pass in a background tab without the timers firing
+        vi.setSystemTime(new Date('2026-11-02T14:05:00Z'));
+        const visibility = vi.spyOn(document, 'visibilityState', 'get').mockReturnValue('visible');
+        act(() => {
+            document.dispatchEvent(new Event('visibilitychange'));
+        });
+        visibility.mockRestore();
+
+        expect(screen.getByText('08:05S')).toBeInTheDocument();
+    });
+
     it('switches to Sierra across the fall-back', () => {
         vi.useFakeTimers();
         vi.setSystemTime(new Date('2026-11-01T06:59:30Z'));
