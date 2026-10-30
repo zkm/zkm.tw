@@ -15,6 +15,64 @@ html {
     scroll-behavior: smooth;
 }
 
+/* "Jazz" accents from the avatar: teal brushstrokes and purple zigzags */
+@layer components {
+    /* Teal underline that turns into a purple zigzag on hover */
+    .jazz-link {
+        text-decoration-line: underline;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 4px;
+        transition:
+            color 0.15s ease,
+            text-decoration-color 0.15s ease;
+    }
+    .jazz-link:hover {
+        text-decoration-style: wavy;
+        text-decoration-color: #b48cff;
+    }
+    /* On light backgrounds (the resume's content area) */
+    .jazz-link-light:hover {
+        text-decoration-color: #6511aa;
+    }
+
+    /* Lifts on hover and drops a hard offset shadow, '90s-sticker style */
+    .jazz-pop {
+        --jazz-pop-color: #6511aa;
+        transition:
+            transform 0.15s ease,
+            box-shadow 0.15s ease,
+            background-color 0.15s ease,
+            border-color 0.15s ease,
+            color 0.15s ease;
+    }
+    .jazz-pop:hover {
+        transform: translate(-3px, -3px);
+        box-shadow: 5px 5px 0 var(--jazz-pop-color);
+    }
+    .jazz-pop:active {
+        transform: translate(0, 0);
+        box-shadow: 0 0 0 var(--jazz-pop-color);
+    }
+    .jazz-pop-teal {
+        --jazz-pop-color: #02cacc;
+    }
+
+    /* A repeating purple zigzag, for dividers and under headings */
+    .jazz-zigzag {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='12' viewBox='0 0 24 12'%3E%3Cpath d='M0 9 L6 3 L12 9 L18 3 L24 9' fill='none' stroke='%23b48cff' stroke-width='2.5' stroke-linejoin='miter'/%3E%3C/svg%3E");
+        background-repeat: repeat-x;
+        background-size: 24px 12px;
+        height: 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .jazz-pop:hover,
+    .jazz-pop:active {
+        transform: none;
+    }
+}
+
 body {
     font-family:
         'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;

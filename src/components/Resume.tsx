@@ -96,7 +96,7 @@ const RevealPhone: React.FC = () => {
             {!revealed ? (
                 <button
                     type="button"
-                    className="underline text-[#7fe3e4] hover:text-[#c4f4f4] min-h-[44px] focus-visible:ring-2 focus-visible:ring-[#02cacc] rounded px-2"
+                    className="jazz-link text-[#7fe3e4] hover:text-[#c4f4f4] min-h-[44px] focus-visible:ring-2 focus-visible:ring-[#02cacc] rounded px-2"
                     onClick={onReveal}
                     aria-label="Reveal phone number"
                 >
@@ -106,7 +106,7 @@ const RevealPhone: React.FC = () => {
                 <>
                     <a
                         id="tel"
-                        className="underline text-[#7fe3e4] hover:text-[#c4f4f4]"
+                        className="jazz-link text-[#7fe3e4] hover:text-[#c4f4f4]"
                         href={telHref}
                     >
                         {prettyText}
@@ -201,7 +201,7 @@ const RevealEmail: React.FC = () => {
             <Mail className="inline text-[#02cacc] flex-shrink-0" size={16} aria-hidden="true" />
             <button
                 type="button"
-                className="underline text-[#7fe3e4] hover:text-[#c4f4f4] min-h-[44px] focus-visible:ring-2 focus-visible:ring-[#02cacc] rounded px-2"
+                className="jazz-link text-[#7fe3e4] hover:text-[#c4f4f4] min-h-[44px] focus-visible:ring-2 focus-visible:ring-[#02cacc] rounded px-2"
                 onClick={onReveal}
                 aria-label="Reveal email address"
             >
@@ -248,14 +248,14 @@ const RevealEmail: React.FC = () => {
                                 onClick={() => {
                                     window.location.href = mailto;
                                 }}
-                                className="rounded-xl bg-[#02cacc] px-4 py-3 font-semibold text-slate-900 hover:bg-[#3fdcdd] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#02cacc] focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 transition-colors"
+                                className="jazz-pop rounded-xl bg-[#02cacc] px-4 py-3 font-semibold text-slate-900 hover:bg-[#3fdcdd] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#02cacc] focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
                             >
                                 Open Mail App
                             </button>
                             <button
                                 type="button"
                                 onClick={onCopy}
-                                className="rounded-xl border border-slate-500 bg-slate-800 px-4 py-3 font-semibold text-[#f9f4e8] hover:border-[#02cacc] hover:text-[#7fe3e4] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#02cacc] focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 transition-colors inline-flex items-center justify-center gap-2"
+                                className="jazz-pop jazz-pop-teal rounded-xl border border-slate-500 bg-slate-800 px-4 py-3 font-semibold text-[#f9f4e8] hover:border-[#b48cff] hover:bg-[#6511aa]/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#02cacc] focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 inline-flex items-center justify-center gap-2"
                                 aria-label="Copy email address"
                             >
                                 {copied ? <CheckIcon size={14} /> : <CopyIcon size={14} />}
@@ -519,7 +519,7 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
                                     <Globe className="inline text-[#02cacc]" aria-hidden="true" />
                                     <a
                                         href={website}
-                                        className="underline text-[#7fe3e4] hover:text-[#c4f4f4]"
+                                        className="jazz-link text-[#7fe3e4] hover:text-[#c4f4f4]"
                                         rel="noopener me"
                                         target="_blank"
                                         aria-label={`Visit ${websiteHost} (opens in new window)`}
@@ -735,7 +735,7 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
                                             href={exp.companyUrl}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="text-[#00777a] hover:text-[#004f51] underline focus-visible:ring-2 focus-visible:ring-[#00777a] rounded"
+                                            className="jazz-link jazz-link-light text-[#00777a] hover:text-[#004f51] focus-visible:ring-2 focus-visible:ring-[#00777a] rounded"
                                             aria-label={`${exp.company} (opens in new window)`}
                                         >
                                             {exp.company}
