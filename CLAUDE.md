@@ -16,7 +16,7 @@ yarn typecheck:worker   # tsc over workers/chat (needs `yarn install` inside wor
 yarn fix                # biome check --write (lint + format; Biome, not ESLint/Prettier — config in biome.json; husky runs on commit)
 yarn test               # vitest run (single run)
 yarn test:watch         # vitest watch mode
-yarn test:coverage      # vitest with coverage
+yarn test:coverage      # vitest with coverage (counts every file in src/, tested or not; config in vitest.config.ts)
 ```
 
 Run a single test file: `yarn vitest run src/__tests__/Portfolio.test.tsx`
@@ -60,3 +60,5 @@ Changing the app's branch through the app spec (rather than a push) redeploys th
 There is no `production` branch or `yarn deploy` script any more; both belonged to an older manual flow that pushed a built `dist/` to `production`.
 
 `.github/workflows/ci.yml` (install → `yarn verify` → worker typecheck → `yarn build`) runs on push/PR to `main`/`master`/`develop` and is the main correctness gate (its "Verify and Build" job is a required check on `master`).
+
+`.github/workflows/coverage.yml` runs `yarn test:coverage` on every push to `master` and force-pushes a one-file orphan `badges` branch (`coverage.json`, a shields.io endpoint) that the README's coverage badge reads. Only that workflow should write to `badges`.

@@ -11,6 +11,7 @@
 
 <p align="center">
   <a href="https://github.com/zkm/zkm.tw/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/zkm/zkm.tw/ci.yml?branch=master&label=CI&logo=githubactions&logoColor=white" alt="CI" /></a>
+  <a href="https://github.com/zkm/zkm.tw/actions/workflows/coverage.yml"><img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fzkm%2Fzkm.tw%2Fbadges%2Fcoverage.json&logo=vitest&logoColor=white" alt="Coverage" /></a>
   <a href="https://github.com/zkm/zkm.tw/actions/workflows/deploy.yml"><img src="https://img.shields.io/github/actions/workflow/status/zkm/zkm.tw/deploy.yml?event=push&label=deploy&logo=digitalocean&logoColor=white" alt="Deploy" /></a>
   <a href="https://github.com/zkm/zkm.tw/releases/latest"><img src="https://img.shields.io/github/v/release/zkm/zkm.tw?label=release" alt="Latest release" /></a>
   <img src="https://img.shields.io/badge/Node-24-5FA04E?logo=nodedotjs&logoColor=white" alt="Node 24" />
