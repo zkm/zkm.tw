@@ -17,128 +17,66 @@
   <img src="https://img.shields.io/badge/Node-24-5FA04E?logo=nodedotjs&logoColor=white" alt="Node 24" />
 </p>
 
-Modern React + TypeScript portfolio powered by Vite, Tailwind CSS, and Framer Motion.
-
-## Stack
-
-- React 19, TypeScript 6, Vite 8
-- Tailwind CSS 4, PostCSS, Styled Components
-- Framer Motion (animations), Lucide Icons
-- Chart.js + react-chartjs-2 (lazy-loaded Bar)
-- Vitest + Testing Library (unit tests)
+A single-page portfolio with a collapsible resume, built with React and TypeScript. Tailwind CSS
+does the styling, Framer Motion the animation, and a lazy-loaded Chart.js bar chart shows skills.
+Icons come from Lucide. Vitest and Testing Library cover the tests, and Biome handles linting
+and formatting.
 
 ## Getting started
 
 Prerequisites: Node 24+, Yarn 4 (via Corepack).
 
-Install deps
-
 ```bash
 yarn install
-```
-
-Dev server
-
-```bash
-yarn dev
-```
-
-Build
-
-```bash
-yarn build
-```
-
-Preview
-
-```bash
-yarn preview
+yarn dev        # Vite dev server
+yarn verify     # lint + typecheck + tests; run before opening a PR
 ```
 
 ## Scripts
 
-- `dev`: start Vite dev server
-- `build`: build for production
-- `preview`: preview production build
-- `lint` / `lint:fix`: run/fix ESLint
-- `typecheck`: check TypeScript types
-- `format` / `format:check`: format/check code with Prettier
-- `test`: run tests once
-- `test:watch`: run tests in watch mode
-- `test:coverage`: generate coverage report
-- `test:ui`: run tests with UI dashboard
-- `clean`: remove dist/ directory
-- `verify`: lint, typecheck, and test
-- `fix`: lint:fix and format
-- `docker:dev`: run dev with Docker (5173, HMR 24678)
-- `docker:prod`: run production build with nginx (8082)
-- `docker:down`: stop Docker containers
-- `health` / `health:full`: health checks and audit
-- `health:report`: generate health report
-- `deps:check` / `deps:audit`: check/audit dependencies
-- `ci`: CI workflow (install, verify, build)
+| Script | What it does |
+|---|---|
+| `dev` / `build` / `preview` | Vite dev server, production build into `dist/`, serve that build |
+| `verify` | `lint`, `typecheck` and `test`: what CI runs |
+| `fix` | Biome lint and format, writing fixes (`lint`, `lint:fix`, `format`, `format:check` do one part) |
+| `typecheck` | `tsc` over the app, Node and test configs; `typecheck:worker` covers `workers/chat` |
+| `test` / `test:watch` / `test:ui` | Vitest once, in watch mode, or with its browser UI |
+| `test:coverage` | Coverage for every file in `src/`, tested or not (report in `coverage/`) |
+| `docker:dev` / `docker:prod` / `docker:down` | See [Docker](#docker) |
+| `health`, `deps:*` | Dependency health, audit and update helpers (see `package.json`) |
+
+## Content and code
+
+Site copy, experience and skills live in JSON, not in components. Edit those files to change
+the site; [docs/data-schema.md](docs/data-schema.md) documents every field.
+
+```
+public/
+  data/profile.json, resume.json   # site content, fetched at runtime
+  analytics.js                     # GA4 setup (gtag is loaded in index.html)
+src/
+  main.tsx → App.tsx               # entry
+  components/
+    Portfolio.tsx                  # the page
+    Resume.tsx                     # lazy-loaded, collapsible resume and skills chart
+  hooks/                           # useProfileData, useResumeData, useFocusTrap, usePrefersReducedMotion
+  __tests__/
+workers/chat/                      # Cloudflare Worker for an AI chat widget (currently unused; docs/chat-worker.md)
+```
+
+Tests mock Framer Motion and Lucide globally in `src/test-setup.ts`. A new icon or animated
+component may need an entry there.
 
 ## Docker
 
-- Dockerfile has multi-stage targets: dev (Vite), build, prod (nginx)
-- docker-compose.yml defines:
-    - web: bind-mount dev with hot reload on http://localhost:5173
-    - web-prod: serves built assets via nginx on http://localhost:8082
-- .dockerignore is configured to keep the build context small
+For local use only; production doesn't run on Docker or nginx.
 
-Common
-
-```bash
-yarn docker:dev   # dev with HMR
-yarn docker:prod  # serve built site on :8082
-```
-
-## Tests
-
-- Vitest + @testing-library/react
-- Framer Motion is mocked in test setup (src/test-setup.ts) for stable DOM
-- Hooks are mocked per test with vi.mocked(...) patterns
-
-Run
-
-```bash
-yarn test
-yarn test:watch
-yarn test:coverage
-yarn test:ui
-```
-
-## Data & components
-
-- Public JSON data: public/data/profile.json, public/data/resume.json
-- Hooks: src/hooks/useProfileData.ts, src/hooks/useResumeData.ts
-- Key components: src/components/Portfolio.tsx, src/components/Resume.tsx
-- Resume sections are collapsible (accessible), default-expanded
-
-## Analytics
-
-GA4 is loaded in index.html and initialized in public/analytics.js
+- `yarn docker:dev`: Vite with hot reload on http://localhost:5173
+- `yarn docker:prod`: the built site served by nginx on http://localhost:8082
 
 ## Deployment
 
 Pushing a `vX.Y.Z` tag on `master` releases and deploys it, after approval: GitHub Actions runs CI, saves the build on a GitHub Release, and has DigitalOcean App Platform build and serve that tag. Merging to `master` alone deploys nothing. CI (`yarn verify` + `yarn build`) runs on every pull request. Releasing, rolling back and setup: [docs/deploy.md](docs/deploy.md).
-
-## Project structure
-
-```
-src/
-  components/
-    Portfolio.tsx
-    Resume.tsx
-  hooks/
-    useProfileData.ts
-    useResumeData.ts
-  __tests__/
-public/
-  data/
-    profile.json
-    resume.json
-```
 
 ---
 
