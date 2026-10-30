@@ -27,6 +27,15 @@ export interface ProfileData {
         cta: string;
         message: string;
     };
+    projects?: Array<{
+        name: string;
+        description: string;
+        tech?: string[];
+        links: Array<{
+            label: string;
+            url: string;
+        }>;
+    }>;
 }
 
 export const useProfileData = () => {

@@ -218,7 +218,7 @@ const Portfolio: React.FC = () => {
         );
     }
 
-    const { profile, socialLinks, resume } = data;
+    const { profile, socialLinks, resume, projects = [] } = data;
     const contactEmail = profile.email || decodeObfuscatedEmail(obfuscatedPrimaryEmail);
 
     const onSayHello = () => {
@@ -490,6 +490,73 @@ const Portfolio: React.FC = () => {
                         </div>
                     </motion.div>
                 </section>
+
+                {projects.length > 0 && (
+                    <motion.section
+                        variants={fadeInUp}
+                        initial={canAnimate ? 'hidden' : 'show'}
+                        animate="show"
+                        transition={{ delay: 0.3, duration: 0.5 }}
+                        className="mt-16"
+                        aria-labelledby="projects-heading"
+                    >
+                        <h2
+                            id="projects-heading"
+                            className="font-display text-3xl md:text-4xl tracking-tight text-[#f9f4e8]"
+                        >
+                            Projects
+                        </h2>
+                        <div className="jazz-zigzag mt-3 w-28" aria-hidden="true" />
+
+                        <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                            {projects.map((project) => (
+                                <article
+                                    key={project.name}
+                                    className="flex flex-col rounded-2xl border border-[#02cacc]/35 bg-[#111b2f]/85 p-6 shadow-[8px_8px_0_rgba(101,17,170,0.45)] backdrop-blur-sm"
+                                >
+                                    <h3 className="font-display text-xl text-[#02cacc]">
+                                        {project.name}
+                                    </h3>
+                                    <p className="mt-3 flex-1 leading-relaxed text-[#d6dfed]">
+                                        {project.description}
+                                    </p>
+
+                                    {project.tech && project.tech.length > 0 && (
+                                        <ul
+                                            className="mt-4 flex flex-wrap gap-2"
+                                            aria-label="Built with"
+                                        >
+                                            {project.tech.map((item) => (
+                                                <li
+                                                    key={item}
+                                                    className="rounded-md bg-[#02cacc]/10 px-2 py-1 text-xs font-semibold text-[#7fe3e4]"
+                                                >
+                                                    {item}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    )}
+
+                                    <div className="mt-5 flex flex-wrap gap-2">
+                                        {project.links.map((link) => (
+                                            <a
+                                                key={link.url}
+                                                href={link.url}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="jazz-pop jazz-pop-teal inline-flex items-center gap-1 rounded-lg border border-[#8cb5c2]/45 bg-[#142032]/80 px-3 py-2 text-sm font-semibold text-[#e8eef7] hover:border-[#b48cff] hover:bg-[#6511aa]/40 hover:text-[#f9f4e8]"
+                                                aria-label={`${project.name}: ${link.label} (opens in new window)`}
+                                            >
+                                                {link.label}
+                                                <span aria-hidden="true">↗</span>
+                                            </a>
+                                        ))}
+                                    </div>
+                                </article>
+                            ))}
+                        </div>
+                    </motion.section>
+                )}
 
                 <motion.footer
                     variants={fadeInUp}

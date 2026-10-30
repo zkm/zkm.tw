@@ -55,5 +55,64 @@
     "contact": {
         "cta": "Let's work together",
         "message": "I'm always interested in hearing about new opportunities and projects."
-    }
+    },
+    "projects": [
+        {
+            "name": "Skywatch",
+            "description": "Listens to the US Air Force's HF radio network and copies every Emergency Action Message as it's read, with Whisper doing the first pass and listeners correcting it live.",
+            "tech": ["Python", "FastAPI", "Whisper", "Leaflet"],
+            "links": [
+                {
+                    "label": "Listen live",
+                    "url": "https://skywatch.zkm.tw"
+                },
+                {
+                    "label": "Write-up",
+                    "url": "https://www.zachschneider.com/tech/skywatch/"
+                },
+                {
+                    "label": "Source",
+                    "url": "https://github.com/zkm/skywatch"
+                }
+            ]
+        },
+        {
+            "name": "motd-forge",
+            "description": "A randomized login banner for homelab servers: uptime, disk and memory, a random quote and a figlet title. The same tool as a Ruby gem and an npm package.",
+            "tech": ["Ruby", "Node.js", "CLI"],
+            "links": [
+                {
+                    "label": "RubyGems",
+                    "url": "https://rubygems.org/gems/motd_forge"
+                },
+                {
+                    "label": "npm",
+                    "url": "https://www.npmjs.com/package/motd-forge"
+                },
+                {
+                    "label": "Ruby source",
+                    "url": "https://github.com/zkm/motd_forge"
+                },
+                {
+                    "label": "Node source",
+                    "url": "https://github.com/zkm/motd-forge"
+                }
+            ]
+        },
+        {
+            "name": "zachschneider.com",
+            "description": "The blog (code, coffee, cycle), running on zkm-cms: a small CMS built for it with CodeIgniter 4 and Vue 3, whose WordPress importer kept every old URL working.",
+            "tech": ["PHP", "CodeIgniter 4", "Vue 3"],
+            "links": [
+                {
+                    "label": "Visit",
+                    "url": "https://www.zachschneider.com"
+                },
+                {
+                    "label": "Source",
+                    "url": "https://github.com/zkm/zkm-cms"
+                }
+            ]
+        }
+    ]
 }

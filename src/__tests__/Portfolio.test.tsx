@@ -222,3 +222,57 @@ describe('Portfolio resume dialog and browser history', () => {
         expect(window.location.hash).toBe('');
     });
 });
+
+describe('Portfolio projects', () => {
+    beforeEach(() => {
+        vi.clearAllMocks();
+    });
+
+    it('lists each project with its links, opening in a new window', async () => {
+        vi.mocked(useProfileData).mockReturnValue({
+            data: {
+                ...mockProfileData,
+                projects: [
+                    {
+                        name: 'Skywatch',
+                        description: 'Copies Emergency Action Messages.',
+                        tech: ['Python'],
+                        links: [
+                            { label: 'Listen live', url: 'https://skywatch.zkm.tw' },
+                            { label: 'Source', url: 'https://github.com/zkm/skywatch' },
+                        ],
+                    },
+                ],
+            },
+            loading: false,
+            error: null,
+        });
+
+        render(<Portfolio />);
+
+        expect(await screen.findByRole('heading', { name: 'Projects' })).toBeInTheDocument();
+        expect(screen.getByRole('heading', { name: 'Skywatch' })).toBeInTheDocument();
+        const live = screen.getByRole('link', {
+            name: 'Skywatch: Listen live (opens in new window)',
+        });
+        expect(live).toHaveAttribute('href', 'https://skywatch.zkm.tw');
+        expect(live).toHaveAttribute('target', '_blank');
+        expect(screen.getByRole('link', { name: /Skywatch: Source/ })).toHaveAttribute(
+            'href',
+            'https://github.com/zkm/skywatch',
+        );
+    });
+
+    it('leaves the section out when there are no projects', async () => {
+        vi.mocked(useProfileData).mockReturnValue({
+            data: mockProfileData,
+            loading: false,
+            error: null,
+        });
+
+        render(<Portfolio />);
+
+        await screen.findByRole('heading', { name: 'John Doe' });
+        expect(screen.queryByRole('heading', { name: 'Projects' })).not.toBeInTheDocument();
+    });
+});
