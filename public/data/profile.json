@@ -5,7 +5,8 @@
         "tagline": "Software Engineer • Builder • Coffee-First Human",
         "about": "I'm Zach, a Cloud Developer Principal at GDIT with more than twenty years of building for the web. These days that means Python, R, and React on AWS Lambda, and bringing a cloud-first eye to legacy government systems without losing sight of security or accessibility. Off the clock I build small tools for my homelab, listen to shortwave radio, ride my bike, hang out with my dogs, and drink a lot of coffee.",
         "image": "/zach.jpg",
-        "location": "Remote · USA"
+        "location": "Remote · USA",
+        "timeZone": "America/Chicago"
     },
     "socialLinks": [
         {

@@ -8,6 +8,7 @@ export interface ProfileData {
         about?: string;
         image: string;
         location?: string;
+        timeZone?: string;
         email?: string;
         phone?: string;
     };

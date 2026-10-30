@@ -9,7 +9,9 @@ read an overlapping-but-different subset.
 ## `profile.json` → `useProfileData` → `Portfolio.tsx`
 
 ```
-profile: { name, title, tagline, about?, image, location?, email?, phone? }
+profile: { name, title, tagline, about?, image, location?, timeZone?, email?, phone? }
+                                                          # timeZone: IANA name; shows local
+                                                          # time + military letter (16:36R)
 socialLinks: [{ platform, url, icon, display, rel? }]   # icon must match a key
                                                           # handled in Portfolio.tsx's
                                                           # icon map (src/components/icons/*.svg)

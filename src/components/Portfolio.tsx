@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useProfileData } from '../hooks/useProfileData';
 import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
 import { useFocusTrap } from '../hooks/useFocusTrap';
+import MilitaryClock from './MilitaryClock';
 const Resume = React.lazy(() => import('./Resume'));
 
 // Use local SVG files for social icons to guarantee rendering across browsers
@@ -343,8 +344,12 @@ const Portfolio: React.FC = () => {
                     className="mb-8 flex items-center justify-between gap-4"
                 >
                     <p className="uppercase tracking-[0.22em] text-sm text-[#02cacc]">ZKM.TW</p>
-                    {profile.location && (
-                        <p className="text-sm text-[#d6dfed]">{profile.location}</p>
+                    {(profile.location || profile.timeZone) && (
+                        <p className="text-sm text-[#d6dfed]">
+                            {profile.location}
+                            {profile.location && profile.timeZone && ' · '}
+                            {profile.timeZone && <MilitaryClock timeZone={profile.timeZone} />}
+                        </p>
                     )}
                 </motion.div>
 
