@@ -276,3 +276,35 @@ describe('Portfolio projects', () => {
         expect(screen.queryByRole('heading', { name: 'Projects' })).not.toBeInTheDocument();
     });
 });
+
+describe('Portfolio current focus', () => {
+    beforeEach(() => {
+        vi.clearAllMocks();
+    });
+
+    it('lists the focus items when the profile has them', async () => {
+        vi.mocked(useProfileData).mockReturnValue({
+            data: { ...mockProfileData, focus: ['Cloud modernization', 'Skywatch'] },
+            loading: false,
+            error: null,
+        });
+
+        render(<Portfolio />);
+
+        expect(await screen.findByText('Cloud modernization')).toBeInTheDocument();
+        expect(screen.getByText('Skywatch')).toBeInTheDocument();
+        expect(screen.queryByText(/Feel free to reach out/)).not.toBeInTheDocument();
+    });
+
+    it('falls back to the contact message without focus items', async () => {
+        vi.mocked(useProfileData).mockReturnValue({
+            data: mockProfileData,
+            loading: false,
+            error: null,
+        });
+
+        render(<Portfolio />);
+
+        expect(await screen.findByText(/Feel free to reach out/)).toBeInTheDocument();
+    });
+});

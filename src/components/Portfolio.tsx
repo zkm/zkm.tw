@@ -386,9 +386,23 @@ const Portfolio: React.FC = () => {
                             <p className="text-sm uppercase tracking-[0.14em] text-[#8cb5c2] mb-2">
                                 Current Focus
                             </p>
-                            <p className="text-[#e5ecf5] leading-relaxed">
-                                {data.contact.cta} - {data.contact.message}
-                            </p>
+                            {data.focus && data.focus.length > 0 ? (
+                                <ul className="space-y-2 text-[#e5ecf5] leading-relaxed">
+                                    {data.focus.map((item) => (
+                                        <li key={item} className="flex gap-3">
+                                            <span
+                                                className="mt-2 h-2 w-2 flex-none rotate-45 bg-[#02cacc]"
+                                                aria-hidden="true"
+                                            />
+                                            <span>{item}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            ) : (
+                                <p className="text-[#e5ecf5] leading-relaxed">
+                                    {data.contact.cta} - {data.contact.message}
+                                </p>
+                            )}
                         </div>
                     </motion.div>
 

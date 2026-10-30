@@ -3,7 +3,7 @@
         "name": "Zach Schneider",
         "title": "Cosmic Code Crusader",
         "tagline": "Software Engineer • Builder • Coffee-First Human",
-        "about": "Hi there! I'm Zach, a full-stack developer with a passion for building beautiful, functional websites. I've worked in the tech industry for over a decade and have had the opportunity to contribute to a wide range of projects, from small business websites to large-scale web applications. In my free time, I enjoy keeping up with the latest developments in web development and spending time with my family. I'm always looking for new challenges and opportunities to learn and grow as a developer.",
+        "about": "I'm Zach, a Cloud Developer Principal at GDIT with more than twenty years of building for the web. These days that means Python, R and React on AWS Lambda, and bringing a cloud-first eye to legacy government systems without losing sight of security or accessibility. Off the clock I build small tools for my homelab, listen to shortwave radio, ride my bike and drink a lot of coffee here in Wisconsin with my family.",
         "image": "/zach.jpg",
         "location": "Wisconsin, USA"
     },
@@ -56,6 +56,11 @@
         "cta": "Let's work together",
         "message": "I'm always interested in hearing about new opportunities and projects."
     },
+    "focus": [
+        "Modernizing legacy federal systems at GDIT: Python, R and React on AWS Lambda, with security and 508 accessibility built in",
+        "Skywatch: copying the Air Force's Emergency Action Messages off shortwave radio with Whisper and help from listeners",
+        "Small Linux tools for my homelab, in Ruby, Node and shell: motd-forge and updateguard"
+    ],
     "projects": [
         {
             "name": "Skywatch",
