@@ -69,7 +69,6 @@ yarn preview
 - `health` / `health:full`: health checks and audit
 - `health:report`: generate health report
 - `deps:check` / `deps:audit`: check/audit dependencies
-- `deploy`: build and deploy to GitHub Pages
 - `ci`: CI workflow (install, verify, build)
 
 ## Docker
@@ -115,7 +114,7 @@ GA4 is loaded in index.html and initialized in public/analytics.js
 
 ## Deployment
 
-Merging to `master` deploys: DigitalOcean App Platform builds the site from `master` (`yarn build`) and serves `dist/` as a static site. CI (`yarn verify` + `yarn build`) runs on every pull request first.
+Pushing a `vX.Y.Z` tag on `master` releases and deploys it, after approval: GitHub Actions runs CI, saves the build on a GitHub Release, and has DigitalOcean App Platform build and serve that tag. Merging to `master` alone deploys nothing. CI (`yarn verify` + `yarn build`) runs on every pull request. Releasing, rolling back and setup: [docs/deploy.md](docs/deploy.md).
 
 ## Project structure
 
