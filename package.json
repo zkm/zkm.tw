@@ -12,7 +12,7 @@
         "preview": "vite preview",
         "lint": "biome lint .",
         "lint:fix": "biome lint --write .",
-        "verify": "yarn lint && yarn typecheck && yarn test",
+        "verify": "yarn lint && yarn format:check && yarn typecheck && yarn test",
         "fix": "biome check --write .",
         "test": "vitest run",
         "test:watch": "vitest",

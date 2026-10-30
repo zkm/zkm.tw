@@ -21,6 +21,23 @@ updates:
               patterns:
                   - '*'
 
+    # The chat worker is its own Yarn project with its own lockfile
+    - package-ecosystem: 'npm'
+      directory: '/workers/chat'
+      schedule:
+          interval: 'weekly'
+          day: 'monday'
+          time: '07:15'
+          timezone: 'America/Chicago'
+      labels:
+          - 'dependencies'
+      open-pull-requests-limit: 5
+      rebase-strategy: 'disabled'
+      groups:
+          worker-dependencies:
+              patterns:
+                  - '*'
+
     - package-ecosystem: 'github-actions'
       directory: '/'
       schedule:

@@ -11,9 +11,9 @@ Zach Schneider's personal portfolio site (zkm.tw): a single-page React app (Port
 ```bash
 yarn dev              # Vite dev server
 yarn build             # yarn clean, tsc -b (app + node configs), then vite build. Yarn 4 does not run pre/post hooks, so build does NOT run verify
-yarn verify             # lint + typecheck + test — run this before considering a change done
+yarn verify             # lint + format check + typecheck + test — run this before considering a change done
 yarn typecheck:worker   # tsc over workers/chat (needs `yarn install` inside workers/chat; run in CI)
-yarn fix                # biome check --write (lint + format; Biome, not ESLint/Prettier — config in biome.json; husky runs on commit)
+yarn fix                # biome check --write (lint + format; Biome, not ESLint/Prettier — config in biome.json; husky runs `yarn lint` on commit). Biome's YAML and Markdown formatters are off in biome.json: `--write` rewrote those files even though the read-only check passed
 yarn test               # vitest run (single run)
 yarn test:watch         # vitest watch mode
 yarn test:coverage      # vitest with coverage (counts every file in src/, tested or not; config in vitest.config.ts)
@@ -59,6 +59,6 @@ Changing the app's branch through the app spec (rather than a push) redeploys th
 
 There is no `production` branch or `yarn deploy` script any more; both belonged to an older manual flow that pushed a built `dist/` to `production`.
 
-`.github/workflows/ci.yml` (install → `yarn verify` → worker typecheck → `yarn build`) runs on push/PR to `main`/`master`/`develop` and is the main correctness gate (its "Verify and Build" job is a required check on `master`).
+`.github/workflows/ci.yml` (install → `yarn verify` → worker typecheck → `yarn build`) runs on push/PR to `master` and is the main correctness gate (its "Verify and Build" job is a required check on `master`).
 
 `.github/workflows/coverage.yml` runs `yarn test:coverage` on every push to `master` and force-pushes a one-file orphan `badges` branch (`coverage.json`, a shields.io endpoint) that the README's coverage badge reads. Only that workflow should write to `badges`.
