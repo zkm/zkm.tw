@@ -92,11 +92,11 @@ const RevealPhone: React.FC = () => {
 
     return (
         <div className="flex items-center gap-2">
-            <Phone className="inline text-yellow-300 flex-shrink-0" size={16} aria-hidden="true" />
+            <Phone className="inline text-[#02cacc] flex-shrink-0" size={16} aria-hidden="true" />
             {!revealed ? (
                 <button
                     type="button"
-                    className="underline text-yellow-200 hover:text-yellow-100 min-h-[44px] focus-visible:ring-2 focus-visible:ring-yellow-400 rounded px-2"
+                    className="jazz-link text-[#7fe3e4] hover:text-[#c4f4f4] min-h-[44px] focus-visible:ring-2 focus-visible:ring-[#02cacc] rounded px-2"
                     onClick={onReveal}
                     aria-label="Reveal phone number"
                 >
@@ -106,7 +106,7 @@ const RevealPhone: React.FC = () => {
                 <>
                     <a
                         id="tel"
-                        className="underline text-yellow-200 hover:text-yellow-100"
+                        className="jazz-link text-[#7fe3e4] hover:text-[#c4f4f4]"
                         href={telHref}
                     >
                         {prettyText}
@@ -114,7 +114,7 @@ const RevealPhone: React.FC = () => {
                     <button
                         type="button"
                         onClick={onCopy}
-                        className="ml-2 text-xs px-3 py-2 rounded bg-slate-800 text-yellow-200 hover:bg-slate-700 inline-flex items-center gap-1 min-h-[44px] min-w-[44px] justify-center focus-visible:ring-2 focus-visible:ring-yellow-400"
+                        className="ml-2 text-xs px-3 py-2 rounded bg-slate-800 text-[#7fe3e4] hover:bg-slate-700 inline-flex items-center gap-1 min-h-[44px] min-w-[44px] justify-center focus-visible:ring-2 focus-visible:ring-[#02cacc]"
                         aria-label="Copy phone number"
                     >
                         {copied ? <CheckIcon size={14} /> : <CopyIcon size={14} />}
@@ -198,10 +198,10 @@ const RevealEmail: React.FC = () => {
 
     return (
         <div className="flex items-center gap-2">
-            <Mail className="inline text-yellow-300 flex-shrink-0" size={16} aria-hidden="true" />
+            <Mail className="inline text-[#02cacc] flex-shrink-0" size={16} aria-hidden="true" />
             <button
                 type="button"
-                className="underline text-yellow-200 hover:text-yellow-100 min-h-[44px] focus-visible:ring-2 focus-visible:ring-yellow-400 rounded px-2"
+                className="jazz-link text-[#7fe3e4] hover:text-[#c4f4f4] min-h-[44px] focus-visible:ring-2 focus-visible:ring-[#02cacc] rounded px-2"
                 onClick={onReveal}
                 aria-label="Reveal email address"
             >
@@ -227,7 +227,7 @@ const RevealEmail: React.FC = () => {
                     >
                         <h3
                             id="resume-email-modal-title"
-                            className="text-xl font-bold text-yellow-100"
+                            className="text-xl font-bold text-[#f9f4e8]"
                         >
                             Email Contact
                         </h3>
@@ -238,7 +238,7 @@ const RevealEmail: React.FC = () => {
                             Choose how to connect.
                         </p>
 
-                        <p className="mt-4 rounded-lg border border-slate-600 bg-slate-800 px-4 py-3 text-yellow-100">
+                        <p className="mt-4 rounded-lg border border-slate-600 bg-slate-800 px-4 py-3 text-[#f9f4e8]">
                             {em}
                         </p>
 
@@ -248,14 +248,14 @@ const RevealEmail: React.FC = () => {
                                 onClick={() => {
                                     window.location.href = mailto;
                                 }}
-                                className="rounded-xl bg-yellow-300 px-4 py-3 font-semibold text-slate-900 hover:bg-yellow-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 transition-colors"
+                                className="jazz-pop rounded-xl bg-[#02cacc] px-4 py-3 font-semibold text-slate-900 hover:bg-[#3fdcdd] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#02cacc] focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
                             >
                                 Open Mail App
                             </button>
                             <button
                                 type="button"
                                 onClick={onCopy}
-                                className="rounded-xl border border-slate-500 bg-slate-800 px-4 py-3 font-semibold text-yellow-100 hover:border-yellow-300 hover:text-yellow-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 transition-colors inline-flex items-center justify-center gap-2"
+                                className="jazz-pop jazz-pop-teal rounded-xl border border-slate-500 bg-slate-800 px-4 py-3 font-semibold text-[#f9f4e8] hover:border-[#b48cff] hover:bg-[#6511aa]/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#02cacc] focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 inline-flex items-center justify-center gap-2"
                                 aria-label="Copy email address"
                             >
                                 {copied ? <CheckIcon size={14} /> : <CopyIcon size={14} />}
@@ -267,7 +267,7 @@ const RevealEmail: React.FC = () => {
                             type="button"
                             onClick={onCloseModal}
                             ref={closeButtonRef}
-                            className="mt-4 w-full rounded-xl border border-slate-500 px-4 py-3 text-slate-100 hover:border-yellow-300 hover:text-yellow-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 transition-colors"
+                            className="mt-4 w-full rounded-xl border border-slate-500 px-4 py-3 text-slate-100 hover:border-[#02cacc] hover:text-[#7fe3e4] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#02cacc] focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 transition-colors"
                         >
                             Close
                         </button>
@@ -280,7 +280,7 @@ const RevealEmail: React.FC = () => {
             <noscript>
                 <span className="ml-2 align-middle">
                     <svg width="210" height="16" aria-label="Email image">
-                        <text x="0" y="12" fontFamily="monospace" fontSize="14" fill="#FDE047">
+                        <text x="0" y="12" fontFamily="monospace" fontSize="14" fill="#02cacc">
                             me [at] zachschneider [dot] com
                         </text>
                     </svg>
@@ -306,7 +306,7 @@ const CollapsibleSection: React.FC<{
                 id={headerId}
                 type="button"
                 onClick={() => setOpen(!open)}
-                className="w-full text-left p-4 bg-gray-50 hover:bg-gray-100 rounded-lg border border-gray-200 transition-colors duration-200 flex items-center justify-between font-semibold text-gray-900 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                className="jazz-pop w-full text-left p-4 bg-gray-50 hover:bg-white hover:border-[#02cacc] rounded-lg border border-gray-200 flex items-center justify-between font-semibold text-gray-900 focus-visible:ring-2 focus-visible:ring-[#00777a] focus-visible:ring-offset-2"
                 aria-expanded={open}
                 aria-controls={contentId}
             >
@@ -382,13 +382,14 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
                 {
                     label: 'Skill Count',
                     data: values,
+                    // By position, in languages order: matches the HTML/CSS/JavaScript/Other chips
                     backgroundColor: [
-                        'rgba(30,41,59,0.85)',
-                        'rgba(37,99,235,0.85)',
-                        'rgba(29,78,216,0.85)',
-                        'rgba(51,65,85,0.85)',
-                        'rgba(30,64,175,0.85)',
-                        'rgba(17,24,39,0.85)',
+                        'rgba(242,146,96,0.85)', // coral
+                        'rgba(2,202,204,0.85)', // teal
+                        'rgba(101,17,170,0.85)', // purple
+                        'rgba(51,65,85,0.85)', // slate
+                        'rgba(0,119,122,0.85)', // deep teal
+                        'rgba(155,93,229,0.85)', // light purple
                     ],
                     borderRadius: 8,
                     borderWidth: 2,
@@ -436,7 +437,7 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
             >
                 <div className="text-center">
                     <div
-                        className={`${prefersReducedMotion ? '' : 'animate-spin'} rounded-full h-24 w-24 border-b-2 border-blue-600 mx-auto`}
+                        className={`${prefersReducedMotion ? '' : 'animate-spin'} rounded-full h-24 w-24 border-b-2 border-[#02cacc] mx-auto`}
                         role="status"
                         aria-label="Loading spinner"
                     ></div>
@@ -477,34 +478,35 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
                 <div className="flex flex-col md:flex-row w-full gap-8">
                     {/* Sidebar/Profile */}
                     <aside
-                        className="w-full md:w-1/3 bg-slate-900 rounded-2xl shadow-xl p-8 flex flex-col items-start text-white"
+                        className="w-full md:w-1/3 bg-slate-900 rounded-2xl shadow-[10px_10px_0_rgba(101,17,170,0.55)] p-8 flex flex-col items-start text-white"
                         data-nosnippet
                     >
                         <div className="mb-8 w-full">
-                            <Heading className="text-3xl font-extrabold mb-2 text-yellow-300 tracking-tight text-left">
+                            <Heading className="text-3xl font-extrabold mb-2 text-[#02cacc] tracking-tight text-left">
                                 {name}
                             </Heading>
                             <p className="text-lg font-semibold mb-4 text-gray-100 text-left">
                                 {title}
                             </p>
+                            <div className="jazz-zigzag w-32" aria-hidden="true" />
                         </div>
 
                         <div className="w-full mt-6">
-                            <h2 className="text-xl font-bold text-yellow-300 mb-2 uppercase tracking-wide text-left">
+                            <h2 className="text-xl font-bold text-[#02cacc] mb-2 uppercase tracking-wide text-left">
                                 About Me
                             </h2>
                             <p className="text-gray-100 text-base mb-6 leading-relaxed text-left">
                                 {summary}
                             </p>
 
-                            <h2 className="text-xl font-bold text-yellow-300 mb-2 uppercase tracking-wide text-left">
+                            <h2 className="text-xl font-bold text-[#02cacc] mb-2 uppercase tracking-wide text-left">
                                 Languages
                             </h2>
                             <ul className="text-gray-100 text-base mb-6 space-y-1 text-left">
                                 <li>English</li>
                             </ul>
 
-                            <h2 className="text-xl font-bold text-yellow-300 mb-2 uppercase tracking-wide text-left">
+                            <h2 className="text-xl font-bold text-[#02cacc] mb-2 uppercase tracking-wide text-left">
                                 Contact
                             </h2>
                             <ul className="text-gray-100 text-base space-y-2 text-left">
@@ -515,10 +517,10 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
                                     <RevealPhone />
                                 </li>
                                 <li className="flex items-center gap-2">
-                                    <Globe className="inline text-yellow-300" aria-hidden="true" />
+                                    <Globe className="inline text-[#02cacc]" aria-hidden="true" />
                                     <a
                                         href={website}
-                                        className="underline text-yellow-200 hover:text-yellow-100"
+                                        className="jazz-link text-[#7fe3e4] hover:text-[#c4f4f4]"
                                         rel="noopener me"
                                         target="_blank"
                                         aria-label={`Visit ${websiteHost} (opens in new window)`}
@@ -529,17 +531,41 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
                             </ul>
                         </div>
 
+                        {/* Under the contact list: the sidebar stretches to the resume's full
+                            height, so anything pinned to its bottom ends up far out of view. */}
+                        <svg
+                            className="pointer-events-none mt-10 h-32 w-64 self-center"
+                            viewBox="0 0 288 160"
+                            aria-hidden="true"
+                        >
+                            <path
+                                d="M10 140 C 90 110, 170 125, 280 60"
+                                fill="none"
+                                stroke="#02cacc"
+                                strokeWidth="34"
+                                strokeLinecap="round"
+                                opacity="0.12"
+                            />
+                            <polyline
+                                points="120,70 150,44 164,70 196,42 210,68 242,40"
+                                fill="none"
+                                stroke="#9b5de5"
+                                strokeWidth="5"
+                                opacity="0.45"
+                            />
+                        </svg>
+
                         <span id="sr-live" className="sr-only" aria-live="polite" />
                     </aside>
 
                     {/* Main Content */}
-                    <section className="w-full md:w-2/3 bg-white rounded-2xl shadow-xl p-8 text-left">
+                    <section className="w-full md:w-2/3 bg-white rounded-2xl shadow-[10px_10px_0_rgba(2,202,204,0.45)] p-8 text-left">
                         {/* Professional Summary */}
                         <CollapsibleSection
                             id="summary"
                             title={
                                 <>
-                                    <Book className="text-blue-400" aria-hidden="true" /> Summary
+                                    <Book className="text-[#02cacc]" aria-hidden="true" /> Summary
                                 </>
                             }
                         >
@@ -553,7 +579,7 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
                             id="skills"
                             title={
                                 <>
-                                    <Code2 className="text-blue-400" aria-hidden="true" /> Skills
+                                    <Code2 className="text-[#02cacc]" aria-hidden="true" /> Skills
                                 </>
                             }
                         >
@@ -561,7 +587,7 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
                                 {/* Programming Languages */}
                                 <div>
                                     <h3 className="text-lg font-semibold text-gray-900 mb-3 border-b border-gray-200 pb-2 flex items-center gap-2">
-                                        <Code2 className="text-blue-500" size={20} />
+                                        <Code2 className="text-[#02cacc]" size={20} />
                                         Programming Languages
                                     </h3>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -570,24 +596,24 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
                                         ).map(([lang, skills]) => {
                                             const langConfig = {
                                                 HTML: {
-                                                    color: 'text-orange-600',
-                                                    bg: 'bg-orange-50',
-                                                    border: 'border-orange-200',
+                                                    color: 'text-[#a3461a]',
+                                                    bg: 'bg-[#f29260]/10',
+                                                    border: 'border-[#f29260]/40',
                                                 },
                                                 CSS: {
-                                                    color: 'text-blue-600',
-                                                    bg: 'bg-blue-50',
-                                                    border: 'border-blue-200',
+                                                    color: 'text-[#00777a]',
+                                                    bg: 'bg-[#02cacc]/10',
+                                                    border: 'border-[#02cacc]/40',
                                                 },
                                                 JavaScript: {
-                                                    color: 'text-yellow-600',
-                                                    bg: 'bg-yellow-50',
-                                                    border: 'border-yellow-200',
+                                                    color: 'text-[#6511aa]',
+                                                    bg: 'bg-[#6511aa]/[0.06]',
+                                                    border: 'border-[#6511aa]/25',
                                                 },
                                                 Other: {
-                                                    color: 'text-purple-600',
-                                                    bg: 'bg-purple-50',
-                                                    border: 'border-purple-200',
+                                                    color: 'text-slate-700',
+                                                    bg: 'bg-slate-50',
+                                                    border: 'border-slate-300',
                                                 },
                                             }[lang] || {
                                                 color: 'text-gray-600',
@@ -619,7 +645,7 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
                                 {/* Tech Stack Grid */}
                                 <div>
                                     <h3 className="text-lg font-semibold text-gray-900 mb-3 border-b border-gray-200 pb-2 flex items-center gap-2">
-                                        <Star className="text-purple-500" size={20} />
+                                        <Star className="text-[#6511aa]" size={20} />
                                         Technology Stack
                                     </h3>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -633,39 +659,39 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
                                             const categoryConfig = {
                                                 frontend: {
                                                     icon: <Palette size={18} />,
-                                                    color: 'text-blue-700',
-                                                    bg: 'bg-gradient-to-br from-blue-50 to-indigo-50',
-                                                    border: 'border-blue-200',
-                                                    tagBg: 'bg-blue-100',
-                                                    tagHover: 'hover:bg-blue-200',
-                                                    shadow: 'hover:shadow-blue-200/30',
+                                                    color: 'text-[#00777a]',
+                                                    bg: 'bg-gradient-to-br from-[#02cacc]/10 to-[#02cacc]/[0.03]',
+                                                    border: 'border-[#02cacc]/40',
+                                                    tagBg: 'bg-[#02cacc]/15',
+                                                    tagHover: 'hover:bg-[#02cacc]/25',
+                                                    pop: 'jazz-pop-teal',
                                                 },
                                                 backend: {
                                                     icon: <Server size={18} />,
-                                                    color: 'text-emerald-700',
-                                                    bg: 'bg-gradient-to-br from-emerald-50 to-green-50',
-                                                    border: 'border-emerald-200',
-                                                    tagBg: 'bg-emerald-100',
-                                                    tagHover: 'hover:bg-emerald-200',
-                                                    shadow: 'hover:shadow-emerald-200/30',
+                                                    color: 'text-[#6511aa]',
+                                                    bg: 'bg-gradient-to-br from-[#6511aa]/[0.07] to-[#6511aa]/[0.02]',
+                                                    border: 'border-[#6511aa]/25',
+                                                    tagBg: 'bg-[#6511aa]/10',
+                                                    tagHover: 'hover:bg-[#6511aa]/20',
+                                                    pop: '',
                                                 },
                                                 infrastructure: {
                                                     icon: <Settings size={18} />,
-                                                    color: 'text-purple-700',
-                                                    bg: 'bg-gradient-to-br from-purple-50 to-violet-50',
-                                                    border: 'border-purple-200',
-                                                    tagBg: 'bg-purple-100',
-                                                    tagHover: 'hover:bg-purple-200',
-                                                    shadow: 'hover:shadow-purple-200/30',
+                                                    color: 'text-slate-800',
+                                                    bg: 'bg-gradient-to-br from-slate-100 to-slate-50',
+                                                    border: 'border-slate-300',
+                                                    tagBg: 'bg-slate-200',
+                                                    tagHover: 'hover:bg-slate-300',
+                                                    pop: 'jazz-pop-slate',
                                                 },
                                                 security: {
                                                     icon: <Shield size={18} />,
-                                                    color: 'text-orange-700',
-                                                    bg: 'bg-gradient-to-br from-orange-50 to-red-50',
-                                                    border: 'border-orange-200',
-                                                    tagBg: 'bg-orange-100',
-                                                    tagHover: 'hover:bg-orange-200',
-                                                    shadow: 'hover:shadow-orange-200/30',
+                                                    color: 'text-[#a3461a]',
+                                                    bg: 'bg-gradient-to-br from-[#f29260]/15 to-[#f29260]/5',
+                                                    border: 'border-[#f29260]/40',
+                                                    tagBg: 'bg-[#f29260]/20',
+                                                    tagHover: 'hover:bg-[#f29260]/30',
+                                                    pop: 'jazz-pop-coral',
                                                 },
                                             }[key] || {
                                                 icon: <Code2 size={18} />,
@@ -674,12 +700,12 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
                                                 border: 'border-gray-200',
                                                 tagBg: 'bg-gray-100',
                                                 tagHover: 'hover:bg-gray-200',
-                                                shadow: 'hover:shadow-gray-200/30',
+                                                pop: '',
                                             };
                                             return (
                                                 <div
                                                     key={key}
-                                                    className={`${categoryConfig.bg} ${categoryConfig.border} border-2 rounded-xl p-6 hover:shadow-lg transition-all duration-300 ${categoryConfig.shadow} transform hover:-translate-y-1`}
+                                                    className={`jazz-pop ${categoryConfig.pop} ${categoryConfig.bg} ${categoryConfig.border} border-2 rounded-xl p-6`}
                                                 >
                                                     <h4
                                                         className={`font-bold mb-4 text-base uppercase tracking-wider flex items-center gap-3 ${categoryConfig.color}`}
@@ -693,7 +719,7 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
                                                         {items.map((item: string) => (
                                                             <span
                                                                 key={item}
-                                                                className={`${categoryConfig.tagBg} ${categoryConfig.tagHover} text-gray-800 px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 border border-transparent hover:border-gray-300 hover:scale-105 cursor-default`}
+                                                                className={`${categoryConfig.tagBg} ${categoryConfig.tagHover} text-gray-800 px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 border border-transparent hover:border-gray-300 hover:-rotate-2 hover:scale-105 cursor-default`}
                                                             >
                                                                 {item}
                                                             </span>
@@ -722,19 +748,19 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
                             id="experience"
                             title={
                                 <>
-                                    <Briefcase className="text-blue-400" aria-hidden="true" />{' '}
+                                    <Briefcase className="text-[#02cacc]" aria-hidden="true" />{' '}
                                     Experience
                                 </>
                             }
                         >
-                            <div className="space-y-8">
+                            <div className="jazz-divided">
                                 {resumeData?.workExperience?.map((exp) => {
                                     const companyLabel = exp.companyUrl ? (
                                         <a
                                             href={exp.companyUrl}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="text-blue-600 hover:text-blue-800 underline focus-visible:ring-2 focus-visible:ring-blue-400 rounded"
+                                            className="jazz-link jazz-link-light text-[#00777a] hover:text-[#004f51] focus-visible:ring-2 focus-visible:ring-[#00777a] rounded"
                                             aria-label={`${exp.company} (opens in new window)`}
                                         >
                                             {exp.company}
@@ -747,8 +773,8 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
                                         <>
                                             {(exp.notableProjects?.length ?? 0) > 0 && (
                                                 <div className="ml-4 mt-2">
-                                                    <div className="p-3 my-2 rounded bg-blue-50 border-l-4 border-blue-400">
-                                                        <h4 className="font-medium text-blue-900 flex items-center gap-2">
+                                                    <div className="p-3 my-2 rounded bg-[#02cacc]/10 border-l-4 border-[#02cacc]">
+                                                        <h4 className="font-medium text-[#004f51] flex items-center gap-2">
                                                             <Star aria-hidden="true" /> Notable
                                                             Projects:
                                                         </h4>
@@ -773,8 +799,8 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
 
                                             {(exp.honorsAndAwards?.length ?? 0) > 0 && (
                                                 <div className="ml-4 mt-2">
-                                                    <div className="p-3 my-2 rounded bg-yellow-50 border-l-4 border-yellow-400">
-                                                        <h4 className="font-medium text-yellow-900 flex items-center gap-2">
+                                                    <div className="p-3 my-2 rounded bg-[#f29260]/15 border-l-4 border-[#f29260]">
+                                                        <h4 className="font-medium text-[#7a3412] flex items-center gap-2">
                                                             <Award aria-hidden="true" /> Honors &
                                                             Awards:
                                                         </h4>
@@ -804,17 +830,17 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
                                             <div key={exp.company}>
                                                 <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
                                                     <Briefcase
-                                                        className="text-blue-400"
+                                                        className="text-[#02cacc]"
                                                         aria-hidden="true"
                                                     />{' '}
                                                     {companyLabel}
                                                 </h3>
-                                                <div className="mt-3 space-y-4 border-l-2 border-gray-200 pl-4">
+                                                <div className="mt-3 space-y-4 border-l-2 border-[#02cacc]/50 pl-4">
                                                     {exp.positions.map((pos) => (
                                                         <div key={pos.position}>
                                                             <h4 className="text-base font-semibold text-gray-900 flex items-center gap-2">
                                                                 <Users
-                                                                    className="text-blue-400"
+                                                                    className="text-[#02cacc]"
                                                                     aria-hidden="true"
                                                                 />{' '}
                                                                 {pos.position}
@@ -841,7 +867,7 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
                                         <div key={exp.company}>
                                             <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
                                                 <Users
-                                                    className="text-blue-400"
+                                                    className="text-[#02cacc]"
                                                     aria-hidden="true"
                                                 />{' '}
                                                 {exp.position}
@@ -867,7 +893,7 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
                             id="education"
                             title={
                                 <>
-                                    <GraduationCap className="text-blue-400" aria-hidden="true" />{' '}
+                                    <GraduationCap className="text-[#02cacc]" aria-hidden="true" />{' '}
                                     Education
                                 </>
                             }
@@ -876,7 +902,7 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
                                 {resumeData?.education?.map((edu) => (
                                     <div key={`${edu.institution}-${edu.degree}`}>
                                         <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                                            <Book className="text-blue-400" aria-hidden="true" />{' '}
+                                            <Book className="text-[#02cacc]" aria-hidden="true" />{' '}
                                             {edu.degree},{' '}
                                             <span className="text-gray-900 font-normal">
                                                 {edu.institution}
@@ -895,7 +921,7 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
                             id="activities"
                             title={
                                 <>
-                                    <HeartHandshake className="text-blue-400" aria-hidden="true" />{' '}
+                                    <HeartHandshake className="text-[#02cacc]" aria-hidden="true" />{' '}
                                     Activities
                                 </>
                             }
@@ -904,7 +930,7 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
                                 {resumeData?.activitiesAndVolunteer?.map((act) => (
                                     <div key={`${act.organization}-${act.role}`}>
                                         <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                                            <Users className="text-blue-400" aria-hidden="true" />{' '}
+                                            <Users className="text-[#02cacc]" aria-hidden="true" />{' '}
                                             {act.role}{' '}
                                             <span className="text-gray-900 font-normal">
                                                 at {act.organization}
@@ -915,8 +941,8 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
 
                                         {(act.notableProjects?.length ?? 0) > 0 && (
                                             <div className="ml-4 mt-2">
-                                                <div className="p-3 my-2 rounded bg-blue-50 border-l-4 border-blue-400">
-                                                    <h4 className="font-medium text-blue-900 flex items-center gap-2">
+                                                <div className="p-3 my-2 rounded bg-[#02cacc]/10 border-l-4 border-[#02cacc]">
+                                                    <h4 className="font-medium text-[#004f51] flex items-center gap-2">
                                                         <Star aria-hidden="true" /> Notable
                                                         Projects:
                                                     </h4>
