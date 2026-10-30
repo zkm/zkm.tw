@@ -478,7 +478,7 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
                 <div className="flex flex-col md:flex-row w-full gap-8">
                     {/* Sidebar/Profile */}
                     <aside
-                        className="relative overflow-hidden w-full md:w-1/3 bg-slate-900 rounded-2xl shadow-[10px_10px_0_rgba(101,17,170,0.55)] p-8 flex flex-col items-start text-white"
+                        className="w-full md:w-1/3 bg-slate-900 rounded-2xl shadow-[10px_10px_0_rgba(101,17,170,0.55)] p-8 flex flex-col items-start text-white"
                         data-nosnippet
                     >
                         <div className="mb-8 w-full">
@@ -531,10 +531,10 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
                             </ul>
                         </div>
 
-                        <span id="sr-live" className="sr-only" aria-live="polite" />
-
+                        {/* Under the contact list: the sidebar stretches to the resume's full
+                            height, so anything pinned to its bottom ends up far out of view. */}
                         <svg
-                            className="pointer-events-none absolute -bottom-6 -right-10 h-40 w-72"
+                            className="pointer-events-none mt-10 h-32 w-64 self-center"
                             viewBox="0 0 288 160"
                             aria-hidden="true"
                         >
@@ -554,6 +554,8 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
                                 opacity="0.45"
                             />
                         </svg>
+
+                        <span id="sr-live" className="sr-only" aria-live="polite" />
                     </aside>
 
                     {/* Main Content */}
