@@ -77,6 +77,21 @@
             ]
         },
         {
+            "name": "zachschneider.com",
+            "description": "The blog (code, coffee, cycle), running on zkm-cms: a small CMS built for it with CodeIgniter 4 and Vue 3, whose WordPress importer kept every old URL working.",
+            "tech": ["PHP", "CodeIgniter 4", "Vue 3"],
+            "links": [
+                {
+                    "label": "Visit",
+                    "url": "https://www.zachschneider.com"
+                },
+                {
+                    "label": "Source",
+                    "url": "https://github.com/zkm/zkm-cms"
+                }
+            ]
+        },
+        {
             "name": "motd-forge",
             "description": "A randomized login banner for homelab servers: uptime, disk and memory, a random quote and a figlet title. The same tool as a Ruby gem and an npm package.",
             "tech": ["Ruby", "Node.js", "CLI"],
@@ -100,17 +115,47 @@
             ]
         },
         {
-            "name": "zachschneider.com",
-            "description": "The blog (code, coffee, cycle), running on zkm-cms: a small CMS built for it with CodeIgniter 4 and Vue 3, whose WordPress importer kept every old URL working.",
-            "tech": ["PHP", "CodeIgniter 4", "Vue 3"],
+            "name": "updateguard",
+            "description": "Snapshots the system before risky OS updates, then checks the machine will still boot before you reboot. Arch and CachyOS, with Debian, Ubuntu and Fedora in preview.",
+            "tech": ["Shell", "btrfs", "pacman / apt / dnf"],
             "links": [
                 {
-                    "label": "Visit",
-                    "url": "https://www.zachschneider.com"
+                    "label": "Docs",
+                    "url": "https://zkm.github.io/updateguard/"
                 },
                 {
                     "label": "Source",
-                    "url": "https://github.com/zkm/zkm-cms"
+                    "url": "https://github.com/zkm/updateguard"
+                }
+            ]
+        },
+        {
+            "name": "Rustris",
+            "description": "Tetris in the terminal, written in Rust: 7-bag pieces, wall kicks, a ghost piece, classic scoring and levels that speed up. No GPU or display server, just a terminal.",
+            "tech": ["Rust", "crossterm"],
+            "links": [
+                {
+                    "label": "Download",
+                    "url": "https://github.com/zkm/rustris/releases/latest"
+                },
+                {
+                    "label": "Source",
+                    "url": "https://github.com/zkm/rustris"
+                }
+            ]
+        },
+        {
+            "name": "VVordle",
+            "description": "A small, readable Wordle clone, written to show how the game works: board state, guess scoring and an on-screen keyboard, with tests.",
+            "tech": ["Vue 3", "TypeScript", "Vite"],
+            "links": [
+                {
+                    "label": "Play",
+                    "url": "https://zkm.github.io/vvordle/"
+                },
+                {
+                    "label": "Source",
+                    "url": "https://github.com/zkm/vvordle"
                 }
             ]
         }
