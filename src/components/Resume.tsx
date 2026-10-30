@@ -382,11 +382,12 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
                 {
                     label: 'Skill Count',
                     data: values,
+                    // By position, in languages order: matches the HTML/CSS/JavaScript/Other chips
                     backgroundColor: [
+                        'rgba(242,146,96,0.85)', // coral
                         'rgba(2,202,204,0.85)', // teal
                         'rgba(101,17,170,0.85)', // purple
-                        'rgba(242,146,96,0.85)', // coral
-                        'rgba(14,20,36,0.85)', // navy
+                        'rgba(51,65,85,0.85)', // slate
                         'rgba(0,119,122,0.85)', // deep teal
                         'rgba(155,93,229,0.85)', // light purple
                     ],
