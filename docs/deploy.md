@@ -49,6 +49,11 @@ The repository is public, so:
   your approval. Pull requests, forks and branch pushes can't read it.
 - **The workflow's `GITHUB_TOKEN` can write** only in the build and deploy jobs, to create the
   release and move `release`.
+- **`release` and `badges` can't be deleted.** The ruleset "Workflow-managed branches: no
+  deletion" blocks it for everyone, workflows included (neither ever deletes them). Pushes are
+  still allowed, because the workflows push with `GITHUB_TOKEN`, and on a personal account's
+  repository GitHub Actions can't be exempted from a push rule. To delete one on purpose, disable
+  the ruleset under Settings → Rules → Rulesets, delete the branch, and turn it back on.
 
 ## One-time setup
 
