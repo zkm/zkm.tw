@@ -56,6 +56,12 @@ html {
     .jazz-pop-teal {
         --jazz-pop-color: #02cacc;
     }
+    .jazz-pop-coral {
+        --jazz-pop-color: #f29260;
+    }
+    .jazz-pop-slate {
+        --jazz-pop-color: #334155;
+    }
 
     /* A repeating purple zigzag, for dividers and under headings */
     .jazz-zigzag {
@@ -63,6 +69,16 @@ html {
         background-repeat: repeat-x;
         background-size: 24px 12px;
         height: 12px;
+    }
+
+    /* A faint zigzag between stacked items, for light backgrounds */
+    .jazz-divided > * + * {
+        margin-top: 1.75rem;
+        padding-top: 1.75rem;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='12' viewBox='0 0 24 12'%3E%3Cpath d='M0 9 L6 3 L12 9 L18 3 L24 9' fill='none' stroke='%236511aa' stroke-opacity='0.35' stroke-width='2.5' stroke-linejoin='miter'/%3E%3C/svg%3E");
+        background-repeat: repeat-x;
+        background-position: top left;
+        background-size: 24px 12px;
     }
 }
 

@@ -306,7 +306,7 @@ const CollapsibleSection: React.FC<{
                 id={headerId}
                 type="button"
                 onClick={() => setOpen(!open)}
-                className="w-full text-left p-4 bg-gray-50 hover:bg-gray-100 rounded-lg border border-gray-200 transition-colors duration-200 flex items-center justify-between font-semibold text-gray-900 focus-visible:ring-2 focus-visible:ring-[#00777a] focus-visible:ring-offset-2"
+                className="jazz-pop w-full text-left p-4 bg-gray-50 hover:bg-white hover:border-[#02cacc] rounded-lg border border-gray-200 flex items-center justify-between font-semibold text-gray-900 focus-visible:ring-2 focus-visible:ring-[#00777a] focus-visible:ring-offset-2"
                 aria-expanded={open}
                 aria-controls={contentId}
             >
@@ -478,7 +478,7 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
                 <div className="flex flex-col md:flex-row w-full gap-8">
                     {/* Sidebar/Profile */}
                     <aside
-                        className="w-full md:w-1/3 bg-slate-900 rounded-2xl shadow-xl p-8 flex flex-col items-start text-white"
+                        className="relative overflow-hidden w-full md:w-1/3 bg-slate-900 rounded-2xl shadow-[10px_10px_0_rgba(101,17,170,0.55)] p-8 flex flex-col items-start text-white"
                         data-nosnippet
                     >
                         <div className="mb-8 w-full">
@@ -488,6 +488,7 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
                             <p className="text-lg font-semibold mb-4 text-gray-100 text-left">
                                 {title}
                             </p>
+                            <div className="jazz-zigzag w-32" aria-hidden="true" />
                         </div>
 
                         <div className="w-full mt-6">
@@ -531,10 +532,32 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
                         </div>
 
                         <span id="sr-live" className="sr-only" aria-live="polite" />
+
+                        <svg
+                            className="pointer-events-none absolute -bottom-6 -right-10 h-40 w-72"
+                            viewBox="0 0 288 160"
+                            aria-hidden="true"
+                        >
+                            <path
+                                d="M10 140 C 90 110, 170 125, 280 60"
+                                fill="none"
+                                stroke="#02cacc"
+                                strokeWidth="34"
+                                strokeLinecap="round"
+                                opacity="0.12"
+                            />
+                            <polyline
+                                points="120,70 150,44 164,70 196,42 210,68 242,40"
+                                fill="none"
+                                stroke="#9b5de5"
+                                strokeWidth="5"
+                                opacity="0.45"
+                            />
+                        </svg>
                     </aside>
 
                     {/* Main Content */}
-                    <section className="w-full md:w-2/3 bg-white rounded-2xl shadow-xl p-8 text-left">
+                    <section className="w-full md:w-2/3 bg-white rounded-2xl shadow-[10px_10px_0_rgba(2,202,204,0.45)] p-8 text-left">
                         {/* Professional Summary */}
                         <CollapsibleSection
                             id="summary"
@@ -639,7 +662,7 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
                                                     border: 'border-[#02cacc]/40',
                                                     tagBg: 'bg-[#02cacc]/15',
                                                     tagHover: 'hover:bg-[#02cacc]/25',
-                                                    shadow: 'hover:shadow-[#02cacc]/20',
+                                                    pop: 'jazz-pop-teal',
                                                 },
                                                 backend: {
                                                     icon: <Server size={18} />,
@@ -648,7 +671,7 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
                                                     border: 'border-[#6511aa]/25',
                                                     tagBg: 'bg-[#6511aa]/10',
                                                     tagHover: 'hover:bg-[#6511aa]/20',
-                                                    shadow: 'hover:shadow-[#6511aa]/20',
+                                                    pop: '',
                                                 },
                                                 infrastructure: {
                                                     icon: <Settings size={18} />,
@@ -657,7 +680,7 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
                                                     border: 'border-slate-300',
                                                     tagBg: 'bg-slate-200',
                                                     tagHover: 'hover:bg-slate-300',
-                                                    shadow: 'hover:shadow-slate-300/30',
+                                                    pop: 'jazz-pop-slate',
                                                 },
                                                 security: {
                                                     icon: <Shield size={18} />,
@@ -666,7 +689,7 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
                                                     border: 'border-[#f29260]/40',
                                                     tagBg: 'bg-[#f29260]/20',
                                                     tagHover: 'hover:bg-[#f29260]/30',
-                                                    shadow: 'hover:shadow-[#f29260]/20',
+                                                    pop: 'jazz-pop-coral',
                                                 },
                                             }[key] || {
                                                 icon: <Code2 size={18} />,
@@ -675,12 +698,12 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
                                                 border: 'border-gray-200',
                                                 tagBg: 'bg-gray-100',
                                                 tagHover: 'hover:bg-gray-200',
-                                                shadow: 'hover:shadow-gray-200/30',
+                                                pop: '',
                                             };
                                             return (
                                                 <div
                                                     key={key}
-                                                    className={`${categoryConfig.bg} ${categoryConfig.border} border-2 rounded-xl p-6 hover:shadow-lg transition-all duration-300 ${categoryConfig.shadow} transform hover:-translate-y-1`}
+                                                    className={`jazz-pop ${categoryConfig.pop} ${categoryConfig.bg} ${categoryConfig.border} border-2 rounded-xl p-6`}
                                                 >
                                                     <h4
                                                         className={`font-bold mb-4 text-base uppercase tracking-wider flex items-center gap-3 ${categoryConfig.color}`}
@@ -694,7 +717,7 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
                                                         {items.map((item: string) => (
                                                             <span
                                                                 key={item}
-                                                                className={`${categoryConfig.tagBg} ${categoryConfig.tagHover} text-gray-800 px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 border border-transparent hover:border-gray-300 hover:scale-105 cursor-default`}
+                                                                className={`${categoryConfig.tagBg} ${categoryConfig.tagHover} text-gray-800 px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 border border-transparent hover:border-gray-300 hover:-rotate-2 hover:scale-105 cursor-default`}
                                                             >
                                                                 {item}
                                                             </span>
@@ -728,7 +751,7 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
                                 </>
                             }
                         >
-                            <div className="space-y-8">
+                            <div className="jazz-divided">
                                 {resumeData?.workExperience?.map((exp) => {
                                     const companyLabel = exp.companyUrl ? (
                                         <a
@@ -810,7 +833,7 @@ const Resume: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
                                                     />{' '}
                                                     {companyLabel}
                                                 </h3>
-                                                <div className="mt-3 space-y-4 border-l-2 border-gray-200 pl-4">
+                                                <div className="mt-3 space-y-4 border-l-2 border-[#02cacc]/50 pl-4">
                                                     {exp.positions.map((pos) => (
                                                         <div key={pos.position}>
                                                             <h4 className="text-base font-semibold text-gray-900 flex items-center gap-2">
