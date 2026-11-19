@@ -1349,11 +1349,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framer-motion@npm:^14.10.0":
-  version: 14.10.0
-  resolution: "framer-motion@npm:14.10.0"
+"framer-motion@npm:^14.14.0":
+  version: 14.14.0
+  resolution: "framer-motion@npm:14.14.0"
   dependencies:
-    motion-dom: "npm:14.10.0"
+    motion-dom: "npm:14.14.0"
     motion-utils: "npm:14.7.0"
     tslib: "npm:^2.4.0"
   peerDependencies:
@@ -1367,7 +1367,7 @@ __metadata:
       optional: true
     remix:
       optional: true
-  checksum: 10c0/a9b505cc8eb37885729d8420e7f06c11a6e99e16710bc4da1cac453984c2d9b30d856a975962d78341132e1453bc2bc5dafabc3f5b4049575c138ff7642a0306
+  checksum: 10c0/405c7ac033bcc308a2444f54526cfc100b2a4373db66ec6d0da5b97c799802490c72a4623d1929a52642470ce6b5c451a1f15806d8bb8c9498a2e5b3d88825e3
   languageName: node
   linkType: hard
 
@@ -1634,16 +1634,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lucide-react@npm:^1.70.0":
-  version: 1.70.0
-  resolution: "lucide-react@npm:1.70.0"
+"lucide-react@npm:^1.73.0":
+  version: 1.73.0
+  resolution: "lucide-react@npm:1.73.0"
   peerDependencies:
     "@types/react": "*"
     react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 10c0/bce0a8b5f77c78933a4b6c2037d4ce371d1eaff8986849ef7fb28da131be3fa6964e4d2459ff40c9ac719402cddced55311af3d34397b178449817d312dfa4c5
+  checksum: 10c0/d533bbdde58d30235b66408bae5e0a63acee1ca4c407a70a17381c75624441d5cd34f6662773fd7a6ad7b3c8e3314a43aa7a4e0698bce13ebc8745bb8de7295a
   languageName: node
   linkType: hard
 
@@ -1708,12 +1708,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"motion-dom@npm:14.10.0":
-  version: 14.10.0
-  resolution: "motion-dom@npm:14.10.0"
+"motion-dom@npm:14.14.0":
+  version: 14.14.0
+  resolution: "motion-dom@npm:14.14.0"
   dependencies:
     motion-utils: "npm:14.7.0"
-  checksum: 10c0/5e7bb3b49ad019fa008e5b9cc222e342d917eecaaa56eb80cb85e65f23ed47d78a67abecbabf36e36c345a66407bdb452beff6335afb2ecf5c3fc86a1fb6c913
+  checksum: 10c0/8a320425f280d2b413bc4da3b161da30d192180e5b367c4379e17eccdb6070089c71ab794267f073ff4dbeea31b75dfdbfd45d44d9888865fc0b0d22d3ec13c5
   languageName: node
   linkType: hard
 
@@ -2391,10 +2391,10 @@ __metadata:
     "@vitest/coverage-v8": "npm:^5.1.0"
     "@vitest/ui": "npm:^5.1.0"
     chart.js: "npm:^4.6.1"
-    framer-motion: "npm:^14.10.0"
+    framer-motion: "npm:^14.14.0"
     husky: "npm:^9.1.7"
     jsdom: "npm:^31.0.1"
-    lucide-react: "npm:^1.70.0"
+    lucide-react: "npm:^1.73.0"
     postcss: "npm:^8.5.33"
     react: "npm:^19.3.1"
     react-chartjs-2: "npm:^5.3.1"
