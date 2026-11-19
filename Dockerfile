@@ -28,7 +28,8 @@ COPY . .
 RUN yarn clean && yarn tsc -b tsconfig.app.json tsconfig.node.json && yarn vite build
 
 # ---------- Production (static) ----------
-FROM cgr.dev/chainguard/nginx:latest AS prod
+# Pinned to nginx 1.31.9 (security fixes); digest avoids silent drift from :latest
+FROM cgr.dev/chainguard/nginx:latest@sha256:1d942360cecf98fe7e45c0470b23734b3c62868544380f920d1c1fa9de6e8e27 AS prod
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY --from=build /app/dist /usr/share/nginx/html
 EXPOSE 8080

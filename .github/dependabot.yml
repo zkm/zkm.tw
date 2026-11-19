@@ -49,3 +49,14 @@ updates:
           codeql-action:
               patterns:
                   - 'github/codeql-action*'
+
+    # Bumps the pinned digest of the Chainguard nginx base image (local Docker only; prod is App Platform static)
+    - package-ecosystem: 'docker'
+      directory: '/'
+      schedule:
+          interval: 'weekly'
+          day: 'monday'
+          time: '07:45'
+          timezone: 'America/Chicago'
+      labels:
+          - 'dependencies'
